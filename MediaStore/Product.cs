@@ -3,122 +3,119 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace MediaStore
 {
-    internal class Product
+    public class Product
     {
         /// <summary>
         /// Constructor
         /// </summary>
-        internal Product(uint _ProductCode, string _Title, float _Price)
+        public Product(uint productCode, string title, ProductTypes productType, float price, uint quantity = 0, string creator = "", string freeText = "", string publisher = "", string releaseYear = "")
         {
-            ProductCode = _ProductCode;
-            Title = _Title;
-            Price = _Price;
+            ProductCode = productCode;
+            Title = title;
+            ProductType = productType;
+            Price = price;
+            Quantity = quantity;
+            Creator = creator;
+            Publisher = publisher;
+            ReleaseYear = releaseYear;
+            FreeText = freeText;
         }
+
+        //public Product(uint productCode, string title, ProductTypes productType, float price, uint quantity = 0)
+        //{
+        //    ProductCode = productCode;
+        //    Title = title;
+        //    ProductType = productType;
+        //    Price = price;
+        //    Quantity = quantity;
+        //    Creator = "";
+        //    Publisher = "";
+        //    ReleaseYear = "";
+        //    FreeText = "";
+        //}
+
         /// <summary>
         /// Name of the product
         /// </summary>
-        private string Title
+        public string Title
         {
-            get => default;
-            set
-            {
-            }
+            get; set;
         }
 
         /// <summary>
         /// Price of the product
         /// </summary>
-        private float Price
+        public float Price
         {
-            get => default;
-            set
-            {
-            }
+            get; set;
         }
 
         /// <summary>
         /// The product code
         /// </summary>
-        private uint ProductCode
+        public uint ProductCode
         {
-            get => default;
-            set
-            {
-            }
+            get; set;
         }
 
         /// <summary>
         /// Date of release
         /// </summary>
-        private string ReleaseYear
+        public string ReleaseYear
         {
-            get => default;
-            set
-            {
-            }
+            get; set;
         }
 
         /// <summary>
         /// Author, Artist, Director
         /// </summary>
-        private string Creator
+        public string Creator
         {
-            get => default;
-            set
-            {
-            }
+            get; set;
         }
         /// <summary>
         /// Type of product (Book, Music or Movie)
         /// </summary>
-        private ProductTypes ProductType
+        public ProductTypes ProductType
         {
-            get => default;
-            set
-            {
-            }
+            get; set;
         }
 
         /// <summary>
         /// Name of publisher or record label
         /// </summary>
-        private string Publisher
+        public string Publisher
         {
-            get => default;
-            set
-            {
-            }
+            get; set;
         }
 
         /// <summary>
         /// Free text field
         /// </summary>
-        private string FreeText
+        public string FreeText
         {
-            get => default;
-            set
-            {
-            }
+            get; set;
         }
 
         /// <summary>
-        /// Modify a product
+        /// Quantity
         /// </summary>
-        internal void ModifyProduct()
+        public uint Quantity
         {
-            throw new System.NotImplementedException();
+            get; set;
         }
 
         /// <summary>
         /// Book, Music, Movie
         /// </summary>
-        private enum ProductTypes
+        public enum ProductTypes
         {
-            Book = 0,
-            Music = 1,
-            Movie = 2
+            Book,
+            Music,
+            Movie
         }
     }
 }
