@@ -337,25 +337,34 @@ namespace MediaStore
                 if (ValidateUINT(ReturnReceiptTextBox.Text) && ValidateUINT(ReturnProductTextBox.Text) && ValidateUINT(ReturnQtyTextBox.Text))
                 {
                     uint receiptNumber = uint.Parse(ReturnReceiptTextBox.Text, CultureInfo.CurrentCulture);
-                    uint productNumber = uint.Parse(ReturnProductTextBox.Text, CultureInfo.CurrentCulture);
-                    uint quantity = uint.Parse(ReturnQtyTextBox.Text, CultureInfo.CurrentCulture);
+                    uint productCode = uint.Parse(ReturnProductTextBox.Text, CultureInfo.CurrentCulture);
+                    uint quantityToReturn = uint.Parse(ReturnQtyTextBox.Text, CultureInfo.CurrentCulture);
 
-                    try
+                    if (quantityToReturn <= 0)
                     {
-                        MySales.Ledger[receiptNumber].
-                    }
-                    catch (Exception)
-                    {
-
-                        throw;
+                        MessageBox.Show("Return quantity must be 1 or larger");
+                        return;
                     }
 
-                    MySales.ReturnProduct(receiptNumber, productNumber, quantity);
-                    MyStock.AddQuantity(productNumber, quantity);
+                    if (MySales.ReturnProduct(receiptNumber,productCode, quantityToReturn))
+                    {
+                        MyStock.AddQuantity(productCode, quantityToReturn);
+                        UpdateCashierStockListView();
+                        ReturnReceiptTextBox.Text = "";
+                        ReturnProductTextBox.Text = "";
+                        ReturnQtyTextBox.Text = "";
+                    }
                 }
-
-
+                else
+                {
+                    MessageBox.Show("All fields must contain numbers");
+                }
             }
+            else
+            {
+                MessageBox.Show("All fields must contain numbers");
+            }
+            
         }
 
         /// <summary>

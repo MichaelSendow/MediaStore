@@ -59,29 +59,44 @@ namespace MediaStore
             }
         }
 
-        internal void ReturnProduct(uint receiptNumber, uint productCode, uint QtyToReturn)
+        internal bool ReturnProduct(uint receiptNumber, uint productCode, uint QtyToReturn)
         {
-            if (Ledger.ContainsKey(receiptNumber))
+            if (Ledger.TryGetValue(receiptNumber, out List<Receipt> receiptList))
             {
+                foreach (var item in receiptList)
+                {
+                    //found the product in receipt
+                    if (item.ProductCode == productCode)
+                    {
+                        //Quantity checks out
+                        if (item.Quantity >= QtyToReturn)
+                        {
+                            if (item.Quantity == QtyToReturn)
+                            {
+                                receiptList.Remove(item);
+                            }
+                            else
+                            {
+                                item.Quantity -= QtyToReturn;
+                            }
 
-
-            //    if (Ledger[receiptNumber].Quantity >= QtyToReturn)
-            //    {
-            //        Ledger[receiptNumber].Quantity -= QtyToReturn;
-            //        if (Ledger[receiptNumber].Quantity == 0)
-            //        {
-            //            Ledger.Remove(receiptNumber);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        throw new Exception($"Can't return bigger quantity than: {Ledger[receiptNumber].Quantity.ToString(CultureInfo.CurrentCulture)}");
-            //    }
-
-            //}
-            //else
-            //{
-            //    throw new Exception($"Can't find receipt: {receiptNumber.ToString(CultureInfo.CurrentCulture)}");
+                            MessageBox.Show("Return processed successfully!","Return processed", MessageBoxButtons.OK);
+                            return true;
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Return quantity can't be larger than {item.Quantity}", "Return quantity to big", MessageBoxButtons.OK);
+                            return false;
+                        }
+                    }
+                }
+                MessageBox.Show($"No such product in receipt: {receiptNumber}", "No such product", MessageBoxButtons.OK);
+                return false;
+            }
+            else
+            {
+                MessageBox.Show($"Unable to find receipt: {receiptNumber}", "Receipt not found", MessageBoxButtons.OK);
+                return false;
             }
         }
 
