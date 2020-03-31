@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -10,8 +12,9 @@ namespace MediaStore
     {
 
         /// <summary>
-        /// List of products in stock
+        /// List of products in stock. Key = ProductCode, Value = Product
         /// </summary>
+        /// 
         public IDictionary<uint, Product> Products
         {
             get; set;
@@ -30,6 +33,23 @@ namespace MediaStore
                 foreach (var product in products)
                     AddProduct(product);
             }
+        }
+
+        public Stock(string filePathName)
+        {
+            Products = new Dictionary<uint, Product>();
+
+            List<Product> products = FileHandler.LoadStock(filePathName);
+            if (products != null)
+            {
+                foreach (var product in products)
+                    AddProduct(product);
+            }
+        }
+
+        internal void SaveStockToFile(string filePathName)
+        {
+            FileHandler.SaveStock(this, filePathName);
         }
 
         internal uint GetNextProductCode()
@@ -52,33 +72,52 @@ namespace MediaStore
             catch (Exception ex)
             {
 
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                throw new Exception($"Product with product code: {product.ProductCode} already exists.", ex);
             }
         }
 
-        internal void DeleteProduct()
+        internal void DeleteProduct(uint productCode)
         {
-            throw new System.NotImplementedException();
+            if (Products.ContainsKey(productCode))
+            {
+                Products.Remove(productCode);
+            }
         }
 
-        internal void AddQuantity()
+        internal void AddQuantity(uint productCode, uint quantity)
         {
-            throw new System.NotImplementedException();
+            if (Products.ContainsKey(productCode))
+            {
+                Products[productCode].Quantity += quantity;
+            }
         }
 
-        internal void SubtractQuantity()
+        internal void SubtractQuantity(uint productCode, uint quantity)
         {
-            throw new System.NotImplementedException();
+            if (Products.ContainsKey(productCode))
+            {
+                Products[productCode].Quantity -= quantity;
+            }
         }
 
-        internal List<Product> ListProducts()
+        internal List<Product> GetProductList()
         {
-            throw new System.NotImplementedException();
+            List<Product> productsList = new List<Product>();
+            foreach (var product in Products.Values)
+            {
+                productsList.Add(product);
+            }
+            return productsList;
         }
 
-        internal Product GetProduct()
+        internal Product GetProduct(uint productCode)
         {
-            throw new System.NotImplementedException();
+            if (Products.TryGetValue(productCode, out Product product))
+                return product;
+            else
+            {
+                throw new Exception("Product does not exist");
+            }
         }
     }
 }

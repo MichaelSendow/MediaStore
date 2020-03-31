@@ -1,30 +1,133 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Windows.Forms;
 
 namespace MediaStore
 {
-    internal class FileHandler
+    internal static class FileHandler
     {
-        internal void LoadStock()
+        internal static List<Product> LoadStock(string filePathName)
         {
-            throw new System.NotImplementedException();
+            List<Product> productList = new List<Product>();
+
+            using (StreamReader streamReader = new StreamReader(filePathName))
+            {
+                while (streamReader.Peek() >= 0)
+                {
+                    try
+                    {
+                        string product = streamReader.ReadLine();
+                        if (product.Length > 0)
+                        {
+                            var fields = product.Split(';');
+                            Product prod = new Product
+                            {
+                                //ProductCode;Title;ProductType;Price;Quantity;ReleaseYear;Creator;Publisher;FreeText
+
+                                ProductCode = uint.Parse(fields[0], CultureInfo.CurrentCulture),
+                                Title = fields[1],
+                                ProductType = (Product.ProductTypes)Enum.Parse(typeof(Product.ProductTypes), fields[2], true),
+                                Price = decimal.Parse(fields[3], CultureInfo.CurrentCulture),
+                                Quantity = uint.Parse(fields[4], CultureInfo.CurrentCulture),
+                                ReleaseYear = fields[5],
+                                Creator = fields[6],
+                                Publisher = fields[7],
+                                FreeText = fields[8],
+                                IsActive = fields[9].Equals("true",StringComparison.CurrentCultureIgnoreCase)
+                            };
+                            productList.Add(prod);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Unable to load product file", ex);
+                    }
+                }
+                return productList;
+            }
         }
 
-        internal void SaveStock()
+        internal static void SaveStock(Stock stock, string filePathName)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                using (StreamWriter streamWriter = new StreamWriter(filePathName, append: false))
+                {
+                    foreach (var value in stock.Products.Values)
+                    {
+                        streamWriter.WriteLine(value.ToString());
+                    }
+                    streamWriter.Flush();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to save product file", ex);
+            }
         }
 
-        internal void LoadSales()
+        internal static List<Receipt> LoadSales(string filePathName)
         {
-            throw new System.NotImplementedException();
+            List<Receipt> receiptList = new List<Receipt>();
+
+            using (StreamReader streamReader = new StreamReader(filePathName))
+            {
+                while (streamReader.Peek() >= 0)
+                {
+                    try
+                    {
+                        string receiptstring = streamReader.ReadLine();
+                        if (receiptstring.Length > 0)
+                        {
+                            var fields = receiptstring.Split(';');
+                            Receipt receipt = new Receipt
+                            {
+                                //ProductCode;Quantity;DateOfSale;ReceiptNumber
+                                ProductCode = uint.Parse(fields[0], CultureInfo.CurrentCulture),
+                                Quantity = uint.Parse(fields[1], CultureInfo.CurrentCulture),
+                                DateOfSale = fields[2],
+                                ReceiptNumber = uint.Parse(fields[3], CultureInfo.CurrentCulture)
+                            };
+                            receiptList.Add(receipt);
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Unable to load sales file", ex);
+                    }
+                }
+                return receiptList;
+            }
         }
 
-        internal void SaveSales()
+        internal static void SaveSales(Sales sales, string filePathName)
         {
-            throw new System.NotImplementedException();
+            try
+            {
+                using (StreamWriter streamWriter = new StreamWriter(filePathName, append: false))
+                {
+                    foreach (var receiptList in sales.Ledger.Values)
+                    {
+                        foreach (var receipt in receiptList)
+                        {
+                            streamWriter.WriteLine(receipt.ToString());
+                        }
+                        
+                    }
+                    streamWriter.Flush();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Unable to save sales file", ex);
+            }
         }
     }
 }

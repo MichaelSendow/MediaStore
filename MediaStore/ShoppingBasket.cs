@@ -1,33 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 
 namespace MediaStore
 {
     internal class ShoppingBasket
     {
-        private IDictionary<MediaStore.Product, uint> Products
+        public IDictionary<uint, Product> Products
         {
-            get => default;
-            set
+            get; set;
+        }
+
+        public ShoppingBasket()
+        {
+            Products = new Dictionary<uint, Product>();
+        }
+
+        public void AddProductToBasket(Product product, uint qty)
+        {
+
+            if (Products.ContainsKey(product.ProductCode))
             {
+                Products[product.ProductCode].Quantity += qty;
+            }
+            else
+            {
+                
+                Products.Add(product.ProductCode, new Product(product));
+                Products[product.ProductCode].Quantity = qty;
             }
         }
 
-        public void AddProductToBasket()
+        public void SubtractProductQuantityFromBasket(uint productCode)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void SubtractProductFromBasket()
-        {
-            throw new System.NotImplementedException();
+            Products[productCode].Quantity -= 1;
+            if (Products[productCode].Quantity == 0)
+            {
+                Products.Remove(productCode);
+            }
         }
 
         public void ClearBasket()
         {
-            throw new System.NotImplementedException();
+            Products.Clear();
         }
+
+        internal Product GetProduct(uint productCode)
+        {
+            if (Products.TryGetValue(productCode, out Product product))
+                return product;
+            else
+            {
+                throw new Exception("Product does not exist");
+            }
+        }
+
     }
 }
