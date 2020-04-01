@@ -25,7 +25,7 @@ namespace MediaStore
         /// <summary>
         /// Type of product (Book, Music or Movie)
         /// </summary>
-        public ProductTypes ProductType { get; set; }
+        public ProductType Type { get; set; }
 
         /// <summary>
         /// Price of the product
@@ -61,12 +61,12 @@ namespace MediaStore
         /// <summary>
         /// Free text field
         /// </summary>
-        public bool IsActive { get; set; }
+        public ProductStatus Status { get; set; }
 
         /// <summary>
         /// Enumerator [Book, Music, Movie]
         /// </summary>
-        public enum ProductTypes
+        public enum ProductType
         {
             Book,
             Music,
@@ -74,20 +74,29 @@ namespace MediaStore
         }
 
         /// <summary>
+        /// Enumerator [Book, Music, Movie]
+        /// </summary>
+        public enum ProductStatus
+        {
+            Active,
+            InActive
+        }
+
+        /// <summary>
         /// Class constructor
         /// </summary>
-        public Product(uint productCode, string title, ProductTypes productType, decimal price, uint quantity = 0, string creator = "", string freeText = "", string publisher = "", string releaseYear = "", bool isActive = true)
+        public Product(uint productCode, string title, ProductType type, decimal price, uint quantity = 0, string creator = "", string freeText = "", string publisher = "", string releaseYear = "", ProductStatus status = ProductStatus.Active)
         {
             ProductCode = productCode;
             Title = title;
-            ProductType = productType;
+            Type = type;
             Price = price;
             Quantity = quantity;
             Creator = creator;
             Publisher = publisher;
             ReleaseYear = releaseYear;
             FreeText = freeText;
-            IsActive = isActive;
+            Status = status;
         }
 
         public Product(Product prod)
@@ -96,14 +105,14 @@ namespace MediaStore
             {
                 ProductCode = prod.ProductCode;
                 Title = prod.Title;
-                ProductType = prod.ProductType;
+                Type = prod.Type;
                 Price = prod.Price;
                 Quantity = prod.Quantity;
                 Creator = prod.Creator;
                 Publisher = prod.Publisher;
                 ReleaseYear = prod.ReleaseYear;
                 FreeText = prod.FreeText;
-                IsActive = prod.IsActive;
+                Status = prod.Status;
             }
         }
 
@@ -117,7 +126,7 @@ namespace MediaStore
         {
             ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
             listViewItem.SubItems.Add(Title);
-            listViewItem.SubItems.Add(ProductType.ToString());
+            listViewItem.SubItems.Add(Type.ToString());
             listViewItem.SubItems.Add(Price.ToString("0.00", CultureInfo.CurrentCulture));
             listViewItem.SubItems.Add(Quantity.ToString(CultureInfo.CurrentCulture));
             if (font == null)
@@ -179,18 +188,18 @@ namespace MediaStore
         public override string ToString()
         {
 
-            //ProductCode;Title;ProductType;Price;Quantity;ReleaseYear;Creator;Publisher;FreeText;IsActive
+            //ProductCode;Title;ProductType;Price;Quantity;ReleaseYear;Creator;Publisher;FreeText;Status
             string productAsString;
             productAsString = ProductCode.ToString(CultureInfo.CurrentCulture) + ';';
             productAsString += Title + ';';
-            productAsString += ProductType.ToString() + ';';
+            productAsString += Type.ToString() + ';';
             productAsString += Price.ToString("0.00", CultureInfo.CurrentCulture) + ';';
             productAsString += Quantity.ToString(CultureInfo.CurrentCulture) + ';';
             productAsString += ReleaseYear.ToString(CultureInfo.CurrentCulture) + ';';
             productAsString += Creator.ToString(CultureInfo.CurrentCulture) + ';';
             productAsString += Publisher.ToString(CultureInfo.CurrentCulture) + ';';
             productAsString += FreeText.ToString(CultureInfo.CurrentCulture) + ';';
-            productAsString += IsActive.ToString(CultureInfo.CurrentCulture);
+            productAsString += Status.ToString(CultureInfo.CurrentCulture);
 
 
             return productAsString;

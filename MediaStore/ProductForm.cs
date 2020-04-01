@@ -102,7 +102,7 @@ namespace MediaStore
         private void PopulateForm()
         {
             ProductCodeTextBox.Text = FormsProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
-            TypeTextBox.Text = FormsProduct.ProductType.ToString();
+            TypeTextBox.Text = FormsProduct.Type.ToString();
             PriceTextBox.Text = FormsProduct.Price.ToString(CultureInfo.CurrentCulture);
             QuantityTextBox.Text = FormsProduct.Quantity.ToString(CultureInfo.CurrentCulture);
             TitleTextBox.Text = FormsProduct.Title;

@@ -27,18 +27,18 @@ namespace MediaStore
                             var fields = product.Split(';');
                             Product prod = new Product
                             {
-                                //ProductCode;Title;ProductType;Price;Quantity;ReleaseYear;Creator;Publisher;FreeText
+                                //ProductCode;Title;ProductType;Price;Quantity;ReleaseYear;Creator;Publisher;FreeText;Staus
 
                                 ProductCode = uint.Parse(fields[0], CultureInfo.CurrentCulture),
                                 Title = fields[1],
-                                ProductType = (Product.ProductTypes)Enum.Parse(typeof(Product.ProductTypes), fields[2], true),
+                                Type = (Product.ProductType)Enum.Parse(typeof(Product.ProductType), fields[2], true),
                                 Price = decimal.Parse(fields[3], CultureInfo.CurrentCulture),
                                 Quantity = uint.Parse(fields[4], CultureInfo.CurrentCulture),
                                 ReleaseYear = fields[5],
                                 Creator = fields[6],
                                 Publisher = fields[7],
                                 FreeText = fields[8],
-                                IsActive = fields[9].Equals("true",StringComparison.CurrentCultureIgnoreCase)
+                                Status = (Product.ProductStatus)Enum.Parse(typeof(Product.ProductStatus), fields[9], true)
                             };
                             productList.Add(prod);
                         }
@@ -119,7 +119,7 @@ namespace MediaStore
                         {
                             streamWriter.WriteLine(receipt.ToString());
                         }
-                        
+
                     }
                     streamWriter.Flush();
                 }

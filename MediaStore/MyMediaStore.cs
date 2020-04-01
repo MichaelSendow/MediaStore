@@ -195,7 +195,7 @@ namespace MediaStore
             CashierStockListView.Items.Clear();
             foreach (KeyValuePair<uint, Product> productValuePair in MyStock.Products)
             {
-                if (productValuePair.Value.IsActive)
+                if (productValuePair.Value.Status == Product.ProductStatus.Active)
                 {
                     CashierStockListView.Items.Add(productValuePair.Value.CashierGetProductListViewItem());
                 }
