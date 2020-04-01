@@ -42,6 +42,12 @@
             this.CashierListViewColumnHeader_ProductType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CashierListViewColumnHeader_Price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CashierListViewColumnHeader_Qty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ReturnQtyTextBox = new System.Windows.Forms.TextBox();
+            this.ReturnQtyLabel = new System.Windows.Forms.Label();
+            this.ReturnProductTextBox = new System.Windows.Forms.TextBox();
+            this.ReturnProductLabel = new System.Windows.Forms.Label();
+            this.ReturnReceiptTextBox = new System.Windows.Forms.TextBox();
+            this.ReturnReceiptLabel = new System.Windows.Forms.Label();
             this.CashierPrintReceiptsCheckBox = new System.Windows.Forms.CheckBox();
             this.CashierReturnItemsButton = new System.Windows.Forms.Button();
             this.ShoppingBasketSplitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -61,12 +67,7 @@
             this.StatisticsTabPage = new System.Windows.Forms.TabPage();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.ReturnReceiptLabel = new System.Windows.Forms.Label();
-            this.ReturnReceiptTextBox = new System.Windows.Forms.TextBox();
-            this.ReturnProductTextBox = new System.Windows.Forms.TextBox();
-            this.ReturnProductLabel = new System.Windows.Forms.Label();
-            this.ReturnQtyTextBox = new System.Windows.Forms.TextBox();
-            this.ReturnQtyLabel = new System.Windows.Forms.Label();
+            this.CashierShowAllProductsCheckBox = new System.Windows.Forms.CheckBox();
             this.MainTabControl.SuspendLayout();
             this.CashierTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CashierTabSplitContainer)).BeginInit();
@@ -149,6 +150,7 @@
             // 
             // CashierSplitContainer1.Panel2
             // 
+            this.CashierSplitContainer1.Panel2.Controls.Add(this.CashierShowAllProductsCheckBox);
             this.CashierSplitContainer1.Panel2.Controls.Add(this.ReturnQtyTextBox);
             this.CashierSplitContainer1.Panel2.Controls.Add(this.ReturnQtyLabel);
             this.CashierSplitContainer1.Panel2.Controls.Add(this.ReturnProductTextBox);
@@ -258,11 +260,62 @@
             this.CashierListViewColumnHeader_Qty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.CashierListViewColumnHeader_Qty.Width = 114;
             // 
+            // ReturnQtyTextBox
+            // 
+            this.ReturnQtyTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ReturnQtyTextBox.Location = new System.Drawing.Point(425, 29);
+            this.ReturnQtyTextBox.Name = "ReturnQtyTextBox";
+            this.ReturnQtyTextBox.Size = new System.Drawing.Size(138, 27);
+            this.ReturnQtyTextBox.TabIndex = 7;
+            // 
+            // ReturnQtyLabel
+            // 
+            this.ReturnQtyLabel.AutoSize = true;
+            this.ReturnQtyLabel.Location = new System.Drawing.Point(425, 5);
+            this.ReturnQtyLabel.Name = "ReturnQtyLabel";
+            this.ReturnQtyLabel.Size = new System.Drawing.Size(79, 18);
+            this.ReturnQtyLabel.TabIndex = 6;
+            this.ReturnQtyLabel.Text = "Quantity";
+            // 
+            // ReturnProductTextBox
+            // 
+            this.ReturnProductTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ReturnProductTextBox.Location = new System.Drawing.Point(281, 29);
+            this.ReturnProductTextBox.Name = "ReturnProductTextBox";
+            this.ReturnProductTextBox.Size = new System.Drawing.Size(138, 27);
+            this.ReturnProductTextBox.TabIndex = 5;
+            // 
+            // ReturnProductLabel
+            // 
+            this.ReturnProductLabel.AutoSize = true;
+            this.ReturnProductLabel.Location = new System.Drawing.Point(281, 5);
+            this.ReturnProductLabel.Name = "ReturnProductLabel";
+            this.ReturnProductLabel.Size = new System.Drawing.Size(136, 18);
+            this.ReturnProductLabel.TabIndex = 4;
+            this.ReturnProductLabel.Text = "Product number";
+            // 
+            // ReturnReceiptTextBox
+            // 
+            this.ReturnReceiptTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ReturnReceiptTextBox.Location = new System.Drawing.Point(137, 29);
+            this.ReturnReceiptTextBox.Name = "ReturnReceiptTextBox";
+            this.ReturnReceiptTextBox.Size = new System.Drawing.Size(138, 27);
+            this.ReturnReceiptTextBox.TabIndex = 3;
+            // 
+            // ReturnReceiptLabel
+            // 
+            this.ReturnReceiptLabel.AutoSize = true;
+            this.ReturnReceiptLabel.Location = new System.Drawing.Point(137, 5);
+            this.ReturnReceiptLabel.Name = "ReturnReceiptLabel";
+            this.ReturnReceiptLabel.Size = new System.Drawing.Size(136, 18);
+            this.ReturnReceiptLabel.TabIndex = 2;
+            this.ReturnReceiptLabel.Text = "Receipt number";
+            // 
             // CashierPrintReceiptsCheckBox
             // 
             this.CashierPrintReceiptsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.CashierPrintReceiptsCheckBox.AutoSize = true;
-            this.CashierPrintReceiptsCheckBox.Location = new System.Drawing.Point(715, 66);
+            this.CashierPrintReceiptsCheckBox.Location = new System.Drawing.Point(679, 69);
             this.CashierPrintReceiptsCheckBox.Name = "CashierPrintReceiptsCheckBox";
             this.CashierPrintReceiptsCheckBox.Size = new System.Drawing.Size(143, 22);
             this.CashierPrintReceiptsCheckBox.TabIndex = 1;
@@ -475,56 +528,15 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument1_PrintPage);
             // 
-            // ReturnReceiptLabel
+            // CashierShowAllProductsCheckBox
             // 
-            this.ReturnReceiptLabel.AutoSize = true;
-            this.ReturnReceiptLabel.Location = new System.Drawing.Point(137, 5);
-            this.ReturnReceiptLabel.Name = "ReturnReceiptLabel";
-            this.ReturnReceiptLabel.Size = new System.Drawing.Size(136, 18);
-            this.ReturnReceiptLabel.TabIndex = 2;
-            this.ReturnReceiptLabel.Text = "Receipt number";
-            // 
-            // ReturnReceiptTextBox
-            // 
-            this.ReturnReceiptTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ReturnReceiptTextBox.Location = new System.Drawing.Point(137, 29);
-            this.ReturnReceiptTextBox.Name = "ReturnReceiptTextBox";
-            this.ReturnReceiptTextBox.Size = new System.Drawing.Size(138, 27);
-            this.ReturnReceiptTextBox.TabIndex = 3;
-            // 
-            // ReturnProductTextBox
-            // 
-            this.ReturnProductTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ReturnProductTextBox.Location = new System.Drawing.Point(281, 29);
-            this.ReturnProductTextBox.Name = "ReturnProductTextBox";
-            this.ReturnProductTextBox.Size = new System.Drawing.Size(138, 27);
-            this.ReturnProductTextBox.TabIndex = 5;
-            // 
-            // ReturnProductLabel
-            // 
-            this.ReturnProductLabel.AutoSize = true;
-            this.ReturnProductLabel.Location = new System.Drawing.Point(281, 5);
-            this.ReturnProductLabel.Name = "ReturnProductLabel";
-            this.ReturnProductLabel.Size = new System.Drawing.Size(136, 18);
-            this.ReturnProductLabel.TabIndex = 4;
-            this.ReturnProductLabel.Text = "Product number";
-            // 
-            // ReturnQtyTextBox
-            // 
-            this.ReturnQtyTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ReturnQtyTextBox.Location = new System.Drawing.Point(425, 29);
-            this.ReturnQtyTextBox.Name = "ReturnQtyTextBox";
-            this.ReturnQtyTextBox.Size = new System.Drawing.Size(138, 27);
-            this.ReturnQtyTextBox.TabIndex = 7;
-            // 
-            // ReturnQtyLabel
-            // 
-            this.ReturnQtyLabel.AutoSize = true;
-            this.ReturnQtyLabel.Location = new System.Drawing.Point(425, 5);
-            this.ReturnQtyLabel.Name = "ReturnQtyLabel";
-            this.ReturnQtyLabel.Size = new System.Drawing.Size(79, 18);
-            this.ReturnQtyLabel.TabIndex = 6;
-            this.ReturnQtyLabel.Text = "Quantity";
+            this.CashierShowAllProductsCheckBox.AutoSize = true;
+            this.CashierShowAllProductsCheckBox.Location = new System.Drawing.Point(679, 5);
+            this.CashierShowAllProductsCheckBox.Name = "CashierShowAllProductsCheckBox";
+            this.CashierShowAllProductsCheckBox.Size = new System.Drawing.Size(179, 22);
+            this.CashierShowAllProductsCheckBox.TabIndex = 8;
+            this.CashierShowAllProductsCheckBox.Text = "Show all products";
+            this.CashierShowAllProductsCheckBox.UseVisualStyleBackColor = true;
             // 
             // MyMediaStore
             // 
@@ -606,6 +618,7 @@
         private System.Windows.Forms.Label ReturnProductLabel;
         private System.Windows.Forms.TextBox ReturnReceiptTextBox;
         private System.Windows.Forms.Label ReturnReceiptLabel;
+        private System.Windows.Forms.CheckBox CashierShowAllProductsCheckBox;
     }
 }
 

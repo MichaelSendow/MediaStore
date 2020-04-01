@@ -52,6 +52,7 @@ namespace MediaStore
             this.FreeTextBox = new System.Windows.Forms.TextBox();
             this.QtyNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.QtyNumericLabel = new System.Windows.Forms.Label();
+            this.IsActiveCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.QtyNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -316,11 +317,27 @@ namespace MediaStore
             this.QtyNumericLabel.Text = "Quantity";
             this.QtyNumericLabel.Visible = false;
             // 
+            // IsActiveCheckBox
+            // 
+            this.IsActiveCheckBox.AutoSize = true;
+            this.IsActiveCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IsActiveCheckBox.Checked = true;
+            this.IsActiveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.IsActiveCheckBox.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.IsActiveCheckBox.Location = new System.Drawing.Point(175, 458);
+            this.IsActiveCheckBox.Name = "IsActiveCheckBox";
+            this.IsActiveCheckBox.Size = new System.Drawing.Size(108, 29);
+            this.IsActiveCheckBox.TabIndex = 22;
+            this.IsActiveCheckBox.Text = "Active";
+            this.IsActiveCheckBox.UseVisualStyleBackColor = true;
+            this.IsActiveCheckBox.CheckedChanged += new System.EventHandler(this.IsActiveCheckBox_CheckedChanged);
+            // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(869, 544);
+            this.Controls.Add(this.IsActiveCheckBox);
             this.Controls.Add(this.QtyNumericUpDown);
             this.Controls.Add(this.QtyNumericLabel);
             this.Controls.Add(this.FreeTextLabel);
@@ -379,5 +396,6 @@ namespace MediaStore
         public System.Windows.Forms.Button CxlButton;
         private System.Windows.Forms.NumericUpDown QtyNumericUpDown;
         private System.Windows.Forms.Label QtyNumericLabel;
+        private System.Windows.Forms.CheckBox IsActiveCheckBox;
     }
 }

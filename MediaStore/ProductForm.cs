@@ -69,6 +69,9 @@ namespace MediaStore
         {
             PopulateForm();
 
+            IsActiveCheckBox.Enabled = false;
+            IsActiveCheckBox.Visible = false;
+
 
             QtyNumericLabel.Text = "New QTY";
             QtyNumericLabel.Visible = true;
@@ -86,8 +89,11 @@ namespace MediaStore
             {
                 PopulateForm();
 
-                if (FormsProduct.Quantity == 0)
+                if (FormsProduct.Quantity == 0 || FormsProduct.Status == Product.ProductStatus.InActive)
                     FunctionButton.Enabled = false;
+
+                IsActiveCheckBox.Enabled = false;
+                IsActiveCheckBox.Visible = false;
 
 
                 QtyNumericLabel.Text = "QTY";
@@ -110,6 +116,12 @@ namespace MediaStore
             CreatorTextBox.Text = FormsProduct.Creator;
             PublisherTextBox.Text = FormsProduct.Publisher;
             FreeTextBox.Text = FormsProduct.FreeText;
+
+            if (FormsProduct.Status != Product.ProductStatus.Active)
+            {
+                IsActiveCheckBox.Checked = false;
+            }
+            
         }
 
         public uint GetNumericSpinBoxValue()
@@ -134,6 +146,19 @@ namespace MediaStore
         {
             ProductFormFunction = FormFunction.Close;
             this.Hide();
+        }
+
+        private void IsActiveCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (IsActiveCheckBox.Checked == true)
+            {
+                FormsProduct.Status = Product.ProductStatus.Active;
+            }
+            else
+            {
+
+            }
+            FormsProduct.Status = Product.ProductStatus.InActive;
         }
     }
 }

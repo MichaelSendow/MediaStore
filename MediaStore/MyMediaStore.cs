@@ -190,14 +190,28 @@ namespace MediaStore
 
         }
 
-        private void UpdateCashierStockListView()
+        private void UpdateCashierStockListView(bool OnlyShowActive = true)
         {
             CashierStockListView.Items.Clear();
             foreach (KeyValuePair<uint, Product> productValuePair in MyStock.Products)
             {
-                if (productValuePair.Value.Status == Product.ProductStatus.Active)
+                if (OnlyShowActive)
                 {
-                    CashierStockListView.Items.Add(productValuePair.Value.CashierGetProductListViewItem());
+                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
+                    {
+                        CashierStockListView.Items.Add(productValuePair.Value.CashierGetProductListViewItem());
+                    }
+                }
+                else
+                {
+                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
+                    {
+                        CashierStockListView.Items.Add(productValuePair.Value.CashierGetProductListViewItem());
+                    }
+                    else
+                    {
+                        CashierStockListView.Items.Add(productValuePair.Value.CashierGetProductListViewItem(new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)))));
+                    }
                 }
             }
 
@@ -346,7 +360,7 @@ namespace MediaStore
                         return;
                     }
 
-                    if (MySales.ReturnProduct(receiptNumber,productCode, quantityToReturn))
+                    if (MySales.ReturnProduct(receiptNumber, productCode, quantityToReturn))
                     {
                         MyStock.AddQuantity(productCode, quantityToReturn);
                         UpdateCashierStockListView();
@@ -364,7 +378,7 @@ namespace MediaStore
             {
                 MessageBox.Show("All fields must contain numbers");
             }
-            
+
         }
 
         /// <summary>
@@ -385,6 +399,20 @@ namespace MediaStore
             }
 
             return true;
+        }
+
+        private void CashierShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+            if (CashierShowAllProductsCheckBox.Checked == true)
+            {
+                UpdateCashierStockListView(OnlyShowActive: false);
+            }
+            else
+            {
+                UpdateCashierStockListView(OnlyShowActive: true);
+            }
+
         }
     }
 
