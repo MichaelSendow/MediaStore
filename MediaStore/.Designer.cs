@@ -42,6 +42,7 @@
             this.CashierListViewColumnHeader_ProductType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CashierListViewColumnHeader_Price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CashierListViewColumnHeader_Qty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.CashierShowAllProductsCheckBox = new System.Windows.Forms.CheckBox();
             this.ReturnQtyTextBox = new System.Windows.Forms.TextBox();
             this.ReturnQtyLabel = new System.Windows.Forms.Label();
             this.ReturnProductTextBox = new System.Windows.Forms.TextBox();
@@ -64,10 +65,18 @@
             this.ShoppingBasketClearBasketButton = new System.Windows.Forms.Button();
             this.ShoppingBasketCheckOutButton = new System.Windows.Forms.Button();
             this.StockTabPage = new System.Windows.Forms.TabPage();
+            this.StockListView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AddNewProductButton = new System.Windows.Forms.Button();
             this.StatisticsTabPage = new System.Windows.Forms.TabPage();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.CashierShowAllProductsCheckBox = new System.Windows.Forms.CheckBox();
+            this.StockSplitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.StockSplitContainer2 = new System.Windows.Forms.SplitContainer();
             this.MainTabControl.SuspendLayout();
             this.CashierTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CashierTabSplitContainer)).BeginInit();
@@ -90,6 +99,14 @@
             this.ShoppingBasketSplitContainer2.Panel1.SuspendLayout();
             this.ShoppingBasketSplitContainer2.Panel2.SuspendLayout();
             this.ShoppingBasketSplitContainer2.SuspendLayout();
+            this.StockTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.StockSplitContainer1)).BeginInit();
+            this.StockSplitContainer1.Panel1.SuspendLayout();
+            this.StockSplitContainer1.Panel2.SuspendLayout();
+            this.StockSplitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.StockSplitContainer2)).BeginInit();
+            this.StockSplitContainer2.Panel1.SuspendLayout();
+            this.StockSplitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -259,6 +276,17 @@
             this.CashierListViewColumnHeader_Qty.Text = "Quantity";
             this.CashierListViewColumnHeader_Qty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.CashierListViewColumnHeader_Qty.Width = 114;
+            // 
+            // CashierShowAllProductsCheckBox
+            // 
+            this.CashierShowAllProductsCheckBox.AutoSize = true;
+            this.CashierShowAllProductsCheckBox.Location = new System.Drawing.Point(679, 5);
+            this.CashierShowAllProductsCheckBox.Name = "CashierShowAllProductsCheckBox";
+            this.CashierShowAllProductsCheckBox.Size = new System.Drawing.Size(179, 22);
+            this.CashierShowAllProductsCheckBox.TabIndex = 8;
+            this.CashierShowAllProductsCheckBox.Text = "Show all products";
+            this.CashierShowAllProductsCheckBox.UseVisualStyleBackColor = true;
+            this.CashierShowAllProductsCheckBox.CheckedChanged += new System.EventHandler(this.CashierShowAllProductsCheckBox_CheckedChanged);
             // 
             // ReturnQtyTextBox
             // 
@@ -495,6 +523,7 @@
             // 
             // StockTabPage
             // 
+            this.StockTabPage.Controls.Add(this.StockSplitContainer1);
             this.StockTabPage.Location = new System.Drawing.Point(4, 38);
             this.StockTabPage.Name = "StockTabPage";
             this.StockTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -502,6 +531,67 @@
             this.StockTabPage.TabIndex = 1;
             this.StockTabPage.Text = "Stock";
             this.StockTabPage.UseVisualStyleBackColor = true;
+            // 
+            // StockListView1
+            // 
+            this.StockListView1.BackColor = System.Drawing.SystemColors.Window;
+            this.StockListView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.StockListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4,
+            this.columnHeader5});
+            this.StockListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StockListView1.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StockListView1.FullRowSelect = true;
+            this.StockListView1.HideSelection = false;
+            this.StockListView1.Location = new System.Drawing.Point(0, 0);
+            this.StockListView1.MultiSelect = false;
+            this.StockListView1.Name = "StockListView1";
+            this.StockListView1.Size = new System.Drawing.Size(854, 815);
+            this.StockListView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.StockListView1.TabIndex = 2;
+            this.StockListView1.UseCompatibleStateImageBehavior = false;
+            this.StockListView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Product code";
+            this.columnHeader1.Width = 131;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Title";
+            this.columnHeader2.Width = 373;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Type";
+            this.columnHeader3.Width = 120;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Price";
+            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader4.Width = 80;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Quantity";
+            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.columnHeader5.Width = 114;
+            // 
+            // AddNewProductButton
+            // 
+            this.AddNewProductButton.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.AddNewProductButton.Location = new System.Drawing.Point(3, 3);
+            this.AddNewProductButton.Name = "AddNewProductButton";
+            this.AddNewProductButton.Size = new System.Drawing.Size(128, 83);
+            this.AddNewProductButton.TabIndex = 1;
+            this.AddNewProductButton.TabStop = false;
+            this.AddNewProductButton.Text = "Add New Product";
+            this.AddNewProductButton.UseVisualStyleBackColor = true;
             // 
             // StatisticsTabPage
             // 
@@ -528,15 +618,38 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument1_PrintPage);
             // 
-            // CashierShowAllProductsCheckBox
+            // StockSplitContainer1
             // 
-            this.CashierShowAllProductsCheckBox.AutoSize = true;
-            this.CashierShowAllProductsCheckBox.Location = new System.Drawing.Point(679, 5);
-            this.CashierShowAllProductsCheckBox.Name = "CashierShowAllProductsCheckBox";
-            this.CashierShowAllProductsCheckBox.Size = new System.Drawing.Size(179, 22);
-            this.CashierShowAllProductsCheckBox.TabIndex = 8;
-            this.CashierShowAllProductsCheckBox.Text = "Show all products";
-            this.CashierShowAllProductsCheckBox.UseVisualStyleBackColor = true;
+            this.StockSplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StockSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StockSplitContainer1.IsSplitterFixed = true;
+            this.StockSplitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.StockSplitContainer1.Name = "StockSplitContainer1";
+            // 
+            // StockSplitContainer1.Panel1
+            // 
+            this.StockSplitContainer1.Panel1.Controls.Add(this.AddNewProductButton);
+            // 
+            // StockSplitContainer1.Panel2
+            // 
+            this.StockSplitContainer1.Panel2.Controls.Add(this.StockSplitContainer2);
+            this.StockSplitContainer1.Size = new System.Drawing.Size(1636, 817);
+            this.StockSplitContainer1.SplitterDistance = 136;
+            this.StockSplitContainer1.TabIndex = 3;
+            // 
+            // StockSplitContainer2
+            // 
+            this.StockSplitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StockSplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StockSplitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.StockSplitContainer2.Name = "StockSplitContainer2";
+            // 
+            // StockSplitContainer2.Panel1
+            // 
+            this.StockSplitContainer2.Panel1.Controls.Add(this.StockListView1);
+            this.StockSplitContainer2.Size = new System.Drawing.Size(1496, 817);
+            this.StockSplitContainer2.SplitterDistance = 856;
+            this.StockSplitContainer2.TabIndex = 0;
             // 
             // MyMediaStore
             // 
@@ -574,6 +687,14 @@
             this.ShoppingBasketSplitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShoppingBasketSplitContainer2)).EndInit();
             this.ShoppingBasketSplitContainer2.ResumeLayout(false);
+            this.StockTabPage.ResumeLayout(false);
+            this.StockSplitContainer1.Panel1.ResumeLayout(false);
+            this.StockSplitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.StockSplitContainer1)).EndInit();
+            this.StockSplitContainer1.ResumeLayout(false);
+            this.StockSplitContainer2.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.StockSplitContainer2)).EndInit();
+            this.StockSplitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -619,6 +740,15 @@
         private System.Windows.Forms.TextBox ReturnReceiptTextBox;
         private System.Windows.Forms.Label ReturnReceiptLabel;
         private System.Windows.Forms.CheckBox CashierShowAllProductsCheckBox;
+        private System.Windows.Forms.Button AddNewProductButton;
+        private System.Windows.Forms.ListView StockListView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.SplitContainer StockSplitContainer1;
+        private System.Windows.Forms.SplitContainer StockSplitContainer2;
     }
 }
 
