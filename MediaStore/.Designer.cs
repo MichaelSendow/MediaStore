@@ -65,18 +65,18 @@
             this.ShoppingBasketClearBasketButton = new System.Windows.Forms.Button();
             this.ShoppingBasketCheckOutButton = new System.Windows.Forms.Button();
             this.StockTabPage = new System.Windows.Forms.TabPage();
+            this.StockSplitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.StockShowAllProductsCheckBox = new System.Windows.Forms.CheckBox();
+            this.AddNewProductButton = new System.Windows.Forms.Button();
+            this.StockSplitContainer2 = new System.Windows.Forms.SplitContainer();
             this.StockListView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.AddNewProductButton = new System.Windows.Forms.Button();
-            this.StatisticsTabPage = new System.Windows.Forms.TabPage();
-            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
-            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.StockSplitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.StockSplitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.TypeListBox = new System.Windows.Forms.ListBox();
+            this.StockSaveUpdatedProductButton = new System.Windows.Forms.Button();
             this.IsActiveCheckBox = new System.Windows.Forms.CheckBox();
             this.FreeTextLabel = new System.Windows.Forms.Label();
             this.FreeTextBox = new System.Windows.Forms.TextBox();
@@ -95,9 +95,9 @@
             this.TitleTextBox = new System.Windows.Forms.TextBox();
             this.ProductCodeLabel = new System.Windows.Forms.Label();
             this.ProductCodeTextBox = new System.Windows.Forms.TextBox();
-            this.SaveUpdatedProductButton = new System.Windows.Forms.Button();
-            this.StockShowAllProductsCheckBox = new System.Windows.Forms.CheckBox();
-            this.TypeListBox = new System.Windows.Forms.ListBox();
+            this.StatisticsTabPage = new System.Windows.Forms.TabPage();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.MainTabControl.SuspendLayout();
             this.CashierTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CashierTabSplitContainer)).BeginInit();
@@ -554,6 +554,90 @@
             this.StockTabPage.Text = "Stock";
             this.StockTabPage.UseVisualStyleBackColor = true;
             // 
+            // StockSplitContainer1
+            // 
+            this.StockSplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StockSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StockSplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.StockSplitContainer1.IsSplitterFixed = true;
+            this.StockSplitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.StockSplitContainer1.Name = "StockSplitContainer1";
+            // 
+            // StockSplitContainer1.Panel1
+            // 
+            this.StockSplitContainer1.Panel1.Controls.Add(this.StockShowAllProductsCheckBox);
+            this.StockSplitContainer1.Panel1.Controls.Add(this.AddNewProductButton);
+            // 
+            // StockSplitContainer1.Panel2
+            // 
+            this.StockSplitContainer1.Panel2.AutoScroll = true;
+            this.StockSplitContainer1.Panel2.Controls.Add(this.StockSplitContainer2);
+            this.StockSplitContainer1.Size = new System.Drawing.Size(1636, 817);
+            this.StockSplitContainer1.SplitterDistance = 136;
+            this.StockSplitContainer1.TabIndex = 3;
+            // 
+            // StockShowAllProductsCheckBox
+            // 
+            this.StockShowAllProductsCheckBox.AutoSize = true;
+            this.StockShowAllProductsCheckBox.Checked = true;
+            this.StockShowAllProductsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.StockShowAllProductsCheckBox.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StockShowAllProductsCheckBox.Location = new System.Drawing.Point(4, 771);
+            this.StockShowAllProductsCheckBox.Name = "StockShowAllProductsCheckBox";
+            this.StockShowAllProductsCheckBox.Size = new System.Drawing.Size(109, 40);
+            this.StockShowAllProductsCheckBox.TabIndex = 9;
+            this.StockShowAllProductsCheckBox.Text = "Show all \r\nproducts";
+            this.StockShowAllProductsCheckBox.UseVisualStyleBackColor = true;
+            this.StockShowAllProductsCheckBox.CheckedChanged += new System.EventHandler(this.StockShowAllProductsCheckBox_CheckedChanged);
+            // 
+            // AddNewProductButton
+            // 
+            this.AddNewProductButton.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.AddNewProductButton.Location = new System.Drawing.Point(3, 3);
+            this.AddNewProductButton.Name = "AddNewProductButton";
+            this.AddNewProductButton.Size = new System.Drawing.Size(128, 83);
+            this.AddNewProductButton.TabIndex = 1;
+            this.AddNewProductButton.TabStop = false;
+            this.AddNewProductButton.Text = "Add New Product";
+            this.AddNewProductButton.UseVisualStyleBackColor = true;
+            // 
+            // StockSplitContainer2
+            // 
+            this.StockSplitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StockSplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StockSplitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.StockSplitContainer2.Name = "StockSplitContainer2";
+            // 
+            // StockSplitContainer2.Panel1
+            // 
+            this.StockSplitContainer2.Panel1.Controls.Add(this.StockListView1);
+            // 
+            // StockSplitContainer2.Panel2
+            // 
+            this.StockSplitContainer2.Panel2.Controls.Add(this.TypeListBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.StockSaveUpdatedProductButton);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.IsActiveCheckBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.FreeTextLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.FreeTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.ReleaseYearLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.ReleaseYearTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.PublisherLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.PublisherTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.CreatorLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.CreatorTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.TypeLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.QuantityLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.QuantityTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.PriceLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.PriceTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.TitleLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.TitleTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.ProductCodeLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.ProductCodeTextBox);
+            this.StockSplitContainer2.Size = new System.Drawing.Size(1496, 817);
+            this.StockSplitContainer2.SplitterDistance = 857;
+            this.StockSplitContainer2.TabIndex = 0;
+            // 
             // StockListView1
             // 
             this.StockListView1.BackColor = System.Drawing.SystemColors.Window;
@@ -577,7 +661,7 @@
             this.StockListView1.UseCompatibleStateImageBehavior = false;
             this.StockListView1.View = System.Windows.Forms.View.Details;
             this.StockListView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.SortListViewOnColumnClick);
-            this.StockListView1.Click += new System.EventHandler(this.StockListView1_Click);
+            this.StockListView1.SelectedIndexChanged += new System.EventHandler(this.StockListView1_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -606,100 +690,34 @@
             this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeader5.Width = 114;
             // 
-            // AddNewProductButton
+            // TypeListBox
             // 
-            this.AddNewProductButton.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
-            this.AddNewProductButton.Location = new System.Drawing.Point(3, 3);
-            this.AddNewProductButton.Name = "AddNewProductButton";
-            this.AddNewProductButton.Size = new System.Drawing.Size(128, 83);
-            this.AddNewProductButton.TabIndex = 1;
-            this.AddNewProductButton.TabStop = false;
-            this.AddNewProductButton.Text = "Add New Product";
-            this.AddNewProductButton.UseVisualStyleBackColor = true;
+            this.TypeListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TypeListBox.DisplayMember = "Product.ProductType";
+            this.TypeListBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.TypeListBox.FormattingEnabled = true;
+            this.TypeListBox.ItemHeight = 25;
+            this.TypeListBox.Items.AddRange(new object[] {
+            "Book",
+            "Movie",
+            "Music"});
+            this.TypeListBox.Location = new System.Drawing.Point(454, 137);
+            this.TypeListBox.Name = "TypeListBox";
+            this.TypeListBox.Size = new System.Drawing.Size(175, 27);
+            this.TypeListBox.TabIndex = 47;
             // 
-            // StatisticsTabPage
+            // StockSaveUpdatedProductButton
             // 
-            this.StatisticsTabPage.Location = new System.Drawing.Point(4, 38);
-            this.StatisticsTabPage.Name = "StatisticsTabPage";
-            this.StatisticsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.StatisticsTabPage.Size = new System.Drawing.Size(1642, 823);
-            this.StatisticsTabPage.TabIndex = 2;
-            this.StatisticsTabPage.Text = "Statistics";
-            this.StatisticsTabPage.UseVisualStyleBackColor = true;
-            // 
-            // printPreviewDialog1
-            // 
-            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
-            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(778, 744);
-            this.printPreviewDialog1.Document = this.printDocument1;
-            this.printPreviewDialog1.Enabled = true;
-            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
-            this.printPreviewDialog1.Name = "printPreviewDialog1";
-            this.printPreviewDialog1.Visible = false;
-            // 
-            // printDocument1
-            // 
-            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument1_PrintPage);
-            // 
-            // StockSplitContainer1
-            // 
-            this.StockSplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StockSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StockSplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.StockSplitContainer1.IsSplitterFixed = true;
-            this.StockSplitContainer1.Location = new System.Drawing.Point(3, 3);
-            this.StockSplitContainer1.Name = "StockSplitContainer1";
-            // 
-            // StockSplitContainer1.Panel1
-            // 
-            this.StockSplitContainer1.Panel1.Controls.Add(this.StockShowAllProductsCheckBox);
-            this.StockSplitContainer1.Panel1.Controls.Add(this.AddNewProductButton);
-            // 
-            // StockSplitContainer1.Panel2
-            // 
-            this.StockSplitContainer1.Panel2.AutoScroll = true;
-            this.StockSplitContainer1.Panel2.Controls.Add(this.StockSplitContainer2);
-            this.StockSplitContainer1.Size = new System.Drawing.Size(1636, 817);
-            this.StockSplitContainer1.SplitterDistance = 136;
-            this.StockSplitContainer1.TabIndex = 3;
-            // 
-            // StockSplitContainer2
-            // 
-            this.StockSplitContainer2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StockSplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StockSplitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.StockSplitContainer2.Name = "StockSplitContainer2";
-            // 
-            // StockSplitContainer2.Panel1
-            // 
-            this.StockSplitContainer2.Panel1.Controls.Add(this.StockListView1);
-            // 
-            // StockSplitContainer2.Panel2
-            // 
-            this.StockSplitContainer2.Panel2.Controls.Add(this.TypeListBox);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.SaveUpdatedProductButton);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.IsActiveCheckBox);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.FreeTextLabel);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.FreeTextBox);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.ReleaseYearLabel);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.ReleaseYearTextBox);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.PublisherLabel);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.PublisherTextBox);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.CreatorLabel);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.CreatorTextBox);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.TypeLabel);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.QuantityLabel);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.QuantityTextBox);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.PriceLabel);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.PriceTextBox);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.TitleLabel);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.TitleTextBox);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.ProductCodeLabel);
-            this.StockSplitContainer2.Panel2.Controls.Add(this.ProductCodeTextBox);
-            this.StockSplitContainer2.Size = new System.Drawing.Size(1496, 817);
-            this.StockSplitContainer2.SplitterDistance = 857;
-            this.StockSplitContainer2.TabIndex = 0;
+            this.StockSaveUpdatedProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.StockSaveUpdatedProductButton.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.StockSaveUpdatedProductButton.Location = new System.Drawing.Point(503, 728);
+            this.StockSaveUpdatedProductButton.Name = "StockSaveUpdatedProductButton";
+            this.StockSaveUpdatedProductButton.Size = new System.Drawing.Size(128, 83);
+            this.StockSaveUpdatedProductButton.TabIndex = 46;
+            this.StockSaveUpdatedProductButton.TabStop = false;
+            this.StockSaveUpdatedProductButton.Text = "Update";
+            this.StockSaveUpdatedProductButton.UseVisualStyleBackColor = true;
+            this.StockSaveUpdatedProductButton.Click += new System.EventHandler(this.StockSaveUpdatedProductButton_Click);
             // 
             // IsActiveCheckBox
             // 
@@ -715,6 +733,7 @@
             this.IsActiveCheckBox.TabIndex = 45;
             this.IsActiveCheckBox.Text = "Active";
             this.IsActiveCheckBox.UseVisualStyleBackColor = true;
+            this.IsActiveCheckBox.CheckedChanged += new System.EventHandler(this.IsActiveCheckBox_CheckedChanged);
             // 
             // FreeTextLabel
             // 
@@ -896,48 +915,30 @@
             this.ProductCodeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ProductCodeTextBox.WordWrap = false;
             // 
-            // SaveUpdatedProductButton
+            // StatisticsTabPage
             // 
-            this.SaveUpdatedProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.SaveUpdatedProductButton.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
-            this.SaveUpdatedProductButton.Location = new System.Drawing.Point(503, 728);
-            this.SaveUpdatedProductButton.Name = "SaveUpdatedProductButton";
-            this.SaveUpdatedProductButton.Size = new System.Drawing.Size(128, 83);
-            this.SaveUpdatedProductButton.TabIndex = 46;
-            this.SaveUpdatedProductButton.TabStop = false;
-            this.SaveUpdatedProductButton.Text = "Update";
-            this.SaveUpdatedProductButton.UseVisualStyleBackColor = true;
-            this.SaveUpdatedProductButton.Click += new System.EventHandler(this.SaveUpdatedProductButton_Click);
+            this.StatisticsTabPage.Location = new System.Drawing.Point(4, 38);
+            this.StatisticsTabPage.Name = "StatisticsTabPage";
+            this.StatisticsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.StatisticsTabPage.Size = new System.Drawing.Size(1642, 823);
+            this.StatisticsTabPage.TabIndex = 2;
+            this.StatisticsTabPage.Text = "Statistics";
+            this.StatisticsTabPage.UseVisualStyleBackColor = true;
             // 
-            // StockShowAllProductsCheckBox
+            // printPreviewDialog1
             // 
-            this.StockShowAllProductsCheckBox.AutoSize = true;
-            this.StockShowAllProductsCheckBox.Checked = true;
-            this.StockShowAllProductsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.StockShowAllProductsCheckBox.Font = new System.Drawing.Font("Verdana", 8F);
-            this.StockShowAllProductsCheckBox.Location = new System.Drawing.Point(4, 771);
-            this.StockShowAllProductsCheckBox.Name = "StockShowAllProductsCheckBox";
-            this.StockShowAllProductsCheckBox.Size = new System.Drawing.Size(109, 40);
-            this.StockShowAllProductsCheckBox.TabIndex = 9;
-            this.StockShowAllProductsCheckBox.Text = "Show all \r\nproducts";
-            this.StockShowAllProductsCheckBox.UseVisualStyleBackColor = true;
-            this.StockShowAllProductsCheckBox.CheckedChanged += new System.EventHandler(this.StockShowAllProductsCheckBox_CheckedChanged);
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(778, 744);
+            this.printPreviewDialog1.Document = this.printDocument1;
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
             // 
-            // TypeListBox
+            // printDocument1
             // 
-            this.TypeListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TypeListBox.DisplayMember = "Product.ProductType";
-            this.TypeListBox.Font = new System.Drawing.Font("Verdana", 10F);
-            this.TypeListBox.FormattingEnabled = true;
-            this.TypeListBox.ItemHeight = 25;
-            this.TypeListBox.Items.AddRange(new object[] {
-            "Book",
-            "Movie",
-            "Music"});
-            this.TypeListBox.Location = new System.Drawing.Point(454, 137);
-            this.TypeListBox.Name = "TypeListBox";
-            this.TypeListBox.Size = new System.Drawing.Size(175, 27);
-            this.TypeListBox.TabIndex = 47;
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument1_PrintPage);
             // 
             // MyMediaStore
             // 
@@ -949,6 +950,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "My Media Store";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MyMediaStore_FormClosing);
+            this.Load += new System.EventHandler(this.MyMediaStore_Load);
             this.MainTabControl.ResumeLayout(false);
             this.CashierTabPage.ResumeLayout(false);
             this.CashierTabSplitContainer.Panel1.ResumeLayout(false);
@@ -1040,7 +1042,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.SplitContainer StockSplitContainer1;
         private System.Windows.Forms.SplitContainer StockSplitContainer2;
-        private System.Windows.Forms.Button SaveUpdatedProductButton;
+        private System.Windows.Forms.Button StockSaveUpdatedProductButton;
         private System.Windows.Forms.CheckBox IsActiveCheckBox;
         private System.Windows.Forms.Label FreeTextLabel;
         private System.Windows.Forms.TextBox FreeTextBox;

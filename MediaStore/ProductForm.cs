@@ -20,11 +20,9 @@ namespace MediaStore
         public enum FormFunction
         {
             AddToBasket,
-            UpdateProduct,
-            SubtractFromBasket,
-            Close,
             ShoppingList,
-            None
+            NewProduct,
+            None,
         }
 
 
@@ -46,13 +44,8 @@ namespace MediaStore
                 case FormFunction.AddToBasket:
                     AddToBasketForm();
                     break;
-                case FormFunction.UpdateProduct:
-                    break;
-                case FormFunction.SubtractFromBasket:
-                    break;
-                case FormFunction.Close:
-                    break;
-                case FormFunction.None:
+                case FormFunction.NewProduct:
+                    NewProduct();
                     break;
                 case FormFunction.ShoppingList:
                     ShoppingList();
@@ -71,7 +64,6 @@ namespace MediaStore
 
             IsActiveCheckBox.Enabled = false;
             IsActiveCheckBox.Visible = false;
-
 
             QtyNumericLabel.Text = "New QTY";
             QtyNumericLabel.Visible = true;
@@ -95,6 +87,22 @@ namespace MediaStore
                 IsActiveCheckBox.Enabled = false;
                 IsActiveCheckBox.Visible = false;
 
+                QtyNumericLabel.Text = "QTY";
+                QtyNumericLabel.Visible = true;
+
+                QtyNumericUpDown.Maximum = FormsProduct.Quantity;
+                QtyNumericUpDown.Visible = true;
+
+                FunctionButton.Text = "Add to Basket";
+            }
+        }
+
+        private void NewProduct()
+        {
+            if (FormsProduct != null)
+            {
+                IsActiveCheckBox.Enabled = false;
+                IsActiveCheckBox.Visible = false;
 
                 QtyNumericLabel.Text = "QTY";
                 QtyNumericLabel.Visible = true;
@@ -105,6 +113,9 @@ namespace MediaStore
                 FunctionButton.Text = "Add to Basket";
             }
         }
+
+
+
         private void PopulateForm()
         {
             ProductCodeTextBox.Text = FormsProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
@@ -121,7 +132,7 @@ namespace MediaStore
             {
                 IsActiveCheckBox.Checked = false;
             }
-            
+
         }
 
         public uint GetNumericSpinBoxValue()
@@ -138,13 +149,11 @@ namespace MediaStore
 
         private void FunctionButton_Click(object sender, EventArgs e)
         {
-            ProductFormFunction = FormFunction.AddToBasket;
             this.Hide();
         }
 
         private void ProductCloseButton_Click(object sender, EventArgs e)
         {
-            ProductFormFunction = FormFunction.Close;
             this.Hide();
         }
 

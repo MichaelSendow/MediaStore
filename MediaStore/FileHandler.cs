@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Forms;
@@ -17,6 +18,12 @@ namespace MediaStore
 
             using (StreamReader streamReader = new StreamReader(filePathName))
             {
+                //Consume header
+                if (streamReader.Peek() >= 0)
+                {
+                    _ = streamReader.ReadLine();
+                }
+
                 while (streamReader.Peek() >= 0)
                 {
                     try
@@ -59,6 +66,9 @@ namespace MediaStore
             {
                 using (StreamWriter streamWriter = new StreamWriter(filePathName, append: false))
                 {
+                    //Write header
+                    streamWriter.WriteLine("ProductCode;Title;Type;Price;Quantity;ReleaseYear;Creator;Publisher;FreeText;Status");
+
                     foreach (var value in stock.Products.Values)
                     {
                         streamWriter.WriteLine(value.ToString());
@@ -78,6 +88,12 @@ namespace MediaStore
 
             using (StreamReader streamReader = new StreamReader(filePathName))
             {
+                //Consume header
+                if (streamReader.Peek() >= 0)
+                {
+                    _ = streamReader.ReadLine();
+                }
+
                 while (streamReader.Peek() >= 0)
                 {
                     try
@@ -113,6 +129,8 @@ namespace MediaStore
             {
                 using (StreamWriter streamWriter = new StreamWriter(filePathName, append: false))
                 {
+                    //Write header
+                    streamWriter.WriteLine("ProductCode;Quantity;DateOfSale;ReceiptNumber");
                     foreach (var receiptList in sales.Ledger.Values)
                     {
                         foreach (var receipt in receiptList)
