@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace MediaStore
     internal class Sales
     {
         public IDictionary<uint, List<Receipt>> Ledger { get; set; }
+
+
 
         public Sales()
         {
@@ -80,7 +83,7 @@ namespace MediaStore
                                 item.Quantity -= QtyToReturn;
                             }
 
-                            MessageBox.Show("Return processed successfully!","Return processed", MessageBoxButtons.OK);
+                            MessageBox.Show("Return processed successfully!", "Return processed", MessageBoxButtons.OK);
                             return true;
                         }
                         else

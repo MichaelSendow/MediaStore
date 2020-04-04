@@ -36,7 +36,7 @@
             this.CashierSplitContainer2 = new System.Windows.Forms.SplitContainer();
             this.CashierSearchTextBox = new System.Windows.Forms.TextBox();
             this.CashierSearchLabel = new System.Windows.Forms.Label();
-            this.CashierStockListView = new System.Windows.Forms.ListView();
+            this.CashierListView1 = new System.Windows.Forms.ListView();
             this.CashierListViewColumnHeader_ProductCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CashierListViewColumnHeader_Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CashierListViewColumnHeader_ProductType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -56,7 +56,7 @@
             this.CashierShoppingBasketLabel = new System.Windows.Forms.Label();
             this.TotalSum_Numbers = new System.Windows.Forms.TextBox();
             this.TotalSumLabel_Text = new System.Windows.Forms.Label();
-            this.ShoppingBasketListView = new System.Windows.Forms.ListView();
+            this.ShoppingBasketListView1 = new System.Windows.Forms.ListView();
             this.ShoppingBasketColumnHeader_ProductCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ShoppingBasketColumnHeader_Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ShoppingBasketColumnHeader_Price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -77,6 +77,27 @@
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.StockSplitContainer1 = new System.Windows.Forms.SplitContainer();
             this.StockSplitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.IsActiveCheckBox = new System.Windows.Forms.CheckBox();
+            this.FreeTextLabel = new System.Windows.Forms.Label();
+            this.FreeTextBox = new System.Windows.Forms.TextBox();
+            this.ReleaseYearLabel = new System.Windows.Forms.Label();
+            this.ReleaseYearTextBox = new System.Windows.Forms.TextBox();
+            this.PublisherLabel = new System.Windows.Forms.Label();
+            this.PublisherTextBox = new System.Windows.Forms.TextBox();
+            this.CreatorLabel = new System.Windows.Forms.Label();
+            this.CreatorTextBox = new System.Windows.Forms.TextBox();
+            this.TypeLabel = new System.Windows.Forms.Label();
+            this.QuantityLabel = new System.Windows.Forms.Label();
+            this.QuantityTextBox = new System.Windows.Forms.TextBox();
+            this.PriceLabel = new System.Windows.Forms.Label();
+            this.PriceTextBox = new System.Windows.Forms.TextBox();
+            this.TitleLabel = new System.Windows.Forms.Label();
+            this.TitleTextBox = new System.Windows.Forms.TextBox();
+            this.ProductCodeLabel = new System.Windows.Forms.Label();
+            this.ProductCodeTextBox = new System.Windows.Forms.TextBox();
+            this.SaveUpdatedProductButton = new System.Windows.Forms.Button();
+            this.StockShowAllProductsCheckBox = new System.Windows.Forms.CheckBox();
+            this.TypeListBox = new System.Windows.Forms.ListBox();
             this.MainTabControl.SuspendLayout();
             this.CashierTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CashierTabSplitContainer)).BeginInit();
@@ -106,6 +127,7 @@
             this.StockSplitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StockSplitContainer2)).BeginInit();
             this.StockSplitContainer2.Panel1.SuspendLayout();
+            this.StockSplitContainer2.Panel2.SuspendLayout();
             this.StockSplitContainer2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -199,7 +221,7 @@
             // 
             // CashierSplitContainer2.Panel2
             // 
-            this.CashierSplitContainer2.Panel2.Controls.Add(this.CashierStockListView);
+            this.CashierSplitContainer2.Panel2.Controls.Add(this.CashierListView1);
             this.CashierSplitContainer2.Size = new System.Drawing.Size(857, 713);
             this.CashierSplitContainer2.SplitterDistance = 54;
             this.CashierSplitContainer2.TabIndex = 2;
@@ -225,30 +247,30 @@
             this.CashierSearchLabel.TabIndex = 0;
             this.CashierSearchLabel.Text = "Search";
             // 
-            // CashierStockListView
+            // CashierListView1
             // 
-            this.CashierStockListView.BackColor = System.Drawing.SystemColors.Window;
-            this.CashierStockListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.CashierStockListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.CashierListView1.BackColor = System.Drawing.SystemColors.Window;
+            this.CashierListView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.CashierListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.CashierListViewColumnHeader_ProductCode,
             this.CashierListViewColumnHeader_Title,
             this.CashierListViewColumnHeader_ProductType,
             this.CashierListViewColumnHeader_Price,
             this.CashierListViewColumnHeader_Qty});
-            this.CashierStockListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CashierStockListView.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CashierStockListView.FullRowSelect = true;
-            this.CashierStockListView.HideSelection = false;
-            this.CashierStockListView.Location = new System.Drawing.Point(0, 0);
-            this.CashierStockListView.MultiSelect = false;
-            this.CashierStockListView.Name = "CashierStockListView";
-            this.CashierStockListView.Size = new System.Drawing.Size(857, 655);
-            this.CashierStockListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.CashierStockListView.TabIndex = 1;
-            this.CashierStockListView.UseCompatibleStateImageBehavior = false;
-            this.CashierStockListView.View = System.Windows.Forms.View.Details;
-            this.CashierStockListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.SortListViewOnColumnClick);
-            this.CashierStockListView.DoubleClick += new System.EventHandler(this.CashierStockListView_DoubleClick);
+            this.CashierListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CashierListView1.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CashierListView1.FullRowSelect = true;
+            this.CashierListView1.HideSelection = false;
+            this.CashierListView1.Location = new System.Drawing.Point(0, 0);
+            this.CashierListView1.MultiSelect = false;
+            this.CashierListView1.Name = "CashierListView1";
+            this.CashierListView1.Size = new System.Drawing.Size(857, 655);
+            this.CashierListView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.CashierListView1.TabIndex = 1;
+            this.CashierListView1.UseCompatibleStateImageBehavior = false;
+            this.CashierListView1.View = System.Windows.Forms.View.Details;
+            this.CashierListView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.SortListViewOnColumnClick);
+            this.CashierListView1.DoubleClick += new System.EventHandler(this.CashierStockListView_DoubleClick);
             // 
             // CashierListViewColumnHeader_ProductCode
             // 
@@ -399,7 +421,7 @@
             // 
             this.ShoppingBasketSplitContainer2.Panel2.Controls.Add(this.TotalSum_Numbers);
             this.ShoppingBasketSplitContainer2.Panel2.Controls.Add(this.TotalSumLabel_Text);
-            this.ShoppingBasketSplitContainer2.Panel2.Controls.Add(this.ShoppingBasketListView);
+            this.ShoppingBasketSplitContainer2.Panel2.Controls.Add(this.ShoppingBasketListView1);
             this.ShoppingBasketSplitContainer2.Size = new System.Drawing.Size(767, 716);
             this.ShoppingBasketSplitContainer2.SplitterDistance = 53;
             this.ShoppingBasketSplitContainer2.TabIndex = 0;
@@ -443,29 +465,29 @@
             this.TotalSumLabel_Text.TabIndex = 1;
             this.TotalSumLabel_Text.Text = "Total Sum:";
             // 
-            // ShoppingBasketListView
+            // ShoppingBasketListView1
             // 
-            this.ShoppingBasketListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ShoppingBasketListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShoppingBasketListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ShoppingBasketListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ShoppingBasketListView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ShoppingBasketListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ShoppingBasketColumnHeader_ProductCode,
             this.ShoppingBasketColumnHeader_Title,
             this.ShoppingBasketColumnHeader_Price,
             this.ShoppingBasketColumnHeader_Quantity,
             this.ShoppingBasketColumnHeader_TotalSum});
-            this.ShoppingBasketListView.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShoppingBasketListView.FullRowSelect = true;
-            this.ShoppingBasketListView.HideSelection = false;
-            this.ShoppingBasketListView.Location = new System.Drawing.Point(0, 0);
-            this.ShoppingBasketListView.Name = "ShoppingBasketListView";
-            this.ShoppingBasketListView.Size = new System.Drawing.Size(767, 619);
-            this.ShoppingBasketListView.TabIndex = 0;
-            this.ShoppingBasketListView.UseCompatibleStateImageBehavior = false;
-            this.ShoppingBasketListView.View = System.Windows.Forms.View.Details;
-            this.ShoppingBasketListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.SortListViewOnColumnClick);
-            this.ShoppingBasketListView.DoubleClick += new System.EventHandler(this.ShoppingBasketListView_DoubleClick);
+            this.ShoppingBasketListView1.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ShoppingBasketListView1.FullRowSelect = true;
+            this.ShoppingBasketListView1.HideSelection = false;
+            this.ShoppingBasketListView1.Location = new System.Drawing.Point(0, 0);
+            this.ShoppingBasketListView1.Name = "ShoppingBasketListView1";
+            this.ShoppingBasketListView1.Size = new System.Drawing.Size(767, 619);
+            this.ShoppingBasketListView1.TabIndex = 0;
+            this.ShoppingBasketListView1.UseCompatibleStateImageBehavior = false;
+            this.ShoppingBasketListView1.View = System.Windows.Forms.View.Details;
+            this.ShoppingBasketListView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.SortListViewOnColumnClick);
+            this.ShoppingBasketListView1.DoubleClick += new System.EventHandler(this.ShoppingBasketListView_DoubleClick);
             // 
             // ShoppingBasketColumnHeader_ProductCode
             // 
@@ -549,11 +571,13 @@
             this.StockListView1.Location = new System.Drawing.Point(0, 0);
             this.StockListView1.MultiSelect = false;
             this.StockListView1.Name = "StockListView1";
-            this.StockListView1.Size = new System.Drawing.Size(854, 815);
+            this.StockListView1.Size = new System.Drawing.Size(855, 815);
             this.StockListView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.StockListView1.TabIndex = 2;
             this.StockListView1.UseCompatibleStateImageBehavior = false;
             this.StockListView1.View = System.Windows.Forms.View.Details;
+            this.StockListView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.SortListViewOnColumnClick);
+            this.StockListView1.Click += new System.EventHandler(this.StockListView1_Click);
             // 
             // columnHeader1
             // 
@@ -622,16 +646,19 @@
             // 
             this.StockSplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StockSplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StockSplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.StockSplitContainer1.IsSplitterFixed = true;
             this.StockSplitContainer1.Location = new System.Drawing.Point(3, 3);
             this.StockSplitContainer1.Name = "StockSplitContainer1";
             // 
             // StockSplitContainer1.Panel1
             // 
+            this.StockSplitContainer1.Panel1.Controls.Add(this.StockShowAllProductsCheckBox);
             this.StockSplitContainer1.Panel1.Controls.Add(this.AddNewProductButton);
             // 
             // StockSplitContainer1.Panel2
             // 
+            this.StockSplitContainer1.Panel2.AutoScroll = true;
             this.StockSplitContainer1.Panel2.Controls.Add(this.StockSplitContainer2);
             this.StockSplitContainer1.Size = new System.Drawing.Size(1636, 817);
             this.StockSplitContainer1.SplitterDistance = 136;
@@ -647,9 +674,270 @@
             // StockSplitContainer2.Panel1
             // 
             this.StockSplitContainer2.Panel1.Controls.Add(this.StockListView1);
+            // 
+            // StockSplitContainer2.Panel2
+            // 
+            this.StockSplitContainer2.Panel2.Controls.Add(this.TypeListBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.SaveUpdatedProductButton);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.IsActiveCheckBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.FreeTextLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.FreeTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.ReleaseYearLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.ReleaseYearTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.PublisherLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.PublisherTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.CreatorLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.CreatorTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.TypeLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.QuantityLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.QuantityTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.PriceLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.PriceTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.TitleLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.TitleTextBox);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.ProductCodeLabel);
+            this.StockSplitContainer2.Panel2.Controls.Add(this.ProductCodeTextBox);
             this.StockSplitContainer2.Size = new System.Drawing.Size(1496, 817);
-            this.StockSplitContainer2.SplitterDistance = 856;
+            this.StockSplitContainer2.SplitterDistance = 857;
             this.StockSplitContainer2.TabIndex = 0;
+            // 
+            // IsActiveCheckBox
+            // 
+            this.IsActiveCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.IsActiveCheckBox.AutoSize = true;
+            this.IsActiveCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IsActiveCheckBox.Checked = true;
+            this.IsActiveCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.IsActiveCheckBox.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.IsActiveCheckBox.Location = new System.Drawing.Point(3, 782);
+            this.IsActiveCheckBox.Name = "IsActiveCheckBox";
+            this.IsActiveCheckBox.Size = new System.Drawing.Size(108, 29);
+            this.IsActiveCheckBox.TabIndex = 45;
+            this.IsActiveCheckBox.Text = "Active";
+            this.IsActiveCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // FreeTextLabel
+            // 
+            this.FreeTextLabel.AutoSize = true;
+            this.FreeTextLabel.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FreeTextLabel.Location = new System.Drawing.Point(0, 225);
+            this.FreeTextLabel.Name = "FreeTextLabel";
+            this.FreeTextLabel.Size = new System.Drawing.Size(113, 18);
+            this.FreeTextLabel.TabIndex = 42;
+            this.FreeTextLabel.Text = "Information";
+            // 
+            // FreeTextBox
+            // 
+            this.FreeTextBox.BackColor = System.Drawing.Color.White;
+            this.FreeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.FreeTextBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.FreeTextBox.Location = new System.Drawing.Point(3, 246);
+            this.FreeTextBox.Multiline = true;
+            this.FreeTextBox.Name = "FreeTextBox";
+            this.FreeTextBox.Size = new System.Drawing.Size(626, 250);
+            this.FreeTextBox.TabIndex = 41;
+            // 
+            // ReleaseYearLabel
+            // 
+            this.ReleaseYearLabel.AutoSize = true;
+            this.ReleaseYearLabel.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ReleaseYearLabel.Location = new System.Drawing.Point(0, 169);
+            this.ReleaseYearLabel.Name = "ReleaseYearLabel";
+            this.ReleaseYearLabel.Size = new System.Drawing.Size(125, 18);
+            this.ReleaseYearLabel.TabIndex = 40;
+            this.ReleaseYearLabel.Text = "Release Year";
+            // 
+            // ReleaseYearTextBox
+            // 
+            this.ReleaseYearTextBox.BackColor = System.Drawing.Color.White;
+            this.ReleaseYearTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ReleaseYearTextBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.ReleaseYearTextBox.Location = new System.Drawing.Point(3, 190);
+            this.ReleaseYearTextBox.MaxLength = 10;
+            this.ReleaseYearTextBox.Name = "ReleaseYearTextBox";
+            this.ReleaseYearTextBox.Size = new System.Drawing.Size(127, 32);
+            this.ReleaseYearTextBox.TabIndex = 39;
+            this.ReleaseYearTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // PublisherLabel
+            // 
+            this.PublisherLabel.AutoSize = true;
+            this.PublisherLabel.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PublisherLabel.Location = new System.Drawing.Point(0, 113);
+            this.PublisherLabel.Name = "PublisherLabel";
+            this.PublisherLabel.Size = new System.Drawing.Size(89, 18);
+            this.PublisherLabel.TabIndex = 38;
+            this.PublisherLabel.Text = "Publisher";
+            // 
+            // PublisherTextBox
+            // 
+            this.PublisherTextBox.BackColor = System.Drawing.Color.White;
+            this.PublisherTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PublisherTextBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.PublisherTextBox.Location = new System.Drawing.Point(3, 134);
+            this.PublisherTextBox.Name = "PublisherTextBox";
+            this.PublisherTextBox.Size = new System.Drawing.Size(445, 32);
+            this.PublisherTextBox.TabIndex = 37;
+            // 
+            // CreatorLabel
+            // 
+            this.CreatorLabel.AutoSize = true;
+            this.CreatorLabel.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreatorLabel.Location = new System.Drawing.Point(133, 169);
+            this.CreatorLabel.Name = "CreatorLabel";
+            this.CreatorLabel.Size = new System.Drawing.Size(76, 18);
+            this.CreatorLabel.TabIndex = 36;
+            this.CreatorLabel.Text = "Creator";
+            // 
+            // CreatorTextBox
+            // 
+            this.CreatorTextBox.BackColor = System.Drawing.Color.White;
+            this.CreatorTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.CreatorTextBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.CreatorTextBox.Location = new System.Drawing.Point(136, 190);
+            this.CreatorTextBox.Name = "CreatorTextBox";
+            this.CreatorTextBox.Size = new System.Drawing.Size(493, 32);
+            this.CreatorTextBox.TabIndex = 35;
+            // 
+            // TypeLabel
+            // 
+            this.TypeLabel.AutoSize = true;
+            this.TypeLabel.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TypeLabel.Location = new System.Drawing.Point(451, 113);
+            this.TypeLabel.Name = "TypeLabel";
+            this.TypeLabel.Size = new System.Drawing.Size(52, 18);
+            this.TypeLabel.TabIndex = 34;
+            this.TypeLabel.Text = "Type";
+            // 
+            // QuantityLabel
+            // 
+            this.QuantityLabel.AutoSize = true;
+            this.QuantityLabel.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.QuantityLabel.Location = new System.Drawing.Point(496, 1);
+            this.QuantityLabel.Name = "QuantityLabel";
+            this.QuantityLabel.Size = new System.Drawing.Size(83, 18);
+            this.QuantityLabel.TabIndex = 32;
+            this.QuantityLabel.Text = "Quantity";
+            // 
+            // QuantityTextBox
+            // 
+            this.QuantityTextBox.BackColor = System.Drawing.Color.White;
+            this.QuantityTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.QuantityTextBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.QuantityTextBox.Location = new System.Drawing.Point(493, 22);
+            this.QuantityTextBox.Name = "QuantityTextBox";
+            this.QuantityTextBox.Size = new System.Drawing.Size(136, 32);
+            this.QuantityTextBox.TabIndex = 31;
+            this.QuantityTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // PriceLabel
+            // 
+            this.PriceLabel.AutoSize = true;
+            this.PriceLabel.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PriceLabel.Location = new System.Drawing.Point(309, 1);
+            this.PriceLabel.Name = "PriceLabel";
+            this.PriceLabel.Size = new System.Drawing.Size(52, 18);
+            this.PriceLabel.TabIndex = 30;
+            this.PriceLabel.Text = "Price";
+            // 
+            // PriceTextBox
+            // 
+            this.PriceTextBox.BackColor = System.Drawing.Color.White;
+            this.PriceTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PriceTextBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.PriceTextBox.Location = new System.Drawing.Point(312, 22);
+            this.PriceTextBox.Name = "PriceTextBox";
+            this.PriceTextBox.Size = new System.Drawing.Size(175, 32);
+            this.PriceTextBox.TabIndex = 29;
+            this.PriceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // TitleLabel
+            // 
+            this.TitleLabel.AutoSize = true;
+            this.TitleLabel.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitleLabel.Location = new System.Drawing.Point(0, 57);
+            this.TitleLabel.Name = "TitleLabel";
+            this.TitleLabel.Size = new System.Drawing.Size(46, 18);
+            this.TitleLabel.TabIndex = 28;
+            this.TitleLabel.Text = "Title";
+            // 
+            // TitleTextBox
+            // 
+            this.TitleTextBox.BackColor = System.Drawing.Color.White;
+            this.TitleTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TitleTextBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.TitleTextBox.Location = new System.Drawing.Point(3, 78);
+            this.TitleTextBox.Name = "TitleTextBox";
+            this.TitleTextBox.Size = new System.Drawing.Size(626, 32);
+            this.TitleTextBox.TabIndex = 27;
+            // 
+            // ProductCodeLabel
+            // 
+            this.ProductCodeLabel.AutoSize = true;
+            this.ProductCodeLabel.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ProductCodeLabel.Location = new System.Drawing.Point(6, 1);
+            this.ProductCodeLabel.Name = "ProductCodeLabel";
+            this.ProductCodeLabel.Size = new System.Drawing.Size(124, 18);
+            this.ProductCodeLabel.TabIndex = 26;
+            this.ProductCodeLabel.Text = "Product code";
+            // 
+            // ProductCodeTextBox
+            // 
+            this.ProductCodeTextBox.BackColor = System.Drawing.Color.White;
+            this.ProductCodeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ProductCodeTextBox.Enabled = false;
+            this.ProductCodeTextBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.ProductCodeTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.ProductCodeTextBox.Location = new System.Drawing.Point(3, 22);
+            this.ProductCodeTextBox.Name = "ProductCodeTextBox";
+            this.ProductCodeTextBox.ReadOnly = true;
+            this.ProductCodeTextBox.Size = new System.Drawing.Size(303, 32);
+            this.ProductCodeTextBox.TabIndex = 25;
+            this.ProductCodeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ProductCodeTextBox.WordWrap = false;
+            // 
+            // SaveUpdatedProductButton
+            // 
+            this.SaveUpdatedProductButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SaveUpdatedProductButton.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
+            this.SaveUpdatedProductButton.Location = new System.Drawing.Point(503, 728);
+            this.SaveUpdatedProductButton.Name = "SaveUpdatedProductButton";
+            this.SaveUpdatedProductButton.Size = new System.Drawing.Size(128, 83);
+            this.SaveUpdatedProductButton.TabIndex = 46;
+            this.SaveUpdatedProductButton.TabStop = false;
+            this.SaveUpdatedProductButton.Text = "Update";
+            this.SaveUpdatedProductButton.UseVisualStyleBackColor = true;
+            this.SaveUpdatedProductButton.Click += new System.EventHandler(this.SaveUpdatedProductButton_Click);
+            // 
+            // StockShowAllProductsCheckBox
+            // 
+            this.StockShowAllProductsCheckBox.AutoSize = true;
+            this.StockShowAllProductsCheckBox.Checked = true;
+            this.StockShowAllProductsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.StockShowAllProductsCheckBox.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StockShowAllProductsCheckBox.Location = new System.Drawing.Point(4, 771);
+            this.StockShowAllProductsCheckBox.Name = "StockShowAllProductsCheckBox";
+            this.StockShowAllProductsCheckBox.Size = new System.Drawing.Size(109, 40);
+            this.StockShowAllProductsCheckBox.TabIndex = 9;
+            this.StockShowAllProductsCheckBox.Text = "Show all \r\nproducts";
+            this.StockShowAllProductsCheckBox.UseVisualStyleBackColor = true;
+            this.StockShowAllProductsCheckBox.CheckedChanged += new System.EventHandler(this.StockShowAllProductsCheckBox_CheckedChanged);
+            // 
+            // TypeListBox
+            // 
+            this.TypeListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TypeListBox.DisplayMember = "Product.ProductType";
+            this.TypeListBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.TypeListBox.FormattingEnabled = true;
+            this.TypeListBox.ItemHeight = 25;
+            this.TypeListBox.Items.AddRange(new object[] {
+            "Book",
+            "Movie",
+            "Music"});
+            this.TypeListBox.Location = new System.Drawing.Point(454, 137);
+            this.TypeListBox.Name = "TypeListBox";
+            this.TypeListBox.Size = new System.Drawing.Size(175, 27);
+            this.TypeListBox.TabIndex = 47;
             // 
             // MyMediaStore
             // 
@@ -689,10 +977,13 @@
             this.ShoppingBasketSplitContainer2.ResumeLayout(false);
             this.StockTabPage.ResumeLayout(false);
             this.StockSplitContainer1.Panel1.ResumeLayout(false);
+            this.StockSplitContainer1.Panel1.PerformLayout();
             this.StockSplitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StockSplitContainer1)).EndInit();
             this.StockSplitContainer1.ResumeLayout(false);
             this.StockSplitContainer2.Panel1.ResumeLayout(false);
+            this.StockSplitContainer2.Panel2.ResumeLayout(false);
+            this.StockSplitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StockSplitContainer2)).EndInit();
             this.StockSplitContainer2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -707,7 +998,7 @@
         private System.Windows.Forms.TabPage StatisticsTabPage;
         private System.Windows.Forms.SplitContainer CashierSplitContainer1;
         private System.Windows.Forms.Label CashierSearchLabel;
-        private System.Windows.Forms.ListView CashierStockListView;
+        private System.Windows.Forms.ListView CashierListView1;
         private System.Windows.Forms.ColumnHeader CashierListViewColumnHeader_ProductCode;
         private System.Windows.Forms.ColumnHeader CashierListViewColumnHeader_Title;
         private System.Windows.Forms.ColumnHeader CashierListViewColumnHeader_ProductType;
@@ -722,7 +1013,7 @@
         private System.Windows.Forms.SplitContainer ShoppingBasketSplitContainer2;
         private System.Windows.Forms.Label CashierShoppingBasketLabel;
         private System.Windows.Forms.Label TotalSumLabel_Text;
-        private System.Windows.Forms.ListView ShoppingBasketListView;
+        private System.Windows.Forms.ListView ShoppingBasketListView1;
         private System.Windows.Forms.ColumnHeader ShoppingBasketColumnHeader_ProductCode;
         private System.Windows.Forms.ColumnHeader ShoppingBasketColumnHeader_Title;
         private System.Windows.Forms.ColumnHeader ShoppingBasketColumnHeader_Price;
@@ -749,6 +1040,27 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.SplitContainer StockSplitContainer1;
         private System.Windows.Forms.SplitContainer StockSplitContainer2;
+        private System.Windows.Forms.Button SaveUpdatedProductButton;
+        private System.Windows.Forms.CheckBox IsActiveCheckBox;
+        private System.Windows.Forms.Label FreeTextLabel;
+        private System.Windows.Forms.TextBox FreeTextBox;
+        private System.Windows.Forms.Label ReleaseYearLabel;
+        private System.Windows.Forms.TextBox ReleaseYearTextBox;
+        private System.Windows.Forms.Label PublisherLabel;
+        private System.Windows.Forms.TextBox PublisherTextBox;
+        private System.Windows.Forms.Label CreatorLabel;
+        private System.Windows.Forms.TextBox CreatorTextBox;
+        private System.Windows.Forms.Label TypeLabel;
+        private System.Windows.Forms.Label QuantityLabel;
+        private System.Windows.Forms.TextBox QuantityTextBox;
+        private System.Windows.Forms.Label PriceLabel;
+        private System.Windows.Forms.TextBox PriceTextBox;
+        private System.Windows.Forms.Label TitleLabel;
+        private System.Windows.Forms.TextBox TitleTextBox;
+        private System.Windows.Forms.Label ProductCodeLabel;
+        private System.Windows.Forms.TextBox ProductCodeTextBox;
+        private System.Windows.Forms.CheckBox StockShowAllProductsCheckBox;
+        private System.Windows.Forms.ListBox TypeListBox;
     }
 }
 

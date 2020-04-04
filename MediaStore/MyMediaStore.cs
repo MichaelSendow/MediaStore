@@ -23,6 +23,7 @@ namespace MediaStore
 
         private readonly ListViewColumnSorter lvwColumnSorter;
         private readonly List<string> ReceiptList;
+        private bool UnsavedChangesInStockTab { get; set; }
 
 
 
@@ -31,8 +32,9 @@ namespace MediaStore
             InitializeComponent();
 
             lvwColumnSorter = new ListViewColumnSorter();
-            CashierStockListView.ListViewItemSorter = lvwColumnSorter;
-            ShoppingBasketListView.ListViewItemSorter = lvwColumnSorter;
+            CashierListView1.ListViewItemSorter = lvwColumnSorter;
+            ShoppingBasketListView1.ListViewItemSorter = lvwColumnSorter;
+            StockListView1.ListViewItemSorter = lvwColumnSorter;
             MyShoppingBasket = new ShoppingBasket();
             ReceiptList = new List<string>();
 
@@ -66,7 +68,7 @@ namespace MediaStore
                 ExitWithoutSavingFile();
             }
 
-            UpdateCashierStockListView();
+            UpdateStockListView();
 
             //Product product1 = new Product(MyStock.GetNextProductCode(), "Avatar: The Last Airbender, The Complete Collection", Product.ProductTypes.Movie, 297.20m, 0, "Michael Dante DiMartino & Bryan Konietzko", "De som praktiserar en av de fyra elementens krafter slåss mot varandra. De olika fraktionerna, Eld, Vatten, Jord och Luft, kämpar om herreväldet, och den som är ödesbestämd att få slut på striderna är Avataren. Tyvärr är Avataren en omogen pojkspoling på tolv år, som inte vill ha något ansvar alls. Längd: 1468 minute", "Twentieth Century Fox", "2017", false);
             //MyStock.AddProduct(product1);
@@ -128,7 +130,7 @@ namespace MediaStore
         private void CashierStockListView_DoubleClick(object sender, EventArgs e)
         {
 
-            uint productCode = uint.Parse(CashierStockListView.SelectedItems[0].Text, CultureInfo.CurrentCulture);
+            uint productCode = uint.Parse(CashierListView1.SelectedItems[0].Text, CultureInfo.CurrentCulture);
 
             using (ProductForm productForm = new ProductForm(MyStock.GetProduct(productCode), ProductForm.FormFunction.AddToBasket))
             {
@@ -137,15 +139,14 @@ namespace MediaStore
                     uint qty = productForm.GetNumericSpinBoxValue();
                     MyShoppingBasket.AddProductToBasket(MyStock.GetProduct(productCode), qty);
                     MyStock.Products[productCode].Quantity -= qty;
-                    UpdateShoppingBasketListView();
-                    UpdateCashierStockListView();
+                    UpdateListViews();
                 }
             }
         }
 
         private void ShoppingBasketListView_DoubleClick(object sender, EventArgs e)
         {
-            uint productCode = uint.Parse(ShoppingBasketListView.SelectedItems[0].Text, CultureInfo.CurrentCulture);
+            uint productCode = uint.Parse(ShoppingBasketListView1.SelectedItems[0].Text, CultureInfo.CurrentCulture);
 
             using (ProductForm productForm = new ProductForm(MyShoppingBasket.GetProduct(productCode), ProductForm.FormFunction.ShoppingList))
             {
@@ -165,23 +166,28 @@ namespace MediaStore
                         MyStock.Products[productCode].Quantity += originalQty - qty;
                     }
 
-                    UpdateShoppingBasketListView();
-                    UpdateCashierStockListView();
+                    UpdateListViews();
                 }
             }
         }
 
+        private void UpdateListViews()
+        {
+            UpdateShoppingBasketListView();
+            UpdateStockListView();
+            UpdateCashierStockListView();
+        }
 
         private void UpdateShoppingBasketListView()
         {
 
-            ShoppingBasketListView.Items.Clear();
+            ShoppingBasketListView1.Items.Clear();
             decimal totalSum = 0;
 
             foreach (KeyValuePair<uint, Product> productValuePair in MyShoppingBasket.Products)
             {
                 ListViewItem listViewItem = productValuePair.Value.ShoppingBasketGetProductListViewItem();
-                ShoppingBasketListView.Items.Add(listViewItem);
+                ShoppingBasketListView1.Items.Add(listViewItem);
                 totalSum += (productValuePair.Value.Quantity * productValuePair.Value.Price);
             }
 
@@ -190,38 +196,91 @@ namespace MediaStore
 
         }
 
-        private void UpdateCashierStockListView(bool OnlyShowActive = true)
+        private void UpdateCashierStockListView()
         {
-            CashierStockListView.Items.Clear();
+            CashierListView1.Items.Clear();
             foreach (KeyValuePair<uint, Product> productValuePair in MyStock.Products)
             {
-                if (OnlyShowActive)
+                if (CashierShowAllProductsCheckBox.CheckState == CheckState.Unchecked)
                 {
                     if (productValuePair.Value.Status == Product.ProductStatus.Active)
                     {
-                        CashierStockListView.Items.Add(productValuePair.Value.CashierGetProductListViewItem());
+                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
                     }
                 }
                 else
                 {
                     if (productValuePair.Value.Status == Product.ProductStatus.Active)
                     {
-                        CashierStockListView.Items.Add(productValuePair.Value.CashierGetProductListViewItem());
+                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
                     }
                     else
                     {
-                        CashierStockListView.Items.Add(productValuePair.Value.CashierGetProductListViewItem(new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)))));
+                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem(new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)))));
+                    }
+                }
+
+
+
+
+
+            }
+
+        }
+
+        private void UpdateStockListView()
+        {
+            StockListView1.Items.Clear();
+            CashierListView1.Items.Clear();
+
+            foreach (KeyValuePair<uint, Product> productValuePair in MyStock.Products)
+            {
+                if (StockShowAllProductsCheckBox.CheckState == CheckState.Unchecked)
+                {
+                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
+                    {
+                        StockListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
+                    }
+                }
+                else
+                {
+                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
+                    {
+                        StockListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
+                    }
+                    else
+                    {
+                        StockListView1.Items.Add(productValuePair.Value.GetProductListViewItem(new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)))));
+                    }
+                }
+
+                if (CashierShowAllProductsCheckBox.CheckState == CheckState.Unchecked)
+                {
+                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
+                    {
+                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
+                    }
+                }
+                else
+                {
+                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
+                    {
+                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
+                    }
+                    else
+                    {
+                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem(new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)))));
                     }
                 }
             }
 
         }
 
+
         private void ShoppingBasketClearBasketButton_Click(object sender, EventArgs e)
         {
             ClearShoppingBasket();
-            UpdateShoppingBasketListView();
-            UpdateCashierStockListView();
+            UpdateListViews();
         }
 
         private void ShoppingBasketCheckOutButton_Click(object sender, EventArgs e)
@@ -250,7 +309,6 @@ namespace MediaStore
                     ReceiptList.Add("".PadRight(81, '-'));
                     ReceiptList.Add("Total sum: " + TotalSum_Numbers.Text.PadLeft(70));
 
-
                     printPreviewDialog1.Document = printDocument1;
                     printPreviewDialog1.ShowDialog();
                 }
@@ -263,7 +321,7 @@ namespace MediaStore
                 }
 
 
-                ShoppingBasketListView.Items.Clear();
+                ShoppingBasketListView1.Items.Clear();
                 MyShoppingBasket.ClearBasket();
                 TotalSum_Numbers.Text = "0";
             }
@@ -283,7 +341,7 @@ namespace MediaStore
 
         private void ClearShoppingBasket()
         {
-            ShoppingBasketListView.Items.Clear();
+            ShoppingBasketListView1.Items.Clear();
 
             foreach (var item in MyShoppingBasket.Products.Values)
             {
@@ -363,7 +421,7 @@ namespace MediaStore
                     if (MySales.ReturnProduct(receiptNumber, productCode, quantityToReturn))
                     {
                         MyStock.AddQuantity(productCode, quantityToReturn);
-                        UpdateCashierStockListView();
+                        UpdateStockListView();
                         ReturnReceiptTextBox.Text = "";
                         ReturnProductTextBox.Text = "";
                         ReturnQtyTextBox.Text = "";
@@ -403,16 +461,96 @@ namespace MediaStore
 
         private void CashierShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            UpdateCashierStockListView();
+        }
+        private void StockShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateStockListView();
+        }
 
-            if (CashierShowAllProductsCheckBox.Checked == true)
+        private void StockListView1_Click(object sender, EventArgs e)
+        {
+            uint productCode = uint.Parse(StockListView1.Items[StockListView1.SelectedIndices[0]].Text, CultureInfo.CurrentCulture);
+
+            Product selectedProduct = MyStock.GetProduct(productCode);
+
+
+            ProductCodeTextBox.Text = selectedProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
+            TypeListBox.Text = selectedProduct.Type.ToString();
+            PriceTextBox.Text = selectedProduct.Price.ToString(CultureInfo.CurrentCulture);
+            QuantityTextBox.Text = selectedProduct.Quantity.ToString(CultureInfo.CurrentCulture);
+            TitleTextBox.Text = selectedProduct.Title;
+            ReleaseYearTextBox.Text = selectedProduct.ReleaseYear.ToString(CultureInfo.CurrentCulture);
+            CreatorTextBox.Text = selectedProduct.Creator;
+            PublisherTextBox.Text = selectedProduct.Publisher;
+            FreeTextBox.Text = selectedProduct.FreeText;
+            if (selectedProduct.Status != Product.ProductStatus.Active)
             {
-                UpdateCashierStockListView(OnlyShowActive: false);
+                IsActiveCheckBox.Checked = false;
+            }
+        }
+
+
+        private bool ValidateFieldsInStockTab()
+        {
+
+            if (
+                Product.ProductType.TryParse(TypeListBox.Text, true, out Product.ProductType _) &&
+                decimal.TryParse(PriceTextBox.Text, out decimal _) &&
+                uint.TryParse(QuantityTextBox.Text, out uint _) &&
+                uint.TryParse(ReleaseYearTextBox.Text, out uint _) &&
+                TitleTextBox.Text.Contains(Environment.NewLine) == false && TitleTextBox.Text.Contains(";") == false &&
+                CreatorTextBox.Text.Contains(Environment.NewLine) == false && CreatorTextBox.Text.Contains(";") == false &&
+                PublisherTextBox.Text.Contains(Environment.NewLine) == false && PublisherTextBox.Text.Contains(";") == false &&
+                FreeTextBox.Text.Contains(Environment.NewLine) == false && FreeTextBox.Text.Contains(";") == false
+               )
+            {
+                return true;
             }
             else
             {
-                UpdateCashierStockListView(OnlyShowActive: true);
+                return false;
             }
+        }
 
+        private void SaveUpdatedProductButton_Click(object sender, EventArgs e)
+        {
+            if (ValidateFieldsInStockTab())
+            {
+                MessageBox.Show("Glöm inte att ändra så att om QTY > 0 vid Activeflagga yadayada");
+                uint productCode = uint.Parse(StockListView1.Items[StockListView1.SelectedIndices[0]].Text, CultureInfo.CurrentCulture);
+                Product updatedProduct = MyStock.GetProduct(productCode);
+
+                if (IsActiveCheckBox.Checked == true)
+                {
+                    updatedProduct.UpdateProduct(TitleTextBox.Text,
+                    (Product.ProductType)Enum.Parse(typeof(Product.ProductType), TypeListBox.Text, true),
+                    decimal.Parse(PriceTextBox.Text, CultureInfo.CurrentCulture),
+                    uint.Parse(QuantityTextBox.Text, CultureInfo.CurrentCulture),
+                    CreatorTextBox.Text, FreeTextBox.Text,
+                    PublisherTextBox.Text,
+                    uint.Parse(ReleaseYearTextBox.Text, CultureInfo.CurrentCulture),
+                    Product.ProductStatus.Active);
+                }
+                else
+                {
+                    updatedProduct.UpdateProduct(TitleTextBox.Text,
+                    (Product.ProductType)Enum.Parse(typeof(Product.ProductType), TypeListBox.Text, true),
+                    decimal.Parse(PriceTextBox.Text, CultureInfo.CurrentCulture),
+                    uint.Parse(QuantityTextBox.Text, CultureInfo.CurrentCulture),
+                    CreatorTextBox.Text, FreeTextBox.Text,
+                    PublisherTextBox.Text,
+                    uint.Parse(ReleaseYearTextBox.Text, CultureInfo.CurrentCulture),
+                    Product.ProductStatus.InActive);
+                }
+
+                UpdateListViews();
+
+            }
+            else
+            {
+                MessageBox.Show("All fields are not correctly formated. Newlines or ';' are not allowed.","Unsupported format",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
         }
     }
 

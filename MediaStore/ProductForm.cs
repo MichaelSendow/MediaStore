@@ -15,7 +15,7 @@ namespace MediaStore
     {
         public FormFunction ProductFormFunction { get; set; }
 
-        private Product FormsProduct;
+        private readonly Product FormsProduct;
 
         public enum FormFunction
         {
@@ -112,7 +112,7 @@ namespace MediaStore
             PriceTextBox.Text = FormsProduct.Price.ToString(CultureInfo.CurrentCulture);
             QuantityTextBox.Text = FormsProduct.Quantity.ToString(CultureInfo.CurrentCulture);
             TitleTextBox.Text = FormsProduct.Title;
-            ReleaseYearTextBox.Text = FormsProduct.ReleaseYear;
+            ReleaseYearTextBox.Text = FormsProduct.ReleaseYear.ToString(CultureInfo.CurrentCulture);
             CreatorTextBox.Text = FormsProduct.Creator;
             PublisherTextBox.Text = FormsProduct.Publisher;
             FreeTextBox.Text = FormsProduct.FreeText;

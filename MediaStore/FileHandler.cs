@@ -34,7 +34,7 @@ namespace MediaStore
                                 Type = (Product.ProductType)Enum.Parse(typeof(Product.ProductType), fields[2], true),
                                 Price = decimal.Parse(fields[3], CultureInfo.CurrentCulture),
                                 Quantity = uint.Parse(fields[4], CultureInfo.CurrentCulture),
-                                ReleaseYear = fields[5],
+                                ReleaseYear = uint.Parse(fields[5], CultureInfo.CurrentCulture),
                                 Creator = fields[6],
                                 Publisher = fields[7],
                                 FreeText = fields[8],

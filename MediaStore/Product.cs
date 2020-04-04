@@ -40,7 +40,7 @@ namespace MediaStore
         /// <summary>
         /// Date of release
         /// </summary>
-        public string ReleaseYear { get; set; }
+        public uint ReleaseYear { get; set; }
 
         /// <summary>
         /// Author, Artist, Director
@@ -85,7 +85,7 @@ namespace MediaStore
         /// <summary>
         /// Class constructor
         /// </summary>
-        public Product(uint productCode, string title, ProductType type, decimal price, uint quantity = 0, string creator = "", string freeText = "", string publisher = "", string releaseYear = "", ProductStatus status = ProductStatus.Active)
+        public Product(uint productCode, string title, ProductType type, decimal price, uint quantity = 0, string creator = "", string freeText = "", string publisher = "", uint releaseYear = 0, ProductStatus status = ProductStatus.Active)
         {
             ProductCode = productCode;
             Title = title;
@@ -122,7 +122,7 @@ namespace MediaStore
         }
 
 
-        public ListViewItem CashierGetProductListViewItem(Font font = null)
+        public ListViewItem GetProductListViewItem(Font font = null)
         {
             ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
             listViewItem.SubItems.Add(Title);
@@ -199,10 +199,23 @@ namespace MediaStore
             productAsString += Creator.ToString(CultureInfo.CurrentCulture) + ';';
             productAsString += Publisher.ToString(CultureInfo.CurrentCulture) + ';';
             productAsString += FreeText.ToString(CultureInfo.CurrentCulture) + ';';
-            productAsString += Status.ToString(CultureInfo.CurrentCulture);
+            productAsString += Status.ToString();
 
 
             return productAsString;
+        }
+
+        internal void UpdateProduct(string title, ProductType type, decimal price, uint quantity = 0, string creator = "", string freeText = "", string publisher = "", uint releaseYear = 0, ProductStatus status = ProductStatus.Active)
+        {
+            Title = title;
+            Type = type;
+            Price = price;
+            Quantity = quantity;
+            Creator = creator;
+            Publisher = publisher;
+            ReleaseYear = releaseYear;
+            FreeText = freeText;
+            Status = status;
         }
     }
 }
