@@ -41,7 +41,6 @@ namespace MediaStore
             this.QuantityLabel = new System.Windows.Forms.Label();
             this.QuantityTextBox = new System.Windows.Forms.TextBox();
             this.TypeLabel = new System.Windows.Forms.Label();
-            this.TypeTextBox = new System.Windows.Forms.TextBox();
             this.ReleaseYearLabel = new System.Windows.Forms.Label();
             this.ReleaseYearTextBox = new System.Windows.Forms.TextBox();
             this.PublisherLabel = new System.Windows.Forms.Label();
@@ -53,13 +52,14 @@ namespace MediaStore
             this.QtyNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.QtyNumericLabel = new System.Windows.Forms.Label();
             this.IsActiveCheckBox = new System.Windows.Forms.CheckBox();
+            this.TypeListBox = new System.Windows.Forms.ListBox();
+            this.TypeTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.QtyNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // FunctionButton
             // 
             this.FunctionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.FunctionButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.FunctionButton.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FunctionButton.Location = new System.Drawing.Point(701, 458);
             this.FunctionButton.MaximumSize = new System.Drawing.Size(156, 75);
@@ -185,17 +185,6 @@ namespace MediaStore
             this.TypeLabel.Size = new System.Drawing.Size(52, 18);
             this.TypeLabel.TabIndex = 11;
             this.TypeLabel.Text = "Type";
-            // 
-            // TypeTextBox
-            // 
-            this.TypeTextBox.BackColor = System.Drawing.Color.White;
-            this.TypeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TypeTextBox.Font = new System.Drawing.Font("Verdana", 10F);
-            this.TypeTextBox.Location = new System.Drawing.Point(321, 28);
-            this.TypeTextBox.Name = "TypeTextBox";
-            this.TypeTextBox.ReadOnly = true;
-            this.TypeTextBox.Size = new System.Drawing.Size(175, 32);
-            this.TypeTextBox.TabIndex = 10;
             // 
             // ReleaseYearLabel
             // 
@@ -332,11 +321,41 @@ namespace MediaStore
             this.IsActiveCheckBox.UseVisualStyleBackColor = true;
             this.IsActiveCheckBox.CheckedChanged += new System.EventHandler(this.IsActiveCheckBox_CheckedChanged);
             // 
+            // TypeListBox
+            // 
+            this.TypeListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TypeListBox.DisplayMember = "Product.ProductType";
+            this.TypeListBox.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TypeListBox.FormattingEnabled = true;
+            this.TypeListBox.ItemHeight = 25;
+            this.TypeListBox.Items.AddRange(new object[] {
+            "Book",
+            "Movie",
+            "Music"});
+            this.TypeListBox.Location = new System.Drawing.Point(321, 28);
+            this.TypeListBox.Name = "TypeListBox";
+            this.TypeListBox.Size = new System.Drawing.Size(175, 27);
+            this.TypeListBox.TabIndex = 48;
+            this.TypeListBox.Visible = false;
+            // 
+            // TypeTextBox
+            // 
+            this.TypeTextBox.BackColor = System.Drawing.Color.White;
+            this.TypeTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TypeTextBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.TypeTextBox.Location = new System.Drawing.Point(321, 28);
+            this.TypeTextBox.Name = "TypeTextBox";
+            this.TypeTextBox.ReadOnly = true;
+            this.TypeTextBox.Size = new System.Drawing.Size(175, 32);
+            this.TypeTextBox.TabIndex = 49;
+            // 
             // ProductForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(869, 544);
+            this.Controls.Add(this.TypeTextBox);
+            this.Controls.Add(this.TypeListBox);
             this.Controls.Add(this.IsActiveCheckBox);
             this.Controls.Add(this.QtyNumericUpDown);
             this.Controls.Add(this.QtyNumericLabel);
@@ -349,7 +368,6 @@ namespace MediaStore
             this.Controls.Add(this.CreatorLabel);
             this.Controls.Add(this.CreatorTextBox);
             this.Controls.Add(this.TypeLabel);
-            this.Controls.Add(this.TypeTextBox);
             this.Controls.Add(this.QuantityLabel);
             this.Controls.Add(this.QuantityTextBox);
             this.Controls.Add(this.PriceLabel);
@@ -383,7 +401,6 @@ namespace MediaStore
         private System.Windows.Forms.Label QuantityLabel;
         private System.Windows.Forms.TextBox QuantityTextBox;
         private System.Windows.Forms.Label TypeLabel;
-        private System.Windows.Forms.TextBox TypeTextBox;
         private System.Windows.Forms.Label ReleaseYearLabel;
         private System.Windows.Forms.TextBox ReleaseYearTextBox;
         private System.Windows.Forms.Label PublisherLabel;
@@ -397,5 +414,7 @@ namespace MediaStore
         private System.Windows.Forms.NumericUpDown QtyNumericUpDown;
         private System.Windows.Forms.Label QtyNumericLabel;
         private System.Windows.Forms.CheckBox IsActiveCheckBox;
+        private System.Windows.Forms.ListBox TypeListBox;
+        private System.Windows.Forms.TextBox TypeTextBox;
     }
 }

@@ -600,6 +600,7 @@
             this.AddNewProductButton.TabStop = false;
             this.AddNewProductButton.Text = "Add New Product";
             this.AddNewProductButton.UseVisualStyleBackColor = true;
+            this.AddNewProductButton.Click += new System.EventHandler(this.AddNewProductButton_Click);
             // 
             // StockSplitContainer2
             // 

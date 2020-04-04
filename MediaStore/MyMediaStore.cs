@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaStore
@@ -16,21 +11,16 @@ namespace MediaStore
     {
         #region Fields
 
-        const string productsFileName = "products.csv";
-        const string salesFileName = "sales.csv";
+        private const string productsFileName = "products.csv";
+        private const string salesFileName = "sales.csv";
 
         private readonly ListViewColumnSorter lvwColumnSorter;
         private readonly ShoppingBasket MyShoppingBasket;
         private readonly List<string> ReceiptList;
         private Sales MySales;
         private Stock MyStock;
+
         #endregion Fields
-
-        #region Properties
-
-        private bool UnsavedChangesInStockTab { get; set; }
-
-        #endregion Properties
 
         #region Constructors
 
@@ -44,10 +34,6 @@ namespace MediaStore
             StockListView1.ListViewItemSorter = lvwColumnSorter;
             MyShoppingBasket = new ShoppingBasket();
             ReceiptList = new List<string>();
-
-
-
-
 
             //Product product1 = new Product(MyStock.GetNextProductCode(), "Avatar: The Last Airbender, The Complete Collection", Product.ProductTypes.Movie, 297.20m, 0, "Michael Dante DiMartino & Bryan Konietzko", "De som praktiserar en av de fyra elementens krafter slåss mot varandra. De olika fraktionerna, Eld, Vatten, Jord och Luft, kämpar om herreväldet, och den som är ödesbestämd att få slut på striderna är Avataren. Tyvärr är Avataren en omogen pojkspoling på tolv år, som inte vill ha något ansvar alls. Längd: 1468 minute", "Twentieth Century Fox", "2017", false);
             //MyStock.AddProduct(product1);
@@ -89,12 +75,34 @@ namespace MediaStore
             }
 
             UpdateStockListView();
-
         }
 
         #endregion Constructors
 
         #region EventMethods
+
+        private void AddNewProductButton_Click(object sender, EventArgs e)
+        {
+            Product newProduct = new Product
+            {
+                ProductCode = MyStock.GetNextProductCode()
+            };
+            MyStock.AddProduct(newProduct);
+
+            using (ProductForm productForm = new ProductForm(newProduct, ProductForm.FormFunction.NewProduct))
+            {
+                productForm.ShowDialog();
+
+                if (productForm.FunctionSucceeded)
+                {
+                    UpdateListViews();
+                }
+                else
+                {
+                    MyStock.Products.Remove(newProduct.ProductCode);
+                }
+            }
+        }
 
         private void CashierReturnItemsButton_Click(object sender, EventArgs e)
         {
@@ -132,7 +140,6 @@ namespace MediaStore
             {
                 MessageBox.Show("All fields must contain numbers");
             }
-
         }
 
         private void CashierShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -147,12 +154,12 @@ namespace MediaStore
         /// <param name="e"></param>
         private void CashierStockListView_DoubleClick(object sender, EventArgs e)
         {
-
             uint productCode = uint.Parse(CashierListView1.SelectedItems[0].Text, CultureInfo.CurrentCulture);
 
-            using (ProductForm productForm = new ProductForm(MyStock.GetProduct(productCode), ProductForm.FormFunction.AddToBasket))
+            using (ProductForm productForm = new ProductForm(MyStock.GetProduct(productCode), ProductForm.FormFunction.AddToBasket, MyStock.Products[productCode].Quantity))
             {
-                if (productForm.ShowDialog() == DialogResult.OK)
+                productForm.ShowDialog();
+                if (productForm.FunctionSucceeded)
                 {
                     uint qty = productForm.GetNumericSpinBoxValue();
                     MyShoppingBasket.AddProductToBasket(MyStock.GetProduct(productCode), qty);
@@ -214,7 +221,7 @@ namespace MediaStore
                 }
             }
 
-            if (UnsavedChangesInStockTab == true)
+            if (UnsavedChanges())
             {
                 DialogResult dlgr = MessageBox.Show("You have unsaved changes in the Stock-tab. Do you want to save changes before quitting?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
@@ -229,7 +236,6 @@ namespace MediaStore
 
             MyStock.SaveStockToFile(productsFileName);
             MySales.SaveSalesToFile(salesFileName);
-
         }
 
         //Printing Text File in C#
@@ -242,35 +248,31 @@ namespace MediaStore
             float yPos;
             int count = 0;
 
-            //Read margins from PrintPageEventArgs  
+            //Read margins from PrintPageEventArgs
             float leftMargin = e.MarginBounds.Left;
             float topMargin = e.MarginBounds.Top;
 
             using (Font Consolas10 = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0))))
             {
-                //Calculate the lines per page on the basis of the height of the page and the height of the font  
+                //Calculate the lines per page on the basis of the height of the page and the height of the font
                 linesPerPage = e.MarginBounds.Height / Consolas10.GetHeight(graphics);
-
-
 
                 while (count < linesPerPage && count < ReceiptList.Count)
                 {
-                    //Calculate the starting position  
+                    //Calculate the starting position
                     yPos = topMargin + (count * Consolas10.GetHeight(graphics));
-                    //Draw text  
+                    //Draw text
                     using (StringFormat stringFormat = new StringFormat())
                     {
                         graphics.DrawString(ReceiptList[count], Consolas10, Brushes.Black, leftMargin, yPos, stringFormat);
-
                     }
 
-                    //Move to next line  
-                    count++;// 0, 1,  2, 3
-
+                    //Move to next line
+                    count++;
                 }
             }
 
-            //If PrintPageEventArgs has more pages to print  
+            //If PrintPageEventArgs has more pages to print
             if (count < ReceiptList.Count)
             {
                 ReceiptList.RemoveRange(0, count);
@@ -284,7 +286,6 @@ namespace MediaStore
 
         private void ShoppingBasketCheckOutButton_Click(object sender, EventArgs e)
         {
-
             if (MyShoppingBasket.Products.Count != 0)
             {
                 uint receiptNumber = MySales.GetNextReceiptNumber();
@@ -292,14 +293,12 @@ namespace MediaStore
                 //Prints to default printer.
                 if (CashierPrintReceiptsCheckBox.CheckState == CheckState.Checked)
                 {
-
                     ReceiptList.Clear();
                     ReceiptList.Add($"Receipt {DateTime.Now.ToString("yyyy-MM-dd HH:mm", CultureInfo.CurrentCulture)}");
                     ReceiptList.Add($"Receiptnumber: {receiptNumber.ToString(CultureInfo.CurrentCulture)}");
                     ReceiptList.Add("");
                     ReceiptList.Add("#          Title                             Price        Qty               Total");
                     ReceiptList.Add("".PadRight(81, '-'));
-
 
                     foreach (var item in MyShoppingBasket.Products.Values)
                     {
@@ -315,10 +314,8 @@ namespace MediaStore
                 //Add new receipt
                 foreach (var product in MyShoppingBasket.Products.Values)
                 {
-
                     MySales.AddReceipt(new Receipt(receiptNumber, product.ProductCode, DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.CurrentCulture), product.Quantity));
                 }
-
 
                 ShoppingBasketListView1.Items.Clear();
                 MyShoppingBasket.ClearBasket();
@@ -339,9 +336,10 @@ namespace MediaStore
         {
             uint productCode = uint.Parse(ShoppingBasketListView1.SelectedItems[0].Text, CultureInfo.CurrentCulture);
 
-            using (ProductForm productForm = new ProductForm(MyShoppingBasket.GetProduct(productCode), ProductForm.FormFunction.ShoppingList))
+            using (ProductForm productForm = new ProductForm(MyShoppingBasket.GetProduct(productCode), ProductForm.FormFunction.ShoppingList, MyStock.Products[productCode].Quantity))
             {
-                if (productForm.ShowDialog() == DialogResult.OK)
+                productForm.ShowDialog();
+                if (productForm.FunctionSucceeded)
                 {
                     uint qty = productForm.GetNumericSpinBoxValue();
                     uint originalQty = MyShoppingBasket.GetProduct(productCode).Quantity;
@@ -367,7 +365,6 @@ namespace MediaStore
         /// 2020-03-21
         private void SortListViewOnColumnClick(object sender, ColumnClickEventArgs e)
         {
-
             if (e.Column == lvwColumnSorter.SortColumn)
             {
                 // Reverse the current sort direction for this column.
@@ -399,7 +396,6 @@ namespace MediaStore
             ((ListView)sender).Sort();
         }
 
-
         private void StockListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectListViewItem();
@@ -409,6 +405,7 @@ namespace MediaStore
         {
             SaveUpdatedProduct();
         }
+
         private void StockShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             UpdateStockListView();
@@ -417,12 +414,37 @@ namespace MediaStore
 
         #region Methods
 
+        /// <summary>
+        /// Checks if a string is only numbers.
+        /// </summary>
+        /// <param name="TextBoxNumber"></param>
+        /// <returns></returns>
+        private static bool ValidateUINT(string stringToValidate)
+        {
+            return uint.TryParse(stringToValidate, out uint _);
+        }
+
+        private void ClearShoppingBasket()
+        {
+            ShoppingBasketListView1.Items.Clear();
+
+            foreach (var item in MyShoppingBasket.Products.Values)
+            {
+                MyStock.Products[item.ProductCode].Quantity += item.Quantity;
+            }
+            MyShoppingBasket.ClearBasket();
+        }
+
+        private void ExitWithoutSavingFile()
+        {
+            this.FormClosing -= new FormClosingEventHandler(this.MyMediaStore_FormClosing);
+            this.Close();
+        }
 
         private void SaveUpdatedProduct()
         {
             if (ValidateFieldsInStockTab())
             {
-
                 uint productCode = uint.Parse(ProductCodeTextBox.Text, CultureInfo.CurrentCulture);
                 Product updatedProduct = MyStock.GetProduct(productCode);
 
@@ -450,72 +472,41 @@ namespace MediaStore
                 }
 
                 UpdateListViews();
-                UnsavedChangesInStockTab = false;
                 MyStock.SaveStockToFile(productsFileName);
-
             }
             else
             {
                 MessageBox.Show("Some fields are not correctly formated. Newlines or ';' are not allowed.", "Unsupported format", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        /// <summary>
-        /// Checks if a string is only numbers.
-        /// </summary>
-        /// <param name="TextBoxNumber"></param>
-        /// <returns></returns>
-        static bool ValidateUINT(string stringToValidate)
-        {
-
-            return uint.TryParse(stringToValidate, out uint _);
-        }
-
-        private void ClearShoppingBasket()
-        {
-            ShoppingBasketListView1.Items.Clear();
-
-            foreach (var item in MyShoppingBasket.Products.Values)
-            {
-                MyStock.Products[item.ProductCode].Quantity += item.Quantity;
-            }
-            MyShoppingBasket.ClearBasket();
-        }
-
-        private void ExitWithoutSavingFile()
-        {
-            this.FormClosing -= new FormClosingEventHandler(this.MyMediaStore_FormClosing);
-            this.Close();
-        }
-
         private void SelectListViewItem()
         {
             if (StockListView1.SelectedItems.Count == 0)
             {
                 return;
             }
-
-            if (UnsavedChangesInStockTab)
+            else if (ProductCodeTextBox.Text.Length != 0)
             {
-                DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before changing product?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                if (UnsavedChanges())
+                {
+                    DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before changing product?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
-                if (dlgr == DialogResult.Yes)
-                {
-                    SaveUpdatedProduct();
-                    UpdateStockListView();
-                    return;
-                }
-                else
-                {
-                    UnsavedChangesInStockTab = false;
-                    UpdateStockListView();
+                    if (dlgr == DialogResult.Yes)
+                    {
+                        SaveUpdatedProduct();
+                        UpdateStockListView();
+                        return;
+                    }
+                    else
+                    {
+                        UpdateStockListView();
+                    }
                 }
             }
 
             uint productCode = uint.Parse(StockListView1.Items[StockListView1.SelectedIndices[0]].Text, CultureInfo.CurrentCulture);
 
             Product selectedProduct = MyStock.GetProduct(productCode);
-
 
             ProductCodeTextBox.Text = selectedProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
             TypeListBox.Text = selectedProduct.Type.ToString();
@@ -531,6 +522,41 @@ namespace MediaStore
                 IsActiveCheckBox.CheckedChanged -= new EventHandler(this.IsActiveCheckBox_CheckedChanged);
                 IsActiveCheckBox.Checked = false;
                 IsActiveCheckBox.CheckedChanged += new EventHandler(this.IsActiveCheckBox_CheckedChanged);
+            }
+            else
+            {
+                IsActiveCheckBox.Checked = true;
+            }
+        }
+
+        private bool UnsavedChanges()
+        {
+            if (ProductCodeTextBox.Text.Length != 0)
+            {
+                Product oldProduct = MyStock.GetProduct(uint.Parse(ProductCodeTextBox.Text, CultureInfo.CurrentCulture));
+
+                if (
+                    TypeListBox.Text != oldProduct.Type.ToString() ||
+                    PriceTextBox.Text != oldProduct.Price.ToString(CultureInfo.CurrentCulture) ||
+                    QuantityTextBox.Text != oldProduct.Quantity.ToString(CultureInfo.CurrentCulture) ||
+                    TitleTextBox.Text != oldProduct.Title ||
+                    ReleaseYearTextBox.Text != oldProduct.ReleaseYear.ToString(CultureInfo.CurrentCulture) ||
+                    CreatorTextBox.Text != oldProduct.Creator ||
+                    PublisherTextBox.Text != oldProduct.Publisher ||
+                    FreeTextBox.Text != oldProduct.FreeText
+                    )
+
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
             }
         }
 
@@ -557,10 +583,9 @@ namespace MediaStore
                         CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem(new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)))));
                     }
                 }
-
             }
-
         }
+
         private void UpdateListViews()
         {
             UpdateShoppingBasketListView();
@@ -570,7 +595,6 @@ namespace MediaStore
 
         private void UpdateShoppingBasketListView()
         {
-
             ShoppingBasketListView1.Items.Clear();
             decimal totalSum = 0;
 
@@ -583,8 +607,8 @@ namespace MediaStore
 
             TotalSum_Numbers.ForeColor = Color.Black;
             TotalSum_Numbers.Text = Math.Round(totalSum, 2).ToString(CultureInfo.CurrentCulture);
-
         }
+
         private void UpdateStockListView()
         {
             StockListView1.Items.Clear();
@@ -630,11 +654,10 @@ namespace MediaStore
                     }
                 }
             }
-
         }
+
         private bool ValidateFieldsInStockTab()
         {
-
             if (
                 Product.ProductType.TryParse(TypeListBox.Text, true, out Product.ProductType _) &&
                 decimal.TryParse(PriceTextBox.Text, out decimal _) &&
@@ -653,12 +676,6 @@ namespace MediaStore
                 return false;
             }
         }
-
-
-
         #endregion Methods
-
-
     }
-
 }

@@ -33,15 +33,7 @@ namespace MediaStore
             }
         }
 
-        public void SubtractProductQuantityFromBasket(uint productCode)
-        {
-            Products[productCode].Quantity -= 1;
-            if (Products[productCode].Quantity == 0)
-            {
-                Products.Remove(productCode);
-            }
-        }
-
+       
         public void ClearBasket()
         {
             Products.Clear();

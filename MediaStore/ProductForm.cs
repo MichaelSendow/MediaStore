@@ -13,7 +13,10 @@ namespace MediaStore
 {
     public partial class ProductForm : Form
     {
-        public FormFunction ProductFormFunction { get; set; }
+        public FormFunction Function { get; set; }
+        public bool FunctionSucceeded { get; set; }
+
+        private readonly uint StockMaxQty;
 
         private readonly Product FormsProduct;
 
@@ -22,32 +25,38 @@ namespace MediaStore
             AddToBasket,
             ShoppingList,
             NewProduct,
-            None,
+            Cancel,
+            None
         }
 
 
         public ProductForm()
         {
             InitializeComponent();
-            ProductFormFunction = FormFunction.None;
+            Function = FormFunction.None;
             FormsProduct = new Product();
+            FunctionSucceeded = false;
         }
 
-        public ProductForm(Product product, FormFunction formFunction)
+        public ProductForm(Product product, FormFunction formFunction, uint maxQty = 1000000)
         {
             InitializeComponent();
 
-            FormsProduct = new Product(product);
+            StockMaxQty = maxQty;
+            Function = formFunction;
 
             switch (formFunction)
             {
                 case FormFunction.AddToBasket:
+                    FormsProduct = new Product(product);
                     AddToBasketForm();
                     break;
                 case FormFunction.NewProduct:
+                    FormsProduct = product;
                     NewProduct();
                     break;
                 case FormFunction.ShoppingList:
+                    FormsProduct = new Product(product);
                     ShoppingList();
                     break;
                 default:
@@ -55,7 +64,7 @@ namespace MediaStore
             }
 
 
-            ProductFormFunction = formFunction;
+            
         }
 
         private void ShoppingList()
@@ -69,7 +78,8 @@ namespace MediaStore
             QtyNumericLabel.Visible = true;
 
             QtyNumericUpDown.Minimum = 0;
-            QtyNumericUpDown.Maximum = FormsProduct.Quantity;
+            QtyNumericUpDown.Maximum = StockMaxQty + FormsProduct.Quantity;
+
             QtyNumericUpDown.Visible = true;
 
             FunctionButton.Text = "Update Quantity";
@@ -90,10 +100,11 @@ namespace MediaStore
                 QtyNumericLabel.Text = "QTY";
                 QtyNumericLabel.Visible = true;
 
-                QtyNumericUpDown.Maximum = FormsProduct.Quantity;
+                QtyNumericUpDown.Maximum = StockMaxQty;
                 QtyNumericUpDown.Visible = true;
 
                 FunctionButton.Text = "Add to Basket";
+
             }
         }
 
@@ -101,16 +112,31 @@ namespace MediaStore
         {
             if (FormsProduct != null)
             {
-                IsActiveCheckBox.Enabled = false;
-                IsActiveCheckBox.Visible = false;
+                IsActiveCheckBox.Enabled = true;
+                IsActiveCheckBox.Visible = true;
 
-                QtyNumericLabel.Text = "QTY";
-                QtyNumericLabel.Visible = true;
+                QtyNumericLabel.Visible = false;
+                QtyNumericUpDown.Enabled = false;
+                QtyNumericUpDown.Visible = false;
 
-                QtyNumericUpDown.Maximum = FormsProduct.Quantity;
-                QtyNumericUpDown.Visible = true;
 
-                FunctionButton.Text = "Add to Basket";
+                TypeListBox.Enabled = true;
+                TypeListBox.Visible = true;
+                TypeListBox.SelectedItem = "Book";
+
+                ProductCodeTextBox.Text = FormsProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
+                PriceTextBox.ReadOnly = false;
+                QuantityTextBox.ReadOnly = false;
+                TitleTextBox.ReadOnly = false;
+                ReleaseYearTextBox.ReadOnly = false;
+                CreatorTextBox.ReadOnly = false;
+                PublisherTextBox.ReadOnly = false;
+                FreeTextBox.ReadOnly = false;
+                TypeTextBox.Visible = false;
+                TypeTextBox.Enabled = false;
+
+
+                FunctionButton.Text = "Add to Stock";
             }
         }
 
@@ -119,6 +145,7 @@ namespace MediaStore
         private void PopulateForm()
         {
             ProductCodeTextBox.Text = FormsProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
+            TypeListBox.SelectedItem = FormsProduct.Type.ToString();
             TypeTextBox.Text = FormsProduct.Type.ToString();
             PriceTextBox.Text = FormsProduct.Price.ToString(CultureInfo.CurrentCulture);
             QuantityTextBox.Text = FormsProduct.Quantity.ToString(CultureInfo.CurrentCulture);
@@ -137,23 +164,84 @@ namespace MediaStore
 
         public uint GetNumericSpinBoxValue()
         {
-            if (QtyNumericUpDown.Value > FormsProduct.Quantity)
-            {
-                return FormsProduct.Quantity;
-            }
-            else
-            {
+         
                 return (uint)QtyNumericUpDown.Value;
-            }
+         
         }
 
         private void FunctionButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            if (Function == FormFunction.NewProduct)
+            {
+
+                if (ValidateFields())
+                {
+                    if (IsActiveCheckBox.Checked == true)
+                    {
+                        FormsProduct.UpdateProduct(TitleTextBox.Text,
+                        (Product.ProductType)Enum.Parse(typeof(Product.ProductType), TypeListBox.Text, true),
+                        decimal.Parse(PriceTextBox.Text, CultureInfo.CurrentCulture),
+                        uint.Parse(QuantityTextBox.Text, CultureInfo.CurrentCulture),
+                        CreatorTextBox.Text, FreeTextBox.Text,
+                        PublisherTextBox.Text,
+                        uint.Parse(ReleaseYearTextBox.Text, CultureInfo.CurrentCulture),
+                        Product.ProductStatus.Active);
+                        FunctionSucceeded = true;
+                        this.Hide();
+                    }
+                    else
+                    {
+                        FormsProduct.UpdateProduct(TitleTextBox.Text,
+                        (Product.ProductType)Enum.Parse(typeof(Product.ProductType), TypeListBox.Text, true),
+                        decimal.Parse(PriceTextBox.Text, CultureInfo.CurrentCulture),
+                        uint.Parse(QuantityTextBox.Text, CultureInfo.CurrentCulture),
+                        CreatorTextBox.Text, FreeTextBox.Text,
+                        PublisherTextBox.Text,
+                        uint.Parse(ReleaseYearTextBox.Text, CultureInfo.CurrentCulture),
+                        Product.ProductStatus.InActive);
+                        FunctionSucceeded = true;
+                        this.Hide();
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Some fields are incorrect.", "Incorrect fields", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+
+                FunctionSucceeded = true;
+                this.Hide();
+            }
+        }
+
+        private bool ValidateFields()
+        {
+
+            if (
+                Product.ProductType.TryParse(TypeListBox.Text, true, out Product.ProductType _) &&
+                decimal.TryParse(PriceTextBox.Text, out decimal _) &&
+                uint.TryParse(QuantityTextBox.Text, out uint _) &&
+                uint.TryParse(ReleaseYearTextBox.Text, out uint _) &&
+                TitleTextBox.Text.Contains(Environment.NewLine) == false && TitleTextBox.Text.Contains(";") == false &&
+                CreatorTextBox.Text.Contains(Environment.NewLine) == false && CreatorTextBox.Text.Contains(";") == false &&
+                PublisherTextBox.Text.Contains(Environment.NewLine) == false && PublisherTextBox.Text.Contains(";") == false &&
+                FreeTextBox.Text.Contains(Environment.NewLine) == false && FreeTextBox.Text.Contains(";") == false
+               )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
         private void ProductCloseButton_Click(object sender, EventArgs e)
         {
+            FunctionSucceeded = false;
             this.Hide();
         }
 
