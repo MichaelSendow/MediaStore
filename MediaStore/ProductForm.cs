@@ -1,24 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MediaStore
 {
     public partial class ProductForm : Form
     {
+        #region Fields
+
+        private readonly Product FormsProduct;
+        private readonly uint StockMaxQty;
+
+        #endregion Fields
+
+        #region Properties
+
         public FormFunction Function { get; set; }
         public bool FunctionSucceeded { get; set; }
 
-        private readonly uint StockMaxQty;
+        #endregion Properties
 
-        private readonly Product FormsProduct;
+        #region Enums
 
         public enum FormFunction
         {
@@ -29,6 +31,9 @@ namespace MediaStore
             None
         }
 
+        #endregion Enums
+
+        #region Constructors
 
         public ProductForm()
         {
@@ -51,129 +56,30 @@ namespace MediaStore
                     FormsProduct = new Product(product);
                     AddToBasketForm();
                     break;
+
                 case FormFunction.NewProduct:
                     FormsProduct = product;
                     NewProduct();
                     break;
+
                 case FormFunction.ShoppingList:
                     FormsProduct = new Product(product);
                     ShoppingList();
                     break;
+
                 default:
                     break;
             }
-
-
-            
         }
 
-        private void ShoppingList()
-        {
-            PopulateForm();
+        #endregion Constructors
 
-            IsActiveCheckBox.Enabled = false;
-            IsActiveCheckBox.Visible = false;
-
-            QtyNumericLabel.Text = "New QTY";
-            QtyNumericLabel.Visible = true;
-
-            QtyNumericUpDown.Minimum = 0;
-            QtyNumericUpDown.Maximum = StockMaxQty + FormsProduct.Quantity;
-
-            QtyNumericUpDown.Visible = true;
-
-            FunctionButton.Text = "Update Quantity";
-        }
-
-        private void AddToBasketForm()
-        {
-            if (FormsProduct != null)
-            {
-                PopulateForm();
-
-                if (FormsProduct.Quantity == 0 || FormsProduct.Status == Product.ProductStatus.InActive)
-                    FunctionButton.Enabled = false;
-
-                IsActiveCheckBox.Enabled = false;
-                IsActiveCheckBox.Visible = false;
-
-                QtyNumericLabel.Text = "QTY";
-                QtyNumericLabel.Visible = true;
-
-                QtyNumericUpDown.Maximum = StockMaxQty;
-                QtyNumericUpDown.Visible = true;
-
-                FunctionButton.Text = "Add to Basket";
-
-            }
-        }
-
-        private void NewProduct()
-        {
-            if (FormsProduct != null)
-            {
-                IsActiveCheckBox.Enabled = true;
-                IsActiveCheckBox.Visible = true;
-
-                QtyNumericLabel.Visible = false;
-                QtyNumericUpDown.Enabled = false;
-                QtyNumericUpDown.Visible = false;
-
-
-                TypeListBox.Enabled = true;
-                TypeListBox.Visible = true;
-                TypeListBox.SelectedItem = "Book";
-
-                ProductCodeTextBox.Text = FormsProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
-                PriceTextBox.ReadOnly = false;
-                QuantityTextBox.ReadOnly = false;
-                TitleTextBox.ReadOnly = false;
-                ReleaseYearTextBox.ReadOnly = false;
-                CreatorTextBox.ReadOnly = false;
-                PublisherTextBox.ReadOnly = false;
-                FreeTextBox.ReadOnly = false;
-                TypeTextBox.Visible = false;
-                TypeTextBox.Enabled = false;
-
-
-                FunctionButton.Text = "Add to Stock";
-            }
-        }
-
-
-
-        private void PopulateForm()
-        {
-            ProductCodeTextBox.Text = FormsProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
-            TypeListBox.SelectedItem = FormsProduct.Type.ToString();
-            TypeTextBox.Text = FormsProduct.Type.ToString();
-            PriceTextBox.Text = FormsProduct.Price.ToString(CultureInfo.CurrentCulture);
-            QuantityTextBox.Text = FormsProduct.Quantity.ToString(CultureInfo.CurrentCulture);
-            TitleTextBox.Text = FormsProduct.Title;
-            ReleaseYearTextBox.Text = FormsProduct.ReleaseYear.ToString(CultureInfo.CurrentCulture);
-            CreatorTextBox.Text = FormsProduct.Creator;
-            PublisherTextBox.Text = FormsProduct.Publisher;
-            FreeTextBox.Text = FormsProduct.FreeText;
-
-            if (FormsProduct.Status != Product.ProductStatus.Active)
-            {
-                IsActiveCheckBox.Checked = false;
-            }
-
-        }
-
-        public uint GetNumericSpinBoxValue()
-        {
-         
-                return (uint)QtyNumericUpDown.Value;
-         
-        }
+        #region EventMethods
 
         private void FunctionButton_Click(object sender, EventArgs e)
         {
             if (Function == FormFunction.NewProduct)
             {
-
                 if (ValidateFields())
                 {
                     if (IsActiveCheckBox.Checked == true)
@@ -210,15 +116,129 @@ namespace MediaStore
             }
             else
             {
-
                 FunctionSucceeded = true;
                 this.Hide();
             }
         }
 
+        private void IsActiveCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (IsActiveCheckBox.Checked == true)
+            {
+                FormsProduct.Status = Product.ProductStatus.Active;
+            }
+            else
+            {
+                FormsProduct.Status = Product.ProductStatus.InActive;
+            }
+        }
+
+        private void ProductCloseButton_Click(object sender, EventArgs e)
+        {
+            FunctionSucceeded = false;
+            this.Hide();
+        }
+
+        #endregion EventMethods
+
+        #region Methods
+
+        public uint GetNumericSpinBoxValue()
+        {
+            return (uint)QtyNumericUpDown.Value;
+        }
+
+        private void AddToBasketForm()
+        {
+            if (FormsProduct != null)
+            {
+                PopulateForm();
+
+                if (FormsProduct.Quantity == 0 || FormsProduct.Status == Product.ProductStatus.InActive)
+                    FunctionButton.Enabled = false;
+
+                IsActiveCheckBox.Enabled = false;
+                IsActiveCheckBox.Visible = false;
+
+                QtyNumericLabel.Text = "QTY";
+                QtyNumericLabel.Visible = true;
+
+                QtyNumericUpDown.Maximum = StockMaxQty;
+                QtyNumericUpDown.Visible = true;
+
+                FunctionButton.Text = "Add to Basket";
+            }
+        }
+
+        private void NewProduct()
+        {
+            if (FormsProduct != null)
+            {
+                IsActiveCheckBox.Enabled = true;
+                IsActiveCheckBox.Visible = true;
+
+                QtyNumericLabel.Visible = false;
+                QtyNumericUpDown.Enabled = false;
+                QtyNumericUpDown.Visible = false;
+
+                TypeListBox.Enabled = true;
+                TypeListBox.Visible = true;
+                TypeListBox.SelectedItem = "Book";
+
+                ProductCodeTextBox.Text = FormsProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
+                PriceTextBox.ReadOnly = false;
+                QuantityTextBox.ReadOnly = false;
+                TitleTextBox.ReadOnly = false;
+                ReleaseYearTextBox.ReadOnly = false;
+                CreatorTextBox.ReadOnly = false;
+                PublisherTextBox.ReadOnly = false;
+                FreeTextBox.ReadOnly = false;
+                TypeTextBox.Visible = false;
+                TypeTextBox.Enabled = false;
+
+                FunctionButton.Text = "Add to Stock";
+            }
+        }
+
+        private void PopulateForm()
+        {
+            ProductCodeTextBox.Text = FormsProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
+            TypeListBox.SelectedItem = FormsProduct.Type.ToString();
+            TypeTextBox.Text = FormsProduct.Type.ToString();
+            PriceTextBox.Text = FormsProduct.Price.ToString(CultureInfo.CurrentCulture);
+            QuantityTextBox.Text = FormsProduct.Quantity.ToString(CultureInfo.CurrentCulture);
+            TitleTextBox.Text = FormsProduct.Title;
+            ReleaseYearTextBox.Text = FormsProduct.ReleaseYear.ToString(CultureInfo.CurrentCulture);
+            CreatorTextBox.Text = FormsProduct.Creator;
+            PublisherTextBox.Text = FormsProduct.Publisher;
+            FreeTextBox.Text = FormsProduct.FreeText;
+
+            if (FormsProduct.Status != Product.ProductStatus.Active)
+            {
+                IsActiveCheckBox.Checked = false;
+            }
+        }
+
+        private void ShoppingList()
+        {
+            PopulateForm();
+
+            IsActiveCheckBox.Enabled = false;
+            IsActiveCheckBox.Visible = false;
+
+            QtyNumericLabel.Text = "New QTY";
+            QtyNumericLabel.Visible = true;
+
+            QtyNumericUpDown.Minimum = 0;
+            QtyNumericUpDown.Maximum = StockMaxQty + FormsProduct.Quantity;
+
+            QtyNumericUpDown.Visible = true;
+
+            FunctionButton.Text = "Update Quantity";
+        }
+
         private bool ValidateFields()
         {
-
             if (
                 Product.ProductType.TryParse(TypeListBox.Text, true, out Product.ProductType _) &&
                 decimal.TryParse(PriceTextBox.Text, out decimal _) &&
@@ -236,26 +256,8 @@ namespace MediaStore
             {
                 return false;
             }
-
         }
 
-        private void ProductCloseButton_Click(object sender, EventArgs e)
-        {
-            FunctionSucceeded = false;
-            this.Hide();
-        }
-
-        private void IsActiveCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (IsActiveCheckBox.Checked == true)
-            {
-                FormsProduct.Status = Product.ProductStatus.Active;
-            }
-            else
-            {
-
-            }
-            FormsProduct.Status = Product.ProductStatus.InActive;
-        }
+        #endregion Methods
     }
 }

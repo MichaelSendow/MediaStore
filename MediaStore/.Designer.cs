@@ -98,6 +98,7 @@
             this.StatisticsTabPage = new System.Windows.Forms.TabPage();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.ShowReceiptsButton = new System.Windows.Forms.Button();
             this.MainTabControl.SuspendLayout();
             this.CashierTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CashierTabSplitContainer)).BeginInit();
@@ -189,6 +190,7 @@
             // 
             // CashierSplitContainer1.Panel2
             // 
+            this.CashierSplitContainer1.Panel2.Controls.Add(this.ShowReceiptsButton);
             this.CashierSplitContainer1.Panel2.Controls.Add(this.CashierShowAllProductsCheckBox);
             this.CashierSplitContainer1.Panel2.Controls.Add(this.ReturnQtyTextBox);
             this.CashierSplitContainer1.Panel2.Controls.Add(this.ReturnQtyLabel);
@@ -941,6 +943,16 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument1_PrintPage);
             // 
+            // ShowReceiptsButton
+            // 
+            this.ShowReceiptsButton.Location = new System.Drawing.Point(587, 64);
+            this.ShowReceiptsButton.Name = "ShowReceiptsButton";
+            this.ShowReceiptsButton.Size = new System.Drawing.Size(86, 28);
+            this.ShowReceiptsButton.TabIndex = 9;
+            this.ShowReceiptsButton.Text = "Receipts";
+            this.ShowReceiptsButton.UseVisualStyleBackColor = true;
+            this.ShowReceiptsButton.Click += new System.EventHandler(this.ShowReceiptsButton_Click);
+            // 
             // MyMediaStore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1064,6 +1076,7 @@
         private System.Windows.Forms.TextBox ProductCodeTextBox;
         private System.Windows.Forms.CheckBox StockShowAllProductsCheckBox;
         private System.Windows.Forms.ListBox TypeListBox;
+        private System.Windows.Forms.Button ShowReceiptsButton;
     }
 }
 

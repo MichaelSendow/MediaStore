@@ -124,5 +124,12 @@ namespace MediaStore
         {
             throw new System.NotImplementedException();
         }
+
+        internal void ShowReceipts()
+        {
+
+
+        }
+
     }
 }

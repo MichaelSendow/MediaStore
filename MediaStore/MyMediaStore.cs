@@ -175,16 +175,18 @@ namespace MediaStore
             {
                 if (uint.Parse(QuantityTextBox.Text, CultureInfo.CurrentCulture) == 0)
                 {
-                    SaveUpdatedProduct();
+                    SaveUpdatedProductFromStockTab();
                     UpdateListViews();
+                    SaveFiles();
                 }
                 else if (IsActiveCheckBox.Checked == false && uint.Parse(QuantityTextBox.Text, CultureInfo.CurrentCulture) > 0)
                 {
                     DialogResult dlgr = MessageBox.Show($"The product still has quantity in stock.\r\nAre you sure the product should be inactive?", "Quantity is not zero", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
                     if (dlgr == DialogResult.Yes)
                     {
-                        SaveUpdatedProduct();
+                        SaveUpdatedProductFromStockTab();
                         UpdateListViews();
+                        SaveFiles();
                     }
                     else
                     {
@@ -195,8 +197,9 @@ namespace MediaStore
                 }
                 else
                 {
-                    SaveUpdatedProduct();
+                    SaveUpdatedProductFromStockTab();
                     UpdateListViews();
+                    SaveFiles();
                 }
             }
         }
@@ -234,8 +237,7 @@ namespace MediaStore
                 }
             }
 
-            MyStock.SaveStockToFile(productsFileName);
-            MySales.SaveSalesToFile(salesFileName);
+            SaveFiles();
         }
 
         //Printing Text File in C#
@@ -322,14 +324,14 @@ namespace MediaStore
                 TotalSum_Numbers.Text = "0";
             }
 
-            MyStock.SaveStockToFile(productsFileName);
-            MySales.SaveSalesToFile(salesFileName);
+            SaveFiles();
         }
 
         private void ShoppingBasketClearBasketButton_Click(object sender, EventArgs e)
         {
             ClearShoppingBasket();
             UpdateListViews();
+            SaveFiles();
         }
 
         private void ShoppingBasketListView_DoubleClick(object sender, EventArgs e)
@@ -403,7 +405,7 @@ namespace MediaStore
 
         private void StockSaveUpdatedProductButton_Click(object sender, EventArgs e)
         {
-            SaveUpdatedProduct();
+            SaveUpdatedProductFromStockTab();
         }
 
         private void StockShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -441,7 +443,7 @@ namespace MediaStore
             this.Close();
         }
 
-        private void SaveUpdatedProduct()
+        private void SaveUpdatedProductFromStockTab()
         {
             if (ValidateFieldsInStockTab())
             {
@@ -471,8 +473,6 @@ namespace MediaStore
                     Product.ProductStatus.InActive);
                 }
 
-                UpdateListViews();
-                MyStock.SaveStockToFile(productsFileName);
             }
             else
             {
@@ -493,8 +493,9 @@ namespace MediaStore
 
                     if (dlgr == DialogResult.Yes)
                     {
-                        SaveUpdatedProduct();
+                        SaveUpdatedProductFromStockTab();
                         UpdateStockListView();
+                        SaveFiles();
                         return;
                     }
                     else
@@ -656,6 +657,12 @@ namespace MediaStore
             }
         }
 
+        private void SaveFiles()
+        {
+            MyStock.SaveStockToFile(productsFileName);
+            MySales.SaveSalesToFile(salesFileName);
+        }
+
         private bool ValidateFieldsInStockTab()
         {
             if (
@@ -677,5 +684,10 @@ namespace MediaStore
             }
         }
         #endregion Methods
+
+        private void ShowReceiptsButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
