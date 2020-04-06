@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace MediaStore
@@ -75,11 +76,17 @@ namespace MediaStore
             }
 
             UpdateStockListView();
+            UpdateCashierStockListView();
         }
 
         #endregion Constructors
 
         #region EventMethods
+
+        private void StockSearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateStockListView();
+        }
 
         private void AddNewProductButton_Click(object sender, EventArgs e)
         {
@@ -107,7 +114,7 @@ namespace MediaStore
         private void CashierReturnItemsButton_Click(object sender, EventArgs e)
         {
             //All fields has text
-            if (ReturnReceiptTextBox.Text.Length != 0 && ReturnProductTextBox.Text.Length != 0 && ReturnQtyTextBox.Text.Length != 0)
+            if (ReturnReceiptTextBox.TextLength != 0 && ReturnProductTextBox.TextLength != 0 && ReturnQtyTextBox.TextLength != 0)
             {
                 //All fields are validnumbers
                 if (ValidateUINT(ReturnReceiptTextBox.Text) && ValidateUINT(ReturnProductTextBox.Text) && ValidateUINT(ReturnQtyTextBox.Text))
@@ -362,6 +369,12 @@ namespace MediaStore
             }
         }
 
+        private void ShowReceiptsButton_Click(object sender, EventArgs e)
+        {
+            //Dirty way of showing the receipts.
+            System.Diagnostics.Process.Start($"{salesFileName}");
+        }
+
         /// How to sort a ListView control by a column in Visual C#
         /// https://support.microsoft.com/en-us/help/319401/how-to-sort-a-listview-control-by-a-column-in-visual-c
         /// 2020-03-21
@@ -443,6 +456,12 @@ namespace MediaStore
             this.Close();
         }
 
+        private void SaveFiles()
+        {
+            MyStock.SaveStockToFile(productsFileName);
+            MySales.SaveSalesToFile(salesFileName);
+        }
+
         private void SaveUpdatedProductFromStockTab()
         {
             if (ValidateFieldsInStockTab())
@@ -485,7 +504,7 @@ namespace MediaStore
             {
                 return;
             }
-            else if (ProductCodeTextBox.Text.Length != 0)
+            else if (ProductCodeTextBox.TextLength != 0)
             {
                 if (UnsavedChanges())
                 {
@@ -532,7 +551,7 @@ namespace MediaStore
 
         private bool UnsavedChanges()
         {
-            if (ProductCodeTextBox.Text.Length != 0)
+            if (ProductCodeTextBox.TextLength != 0)
             {
                 Product oldProduct = MyStock.GetProduct(uint.Parse(ProductCodeTextBox.Text, CultureInfo.CurrentCulture));
 
@@ -612,10 +631,27 @@ namespace MediaStore
 
         private void UpdateStockListView()
         {
-            StockListView1.Items.Clear();
-            CashierListView1.Items.Clear();
+            Stock stock;
 
-            foreach (KeyValuePair<uint, Product> productValuePair in MyStock.Products)
+            StockListView1.Items.Clear();
+            
+            if (StockSearchTextBox.TextLength == 0)
+            {
+                stock = MyStock;
+            }
+            else if (StockSearchTextBox.Text.Contains(';'))
+            {
+                SplitSearcher splitSearcher = new SplitSearcher();
+                stock = splitSearcher.Search(MyStock, StockSearchTextBox.Text);
+            }
+            else
+            {
+                WildSearch wildSearcher = new WildSearch();
+
+                stock = wildSearcher.Search(MyStock, StockSearchTextBox.Text);
+            }
+
+            foreach (KeyValuePair<uint, Product> productValuePair in stock.Products)
             {
                 if (StockShowAllProductsCheckBox.CheckState == CheckState.Unchecked)
                 {
@@ -636,31 +672,8 @@ namespace MediaStore
                     }
                 }
 
-                if (CashierShowAllProductsCheckBox.CheckState == CheckState.Unchecked)
-                {
-                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
-                    {
-                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
-                    }
-                }
-                else
-                {
-                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
-                    {
-                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
-                    }
-                    else
-                    {
-                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem(new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)))));
-                    }
-                }
             }
-        }
 
-        private void SaveFiles()
-        {
-            MyStock.SaveStockToFile(productsFileName);
-            MySales.SaveSalesToFile(salesFileName);
         }
 
         private bool ValidateFieldsInStockTab()
@@ -683,11 +696,9 @@ namespace MediaStore
                 return false;
             }
         }
+
         #endregion Methods
 
-        private void ShowReceiptsButton_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }

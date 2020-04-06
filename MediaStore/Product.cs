@@ -12,25 +12,32 @@ namespace MediaStore
     public class Product
     {
 
+        #region Properties
+
+        /// <summary>
+        /// Author, Artist, Director
+        /// </summary>
+        public string Creator { get; set; }
+
+        /// <summary>
+        /// Free text field
+        /// </summary>
+        public string FreeText { get; set; }
+
+        /// <summary>
+        /// Price of the product
+        /// </summary>
+        public decimal Price { get; set; }
+
         /// <summary>
         /// The product code
         /// </summary>
         public uint ProductCode { get; set; }
 
         /// <summary>
-        /// The title of the product
+        /// Name of publisher or record label
         /// </summary>
-        public string Title { get; set; }
-
-        /// <summary>
-        /// Type of product (Book, Music or Movie)
-        /// </summary>
-        public ProductType Type { get; set; }
-
-        /// <summary>
-        /// Price of the product
-        /// </summary>
-        public decimal Price { get; set; }
+        public string Publisher { get; set; }
 
         /// <summary>
         /// Quantity of product
@@ -43,25 +50,32 @@ namespace MediaStore
         public uint ReleaseYear { get; set; }
 
         /// <summary>
-        /// Author, Artist, Director
-        /// </summary>
-        public string Creator { get; set; }
-
-
-        /// <summary>
-        /// Name of publisher or record label
-        /// </summary>
-        public string Publisher { get; set; }
-
-        /// <summary>
-        /// Free text field
-        /// </summary>
-        public string FreeText { get; set; }
-
-        /// <summary>
         /// Free text field
         /// </summary>
         public ProductStatus Status { get; set; }
+
+        /// <summary>
+        /// The title of the product
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Type of product (Book, Music or Movie)
+        /// </summary>
+        public ProductType Type { get; set; }
+
+        #endregion Properties
+
+        #region Enums
+
+        /// <summary>
+        /// Enumerator [Book, Music, Movie]
+        /// </summary>
+        public enum ProductStatus
+        {
+            Active,
+            InActive
+        }
 
         /// <summary>
         /// Enumerator [Book, Music, Movie]
@@ -73,14 +87,9 @@ namespace MediaStore
             Movie
         }
 
-        /// <summary>
-        /// Enumerator [Book, Music, Movie]
-        /// </summary>
-        public enum ProductStatus
-        {
-            Active,
-            InActive
-        }
+        #endregion Enums
+
+        #region Constructors
 
         /// <summary>
         /// Class constructor
@@ -121,6 +130,10 @@ namespace MediaStore
 
         }
 
+        #endregion Constructors
+
+
+        #region Methods
 
         public ListViewItem GetProductListViewItem(Font font = null)
         {
@@ -129,25 +142,6 @@ namespace MediaStore
             listViewItem.SubItems.Add(Type.ToString());
             listViewItem.SubItems.Add(Price.ToString("0.00", CultureInfo.CurrentCulture));
             listViewItem.SubItems.Add(Quantity.ToString(CultureInfo.CurrentCulture));
-            if (font == null)
-            {
-                listViewItem.Font = new Font("Verdana", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
-            }
-            else
-            {
-                listViewItem.Font = font;
-            }
-
-            return listViewItem;
-        }
-
-        public ListViewItem ShoppingBasketGetProductListViewItem(Font font = null)
-        {
-            ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
-            listViewItem.SubItems.Add(Title);
-            listViewItem.SubItems.Add(Price.ToString("0.00", CultureInfo.CurrentCulture));
-            listViewItem.SubItems.Add(Quantity.ToString(CultureInfo.CurrentCulture));
-            listViewItem.SubItems.Add((Price * Quantity).ToString(CultureInfo.CurrentCulture));
             if (font == null)
             {
                 listViewItem.Font = new Font("Verdana", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
@@ -184,7 +178,24 @@ namespace MediaStore
             return receiptString;
         }
 
+        public ListViewItem ShoppingBasketGetProductListViewItem(Font font = null)
+        {
+            ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
+            listViewItem.SubItems.Add(Title);
+            listViewItem.SubItems.Add(Price.ToString("0.00", CultureInfo.CurrentCulture));
+            listViewItem.SubItems.Add(Quantity.ToString(CultureInfo.CurrentCulture));
+            listViewItem.SubItems.Add((Price * Quantity).ToString(CultureInfo.CurrentCulture));
+            if (font == null)
+            {
+                listViewItem.Font = new Font("Verdana", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            }
+            else
+            {
+                listViewItem.Font = font;
+            }
 
+            return listViewItem;
+        }
         public override string ToString()
         {
 
@@ -201,7 +212,6 @@ namespace MediaStore
             productAsString += FreeText.ToString(CultureInfo.CurrentCulture) + ';';
             productAsString += Status.ToString();
 
-
             return productAsString;
         }
 
@@ -217,5 +227,7 @@ namespace MediaStore
             FreeText = freeText;
             Status = status;
         }
+
+        #endregion Methods
     }
 }

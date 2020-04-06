@@ -8,16 +8,17 @@ namespace MediaStore
 {
     internal class Receipt
     {
-        /// <summary>
-        /// The product being sold
-        /// </summary>
-        public uint ProductCode { get; set; }
+        #region Properties
 
         /// <summary>
         /// Date of sale
         /// </summary>
         public string DateOfSale { get; set; }
 
+        /// <summary>
+        /// The product being sold
+        /// </summary>
+        public uint ProductCode { get; set; }
         /// <summary>
         /// Number of items
         /// </summary>
@@ -28,6 +29,10 @@ namespace MediaStore
         /// </summary>
         public uint ReceiptNumber { get; set; }
 
+        #endregion Properties
+
+
+        #region Constructors
 
         public Receipt(uint receiptNumber , uint productCode, string dateOfSale, uint quantity)
         {
@@ -50,6 +55,10 @@ namespace MediaStore
 
         }
 
+        #endregion Constructors
+
+        #region Methods
+
         public override string ToString()
         {
             string receiptAsString;
@@ -60,6 +69,8 @@ namespace MediaStore
 
             return receiptAsString;
         }
+
+        #endregion Methods
 
     }
 }

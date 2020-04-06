@@ -8,15 +8,25 @@ namespace MediaStore
 {
     internal class ShoppingBasket
     {
+        #region Properties
+
         public IDictionary<uint, Product> Products
         {
             get; set;
         }
 
+        #endregion Properties
+
+        #region Constructors
+
         public ShoppingBasket()
         {
             Products = new Dictionary<uint, Product>();
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         public void AddProductToBasket(Product product, uint qty)
         {
@@ -32,8 +42,7 @@ namespace MediaStore
                 Products[product.ProductCode].Quantity = qty;
             }
         }
-
-       
+               
         public void ClearBasket()
         {
             Products.Clear();
@@ -48,6 +57,8 @@ namespace MediaStore
                 throw new Exception("Product does not exist");
             }
         }
+
+        #endregion Methods
 
     }
 }

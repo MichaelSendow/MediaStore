@@ -87,7 +87,6 @@
     </Compile>
     <Compile Include="FileHandler.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IntegerSearcher.cs" />
     <Compile Include="ISearch.cs" />
     <Compile Include="IStatistics.cs" />
     <Compile Include="Receipt.cs" />
@@ -105,9 +104,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sales.cs" />
     <Compile Include="ShoppingBasket.cs" />
+    <Compile Include="SplitSearcher.cs" />
     <Compile Include="Statistics.cs" />
     <Compile Include="Stock.cs" />
-    <Compile Include="StringSearcher.cs" />
+    <Compile Include="WildSearch.cs" />
     <EmbeddedResource Include="ProductForm.resx">
       <DependentUpon>ProductForm.cs</DependentUpon>
     </EmbeddedResource>

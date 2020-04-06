@@ -66,7 +66,7 @@ namespace MediaStore
             this.FunctionButton.MinimumSize = new System.Drawing.Size(156, 75);
             this.FunctionButton.Name = "FunctionButton";
             this.FunctionButton.Size = new System.Drawing.Size(156, 75);
-            this.FunctionButton.TabIndex = 0;
+            this.FunctionButton.TabIndex = 12;
             this.FunctionButton.Text = "Function Button";
             this.FunctionButton.UseVisualStyleBackColor = true;
             this.FunctionButton.Click += new System.EventHandler(this.FunctionButton_Click);
@@ -81,7 +81,7 @@ namespace MediaStore
             this.CxlButton.MinimumSize = new System.Drawing.Size(156, 75);
             this.CxlButton.Name = "CxlButton";
             this.CxlButton.Size = new System.Drawing.Size(156, 75);
-            this.CxlButton.TabIndex = 1;
+            this.CxlButton.TabIndex = 13;
             this.CxlButton.Text = "Cancel";
             this.CxlButton.UseVisualStyleBackColor = true;
             this.CxlButton.Click += new System.EventHandler(this.ProductCloseButton_Click);
@@ -97,7 +97,7 @@ namespace MediaStore
             this.ProductCodeTextBox.Name = "ProductCodeTextBox";
             this.ProductCodeTextBox.ReadOnly = true;
             this.ProductCodeTextBox.Size = new System.Drawing.Size(303, 32);
-            this.ProductCodeTextBox.TabIndex = 2;
+            this.ProductCodeTextBox.TabIndex = 1;
             this.ProductCodeTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ProductCodeTextBox.WordWrap = false;
             // 
@@ -108,7 +108,7 @@ namespace MediaStore
             this.ProductCodeLabel.Location = new System.Drawing.Point(12, 9);
             this.ProductCodeLabel.Name = "ProductCodeLabel";
             this.ProductCodeLabel.Size = new System.Drawing.Size(124, 18);
-            this.ProductCodeLabel.TabIndex = 3;
+            this.ProductCodeLabel.TabIndex = 0;
             this.ProductCodeLabel.Text = "Product code";
             // 
             // TitleLabel
@@ -118,7 +118,7 @@ namespace MediaStore
             this.TitleLabel.Location = new System.Drawing.Point(12, 63);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(46, 18);
-            this.TitleLabel.TabIndex = 5;
+            this.TitleLabel.TabIndex = 0;
             this.TitleLabel.Text = "Title";
             // 
             // TitleTextBox
@@ -130,7 +130,7 @@ namespace MediaStore
             this.TitleTextBox.Name = "TitleTextBox";
             this.TitleTextBox.ReadOnly = true;
             this.TitleTextBox.Size = new System.Drawing.Size(846, 32);
-            this.TitleTextBox.TabIndex = 4;
+            this.TitleTextBox.TabIndex = 5;
             // 
             // PriceLabel
             // 
@@ -139,7 +139,7 @@ namespace MediaStore
             this.PriceLabel.Location = new System.Drawing.Point(499, 7);
             this.PriceLabel.Name = "PriceLabel";
             this.PriceLabel.Size = new System.Drawing.Size(52, 18);
-            this.PriceLabel.TabIndex = 7;
+            this.PriceLabel.TabIndex = 0;
             this.PriceLabel.Text = "Price";
             // 
             // PriceTextBox
@@ -151,7 +151,7 @@ namespace MediaStore
             this.PriceTextBox.Name = "PriceTextBox";
             this.PriceTextBox.ReadOnly = true;
             this.PriceTextBox.Size = new System.Drawing.Size(175, 32);
-            this.PriceTextBox.TabIndex = 6;
+            this.PriceTextBox.TabIndex = 3;
             this.PriceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // QuantityLabel
@@ -161,7 +161,7 @@ namespace MediaStore
             this.QuantityLabel.Location = new System.Drawing.Point(680, 7);
             this.QuantityLabel.Name = "QuantityLabel";
             this.QuantityLabel.Size = new System.Drawing.Size(83, 18);
-            this.QuantityLabel.TabIndex = 9;
+            this.QuantityLabel.TabIndex = 0;
             this.QuantityLabel.Text = "Quantity";
             // 
             // QuantityTextBox
@@ -173,7 +173,7 @@ namespace MediaStore
             this.QuantityTextBox.Name = "QuantityTextBox";
             this.QuantityTextBox.ReadOnly = true;
             this.QuantityTextBox.Size = new System.Drawing.Size(175, 32);
-            this.QuantityTextBox.TabIndex = 8;
+            this.QuantityTextBox.TabIndex = 4;
             this.QuantityTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // TypeLabel
@@ -183,7 +183,7 @@ namespace MediaStore
             this.TypeLabel.Location = new System.Drawing.Point(318, 7);
             this.TypeLabel.Name = "TypeLabel";
             this.TypeLabel.Size = new System.Drawing.Size(52, 18);
-            this.TypeLabel.TabIndex = 11;
+            this.TypeLabel.TabIndex = 0;
             this.TypeLabel.Text = "Type";
             // 
             // ReleaseYearLabel
@@ -193,7 +193,7 @@ namespace MediaStore
             this.ReleaseYearLabel.Location = new System.Drawing.Point(12, 119);
             this.ReleaseYearLabel.Name = "ReleaseYearLabel";
             this.ReleaseYearLabel.Size = new System.Drawing.Size(125, 18);
-            this.ReleaseYearLabel.TabIndex = 17;
+            this.ReleaseYearLabel.TabIndex = 0;
             this.ReleaseYearLabel.Text = "Release Year";
             // 
             // ReleaseYearTextBox
@@ -206,7 +206,7 @@ namespace MediaStore
             this.ReleaseYearTextBox.Name = "ReleaseYearTextBox";
             this.ReleaseYearTextBox.ReadOnly = true;
             this.ReleaseYearTextBox.Size = new System.Drawing.Size(127, 32);
-            this.ReleaseYearTextBox.TabIndex = 16;
+            this.ReleaseYearTextBox.TabIndex = 6;
             this.ReleaseYearTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // PublisherLabel
@@ -216,7 +216,7 @@ namespace MediaStore
             this.PublisherLabel.Location = new System.Drawing.Point(463, 119);
             this.PublisherLabel.Name = "PublisherLabel";
             this.PublisherLabel.Size = new System.Drawing.Size(89, 18);
-            this.PublisherLabel.TabIndex = 15;
+            this.PublisherLabel.TabIndex = 0;
             this.PublisherLabel.Text = "Publisher";
             // 
             // PublisherTextBox
@@ -228,7 +228,7 @@ namespace MediaStore
             this.PublisherTextBox.Name = "PublisherTextBox";
             this.PublisherTextBox.ReadOnly = true;
             this.PublisherTextBox.Size = new System.Drawing.Size(395, 32);
-            this.PublisherTextBox.TabIndex = 14;
+            this.PublisherTextBox.TabIndex = 8;
             // 
             // CreatorLabel
             // 
@@ -237,7 +237,7 @@ namespace MediaStore
             this.CreatorLabel.Location = new System.Drawing.Point(145, 119);
             this.CreatorLabel.Name = "CreatorLabel";
             this.CreatorLabel.Size = new System.Drawing.Size(76, 18);
-            this.CreatorLabel.TabIndex = 13;
+            this.CreatorLabel.TabIndex = 0;
             this.CreatorLabel.Text = "Creator";
             // 
             // CreatorTextBox
@@ -249,7 +249,7 @@ namespace MediaStore
             this.CreatorTextBox.Name = "CreatorTextBox";
             this.CreatorTextBox.ReadOnly = true;
             this.CreatorTextBox.Size = new System.Drawing.Size(312, 32);
-            this.CreatorTextBox.TabIndex = 12;
+            this.CreatorTextBox.TabIndex = 7;
             // 
             // FreeTextLabel
             // 
@@ -258,7 +258,7 @@ namespace MediaStore
             this.FreeTextLabel.Location = new System.Drawing.Point(12, 175);
             this.FreeTextLabel.Name = "FreeTextLabel";
             this.FreeTextLabel.Size = new System.Drawing.Size(113, 18);
-            this.FreeTextLabel.TabIndex = 19;
+            this.FreeTextLabel.TabIndex = 0;
             this.FreeTextLabel.Text = "Information";
             // 
             // FreeTextBox
@@ -271,7 +271,7 @@ namespace MediaStore
             this.FreeTextBox.Name = "FreeTextBox";
             this.FreeTextBox.ReadOnly = true;
             this.FreeTextBox.Size = new System.Drawing.Size(846, 250);
-            this.FreeTextBox.TabIndex = 18;
+            this.FreeTextBox.TabIndex = 9;
             // 
             // QtyNumericUpDown
             // 
@@ -286,7 +286,7 @@ namespace MediaStore
             0});
             this.QtyNumericUpDown.Name = "QtyNumericUpDown";
             this.QtyNumericUpDown.Size = new System.Drawing.Size(103, 42);
-            this.QtyNumericUpDown.TabIndex = 20;
+            this.QtyNumericUpDown.TabIndex = 11;
             this.QtyNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.QtyNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -302,7 +302,7 @@ namespace MediaStore
             this.QtyNumericLabel.Location = new System.Drawing.Point(587, 458);
             this.QtyNumericLabel.Name = "QtyNumericLabel";
             this.QtyNumericLabel.Size = new System.Drawing.Size(108, 25);
-            this.QtyNumericLabel.TabIndex = 21;
+            this.QtyNumericLabel.TabIndex = 0;
             this.QtyNumericLabel.Text = "Quantity";
             this.QtyNumericLabel.Visible = false;
             // 
@@ -316,7 +316,7 @@ namespace MediaStore
             this.IsActiveCheckBox.Location = new System.Drawing.Point(175, 458);
             this.IsActiveCheckBox.Name = "IsActiveCheckBox";
             this.IsActiveCheckBox.Size = new System.Drawing.Size(108, 29);
-            this.IsActiveCheckBox.TabIndex = 22;
+            this.IsActiveCheckBox.TabIndex = 10;
             this.IsActiveCheckBox.Text = "Active";
             this.IsActiveCheckBox.UseVisualStyleBackColor = true;
             this.IsActiveCheckBox.CheckedChanged += new System.EventHandler(this.IsActiveCheckBox_CheckedChanged);
@@ -335,7 +335,7 @@ namespace MediaStore
             this.TypeListBox.Location = new System.Drawing.Point(321, 28);
             this.TypeListBox.Name = "TypeListBox";
             this.TypeListBox.Size = new System.Drawing.Size(175, 27);
-            this.TypeListBox.TabIndex = 48;
+            this.TypeListBox.TabIndex = 0;
             this.TypeListBox.Visible = false;
             // 
             // TypeTextBox
@@ -347,7 +347,7 @@ namespace MediaStore
             this.TypeTextBox.Name = "TypeTextBox";
             this.TypeTextBox.ReadOnly = true;
             this.TypeTextBox.Size = new System.Drawing.Size(175, 32);
-            this.TypeTextBox.TabIndex = 49;
+            this.TypeTextBox.TabIndex = 2;
             // 
             // ProductForm
             // 

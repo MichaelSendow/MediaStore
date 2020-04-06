@@ -10,9 +10,13 @@ namespace MediaStore
 {
     internal class Sales
     {
+        #region Properties
+
         public IDictionary<uint, List<Receipt>> Ledger { get; set; }
 
+        #endregion Properties
 
+        #region Constructors
 
         public Sales()
         {
@@ -50,6 +54,10 @@ namespace MediaStore
 
         }
 
+        #endregion Constructors
+
+        #region Methods
+
         internal void AddReceipt(Receipt receipt)
         {
             if (Ledger.ContainsKey(receipt.ReceiptNumber))
@@ -60,6 +68,17 @@ namespace MediaStore
             {
                 Ledger.Add(receipt.ReceiptNumber, new List<Receipt> { new Receipt(receipt) });
             }
+        }
+
+        internal uint GetNextReceiptNumber()
+        {
+            uint nextProductCode = 1;
+
+            if (Ledger.Count != 0)
+                nextProductCode = Ledger.Keys.Max() + 1;
+
+
+            return nextProductCode;
         }
 
         internal bool ReturnProduct(uint receiptNumber, uint productCode, uint QtyToReturn)
@@ -103,33 +122,12 @@ namespace MediaStore
             }
         }
 
-        internal uint GetNextReceiptNumber()
-        {
-            uint nextProductCode = 1;
-
-            if (Ledger.Count != 0)
-                nextProductCode = Ledger.Keys.Max() + 1;
-
-
-            return nextProductCode;
-        }
-
-
         internal void SaveSalesToFile(string filePathName)
         {
             FileHandler.SaveSales(this, filePathName);
         }
 
-        internal void DeleteProduct()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        internal void ShowReceipts()
-        {
-
-
-        }
+        #endregion Methods
 
     }
 }

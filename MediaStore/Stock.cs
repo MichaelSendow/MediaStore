@@ -11,6 +11,8 @@ namespace MediaStore
     public class Stock
     {
 
+        #region Properties
+
         /// <summary>
         /// List of products in stock. Key = ProductCode, Value = Product
         /// </summary>
@@ -20,19 +22,26 @@ namespace MediaStore
             get; set;
         }
 
+        #endregion Properties
+
+        #region Constructors
+
         public Stock()
         {
             Products = new Dictionary<uint, Product>();
         }
 
-        public Stock(List<Product> products)
+        public Stock(Stock stock)
         {
-            Products = new Dictionary<uint, Product>();
-            if (products != null)
+            if (stock !=null)
             {
-                foreach (var product in products)
-                    AddProduct(product);
+                Products = new Dictionary<uint, Product>(stock.Products);
             }
+            else
+            {
+                Products = new Dictionary<uint, Product>();
+            }
+            
         }
 
         public Stock(string filePathName)
@@ -47,21 +56,9 @@ namespace MediaStore
             }
         }
 
-        internal void SaveStockToFile(string filePathName)
-        {
-            FileHandler.SaveStock(this, filePathName);
-        }
+        #endregion Constructors
 
-        internal uint GetNextProductCode()
-        {
-            uint nextProductCode = 1;
-
-            if (Products.Count != 0)
-                nextProductCode = Products.Keys.Max() + 1;
-
-
-            return nextProductCode;
-        }
+        #region Methods
 
         internal void AddProduct(Product product)
         {
@@ -76,14 +73,6 @@ namespace MediaStore
             }
         }
 
-        internal void DeleteProduct(uint productCode)
-        {
-            if (Products.ContainsKey(productCode))
-            {
-                Products.Remove(productCode);
-            }
-        }
-
         internal void AddQuantity(uint productCode, uint quantity)
         {
             if (Products.ContainsKey(productCode))
@@ -92,22 +81,23 @@ namespace MediaStore
             }
         }
 
-        internal void SubtractQuantity(uint productCode, uint quantity)
-        {
-            if (Products.ContainsKey(productCode))
-            {
-                Products[productCode].Quantity -= quantity;
-            }
-        }
+        //internal void DeleteProduct(uint productCode)
+        //{
+        //    if (Products.ContainsKey(productCode))
+        //    {
+        //        Products.Remove(productCode);
+        //    }
+        //}
 
-        internal List<Product> GetProductList()
+        internal uint GetNextProductCode()
         {
-            List<Product> productsList = new List<Product>();
-            foreach (var product in Products.Values)
-            {
-                productsList.Add(product);
-            }
-            return productsList;
+            uint nextProductCode = 1;
+
+            if (Products.Count != 0)
+                nextProductCode = Products.Keys.Max() + 1;
+
+
+            return nextProductCode;
         }
 
         internal Product GetProduct(uint productCode)
@@ -119,5 +109,30 @@ namespace MediaStore
                 throw new Exception("Product does not exist");
             }
         }
+
+        //internal List<Product> GetProductList()
+        //{
+        //    List<Product> productsList = new List<Product>();
+        //    foreach (var product in Products.Values)
+        //    {
+        //        productsList.Add(product);
+        //    }
+        //    return productsList;
+        //}
+
+        internal void SaveStockToFile(string filePathName)
+        {
+            FileHandler.SaveStock(this, filePathName);
+        }
+
+        //internal void SubtractQuantity(uint productCode, uint quantity)
+        //{
+        //    if (Products.ContainsKey(productCode))
+        //    {
+        //        Products[productCode].Quantity -= quantity;
+        //    }
+        //}
+
+        #endregion Methods
     }
 }
