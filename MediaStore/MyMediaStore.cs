@@ -88,6 +88,11 @@ namespace MediaStore
             UpdateStockListView();
         }
 
+        private void CashierSearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateCashierStockListView();
+        }
+
         private void AddNewProductButton_Click(object sender, EventArgs e)
         {
             Product newProduct = new Product
@@ -582,8 +587,28 @@ namespace MediaStore
 
         private void UpdateCashierStockListView()
         {
+
+            Stock stock;
+
             CashierListView1.Items.Clear();
-            foreach (KeyValuePair<uint, Product> productValuePair in MyStock.Products)
+
+            if (CashierSearchTextBox.TextLength == 0)
+            {
+                stock = MyStock;
+            }
+            else if (CashierSearchTextBox.Text.Contains(';'))
+            {
+                SplitSearcher splitSearcher = new SplitSearcher();
+                stock = splitSearcher.Search(MyStock, CashierSearchTextBox.Text);
+            }
+            else
+            {
+                WildSearch wildSearcher = new WildSearch();
+
+                stock = wildSearcher.Search(MyStock, CashierSearchTextBox.Text);
+            }
+
+            foreach (KeyValuePair<uint, Product> productValuePair in stock.Products)
             {
                 if (CashierShowAllProductsCheckBox.CheckState == CheckState.Unchecked)
                 {

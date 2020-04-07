@@ -11,6 +11,26 @@ namespace MediaStore
 {
     public class SplitSearcher : ISearch
     {
+        #region Enums
+
+        enum ProductField
+        {
+            ProductCode,
+            Title,
+            Type,
+            Price,
+            Quantity,
+            ReleaseYear,
+            Creator,
+            Publisher,
+            FreeText,
+            Status
+        }
+
+        #endregion Enums
+
+        #region Methods
+
         public Stock Search(Stock stock, string searchString)
         {
             Stock MatchedStock;
@@ -49,11 +69,6 @@ namespace MediaStore
 
                     if (isProductFields)
                     {
-
-
-
-
-
                         foreach (var item in stock.Products.Values)
                         {
                             bool totalMatch = true;
@@ -276,18 +291,6 @@ namespace MediaStore
             return MatchedStock;
         }
 
-        enum ProductField
-        {
-            ProductCode,
-            Title,
-            Type,
-            Price,
-            Quantity,
-            ReleaseYear,
-            Creator,
-            Publisher,
-            FreeText,
-            Status
-        }
+        #endregion Methods
     }
 }

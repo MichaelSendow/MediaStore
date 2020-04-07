@@ -42,6 +42,7 @@
             this.CashierListViewColumnHeader_ProductType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CashierListViewColumnHeader_Price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.CashierListViewColumnHeader_Qty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ShowReceiptsButton = new System.Windows.Forms.Button();
             this.CashierShowAllProductsCheckBox = new System.Windows.Forms.CheckBox();
             this.ReturnQtyTextBox = new System.Windows.Forms.TextBox();
             this.ReturnQtyLabel = new System.Windows.Forms.Label();
@@ -69,6 +70,9 @@
             this.StockShowAllProductsCheckBox = new System.Windows.Forms.CheckBox();
             this.AddNewProductButton = new System.Windows.Forms.Button();
             this.StockSplitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.StockSearchPanel1 = new System.Windows.Forms.Panel();
+            this.StockSearchTextBox = new System.Windows.Forms.TextBox();
+            this.StockSearchLabel = new System.Windows.Forms.Label();
             this.StockListView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -98,10 +102,6 @@
             this.StatisticsTabPage = new System.Windows.Forms.TabPage();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.ShowReceiptsButton = new System.Windows.Forms.Button();
-            this.StockSearchPanel1 = new System.Windows.Forms.Panel();
-            this.StockSearchTextBox = new System.Windows.Forms.TextBox();
-            this.StockSearchLabel = new System.Windows.Forms.Label();
             this.MainTabControl.SuspendLayout();
             this.CashierTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CashierTabSplitContainer)).BeginInit();
@@ -245,6 +245,7 @@
             this.CashierSearchTextBox.Name = "CashierSearchTextBox";
             this.CashierSearchTextBox.Size = new System.Drawing.Size(732, 32);
             this.CashierSearchTextBox.TabIndex = 1;
+            this.CashierSearchTextBox.TextChanged += new System.EventHandler(this.CashierSearchTextBox_TextChanged);
             // 
             // CashierSearchLabel
             // 
@@ -307,6 +308,17 @@
             this.CashierListViewColumnHeader_Qty.Text = "Quantity";
             this.CashierListViewColumnHeader_Qty.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.CashierListViewColumnHeader_Qty.Width = 114;
+            // 
+            // ShowReceiptsButton
+            // 
+            this.ShowReceiptsButton.Location = new System.Drawing.Point(587, 64);
+            this.ShowReceiptsButton.Name = "ShowReceiptsButton";
+            this.ShowReceiptsButton.Size = new System.Drawing.Size(86, 28);
+            this.ShowReceiptsButton.TabIndex = 0;
+            this.ShowReceiptsButton.TabStop = false;
+            this.ShowReceiptsButton.Text = "Receipts";
+            this.ShowReceiptsButton.UseVisualStyleBackColor = true;
+            this.ShowReceiptsButton.Click += new System.EventHandler(this.ShowReceiptsButton_Click);
             // 
             // CashierShowAllProductsCheckBox
             // 
@@ -655,6 +667,38 @@
             this.StockSplitContainer2.TabIndex = 0;
             this.StockSplitContainer2.TabStop = false;
             // 
+            // StockSearchPanel1
+            // 
+            this.StockSearchPanel1.Controls.Add(this.StockSearchTextBox);
+            this.StockSearchPanel1.Controls.Add(this.StockSearchLabel);
+            this.StockSearchPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.StockSearchPanel1.Location = new System.Drawing.Point(0, 0);
+            this.StockSearchPanel1.Name = "StockSearchPanel1";
+            this.StockSearchPanel1.Size = new System.Drawing.Size(855, 54);
+            this.StockSearchPanel1.TabIndex = 0;
+            // 
+            // StockSearchTextBox
+            // 
+            this.StockSearchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.StockSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StockSearchTextBox.Font = new System.Drawing.Font("Verdana", 10F);
+            this.StockSearchTextBox.Location = new System.Drawing.Point(122, 8);
+            this.StockSearchTextBox.Name = "StockSearchTextBox";
+            this.StockSearchTextBox.Size = new System.Drawing.Size(723, 32);
+            this.StockSearchTextBox.TabIndex = 1;
+            this.StockSearchTextBox.TextChanged += new System.EventHandler(this.StockSearchTextBox_TextChanged);
+            // 
+            // StockSearchLabel
+            // 
+            this.StockSearchLabel.AutoSize = true;
+            this.StockSearchLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StockSearchLabel.Location = new System.Drawing.Point(3, 3);
+            this.StockSearchLabel.Name = "StockSearchLabel";
+            this.StockSearchLabel.Size = new System.Drawing.Size(113, 34);
+            this.StockSearchLabel.TabIndex = 0;
+            this.StockSearchLabel.Text = "Search";
+            // 
             // StockListView1
             // 
             this.StockListView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -956,49 +1000,6 @@
             // printDocument1
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument1_PrintPage);
-            // 
-            // ShowReceiptsButton
-            // 
-            this.ShowReceiptsButton.Location = new System.Drawing.Point(587, 64);
-            this.ShowReceiptsButton.Name = "ShowReceiptsButton";
-            this.ShowReceiptsButton.Size = new System.Drawing.Size(86, 28);
-            this.ShowReceiptsButton.TabIndex = 0;
-            this.ShowReceiptsButton.TabStop = false;
-            this.ShowReceiptsButton.Text = "Receipts";
-            this.ShowReceiptsButton.UseVisualStyleBackColor = true;
-            this.ShowReceiptsButton.Click += new System.EventHandler(this.ShowReceiptsButton_Click);
-            // 
-            // StockSearchPanel1
-            // 
-            this.StockSearchPanel1.Controls.Add(this.StockSearchTextBox);
-            this.StockSearchPanel1.Controls.Add(this.StockSearchLabel);
-            this.StockSearchPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.StockSearchPanel1.Location = new System.Drawing.Point(0, 0);
-            this.StockSearchPanel1.Name = "StockSearchPanel1";
-            this.StockSearchPanel1.Size = new System.Drawing.Size(855, 54);
-            this.StockSearchPanel1.TabIndex = 0;
-            // 
-            // StockSearchTextBox
-            // 
-            this.StockSearchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.StockSearchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StockSearchTextBox.Font = new System.Drawing.Font("Verdana", 10F);
-            this.StockSearchTextBox.Location = new System.Drawing.Point(122, 8);
-            this.StockSearchTextBox.Name = "StockSearchTextBox";
-            this.StockSearchTextBox.Size = new System.Drawing.Size(723, 32);
-            this.StockSearchTextBox.TabIndex = 1;
-            this.StockSearchTextBox.TextChanged += new System.EventHandler(this.StockSearchTextBox_TextChanged);
-            // 
-            // StockSearchLabel
-            // 
-            this.StockSearchLabel.AutoSize = true;
-            this.StockSearchLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StockSearchLabel.Location = new System.Drawing.Point(3, 3);
-            this.StockSearchLabel.Name = "StockSearchLabel";
-            this.StockSearchLabel.Size = new System.Drawing.Size(113, 34);
-            this.StockSearchLabel.TabIndex = 0;
-            this.StockSearchLabel.Text = "Search";
             // 
             // MyMediaStore
             // 

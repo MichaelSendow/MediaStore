@@ -22,8 +22,7 @@ namespace MediaStore
 
                 foreach (KeyValuePair<uint, Product> productValuePair in stock.Products)
                 {
-                    ;
-                    if (productValuePair.Value.ToString().Replace(";", "").ToLower(CultureInfo.CurrentCulture).Contains(searchString.ToLower(CultureInfo.CurrentCulture)))
+                    if (productValuePair.Value.ToString().Replace(";", " ").ToLower(CultureInfo.CurrentCulture).Contains(searchString.ToLower(CultureInfo.CurrentCulture)))
                     {
                         if (MatchedStock.Products.ContainsKey(productValuePair.Key) == false)
                         {
