@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
+﻿using System.Globalization;
 
 namespace MediaStore
 {
@@ -34,7 +30,7 @@ namespace MediaStore
 
         #region Constructors
 
-        public Receipt(uint receiptNumber , uint productCode, string dateOfSale, uint quantity)
+        public Receipt(uint receiptNumber, uint productCode, string dateOfSale, uint quantity)
         {
             ReceiptNumber = receiptNumber;
             ProductCode = productCode;

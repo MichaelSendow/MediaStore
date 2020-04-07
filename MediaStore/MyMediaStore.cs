@@ -83,16 +83,6 @@ namespace MediaStore
 
         #region EventMethods
 
-        private void StockSearchTextBox_TextChanged(object sender, EventArgs e)
-        {
-            UpdateStockListView();
-        }
-
-        private void CashierSearchTextBox_TextChanged(object sender, EventArgs e)
-        {
-            UpdateCashierStockListView();
-        }
-
         private void AddNewProductButton_Click(object sender, EventArgs e)
         {
             Product newProduct = new Product
@@ -152,6 +142,11 @@ namespace MediaStore
             {
                 MessageBox.Show("All fields must contain numbers");
             }
+        }
+
+        private void CashierSearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateCashierStockListView();
         }
 
         private void CashierShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -426,6 +421,10 @@ namespace MediaStore
             SaveUpdatedProductFromStockTab();
         }
 
+        private void StockSearchTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateStockListView();
+        }
         private void StockShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             UpdateStockListView();
@@ -503,6 +502,7 @@ namespace MediaStore
                 MessageBox.Show("Some fields are not correctly formated. Newlines or ';' are not allowed.", "Unsupported format", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void SelectListViewItem()
         {
             if (StockListView1.SelectedItems.Count == 0)
@@ -659,7 +659,7 @@ namespace MediaStore
             Stock stock;
 
             StockListView1.Items.Clear();
-            
+
             if (StockSearchTextBox.TextLength == 0)
             {
                 stock = MyStock;

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 namespace MediaStore
 {
     public class WildSearch : ISearch
     {
+        #region Methods
+
         public Stock Search(Stock stock, string searchString)
         {
             Stock MatchedStock;
@@ -35,5 +33,7 @@ namespace MediaStore
             return MatchedStock;
 
         }
+
+        #endregion Methods
     }
 }

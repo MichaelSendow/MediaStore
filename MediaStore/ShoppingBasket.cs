@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
 
 namespace MediaStore
 {
@@ -37,12 +34,12 @@ namespace MediaStore
             }
             else
             {
-                
+
                 Products.Add(product.ProductCode, new Product(product));
                 Products[product.ProductCode].Quantity = qty;
             }
         }
-               
+
         public void ClearBasket()
         {
             Products.Clear();

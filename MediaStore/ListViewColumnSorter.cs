@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
-using System.Windows.Forms;
+﻿using System.Collections;
 using System.Globalization;
+using System.Windows.Forms;
 
 /// How to sort a ListView control by a column in Visual C#
 /// https://support.microsoft.com/en-us/help/319401/how-to-sort-a-listview-control-by-a-column-in-visual-c
@@ -19,15 +14,12 @@ namespace MediaStore
     /// </summary>
     public class ListViewColumnSorter : IComparer
     {
+        #region Fields
+
         /// <summary>
         /// Specifies the column to be sorted
         /// </summary>
         private int ColumnToSort;
-
-        /// <summary>
-        /// Specifies the order in which to sort (i.e. 'Ascending').
-        /// </summary>
-        private SortOrder OrderOfSort;
 
         /// <summary>
         /// Case insensitive comparer object
@@ -35,66 +27,26 @@ namespace MediaStore
         private CaseInsensitiveComparer ObjectCompare;
 
         /// <summary>
-        /// Specifies if sorting should be text or numerical.
+        /// Specifies the order in which to sort (i.e. 'Ascending').
         /// </summary>
-        public bool TextSort { get; set; }
+        private SortOrder OrderOfSort;
+
+        #endregion Fields
+
+        #region Properties
 
         /// <summary>
-        /// Class constructor. Initializes various elements
+        /// Gets or sets the order of sorting to apply (for example, 'Ascending' or 'Descending').
         /// </summary>
-        public ListViewColumnSorter()
+        public SortOrder Order
         {
-            // Initialize the column to '0'
-            ColumnToSort = 0;
-
-            // Initialize the sort order to 'none'
-            OrderOfSort = SortOrder.None;
-
-            // Initialize the CaseInsensitiveComparer object
-            ObjectCompare = new CaseInsensitiveComparer();
-            TextSort = true;
-        }
-
-        /// <summary>
-        /// This method is inherited from the IComparer interface.  It compares the two objects passed using a case insensitive comparison.
-        /// </summary>
-        /// <param name="x">First object to be compared</param>
-        /// <param name="y">Second object to be compared</param>
-        /// <returns>The result of the comparison. "0" if equal, negative if 'x' is less than 'y' and positive if 'x' is greater than 'y'</returns>
-        public int Compare(object x, object y)
-        {
-            int compareResult;
-            ListViewItem listviewX, listviewY;
-
-            // Cast the objects to be compared to ListViewItem objects
-            listviewX = (ListViewItem)x;
-            listviewY = (ListViewItem)y;
-
-            // Compare the two items
-
-            //Hardcoded to sort certain columns as text and some as numerical
-            
-                if (TextSort)
-                    compareResult = ObjectCompare.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
-                else
-                    compareResult = ObjectCompare.Compare(float.Parse(listviewX.SubItems[ColumnToSort].Text, CultureInfo.CurrentCulture), float.Parse(listviewY.SubItems[ColumnToSort].Text, CultureInfo.CurrentCulture));
-            
-
-            // Calculate correct return value based on object comparison
-            if (OrderOfSort == SortOrder.Ascending)
+            set
             {
-                // Ascending sort is selected, return normal result of compare operation
-                return compareResult;
+                OrderOfSort = value;
             }
-            else if (OrderOfSort == SortOrder.Descending)
+            get
             {
-                // Descending sort is selected, return negative result of compare operation
-                return (-compareResult);
-            }
-            else
-            {
-                // Return '0' to indicate they are equal
-                return 0;
+                return OrderOfSort;
             }
         }
 
@@ -114,19 +66,77 @@ namespace MediaStore
         }
 
         /// <summary>
-        /// Gets or sets the order of sorting to apply (for example, 'Ascending' or 'Descending').
+        /// Specifies if sorting should be text or numerical.
         /// </summary>
-        public SortOrder Order
+        public bool TextSort { get; set; }
+
+        #endregion Properties
+
+        #region Constructors
+
+        /// <summary>
+        /// Class constructor. Initializes various elements
+        /// </summary>
+        public ListViewColumnSorter()
         {
-            set
+            // Initialize the column to '0'
+            ColumnToSort = 0;
+
+            // Initialize the sort order to 'none'
+            OrderOfSort = SortOrder.None;
+
+            // Initialize the CaseInsensitiveComparer object
+            ObjectCompare = new CaseInsensitiveComparer();
+            TextSort = true;
+        }
+
+        #endregion Constructors
+
+        #region Methods
+
+        /// <summary>
+        /// This method is inherited from the IComparer interface.  It compares the two objects passed using a case insensitive comparison.
+        /// </summary>
+        /// <param name="x">First object to be compared</param>
+        /// <param name="y">Second object to be compared</param>
+        /// <returns>The result of the comparison. "0" if equal, negative if 'x' is less than 'y' and positive if 'x' is greater than 'y'</returns>
+        public int Compare(object x, object y)
+        {
+            int compareResult;
+            ListViewItem listviewX, listviewY;
+
+            // Cast the objects to be compared to ListViewItem objects
+            listviewX = (ListViewItem)x;
+            listviewY = (ListViewItem)y;
+
+            // Compare the two items
+
+            //Hardcoded to sort certain columns as text and some as numerical
+
+            if (TextSort)
+                compareResult = ObjectCompare.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
+            else
+                compareResult = ObjectCompare.Compare(float.Parse(listviewX.SubItems[ColumnToSort].Text, CultureInfo.CurrentCulture), float.Parse(listviewY.SubItems[ColumnToSort].Text, CultureInfo.CurrentCulture));
+
+
+            // Calculate correct return value based on object comparison
+            if (OrderOfSort == SortOrder.Ascending)
             {
-                OrderOfSort = value;
+                // Ascending sort is selected, return normal result of compare operation
+                return compareResult;
             }
-            get
+            else if (OrderOfSort == SortOrder.Descending)
             {
-                return OrderOfSort;
+                // Descending sort is selected, return negative result of compare operation
+                return (-compareResult);
+            }
+            else
+            {
+                // Return '0' to indicate they are equal
+                return 0;
             }
         }
 
+        #endregion Methods
     }
 }

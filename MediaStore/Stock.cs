@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Globalization;
-using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace MediaStore
 {
@@ -33,7 +29,7 @@ namespace MediaStore
 
         public Stock(Stock stock)
         {
-            if (stock !=null)
+            if (stock != null)
             {
                 Products = new Dictionary<uint, Product>(stock.Products);
             }
@@ -41,7 +37,7 @@ namespace MediaStore
             {
                 Products = new Dictionary<uint, Product>();
             }
-            
+
         }
 
         public Stock(string filePathName)
