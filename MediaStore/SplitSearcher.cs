@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace MediaStore
@@ -21,76 +23,270 @@ namespace MediaStore
             {
                 MatchedStock = new Stock();
 
-                var splits = searchString.Split(';');
+                var subSearchStrings = searchString.Split(';');
 
-                foreach (var split in splits)
+                if (subSearchStrings.Length % 2 == 0)
                 {
-                    switch ((ProductField)Enum.Parse(typeof(ProductField), split, true))
+                    //(ProductField)Enum.Parse(typeof(ProductField), split, true)
+
+                    string[] productFields = new string[subSearchStrings.Length / 2];
+                    string[] searchTerms = new string[subSearchStrings.Length / 2];
+
+                    for (int i = 0, a = 0; i < subSearchStrings.Length; i += 2, a++)
                     {
-                        case ProductField.ProductCode:
-                            foreach (KeyValuePair<uint, Product> productValuePair in stock.Products)
+                        productFields[a] = subSearchStrings[i];
+                        searchTerms[a] = subSearchStrings[i + 1];
+                    }
+
+                    bool isProductFields = true;
+                    List<ProductField> listOfFields = new List<ProductField>();
+                    foreach (var item in productFields)
+                    {
+                        isProductFields = isProductFields && Enum.TryParse<ProductField>(item, true, out _);
+                        if (isProductFields)
+                            listOfFields.Add((ProductField)Enum.Parse(typeof(ProductField), item, true));
+                    }
+
+                    if (isProductFields)
+                    {
+
+
+
+
+
+                        foreach (var item in stock.Products.Values)
+                        {
+                            bool totalMatch = true;
+
+                            for (int i = 0; i < productFields.Length; i++)
                             {
-                                if (productValuePair.Value.ToString().Replace(";", "").ToLower(CultureInfo.CurrentCulture).Contains(searchString.ToLower(CultureInfo.CurrentCulture)))
+                                switch ((ProductField)Enum.Parse(typeof(ProductField), productFields[i], true))
                                 {
-                                    if (MatchedStock.Products.ContainsKey(productValuePair.Key) == false)
-                                    {
-                                        MatchedStock.Products.Add(productValuePair);
-                                    }
+                                    case ProductField.ProductCode:
+                                        if (uint.TryParse(searchTerms[i], out uint productCode))
+                                        {
+                                            if (item.ProductCode != productCode)
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            totalMatch = false;
+                                        }
+                                        break;
+                                    case ProductField.Title:
+                                        if (item.Title.ToLower(CultureInfo.CurrentCulture).Contains(searchTerms[i].ToLower(CultureInfo.CurrentCulture)) == false)
+                                        {
+                                            totalMatch = false;
+                                        }
+                                        break;
+                                    case ProductField.Type:
+                                        if (Enum.TryParse<Product.ProductType>(searchTerms[i], true, out Product.ProductType type))
+                                        {
+                                            if (item.Type != type)
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            totalMatch = false;
+                                        }
+                                        break;
+                                    case ProductField.Price:
+                                        if (searchTerms[i].StartsWith("<"))
+                                        {
+                                            if (decimal.TryParse(searchTerms[i].Substring(1), out decimal price))
+                                            {
+                                                if (item.Price > price)
+                                                {
+                                                    totalMatch = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        else if (searchTerms[i].StartsWith(">"))
+                                        {
+                                            if (decimal.TryParse(searchTerms[i].Substring(1), out decimal price))
+                                            {
+                                                if (item.Price < price)
+                                                {
+                                                    totalMatch = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (decimal.TryParse(searchTerms[i], out decimal price))
+                                            {
+                                                if (item.Price != price)
+                                                {
+                                                    totalMatch = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        break;
+                                    case ProductField.Quantity:
+                                        if (searchTerms[i].StartsWith("<"))
+                                        {
+                                            if (uint.TryParse(searchTerms[i].Substring(1), out uint Quantity))
+                                            {
+                                                if (item.Quantity > Quantity)
+                                                {
+                                                    totalMatch = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        else if (searchTerms[i].StartsWith(">"))
+                                        {
+                                            if (uint.TryParse(searchTerms[i].Substring(1), out uint Quantity))
+                                            {
+                                                if (item.Quantity < Quantity)
+                                                {
+                                                    totalMatch = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (uint.TryParse(searchTerms[i], out uint Quantity))
+                                            {
+                                                if (item.Quantity != Quantity)
+                                                {
+                                                    totalMatch = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        break;
+                                    case ProductField.ReleaseYear:
+                                        if (searchTerms[i].StartsWith("<"))
+                                        {
+                                            if (uint.TryParse(searchTerms[i].Substring(1), out uint ReleaseYear))
+                                            {
+                                                if (item.ReleaseYear > ReleaseYear)
+                                                {
+                                                    totalMatch = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        else if (searchTerms[i].StartsWith(">"))
+                                        {
+                                            if (uint.TryParse(searchTerms[i].Substring(1), out uint ReleaseYear))
+                                            {
+                                                if (item.ReleaseYear < ReleaseYear)
+                                                {
+                                                    totalMatch = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (uint.TryParse(searchTerms[i], out uint ReleaseYear))
+                                            {
+                                                if (item.ReleaseYear != ReleaseYear)
+                                                {
+                                                    totalMatch = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        break;
+                                    case ProductField.Creator:
+                                        if (item.Creator.ToLower(CultureInfo.CurrentCulture).Contains(searchTerms[i].ToLower(CultureInfo.CurrentCulture)) == false)
+                                        {
+                                            totalMatch = false;
+                                        }
+                                        break;
+                                    case ProductField.Publisher:
+                                        if (item.Publisher.ToLower(CultureInfo.CurrentCulture).Contains(searchTerms[i].ToLower(CultureInfo.CurrentCulture)) == false)
+                                        {
+                                            totalMatch = false;
+                                        }
+                                        break;
+                                    case ProductField.FreeText:
+                                        if (item.FreeText.ToLower(CultureInfo.CurrentCulture).Contains(searchTerms[i].ToLower(CultureInfo.CurrentCulture)) == false)
+                                        {
+                                            totalMatch = false;
+                                        }
+                                        break;
+                                    case ProductField.Status:
+                                        if (Enum.TryParse<Product.ProductStatus>(searchTerms[i], true, out Product.ProductStatus status))
+                                        {
+                                            if (item.Status != status)
+                                            {
+                                                totalMatch = false;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            totalMatch = false;
+                                        }
+                                        break;
+                                    default:
+                                        totalMatch = false;
+                                        break;
                                 }
                             }
-
-
-                            break;
-                        case ProductField.Title:
-                            break;
-                        case ProductField.Type:
-                            break;
-                        case ProductField.Price:
-                            break;
-                        case ProductField.Quantity:
-                            break;
-                        case ProductField.ReleaseYear:
-                            break;
-                        case ProductField.Creator:
-                            break;
-                        case ProductField.Publisher:
-                            break;
-                        case ProductField.FreeText:
-                            break;
-                        case ProductField.Status:
-                            break;
-                        default:
-                            break;
-                    }
-                }
-
-                foreach (KeyValuePair<uint, Product> productValuePair in stock.Products)
-                {
-                    if (productValuePair.Value.ToString().Replace(";", "").ToLower(CultureInfo.CurrentCulture).Contains(searchString.ToLower(CultureInfo.CurrentCulture)))
-                    {
-                        if (MatchedStock.Products.ContainsKey(productValuePair.Key) == false)
-                        {
-                            MatchedStock.Products.Add(productValuePair);
+                            if (totalMatch)
+                            {
+                                if (MatchedStock.Products.ContainsKey(item.ProductCode) == false)
+                                {
+                                    MatchedStock.Products.Add(item.ProductCode, new Product(item));
+                                }
+                            }
                         }
                     }
                 }
             }
-
             return MatchedStock;
-
         }
 
         enum ProductField
         {
-            ProductCode, 
-            Title, 
-            Type, 
-            Price, 
-            Quantity, 
-            ReleaseYear, 
-            Creator, 
-            Publisher, 
-            FreeText, 
+            ProductCode,
+            Title,
+            Type,
+            Price,
+            Quantity,
+            ReleaseYear,
+            Creator,
+            Publisher,
+            FreeText,
             Status
         }
     }

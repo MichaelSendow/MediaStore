@@ -8,6 +8,6 @@ namespace MediaStore
 {
     public interface ISearch
     {
-        Stock Search(Stock stock, string searchString);
+       Stock Search(Stock stock, string searchString);
     }
 }
