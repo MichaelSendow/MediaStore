@@ -20,6 +20,7 @@ namespace MediaStore
         private readonly List<string> ReceiptList;
         private Sales MySales;
         private Stock MyStock;
+        private ReceiptsDialog receiptDialog;
 
         #endregion Fields
 
@@ -77,6 +78,8 @@ namespace MediaStore
 
             UpdateStockListView();
             UpdateCashierStockListView();
+
+
         }
 
         #endregion Constructors
@@ -245,6 +248,7 @@ namespace MediaStore
             }
 
             SaveFiles();
+
         }
 
         //Printing Text File in C#
@@ -323,14 +327,14 @@ namespace MediaStore
                 //Add new receipt
                 foreach (var product in MyShoppingBasket.Products.Values)
                 {
-                    MySales.AddReceipt(new Receipt(receiptNumber, product.ProductCode, DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.CurrentCulture), product.Quantity));
+                    MySales.AddReceipt(new Receipt(receiptNumber, product.ProductCode, DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.CurrentCulture), product.Quantity, product.Price));
                 }
 
                 ShoppingBasketListView1.Items.Clear();
                 MyShoppingBasket.ClearBasket();
                 TotalSum_Numbers.Text = "0";
             }
-
+            MessageBox.Show("Sale completed", "Sold", MessageBoxButtons.OK, MessageBoxIcon.Information);
             SaveFiles();
         }
 
@@ -371,8 +375,13 @@ namespace MediaStore
 
         private void ShowReceiptsButton_Click(object sender, EventArgs e)
         {
-            //Dirty way of showing the receipts.
-            System.Diagnostics.Process.Start($"{salesFileName}");
+            if (receiptDialog != null)
+            {
+                receiptDialog.Dispose();
+            }
+
+            receiptDialog = new ReceiptsDialog(MyStock, MySales);
+            receiptDialog.Show();
         }
 
         /// How to sort a ListView control by a column in Visual C#

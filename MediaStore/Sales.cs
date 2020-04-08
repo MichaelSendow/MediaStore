@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace MediaStore
 {
-    internal class Sales
+    public class Sales
     {
         #region Properties
 

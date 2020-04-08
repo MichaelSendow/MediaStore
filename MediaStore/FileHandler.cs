@@ -31,11 +31,13 @@ namespace MediaStore
                             var fields = receiptstring.Split(';');
                             Receipt receipt = new Receipt
                             {
-                                //ProductCode;Quantity;DateOfSale;ReceiptNumber
+                                //ProductCode;Quantity;DateOfSale;ReceiptNumber;Price
                                 ProductCode = uint.Parse(fields[0], CultureInfo.CurrentCulture),
                                 Quantity = uint.Parse(fields[1], CultureInfo.CurrentCulture),
                                 DateOfSale = fields[2],
-                                ReceiptNumber = uint.Parse(fields[3], CultureInfo.CurrentCulture)
+                                ReceiptNumber = uint.Parse(fields[3], CultureInfo.CurrentCulture),
+                                Price = decimal.Parse(fields[4],CultureInfo.CurrentCulture)
+
                             };
                             receiptList.Add(receipt);
                         }
@@ -105,7 +107,7 @@ namespace MediaStore
                 using (StreamWriter streamWriter = new StreamWriter(filePathName, append: false))
                 {
                     //Write header
-                    streamWriter.WriteLine("ProductCode;Quantity;DateOfSale;ReceiptNumber");
+                    streamWriter.WriteLine("ProductCode;Quantity;DateOfSale;ReceiptNumber;Price");
                     foreach (var receiptList in sales.Ledger.Values)
                     {
                         foreach (var receipt in receiptList)

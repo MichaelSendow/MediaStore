@@ -16,8 +16,10 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
+                receiptDialog.Dispose();
             }
             base.Dispose(disposing);
+            
         }
 
         #region Windows Form Designer generated code

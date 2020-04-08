@@ -2,7 +2,7 @@
 
 namespace MediaStore
 {
-    internal class Receipt
+    public class Receipt
     {
         #region Properties
 
@@ -25,25 +25,32 @@ namespace MediaStore
         /// </summary>
         public uint ReceiptNumber { get; set; }
 
+        public decimal Price { get; set; }
+
         #endregion Properties
 
 
         #region Constructors
 
-        public Receipt(uint receiptNumber, uint productCode, string dateOfSale, uint quantity)
+        public Receipt(uint receiptNumber, uint productCode, string dateOfSale, uint quantity, decimal price)
         {
             ReceiptNumber = receiptNumber;
             ProductCode = productCode;
             DateOfSale = dateOfSale;
             Quantity = quantity;
+            Price = price;
         }
 
         public Receipt(Receipt receipt)
         {
-            ReceiptNumber = receipt.ReceiptNumber;
-            ProductCode = receipt.ProductCode;
-            DateOfSale = receipt.DateOfSale;
-            Quantity = receipt.Quantity;
+            if (receipt != null)
+            {
+                ReceiptNumber = receipt.ReceiptNumber;
+                ProductCode = receipt.ProductCode;
+                DateOfSale = receipt.DateOfSale;
+                Quantity = receipt.Quantity;
+                Price = receipt.Price;
+            }
         }
 
         public Receipt()
@@ -61,7 +68,8 @@ namespace MediaStore
             receiptAsString = ProductCode.ToString(CultureInfo.CurrentCulture) + ';';
             receiptAsString += Quantity.ToString(CultureInfo.CurrentCulture) + ';';
             receiptAsString += DateOfSale + ';';
-            receiptAsString += ReceiptNumber.ToString(CultureInfo.CurrentCulture);
+            receiptAsString += ReceiptNumber.ToString(CultureInfo.CurrentCulture) +';';
+            receiptAsString += Price.ToString(CultureInfo.CurrentCulture);
 
             return receiptAsString;
         }

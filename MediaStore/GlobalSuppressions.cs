@@ -16,3 +16,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:MediaStore.WildSearch.Search(MediaStore.Stock,System.String)~MediaStore.Stock")]
 [assembly: SuppressMessage("Design", "CA1062:Validate arguments of public methods", Justification = "<Pending>", Scope = "member", Target = "~M:MediaStore.SplitSearcher.Search(MediaStore.Stock,System.String)~MediaStore.Stock")]
 [assembly: SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "<Pending>", Scope = "member", Target = "~M:MediaStore.SplitSearcher.Search(MediaStore.Stock,System.String)~MediaStore.Stock")]
+[assembly: SuppressMessage("Usage", "CA2227:Collection properties should be read only", Justification = "<Pending>", Scope = "member", Target = "~P:MediaStore.Sales.Ledger")]
