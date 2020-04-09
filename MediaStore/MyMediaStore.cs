@@ -34,6 +34,7 @@ namespace MediaStore
             CashierListView1.ListViewItemSorter = lvwColumnSorter;
             ShoppingBasketListView1.ListViewItemSorter = lvwColumnSorter;
             StockListView1.ListViewItemSorter = lvwColumnSorter;
+            StatListView_Sales.ListViewItemSorter = lvwColumnSorter;
             MyShoppingBasket = new ShoppingBasket();
             ReceiptList = new List<string>();
 
@@ -76,9 +77,7 @@ namespace MediaStore
                 return;
             }
 
-            UpdateStockListView();
-            UpdateCashierStockListView();
-
+            UpdateListViews();
 
         }
 
@@ -420,6 +419,15 @@ namespace MediaStore
             ((ListView)sender).Sort();
         }
 
+        private void StatCheckBox_ShowAll_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdateStatListView();
+        }
+        private void StatTextBox_Search_TextChanged(object sender, EventArgs e)
+        {
+            UpdateStatListView();
+        }
+
         private void StockListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectListViewItem();
@@ -628,14 +636,7 @@ namespace MediaStore
                 }
                 else
                 {
-                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
-                    {
-                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
-                    }
-                    else
-                    {
-                        CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem(new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)))));
-                    }
+                    CashierListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
                 }
             }
         }
@@ -645,6 +646,7 @@ namespace MediaStore
             UpdateShoppingBasketListView();
             UpdateStockListView();
             UpdateCashierStockListView();
+            UpdateStatListView();
         }
 
         private void UpdateShoppingBasketListView()
@@ -654,13 +656,52 @@ namespace MediaStore
 
             foreach (KeyValuePair<uint, Product> productValuePair in MyShoppingBasket.Products)
             {
-                ListViewItem listViewItem = productValuePair.Value.ShoppingBasketGetProductListViewItem();
-                ShoppingBasketListView1.Items.Add(listViewItem);
+                ShoppingBasketListView1.Items.Add(productValuePair.Value.ShoppingBasketGetProductListViewItem());
                 totalSum += (productValuePair.Value.Quantity * productValuePair.Value.Price);
             }
 
             ShoppingBasketTextBox_TotalSum.ForeColor = Color.Black;
             ShoppingBasketTextBox_TotalSum.Text = Math.Round(totalSum, 2).ToString(CultureInfo.CurrentCulture);
+        }
+
+        private void UpdateStatListView()
+        {
+
+            Stock stock;
+
+            StatListView_Sales.Items.Clear();
+
+            if (StatTextBox_Search.TextLength == 0)
+            {
+                stock = MyStock;
+            }
+            else if (StatTextBox_Search.Text.Contains(';'))
+            {
+                SplitSearcher splitSearcher = new SplitSearcher();
+                stock = splitSearcher.Search(MyStock, StatTextBox_Search.Text);
+            }
+            else
+            {
+                WildSearch wildSearcher = new WildSearch();
+
+                stock = wildSearcher.Search(MyStock, StatTextBox_Search.Text);
+            }
+
+            foreach (KeyValuePair<uint, Product> productValuePair in stock.Products)
+            {
+                if (StatCheckBox_ShowAll.CheckState == CheckState.Unchecked)
+                {
+                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
+                    {
+                        StatListView_Sales.Items.Add(productValuePair.Value.StatisticsGetProductListViewItem());
+                    }
+                }
+                else
+                {
+                    StatListView_Sales.Items.Add(productValuePair.Value.StatisticsGetProductListViewItem());
+                }
+            }
+
         }
 
         private void UpdateStockListView()
@@ -696,14 +737,7 @@ namespace MediaStore
                 }
                 else
                 {
-                    if (productValuePair.Value.Status == Product.ProductStatus.Active)
-                    {
-                        StockListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
-                    }
-                    else
-                    {
-                        StockListView1.Items.Add(productValuePair.Value.GetProductListViewItem(new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)))));
-                    }
+                    StockListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
                 }
 
             }
@@ -731,8 +765,10 @@ namespace MediaStore
             }
         }
 
+
+
         #endregion Methods
 
-
+        
     }
 }

@@ -7,6 +7,8 @@ namespace MediaStore
 {
     public class Product
     {
+        static Font defaultFont;
+        static Font inactiveFont;
 
         #region Properties
 
@@ -102,6 +104,8 @@ namespace MediaStore
             ReleaseYear = releaseYear;
             FreeText = freeText;
             Status = status;
+            defaultFont = new Font("Verdana", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            inactiveFont = new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)));
         }
 
         public Product(Product prod)
@@ -118,12 +122,15 @@ namespace MediaStore
                 ReleaseYear = prod.ReleaseYear;
                 FreeText = prod.FreeText;
                 Status = prod.Status;
+                defaultFont = new Font("Verdana", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+                inactiveFont = new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)));
             }
         }
 
         public Product()
         {
-
+            defaultFont = new Font("Verdana", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+            inactiveFont = new Font("Verdana", 8F, FontStyle.Strikeout, GraphicsUnit.Point, ((byte)(0)));
         }
 
         #endregion Constructors
@@ -131,24 +138,43 @@ namespace MediaStore
 
         #region Methods
 
-        public ListViewItem GetProductListViewItem(Font font = null)
+        public ListViewItem GetProductListViewItem()
         {
             ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
             listViewItem.SubItems.Add(Title);
             listViewItem.SubItems.Add(Type.ToString());
             listViewItem.SubItems.Add(Price.ToString("0.00", CultureInfo.CurrentCulture));
             listViewItem.SubItems.Add(Quantity.ToString(CultureInfo.CurrentCulture));
-            if (font == null)
+            if (Status == ProductStatus.Active)
             {
-                listViewItem.Font = new Font("Verdana", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+                listViewItem.Font = defaultFont;
             }
             else
             {
-                listViewItem.Font = font;
+                listViewItem.Font = inactiveFont;
             }
 
             return listViewItem;
         }
+
+        public ListViewItem StatisticsGetProductListViewItem()
+        {
+            ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
+            listViewItem.SubItems.Add(Title);
+
+            if (Status == ProductStatus.Active)
+            {
+                listViewItem.Font = defaultFont;
+            }
+            else
+            {
+                listViewItem.Font = inactiveFont;
+            }
+
+
+            return listViewItem;
+        }
+
 
         public string ReceiptString()
         {
@@ -174,20 +200,20 @@ namespace MediaStore
             return receiptString;
         }
 
-        public ListViewItem ShoppingBasketGetProductListViewItem(Font font = null)
+        public ListViewItem ShoppingBasketGetProductListViewItem()
         {
             ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
             listViewItem.SubItems.Add(Title);
             listViewItem.SubItems.Add(Price.ToString("0.00", CultureInfo.CurrentCulture));
             listViewItem.SubItems.Add(Quantity.ToString(CultureInfo.CurrentCulture));
             listViewItem.SubItems.Add((Price * Quantity).ToString(CultureInfo.CurrentCulture));
-            if (font == null)
+            if (Status == ProductStatus.Active)
             {
-                listViewItem.Font = new Font("Verdana", 8F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
+                listViewItem.Font = defaultFont;
             }
             else
             {
-                listViewItem.Font = font;
+                listViewItem.Font = inactiveFont;
             }
 
             return listViewItem;
