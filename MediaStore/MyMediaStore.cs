@@ -112,14 +112,14 @@ namespace MediaStore
         private void CashierReturnItemsButton_Click(object sender, EventArgs e)
         {
             //All fields has text
-            if (ReturnReceiptTextBox.TextLength != 0 && ReturnProductTextBox.TextLength != 0 && ReturnQtyTextBox.TextLength != 0)
+            if (CashierTextBox_ReturnReceipt.TextLength != 0 && CashierTextBox_ReturnProduct.TextLength != 0 && CashierTextBox_ReturnQuantity.TextLength != 0)
             {
                 //All fields are validnumbers
-                if (ValidateUINT(ReturnReceiptTextBox.Text) && ValidateUINT(ReturnProductTextBox.Text) && ValidateUINT(ReturnQtyTextBox.Text))
+                if (ValidateUINT(CashierTextBox_ReturnReceipt.Text) && ValidateUINT(CashierTextBox_ReturnProduct.Text) && ValidateUINT(CashierTextBox_ReturnQuantity.Text))
                 {
-                    uint receiptNumber = uint.Parse(ReturnReceiptTextBox.Text, CultureInfo.CurrentCulture);
-                    uint productCode = uint.Parse(ReturnProductTextBox.Text, CultureInfo.CurrentCulture);
-                    uint quantityToReturn = uint.Parse(ReturnQtyTextBox.Text, CultureInfo.CurrentCulture);
+                    uint receiptNumber = uint.Parse(CashierTextBox_ReturnReceipt.Text, CultureInfo.CurrentCulture);
+                    uint productCode = uint.Parse(CashierTextBox_ReturnProduct.Text, CultureInfo.CurrentCulture);
+                    uint quantityToReturn = uint.Parse(CashierTextBox_ReturnQuantity.Text, CultureInfo.CurrentCulture);
 
                     if (quantityToReturn <= 0)
                     {
@@ -131,9 +131,9 @@ namespace MediaStore
                     {
                         MyStock.AddQuantity(productCode, quantityToReturn);
                         UpdateStockListView();
-                        ReturnReceiptTextBox.Text = "";
-                        ReturnProductTextBox.Text = "";
-                        ReturnQtyTextBox.Text = "";
+                        CashierTextBox_ReturnReceipt.Text = "";
+                        CashierTextBox_ReturnProduct.Text = "";
+                        CashierTextBox_ReturnQuantity.Text = "";
                     }
                 }
                 else
@@ -181,15 +181,15 @@ namespace MediaStore
 
         private void IsActiveCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (uint.TryParse(QuantityTextBox.Text, out uint _))
+            if (uint.TryParse(StockTextBox_Quantity.Text, out uint _))
             {
-                if (uint.Parse(QuantityTextBox.Text, CultureInfo.CurrentCulture) == 0)
+                if (uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture) == 0)
                 {
                     SaveUpdatedProductFromStockTab();
                     UpdateListViews();
                     SaveFiles();
                 }
-                else if (IsActiveCheckBox.Checked == false && uint.Parse(QuantityTextBox.Text, CultureInfo.CurrentCulture) > 0)
+                else if (StockCheckBox_Active.Checked == false && uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture) > 0)
                 {
                     DialogResult dlgr = MessageBox.Show($"The product still has quantity in stock.\r\nAre you sure the product should be inactive?", "Quantity is not zero", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
                     if (dlgr == DialogResult.Yes)
@@ -200,9 +200,9 @@ namespace MediaStore
                     }
                     else
                     {
-                        this.IsActiveCheckBox.CheckedChanged -= new EventHandler(this.IsActiveCheckBox_CheckedChanged);
-                        IsActiveCheckBox.Checked = true;
-                        this.IsActiveCheckBox.CheckedChanged += new EventHandler(this.IsActiveCheckBox_CheckedChanged);
+                        this.StockCheckBox_Active.CheckedChanged -= new EventHandler(this.IsActiveCheckBox_CheckedChanged);
+                        StockCheckBox_Active.Checked = true;
+                        this.StockCheckBox_Active.CheckedChanged += new EventHandler(this.IsActiveCheckBox_CheckedChanged);
                     }
                 }
                 else
@@ -304,7 +304,7 @@ namespace MediaStore
                 uint receiptNumber = MySales.GetNextReceiptNumber();
 
                 //Prints to default printer.
-                if (CashierPrintReceiptsCheckBox.CheckState == CheckState.Checked)
+                if (CashierCheckBox_PrintReceipts.CheckState == CheckState.Checked)
                 {
                     ReceiptList.Clear();
                     ReceiptList.Add($"Receipt {DateTime.Now.ToString("yyyy-MM-dd HH:mm", CultureInfo.CurrentCulture)}");
@@ -318,7 +318,7 @@ namespace MediaStore
                         ReceiptList.Add(item.ProductCode.ToString(CultureInfo.CurrentCulture).PadRight(11) + item.ReceiptString());
                     }
                     ReceiptList.Add("".PadRight(81, '-'));
-                    ReceiptList.Add("Total sum: " + TotalSum_Numbers.Text.PadLeft(70));
+                    ReceiptList.Add("Total sum: " + ShoppingBasketTextBox_TotalSum.Text.PadLeft(70));
 
                     printPreviewDialog1.Document = printDocument1;
                     printPreviewDialog1.ShowDialog();
@@ -332,7 +332,7 @@ namespace MediaStore
 
                 ShoppingBasketListView1.Items.Clear();
                 MyShoppingBasket.ClearBasket();
-                TotalSum_Numbers.Text = "0";
+                ShoppingBasketTextBox_TotalSum.Text = "0";
             }
             MessageBox.Show("Sale completed", "Sold", MessageBoxButtons.OK, MessageBoxIcon.Information);
             SaveFiles();
@@ -479,29 +479,29 @@ namespace MediaStore
         {
             if (ValidateFieldsInStockTab())
             {
-                uint productCode = uint.Parse(ProductCodeTextBox.Text, CultureInfo.CurrentCulture);
+                uint productCode = uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture);
                 Product updatedProduct = MyStock.GetProduct(productCode);
 
-                if (IsActiveCheckBox.Checked == true)
+                if (StockCheckBox_Active.Checked == true)
                 {
-                    updatedProduct.UpdateProduct(TitleTextBox.Text,
-                    (Product.ProductType)Enum.Parse(typeof(Product.ProductType), TypeListBox.Text, true),
-                    decimal.Parse(PriceTextBox.Text, CultureInfo.CurrentCulture),
-                    uint.Parse(QuantityTextBox.Text, CultureInfo.CurrentCulture),
-                    CreatorTextBox.Text, FreeTextBox.Text,
-                    PublisherTextBox.Text,
-                    uint.Parse(ReleaseYearTextBox.Text, CultureInfo.CurrentCulture),
+                    updatedProduct.UpdateProduct(StockTextBox_Title.Text,
+                    (Product.ProductType)Enum.Parse(typeof(Product.ProductType), StockListBox_Type.Text, true),
+                    decimal.Parse(StockTextBox_Price.Text, CultureInfo.CurrentCulture),
+                    uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture),
+                    StockTextBox_Creator.Text, StockTextBox_FreeText.Text,
+                    StockTextBox_Publisher.Text,
+                    uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
                     Product.ProductStatus.Active);
                 }
                 else
                 {
-                    updatedProduct.UpdateProduct(TitleTextBox.Text,
-                    (Product.ProductType)Enum.Parse(typeof(Product.ProductType), TypeListBox.Text, true),
-                    decimal.Parse(PriceTextBox.Text, CultureInfo.CurrentCulture),
-                    uint.Parse(QuantityTextBox.Text, CultureInfo.CurrentCulture),
-                    CreatorTextBox.Text, FreeTextBox.Text,
-                    PublisherTextBox.Text,
-                    uint.Parse(ReleaseYearTextBox.Text, CultureInfo.CurrentCulture),
+                    updatedProduct.UpdateProduct(StockTextBox_Title.Text,
+                    (Product.ProductType)Enum.Parse(typeof(Product.ProductType), StockListBox_Type.Text, true),
+                    decimal.Parse(StockTextBox_Price.Text, CultureInfo.CurrentCulture),
+                    uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture),
+                    StockTextBox_Creator.Text, StockTextBox_FreeText.Text,
+                    StockTextBox_Publisher.Text,
+                    uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
                     Product.ProductStatus.InActive);
                 }
 
@@ -518,7 +518,7 @@ namespace MediaStore
             {
                 return;
             }
-            else if (ProductCodeTextBox.TextLength != 0)
+            else if (StockTextBox_ProductCode.TextLength != 0)
             {
                 if (UnsavedChanges())
                 {
@@ -542,42 +542,42 @@ namespace MediaStore
 
             Product selectedProduct = MyStock.GetProduct(productCode);
 
-            ProductCodeTextBox.Text = selectedProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
-            TypeListBox.Text = selectedProduct.Type.ToString();
-            PriceTextBox.Text = selectedProduct.Price.ToString(CultureInfo.CurrentCulture);
-            QuantityTextBox.Text = selectedProduct.Quantity.ToString(CultureInfo.CurrentCulture);
-            TitleTextBox.Text = selectedProduct.Title;
-            ReleaseYearTextBox.Text = selectedProduct.ReleaseYear.ToString(CultureInfo.CurrentCulture);
-            CreatorTextBox.Text = selectedProduct.Creator;
-            PublisherTextBox.Text = selectedProduct.Publisher;
-            FreeTextBox.Text = selectedProduct.FreeText;
+            StockTextBox_ProductCode.Text = selectedProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
+            StockListBox_Type.Text = selectedProduct.Type.ToString();
+            StockTextBox_Price.Text = selectedProduct.Price.ToString(CultureInfo.CurrentCulture);
+            StockTextBox_Quantity.Text = selectedProduct.Quantity.ToString(CultureInfo.CurrentCulture);
+            StockTextBox_Title.Text = selectedProduct.Title;
+            StockTextBox_ReleaseYear.Text = selectedProduct.ReleaseYear.ToString(CultureInfo.CurrentCulture);
+            StockTextBox_Creator.Text = selectedProduct.Creator;
+            StockTextBox_Publisher.Text = selectedProduct.Publisher;
+            StockTextBox_FreeText.Text = selectedProduct.FreeText;
             if (selectedProduct.Status != Product.ProductStatus.Active)
             {
-                IsActiveCheckBox.CheckedChanged -= new EventHandler(this.IsActiveCheckBox_CheckedChanged);
-                IsActiveCheckBox.Checked = false;
-                IsActiveCheckBox.CheckedChanged += new EventHandler(this.IsActiveCheckBox_CheckedChanged);
+                StockCheckBox_Active.CheckedChanged -= new EventHandler(this.IsActiveCheckBox_CheckedChanged);
+                StockCheckBox_Active.Checked = false;
+                StockCheckBox_Active.CheckedChanged += new EventHandler(this.IsActiveCheckBox_CheckedChanged);
             }
             else
             {
-                IsActiveCheckBox.Checked = true;
+                StockCheckBox_Active.Checked = true;
             }
         }
 
         private bool UnsavedChanges()
         {
-            if (ProductCodeTextBox.TextLength != 0)
+            if (StockTextBox_ProductCode.TextLength != 0)
             {
-                Product oldProduct = MyStock.GetProduct(uint.Parse(ProductCodeTextBox.Text, CultureInfo.CurrentCulture));
+                Product oldProduct = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
 
                 if (
-                    TypeListBox.Text != oldProduct.Type.ToString() ||
-                    PriceTextBox.Text != oldProduct.Price.ToString(CultureInfo.CurrentCulture) ||
-                    QuantityTextBox.Text != oldProduct.Quantity.ToString(CultureInfo.CurrentCulture) ||
-                    TitleTextBox.Text != oldProduct.Title ||
-                    ReleaseYearTextBox.Text != oldProduct.ReleaseYear.ToString(CultureInfo.CurrentCulture) ||
-                    CreatorTextBox.Text != oldProduct.Creator ||
-                    PublisherTextBox.Text != oldProduct.Publisher ||
-                    FreeTextBox.Text != oldProduct.FreeText
+                    StockListBox_Type.Text != oldProduct.Type.ToString() ||
+                    StockTextBox_Price.Text != oldProduct.Price.ToString(CultureInfo.CurrentCulture) ||
+                    StockTextBox_Quantity.Text != oldProduct.Quantity.ToString(CultureInfo.CurrentCulture) ||
+                    StockTextBox_Title.Text != oldProduct.Title ||
+                    StockTextBox_ReleaseYear.Text != oldProduct.ReleaseYear.ToString(CultureInfo.CurrentCulture) ||
+                    StockTextBox_Creator.Text != oldProduct.Creator ||
+                    StockTextBox_Publisher.Text != oldProduct.Publisher ||
+                    StockTextBox_FreeText.Text != oldProduct.FreeText
                     )
 
                 {
@@ -601,25 +601,25 @@ namespace MediaStore
 
             CashierListView1.Items.Clear();
 
-            if (CashierSearchTextBox.TextLength == 0)
+            if (CashierTextBox_Search.TextLength == 0)
             {
                 stock = MyStock;
             }
-            else if (CashierSearchTextBox.Text.Contains(';'))
+            else if (CashierTextBox_Search.Text.Contains(';'))
             {
                 SplitSearcher splitSearcher = new SplitSearcher();
-                stock = splitSearcher.Search(MyStock, CashierSearchTextBox.Text);
+                stock = splitSearcher.Search(MyStock, CashierTextBox_Search.Text);
             }
             else
             {
                 WildSearch wildSearcher = new WildSearch();
 
-                stock = wildSearcher.Search(MyStock, CashierSearchTextBox.Text);
+                stock = wildSearcher.Search(MyStock, CashierTextBox_Search.Text);
             }
 
             foreach (KeyValuePair<uint, Product> productValuePair in stock.Products)
             {
-                if (CashierShowAllProductsCheckBox.CheckState == CheckState.Unchecked)
+                if (CashierCheckBox_ShowAllProducts.CheckState == CheckState.Unchecked)
                 {
                     if (productValuePair.Value.Status == Product.ProductStatus.Active)
                     {
@@ -659,8 +659,8 @@ namespace MediaStore
                 totalSum += (productValuePair.Value.Quantity * productValuePair.Value.Price);
             }
 
-            TotalSum_Numbers.ForeColor = Color.Black;
-            TotalSum_Numbers.Text = Math.Round(totalSum, 2).ToString(CultureInfo.CurrentCulture);
+            ShoppingBasketTextBox_TotalSum.ForeColor = Color.Black;
+            ShoppingBasketTextBox_TotalSum.Text = Math.Round(totalSum, 2).ToString(CultureInfo.CurrentCulture);
         }
 
         private void UpdateStockListView()
@@ -669,25 +669,25 @@ namespace MediaStore
 
             StockListView1.Items.Clear();
 
-            if (StockSearchTextBox.TextLength == 0)
+            if (StockTextBox_Search.TextLength == 0)
             {
                 stock = MyStock;
             }
-            else if (StockSearchTextBox.Text.Contains(';'))
+            else if (StockTextBox_Search.Text.Contains(';'))
             {
                 SplitSearcher splitSearcher = new SplitSearcher();
-                stock = splitSearcher.Search(MyStock, StockSearchTextBox.Text);
+                stock = splitSearcher.Search(MyStock, StockTextBox_Search.Text);
             }
             else
             {
                 WildSearch wildSearcher = new WildSearch();
 
-                stock = wildSearcher.Search(MyStock, StockSearchTextBox.Text);
+                stock = wildSearcher.Search(MyStock, StockTextBox_Search.Text);
             }
 
             foreach (KeyValuePair<uint, Product> productValuePair in stock.Products)
             {
-                if (StockShowAllProductsCheckBox.CheckState == CheckState.Unchecked)
+                if (StockCheckBox_ShowAllProducts.CheckState == CheckState.Unchecked)
                 {
                     if (productValuePair.Value.Status == Product.ProductStatus.Active)
                     {
@@ -713,14 +713,14 @@ namespace MediaStore
         private bool ValidateFieldsInStockTab()
         {
             if (
-                Product.ProductType.TryParse(TypeListBox.Text, true, out Product.ProductType _) &&
-                decimal.TryParse(PriceTextBox.Text, out decimal _) &&
-                uint.TryParse(QuantityTextBox.Text, out uint _) &&
-                uint.TryParse(ReleaseYearTextBox.Text, out uint _) &&
-                TitleTextBox.Text.Contains(Environment.NewLine) == false && TitleTextBox.Text.Contains(";") == false &&
-                CreatorTextBox.Text.Contains(Environment.NewLine) == false && CreatorTextBox.Text.Contains(";") == false &&
-                PublisherTextBox.Text.Contains(Environment.NewLine) == false && PublisherTextBox.Text.Contains(";") == false &&
-                FreeTextBox.Text.Contains(Environment.NewLine) == false && FreeTextBox.Text.Contains(";") == false
+                Product.ProductType.TryParse(StockListBox_Type.Text, true, out Product.ProductType _) &&
+                decimal.TryParse(StockTextBox_Price.Text, out decimal _) &&
+                uint.TryParse(StockTextBox_Quantity.Text, out uint _) &&
+                uint.TryParse(StockTextBox_ReleaseYear.Text, out uint _) &&
+                StockTextBox_Title.Text.Contains(Environment.NewLine) == false && StockTextBox_Title.Text.Contains(";") == false &&
+                StockTextBox_Creator.Text.Contains(Environment.NewLine) == false && StockTextBox_Creator.Text.Contains(";") == false &&
+                StockTextBox_Publisher.Text.Contains(Environment.NewLine) == false && StockTextBox_Publisher.Text.Contains(";") == false &&
+                StockTextBox_FreeText.Text.Contains(Environment.NewLine) == false && StockTextBox_FreeText.Text.Contains(";") == false
                )
             {
                 return true;
