@@ -1,25 +1,24 @@
-﻿namespace MediaStore
+﻿using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+
+namespace MediaStore
 {
-    internal class Statistics
+    public static class Statistics
     {
-        public void TotalSales()
+        public static List<ListViewItem> Top10(List<Receipt> receipts, Product.ProductType type)
         {
-            throw new System.NotImplementedException();
+            List<ListViewItem> listViewItems = null;
+
+            return listViewItems;
         }
 
-        public void MonthlySales()
+        public static  List<KeyValuePair<uint, decimal>> SaleStat(List<Receipt> receipts, DateTime dateTime)
         {
-            throw new System.NotImplementedException();
+            List<KeyValuePair<uint, decimal>> keyValuePairs = null;
+
+            return keyValuePairs;
         }
 
-        public void YearlySales()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Top10Sales()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
