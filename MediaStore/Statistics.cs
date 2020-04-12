@@ -37,13 +37,16 @@ namespace MediaStore
                     statList.Add(new KeyValuePair<uint, uint>(code, sumqty));
                     statList.Sort((pair1, pair2) => pair2.Value.CompareTo(pair1.Value));
                 }
+                int i = 1;
                 foreach (var item in statList)
                 {
-                    ListViewItem lvi = new ListViewItem(item.Key.ToString(CultureInfo.CurrentCulture));
+                    ListViewItem lvi = new ListViewItem(i.ToString(CultureInfo.CurrentCulture));
+                    lvi.SubItems.Add(item.Key.ToString(CultureInfo.CurrentCulture));
                     lvi.SubItems.Add(stock.GetProduct(item.Key).Title);
                     lvi.SubItems.Add(item.Value.ToString(CultureInfo.CurrentCulture));
                     lvi.Font = stock.GetProduct(item.Key).Status == Product.ProductStatus.Active ? Product.DefaultFont : Product.InactiveFont;
                     listViewItems.Add(lvi);
+                    i++;
                 }
 
             }

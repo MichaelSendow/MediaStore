@@ -168,25 +168,6 @@ namespace MediaStore
             return listViewItem;
         }
 
-        public ListViewItem StatisticsGetProductListViewItem()
-        {
-            ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
-            listViewItem.SubItems.Add(Title);
-
-            if (Status == ProductStatus.Active)
-            {
-                listViewItem.Font = DefaultFont;
-            }
-            else
-            {
-                listViewItem.Font = InactiveFont;
-            }
-
-
-            return listViewItem;
-        }
-
-
         public string ReceiptString()
         {
             string receiptString;
@@ -226,6 +207,24 @@ namespace MediaStore
             {
                 listViewItem.Font = InactiveFont;
             }
+
+            return listViewItem;
+        }
+
+        public ListViewItem StatisticsGetProductListViewItem()
+        {
+            ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
+            listViewItem.SubItems.Add(Title);
+
+            if (Status == ProductStatus.Active)
+            {
+                listViewItem.Font = DefaultFont;
+            }
+            else
+            {
+                listViewItem.Font = InactiveFont;
+            }
+
 
             return listViewItem;
         }

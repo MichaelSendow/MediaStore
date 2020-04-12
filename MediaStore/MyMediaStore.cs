@@ -87,7 +87,6 @@ namespace MediaStore
         #endregion Constructors
 
         #region EventMethods
-
         private void AddNewProductButton_Click(object sender, EventArgs e)
         {
             Product newProduct = new Product
@@ -217,7 +216,7 @@ namespace MediaStore
                     SaveFiles();
                 }
             }
-            
+
         }
 
         private void MyMediaStore_FormClosing(object sender, FormClosingEventArgs e)
@@ -426,6 +425,12 @@ namespace MediaStore
             ((ListView)sender).Sort();
         }
 
+        private void StatButton_AllTime_Click(object sender, EventArgs e)
+        {
+            Top10AllTime(Product.ProductType.Book, StatListView_Books, Top10BooksCheckBox);
+            Top10AllTime(Product.ProductType.Movie, StatListView_Movies, Top10MoviesCheckBox);
+            Top10AllTime(Product.ProductType.Music, StatListView_Music, Top10MusicCheckBox);
+        }
         private void StatCheckBox_ShowAll_CheckedChanged(object sender, EventArgs e)
         {
             UpdateStatListView();
@@ -435,6 +440,7 @@ namespace MediaStore
         {
             StatLabel_Yearly.Text = "Total " + StatDateTimePicker_Year.Value.ToString("yyyy", CultureInfo.CurrentCulture);
         }
+
         private void StatTextBox_Search_TextChanged(object sender, EventArgs e)
         {
             UpdateStatListView();
@@ -456,10 +462,13 @@ namespace MediaStore
         {
             UpdateStockListView();
         }
+
         private void StockShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             UpdateStockListView();
         }
+
+
         #endregion EventMethods
 
         #region Methods
@@ -588,6 +597,34 @@ namespace MediaStore
             }
             StockCheckBox_Active.CheckedChanged += new EventHandler(this.IsActiveCheckBox_CheckedChanged);
         }
+        private void StatSetLabels()
+        {
+            StatLabel_January.Text = new DateTime(2010, 1, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_Februari.Text = new DateTime(2010, 2, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_Mars.Text = new DateTime(2010, 3, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_April.Text = new DateTime(2010, 4, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_May.Text = new DateTime(2010, 5, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_June.Text = new DateTime(2010, 6, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_Juli.Text = new DateTime(2010, 7, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_August.Text = new DateTime(2010, 8, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_September.Text = new DateTime(2010, 9, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_October.Text = new DateTime(2010, 10, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_November.Text = new DateTime(2010, 11, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_December.Text = new DateTime(2010, 12, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+        }
+
+        private void Top10AllTime(Product.ProductType productType, ListView listView, CheckBox checkBox)
+        {
+            List<Receipt> receipts = MySales.ReceiptsAsList();
+            listView.Items.Clear();
+            List<ListViewItem> listViewItems = checkBox.Checked ? Statistics.Top10AllTime(MyStock, receipts, productType, showOnlyActive: false) : Statistics.Top10AllTime(MyStock, receipts, productType, showOnlyActive: true);
+
+            for (int i = 0; i < listViewItems.Count && i < 10; i++)
+            {
+                listView.Items.Add(listViewItems[i]);
+            }
+        }
+
         /// <summary>
         /// Checks if product in the stock is equal to the product in the form.
         /// </summary>
@@ -827,37 +864,11 @@ namespace MediaStore
                 return false;
             }
         }
-
-
-        private void StatSetLabels()
-        {
-            StatLabel_January.Text = new DateTime(2010, 1, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_Februari.Text = new DateTime(2010, 2, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_Mars.Text = new DateTime(2010, 3, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_April.Text = new DateTime(2010, 4, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_May.Text = new DateTime(2010, 5, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_June.Text = new DateTime(2010, 6, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_Juli.Text = new DateTime(2010, 7, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_August.Text = new DateTime(2010, 8, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_September.Text = new DateTime(2010, 9, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_October.Text = new DateTime(2010, 10, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_November.Text = new DateTime(2010, 11, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_December.Text = new DateTime(2010, 12, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-        }
-
-
         #endregion Methods
-        private void StatButton_AllTime_Click(object sender, EventArgs e)
-        {
-            List<Receipt> receipts = MySales.ReceiptsAsList();
-            StatListView_Books.Items.Clear();
-            List<ListViewItem> listViewItems = StatCheckBox_ShowAll.Checked ? Statistics.Top10AllTime(MyStock, receipts, Product.ProductType.Book, showOnlyActive: false) : Statistics.Top10AllTime(MyStock, receipts, Product.ProductType.Book, showOnlyActive: true);
+ 
 
-            for (int i = 0; i < listViewItems.Count && i < 10; i++)
-            {
-                StatListView_Books.Items.Add(listViewItems[i]);
-            }
-        }
 
+  
+        
     }
 }
