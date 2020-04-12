@@ -847,7 +847,17 @@ namespace MediaStore
 
 
         #endregion Methods
+        private void StatButton_AllTime_Click(object sender, EventArgs e)
+        {
+            List<Receipt> receipts = MySales.ReceiptsAsList();
+            StatListView_Books.Items.Clear();
+            List<ListViewItem> listViewItems = StatCheckBox_ShowAll.Checked ? Statistics.Top10AllTime(MyStock, receipts, Product.ProductType.Book, showOnlyActive: false) : Statistics.Top10AllTime(MyStock, receipts, Product.ProductType.Book, showOnlyActive: true);
 
+            for (int i = 0; i < listViewItems.Count && i < 10; i++)
+            {
+                StatListView_Books.Items.Add(listViewItems[i]);
+            }
+        }
 
     }
 }

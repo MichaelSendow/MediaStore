@@ -112,11 +112,11 @@
     <Compile Include="SplitSearcher.cs" />
     <Compile Include="Stock.cs" />
     <Compile Include="WildSearch.cs" />
-    <EmbeddedResource Include="ProductForm.resx">
-      <DependentUpon>ProductForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MyMediaStore.resx">
       <DependentUpon>MyMediaStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ProductForm.resx">
+      <DependentUpon>ProductForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -123,6 +123,20 @@ namespace MediaStore
             FileHandler.SaveSales(this, filePathName);
         }
 
+        internal List<Receipt> ReceiptsAsList()
+        {
+            List<Receipt> receipts = new List<Receipt>();
+            foreach (var ListOfReceipts in Ledger.Values)
+            {
+                foreach (var receipt in ListOfReceipts)
+                {
+                    receipts.Add(receipt);
+                }
+            }
+
+            return receipts;
+        }
+
         #endregion Methods
 
     }
