@@ -1475,6 +1475,7 @@
             this.StatButton_Month.TabIndex = 7;
             this.StatButton_Month.Text = "This Month";
             this.StatButton_Month.UseVisualStyleBackColor = true;
+            this.StatButton_Month.Click += new System.EventHandler(this.StatButton_Month_Click);
             // 
             // StatButton_Year
             // 
@@ -1485,6 +1486,7 @@
             this.StatButton_Year.TabIndex = 6;
             this.StatButton_Year.Text = "This Year";
             this.StatButton_Year.UseVisualStyleBackColor = true;
+            this.StatButton_Year.Click += new System.EventHandler(this.StatButton_Year_Click);
             // 
             // StatPanel_Music
             // 

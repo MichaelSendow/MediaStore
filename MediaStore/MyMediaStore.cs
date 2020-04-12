@@ -431,6 +431,21 @@ namespace MediaStore
             Top10AllTime(Product.ProductType.Movie, StatListView_Movies, Top10MoviesCheckBox);
             Top10AllTime(Product.ProductType.Music, StatListView_Music, Top10MusicCheckBox);
         }
+
+        private void StatButton_Month_Click(object sender, EventArgs e)
+        {
+            Top10Month(Product.ProductType.Book, StatListView_Books, Top10BooksCheckBox);
+            Top10Month(Product.ProductType.Movie, StatListView_Movies, Top10MoviesCheckBox);
+            Top10Month(Product.ProductType.Music, StatListView_Music, Top10MusicCheckBox);
+        }
+
+        private void StatButton_Year_Click(object sender, EventArgs e)
+        {
+            Top10Year(Product.ProductType.Book, StatListView_Books, Top10BooksCheckBox);
+            Top10Year(Product.ProductType.Movie, StatListView_Movies, Top10MoviesCheckBox);
+            Top10Year(Product.ProductType.Music, StatListView_Music, Top10MusicCheckBox);
+        }
+
         private void StatCheckBox_ShowAll_CheckedChanged(object sender, EventArgs e)
         {
             UpdateStatListView();
@@ -624,6 +639,32 @@ namespace MediaStore
                 listView.Items.Add(listViewItems[i]);
             }
         }
+
+        private void Top10Month(Product.ProductType productType, ListView listView, CheckBox checkBox)
+        {
+            List<Receipt> receipts = MySales.ReceiptsAsList();
+            listView.Items.Clear();
+            List<ListViewItem> listViewItems = checkBox.Checked ? Statistics.Top10Month(MyStock, receipts, productType, showOnlyActive: false) : Statistics.Top10Month(MyStock, receipts, productType, showOnlyActive: true);
+
+            for (int i = 0; i < listViewItems.Count && i < 10; i++)
+            {
+                listView.Items.Add(listViewItems[i]);
+            }
+        }
+
+        private void Top10Year(Product.ProductType productType, ListView listView, CheckBox checkBox)
+        {
+            List<Receipt> receipts = MySales.ReceiptsAsList();
+            listView.Items.Clear();
+            List<ListViewItem> listViewItems = checkBox.Checked ? Statistics.Top10Year(MyStock, receipts, productType, showOnlyActive: false) : Statistics.Top10Year(MyStock, receipts, productType, showOnlyActive: true);
+
+            for (int i = 0; i < listViewItems.Count && i < 10; i++)
+            {
+                listView.Items.Add(listViewItems[i]);
+            }
+        }
+
+
 
         /// <summary>
         /// Checks if product in the stock is equal to the product in the form.
@@ -864,11 +905,12 @@ namespace MediaStore
                 return false;
             }
         }
+
+
+
+
         #endregion Methods
- 
 
 
-  
-        
     }
 }
