@@ -21,6 +21,7 @@ namespace MediaStore
         private Sales MySales;
         private Stock MyStock;
         private ReceiptsDialog receiptDialog;
+        //private bool UnsavedChanges = false;
 
         #endregion Fields
 
@@ -38,10 +39,6 @@ namespace MediaStore
             MyShoppingBasket = new ShoppingBasket();
             ReceiptList = new List<string>();
             StatDateTimePicker_Year.Value = DateTime.Now;
-
-            //Product product1 = new Product(MyStock.GetNextProductCode(), "Avatar: The Last Airbender, The Complete Collection", Product.ProductTypes.Movie, 297.20m, 0, "Michael Dante DiMartino & Bryan Konietzko", "De som praktiserar en av de fyra elementens krafter slåss mot varandra. De olika fraktionerna, Eld, Vatten, Jord och Luft, kämpar om herreväldet, och den som är ödesbestämd att få slut på striderna är Avataren. Tyvärr är Avataren en omogen pojkspoling på tolv år, som inte vill ha något ansvar alls. Längd: 1468 minute", "Twentieth Century Fox", "2017", false);
-            //MyStock.AddProduct(product1);
-            //MyStock.SaveStockToFile(productsFileName);
         }
 
         private void MyMediaStore_Load(object sender, EventArgs e)
@@ -78,15 +75,14 @@ namespace MediaStore
                 return;
             }
 
-
             StatSetLabels();
             UpdateListViews();
-
         }
 
         #endregion Constructors
 
         #region EventMethods
+
         private void AddNewProductButton_Click(object sender, EventArgs e)
         {
             Product newProduct = new Product
@@ -188,7 +184,6 @@ namespace MediaStore
                 {
                     SaveUpdatedProductFromStockTab();
                     UpdateListViews();
-                    StockListView1.Focus();
                     SaveFiles();
                 }
                 else if (StockCheckBox_Active.Checked == false && uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture) > 0)
@@ -198,7 +193,6 @@ namespace MediaStore
                     {
                         SaveUpdatedProductFromStockTab();
                         UpdateListViews();
-                        StockListView1.Focus();
                         SaveFiles();
                     }
                     else
@@ -212,7 +206,6 @@ namespace MediaStore
                 {
                     SaveUpdatedProductFromStockTab();
                     UpdateListViews();
-                    StockListView1.Focus();
                     SaveFiles();
                 }
             }
@@ -239,18 +232,18 @@ namespace MediaStore
                 }
             }
 
-            if (UnsavedChanges())
-            {
-                DialogResult dlgr = MessageBox.Show("You have unsaved changes in the Stock-tab. Do you want to save changes before quitting?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            //if (UnsavedChanges)
+            //{
+            //    DialogResult dlgr = MessageBox.Show("You have unsaved changes in the Stock-tab. Do you want to save changes before quitting?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
-                if (dlgr == DialogResult.Yes)
-                {
-                    e.Cancel = true;
-                    MainTabControl.SelectedTab = StockTabPage;
-                    StockTabPage.Focus();
-                    return;
-                }
-            }
+            //    if (dlgr == DialogResult.Yes)
+            //    {
+            //        e.Cancel = true;
+            //        MainTabControl.SelectedTab = StockTabPage;
+            //        StockTabPage.Focus();
+            //        return;
+            //    }
+            //}
 
             SaveFiles();
 
@@ -299,6 +292,20 @@ namespace MediaStore
             else
             {
                 e.HasMorePages = false;
+            }
+        }
+
+        private void SelectStatListViewItem()
+        {
+            if (StatListView_Sales.SelectedItems.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                uint productCode = uint.Parse(StatListView_Sales.Items[StatListView_Sales.SelectedIndices[0]].Text, CultureInfo.CurrentCulture);
+                Dictionary<Statistics.SaleStat, KeyValuePair<uint, decimal>> keyValuePairs = Statistics.SalesStatistics(productCode, StatDateTimePicker_Year.Value, MyStock, MySales.ReceiptsAsList());
+                UpdateStatisticsTabPage(keyValuePairs);
             }
         }
 
@@ -427,23 +434,23 @@ namespace MediaStore
 
         private void StatButton_AllTime_Click(object sender, EventArgs e)
         {
-            Top10AllTime(Product.ProductType.Book, StatListView_Books, Top10BooksCheckBox);
-            Top10AllTime(Product.ProductType.Movie, StatListView_Movies, Top10MoviesCheckBox);
-            Top10AllTime(Product.ProductType.Music, StatListView_Music, Top10MusicCheckBox);
+            Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.AllTime);
+            Top10(Product.ProductType.Movie, Top10ListView_Movies, Top10MoviesCheckBox, Statistics.Mode.AllTime);
+            Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.AllTime);
         }
 
         private void StatButton_Month_Click(object sender, EventArgs e)
         {
-            Top10Month(Product.ProductType.Book, StatListView_Books, Top10BooksCheckBox);
-            Top10Month(Product.ProductType.Movie, StatListView_Movies, Top10MoviesCheckBox);
-            Top10Month(Product.ProductType.Music, StatListView_Music, Top10MusicCheckBox);
+            Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.Month);
+            Top10(Product.ProductType.Movie, Top10ListView_Movies, Top10MoviesCheckBox, Statistics.Mode.Month);
+            Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.Month);
         }
 
         private void StatButton_Year_Click(object sender, EventArgs e)
         {
-            Top10Year(Product.ProductType.Book, StatListView_Books, Top10BooksCheckBox);
-            Top10Year(Product.ProductType.Movie, StatListView_Movies, Top10MoviesCheckBox);
-            Top10Year(Product.ProductType.Music, StatListView_Music, Top10MusicCheckBox);
+            Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.Year);
+            Top10(Product.ProductType.Movie, Top10ListView_Movies, Top10MoviesCheckBox, Statistics.Mode.Year);
+            Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.Year);
         }
 
         private void StatCheckBox_ShowAll_CheckedChanged(object sender, EventArgs e)
@@ -454,8 +461,13 @@ namespace MediaStore
         private void StatDateTimePicker_Year_ValueChanged(object sender, EventArgs e)
         {
             StatLabel_Yearly.Text = "Total " + StatDateTimePicker_Year.Value.ToString("yyyy", CultureInfo.CurrentCulture);
+            StatListView_Sales_SelectedIndexChanged(sender, e);
         }
 
+        private void StatListView_Sales_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectStatListViewItem();
+        }
         private void StatTextBox_Search_TextChanged(object sender, EventArgs e)
         {
             UpdateStatListView();
@@ -463,14 +475,13 @@ namespace MediaStore
 
         private void StockListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SelectListViewItem();
+            SelectStockListViewItem();
         }
 
         private void StockSaveUpdatedProductButton_Click(object sender, EventArgs e)
         {
             SaveUpdatedProductFromStockTab();
             UpdateListViews();
-            StockListView1.Focus();
         }
 
         private void StockSearchTextBox_TextChanged(object sender, EventArgs e)
@@ -538,6 +549,7 @@ namespace MediaStore
                     StockTextBox_Publisher.Text,
                     uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
                     Product.ProductStatus.Active);
+                    //UnsavedChanges = false;
                 }
                 else
                 {
@@ -549,6 +561,7 @@ namespace MediaStore
                     StockTextBox_Publisher.Text,
                     uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
                     Product.ProductStatus.InActive);
+                    //UnsavedChanges = false;
                 }
 
             }
@@ -558,7 +571,7 @@ namespace MediaStore
             }
         }
 
-        private void SelectListViewItem()
+        private void SelectStockListViewItem()
         {
             if (StockListView1.SelectedItems.Count == 0)
             {
@@ -567,24 +580,25 @@ namespace MediaStore
             else if (StockTextBox_ProductCode.TextLength != 0)
             {
 
-                if (UnsavedChanges())
-                {
-                    DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before changing product?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                //if (UnsavedChanges)
+                //{
+                //    DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before changing product?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
-                    if (dlgr == DialogResult.Yes)
-                    {
-                        SaveUpdatedProductFromStockTab();
-                        UpdateStockListView();
-                        SaveFiles();
-                        return;
-                    }
-                    else
-                    {
-                        UpdateStockListView();
-                    }
-                }
+                //    if (dlgr == DialogResult.Yes)
+                //    {
+                //        SaveUpdatedProductFromStockTab();
+                //        UpdateStockListView();
+                //        SaveFiles();
+                //        return;
+                //    }
+                //    else
+                //    {
+                //        UpdateStockListView();
+                //    }
+                //}
 
             }
+
 
             uint productCode = uint.Parse(StockListView1.Items[StockListView1.SelectedIndices[0]].Text, CultureInfo.CurrentCulture);
 
@@ -615,12 +629,12 @@ namespace MediaStore
         private void StatSetLabels()
         {
             StatLabel_January.Text = new DateTime(2010, 1, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_Februari.Text = new DateTime(2010, 2, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_Mars.Text = new DateTime(2010, 3, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_February.Text = new DateTime(2010, 2, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_March.Text = new DateTime(2010, 3, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
             StatLabel_April.Text = new DateTime(2010, 4, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
             StatLabel_May.Text = new DateTime(2010, 5, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
             StatLabel_June.Text = new DateTime(2010, 6, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
-            StatLabel_Juli.Text = new DateTime(2010, 7, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
+            StatLabel_July.Text = new DateTime(2010, 7, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
             StatLabel_August.Text = new DateTime(2010, 8, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
             StatLabel_September.Text = new DateTime(2010, 9, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
             StatLabel_October.Text = new DateTime(2010, 10, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
@@ -628,99 +642,15 @@ namespace MediaStore
             StatLabel_December.Text = new DateTime(2010, 12, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
         }
 
-        private void Top10AllTime(Product.ProductType productType, ListView listView, CheckBox checkBox)
+        private void Top10(Product.ProductType productType, ListView listView, CheckBox checkBox, Statistics.Mode mode)
         {
             List<Receipt> receipts = MySales.ReceiptsAsList();
             listView.Items.Clear();
-            List<ListViewItem> listViewItems = checkBox.Checked ? Statistics.Top10AllTime(MyStock, receipts, productType, showOnlyActive: false) : Statistics.Top10AllTime(MyStock, receipts, productType, showOnlyActive: true);
+            List<ListViewItem> listViewItems = checkBox.Checked ? Statistics.Top10(MyStock, receipts, productType, showOnlyActive: false, mode) : Statistics.Top10(MyStock, receipts, productType, showOnlyActive: true, mode);
 
             for (int i = 0; i < listViewItems.Count && i < 10; i++)
             {
                 listView.Items.Add(listViewItems[i]);
-            }
-        }
-
-        private void Top10Month(Product.ProductType productType, ListView listView, CheckBox checkBox)
-        {
-            List<Receipt> receipts = MySales.ReceiptsAsList();
-            listView.Items.Clear();
-            List<ListViewItem> listViewItems = checkBox.Checked ? Statistics.Top10Month(MyStock, receipts, productType, showOnlyActive: false) : Statistics.Top10Month(MyStock, receipts, productType, showOnlyActive: true);
-
-            for (int i = 0; i < listViewItems.Count && i < 10; i++)
-            {
-                listView.Items.Add(listViewItems[i]);
-            }
-        }
-
-        private void Top10Year(Product.ProductType productType, ListView listView, CheckBox checkBox)
-        {
-            List<Receipt> receipts = MySales.ReceiptsAsList();
-            listView.Items.Clear();
-            List<ListViewItem> listViewItems = checkBox.Checked ? Statistics.Top10Year(MyStock, receipts, productType, showOnlyActive: false) : Statistics.Top10Year(MyStock, receipts, productType, showOnlyActive: true);
-
-            for (int i = 0; i < listViewItems.Count && i < 10; i++)
-            {
-                listView.Items.Add(listViewItems[i]);
-            }
-        }
-
-
-
-        /// <summary>
-        /// Checks if product in the stock is equal to the product in the form.
-        /// </summary>
-        /// <returns>True if no changes is present.</returns>
-        private bool UnsavedChanges()
-        {
-            if (StockTextBox_ProductCode.TextLength != 0)
-            {
-                Product oldProduct = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
-
-                //Product.ProductType.TryParse(StockListBox_Type.Text, true, out Product.ProductType _) &&
-                //decimal.TryParse(StockTextBox_Price.Text, out decimal _) &&
-                //uint.TryParse(StockTextBox_Quantity.Text, out uint _) &&
-                //uint.TryParse(StockTextBox_ReleaseYear.Text, out uint _) &&
-                //StockTextBox_Title.Text.Contains(Environment.NewLine) == false && StockTextBox_Title.Text.Contains(";") == false &&
-                //StockTextBox_Creator.Text.Contains(Environment.NewLine) == false && StockTextBox_Creator.Text.Contains(";") == false &&
-                //StockTextBox_Publisher.Text.Contains(Environment.NewLine) == false && StockTextBox_Publisher.Text.Contains(";") == false &&
-                //StockTextBox_FreeText.Text.Contains(Environment.NewLine) == false && StockTextBox_FreeText.Text.Contains(";") == false
-
-
-                uint quantity = 0;
-                uint releaseYear = 0;
-                decimal price = 0;
-
-
-                if (uint.TryParse(StockTextBox_Quantity.Text, out quantity) && uint.TryParse(StockTextBox_ReleaseYear.Text, out releaseYear) && decimal.TryParse(StockTextBox_Price.Text, out price))
-                {
-                    if (
-                         StockListBox_Type.Text == oldProduct.Type.ToString() &&
-                         price == oldProduct.Price &&
-                         quantity == oldProduct.Quantity &&
-                         StockTextBox_Title.Text == oldProduct.Title &&
-                         releaseYear == oldProduct.ReleaseYear &&
-                         StockTextBox_Creator.Text == oldProduct.Creator &&
-                         StockTextBox_Publisher.Text == oldProduct.Publisher &&
-                         StockTextBox_FreeText.Text == oldProduct.FreeText
-                         )
-
-                    {
-                        return false;
-                    }
-                    else
-                    {
-                        return true;
-                    }
-                }
-                else
-                {
-                    return true;
-                }
-
-            }
-            else
-            {
-                return false;
             }
         }
 
@@ -786,6 +716,39 @@ namespace MediaStore
             ShoppingBasketTextBox_TotalSum.Text = Math.Round(totalSum, 2).ToString(CultureInfo.CurrentCulture);
         }
 
+        private void UpdateStatisticsTabPage(Dictionary<Statistics.SaleStat, KeyValuePair<uint, decimal>> keyValuePairs)
+        {
+            StatLabel_AllTime_QTY.Text = keyValuePairs[Statistics.SaleStat.AllTime].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_January_QTY.Text = keyValuePairs[Statistics.SaleStat.January].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_February_QTY.Text = keyValuePairs[Statistics.SaleStat.February].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_March_QTY.Text = keyValuePairs[Statistics.SaleStat.March].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_April_QTY.Text = keyValuePairs[Statistics.SaleStat.April].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_May_QTY.Text = keyValuePairs[Statistics.SaleStat.May].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_June_QTY.Text = keyValuePairs[Statistics.SaleStat.June].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_July_QTY.Text = keyValuePairs[Statistics.SaleStat.July].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_August_QTY.Text = keyValuePairs[Statistics.SaleStat.August].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_September_QTY.Text = keyValuePairs[Statistics.SaleStat.September].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_October_QTY.Text = keyValuePairs[Statistics.SaleStat.October].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_November_QTY.Text = keyValuePairs[Statistics.SaleStat.November].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_December_QTY.Text = keyValuePairs[Statistics.SaleStat.December].Key.ToString(CultureInfo.CurrentCulture);
+            StatLabel_Yearly_QTY.Text = keyValuePairs[Statistics.SaleStat.Yearly].Key.ToString(CultureInfo.CurrentCulture);
+
+            StatLabel_AllTime_Gross.Text = keyValuePairs[Statistics.SaleStat.AllTime].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_January_Gross.Text = keyValuePairs[Statistics.SaleStat.January].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_February_Gross.Text = keyValuePairs[Statistics.SaleStat.February].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_March_Gross.Text = keyValuePairs[Statistics.SaleStat.March].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_April_Gross.Text = keyValuePairs[Statistics.SaleStat.April].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_May_Gross.Text = keyValuePairs[Statistics.SaleStat.May].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_June_Gross.Text = keyValuePairs[Statistics.SaleStat.June].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_July_Gross.Text = keyValuePairs[Statistics.SaleStat.July].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_August_Gross.Text = keyValuePairs[Statistics.SaleStat.August].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_September_Gross.Text = keyValuePairs[Statistics.SaleStat.September].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_October_Gross.Text = keyValuePairs[Statistics.SaleStat.October].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_November_Gross.Text = keyValuePairs[Statistics.SaleStat.November].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_December_Gross.Text = keyValuePairs[Statistics.SaleStat.December].Value.ToString(CultureInfo.CurrentCulture);
+            StatLabel_Yearly_Gross.Text = keyValuePairs[Statistics.SaleStat.Yearly].Value.ToString(CultureInfo.CurrentCulture);
+        }
+
         private void UpdateStatListView()
         {
 
@@ -830,15 +793,6 @@ namespace MediaStore
         {
             Stock stock;
 
-            string selectedProductCode = "";
-            bool itemWasSelected = false;
-            if (StockListView1.SelectedItems.Count != 0)
-            {
-                selectedProductCode = StockListView1.Items[StockListView1.SelectedIndices[0]].Text;
-                itemWasSelected = true;
-            }
-
-
             StockListView1.Items.Clear();
 
             if (StockTextBox_Search.TextLength == 0)
@@ -871,16 +825,8 @@ namespace MediaStore
                     StockListView1.Items.Add(productValuePair.Value.GetProductListViewItem());
                 }
             }
-
-            if (itemWasSelected)
-            {
-                ListViewItem SelectedItem = StockListView1.FindItemWithText(selectedProductCode, false, 0, false);
-                if (SelectedItem != null)
-                {
-                    SelectedItem.Selected = true;
-                }
-            }
         }
+
         /// <summary>
         /// Checks if all fields are correctly formated.
         /// </summary>
@@ -905,12 +851,6 @@ namespace MediaStore
                 return false;
             }
         }
-
-
-
-
         #endregion Methods
-
-
     }
 }

@@ -16,7 +16,11 @@
             if (disposing && (components != null))
             {
                 components.Dispose();
-                receiptDialog.Dispose();
+                if (receiptDialog != null)
+                {
+                    receiptDialog.Dispose();
+                }
+
             }
             base.Dispose(disposing);
 
@@ -30,6 +34,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MyMediaStore));
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.CashierTabPage = new System.Windows.Forms.TabPage();
@@ -106,61 +111,91 @@
             this.StatTableLayoutPanel1_Sales = new System.Windows.Forms.TableLayoutPanel();
             this.StatTextBox_Search = new System.Windows.Forms.TextBox();
             this.StatPanel_Controls = new System.Windows.Forms.Panel();
-            this.label17 = new System.Windows.Forms.Label();
+            this.StatYearLabel = new System.Windows.Forms.Label();
             this.StatDateTimePicker_Year = new System.Windows.Forms.DateTimePicker();
             this.StatCheckBox_ShowAll = new System.Windows.Forms.CheckBox();
             this.StatListView_Sales = new System.Windows.Forms.ListView();
             this.StatColumnHeader1_ProductCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatColumnHeader2_Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.StatSalesPanel = new System.Windows.Forms.Panel();
             this.SalesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.StatLabel_AllTime = new System.Windows.Forms.Label();
             this.StatLabelQuantity = new System.Windows.Forms.Label();
             this.StatLabelGrossAmount = new System.Windows.Forms.Label();
             this.StatLabel_January = new System.Windows.Forms.Label();
-            this.StatLabel_Februari = new System.Windows.Forms.Label();
-            this.StatLabel_Mars = new System.Windows.Forms.Label();
+            this.StatLabel_February = new System.Windows.Forms.Label();
+            this.StatLabel_March = new System.Windows.Forms.Label();
             this.StatLabel_April = new System.Windows.Forms.Label();
             this.StatLabel_May = new System.Windows.Forms.Label();
             this.StatLabel_June = new System.Windows.Forms.Label();
-            this.StatLabel_Juli = new System.Windows.Forms.Label();
+            this.StatLabel_July = new System.Windows.Forms.Label();
             this.StatLabel_August = new System.Windows.Forms.Label();
             this.StatLabel_September = new System.Windows.Forms.Label();
             this.StatLabel_October = new System.Windows.Forms.Label();
             this.StatLabel_November = new System.Windows.Forms.Label();
             this.StatLabel_December = new System.Windows.Forms.Label();
             this.StatLabel_Yearly = new System.Windows.Forms.Label();
+            this.StatLabel_AllTime_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_AllTime_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_January_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_January_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_February_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_February_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_March_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_March_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_April_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_April_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_May_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_May_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_June_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_June_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_July_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_July_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_August_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_August_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_September_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_September_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_October_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_October_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_November_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_November_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_December_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_December_Gross = new System.Windows.Forms.Label();
+            this.StatLabel_Yearly_QTY = new System.Windows.Forms.Label();
+            this.StatLabel_Yearly_Gross = new System.Windows.Forms.Label();
             this.Top10TabPage = new System.Windows.Forms.TabPage();
-            this.StatTableLayoutPanel_Charts = new System.Windows.Forms.TableLayoutPanel();
-            this.StatButton_Month = new System.Windows.Forms.Button();
-            this.StatButton_Year = new System.Windows.Forms.Button();
-            this.StatPanel_Music = new System.Windows.Forms.Panel();
+            this.Top10TableLayoutPanel_Charts = new System.Windows.Forms.TableLayoutPanel();
+            this.Top10Panel_Music = new System.Windows.Forms.Panel();
             this.Top10MusicCheckBox = new System.Windows.Forms.CheckBox();
-            this.StatListView_Music = new System.Windows.Forms.ListView();
+            this.Top10ListView_Music = new System.Windows.Forms.ListView();
             this.StatMusicColumnHeader1_Rank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatMusicColumnHeader1_Pn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatMusicColumnHeader2_Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatMusicColumnHeader1_QTY = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.StatLabel_Music = new System.Windows.Forms.Label();
-            this.StatPanel_Movies = new System.Windows.Forms.Panel();
+            this.Top10Label_Music = new System.Windows.Forms.Label();
+            this.Top10Panel_Movies = new System.Windows.Forms.Panel();
             this.Top10MoviesCheckBox = new System.Windows.Forms.CheckBox();
-            this.StatListView_Movies = new System.Windows.Forms.ListView();
+            this.Top10ListView_Movies = new System.Windows.Forms.ListView();
             this.StatMoviesColumnHeader1_Rank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatMoviesColumnHeader2_Pn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatMoviesColumnHeader3_Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatMoviesColumnHeader4_QTY = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.StatLabel_Movies = new System.Windows.Forms.Label();
-            this.StatPanel_Books = new System.Windows.Forms.Panel();
+            this.Top10Label_Movies = new System.Windows.Forms.Label();
+            this.Top10Panel_Books = new System.Windows.Forms.Panel();
             this.Top10BooksCheckBox = new System.Windows.Forms.CheckBox();
-            this.StatListView_Books = new System.Windows.Forms.ListView();
+            this.Top10ListView_Books = new System.Windows.Forms.ListView();
             this.StatBooksColumnHeader1_Rank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatBooksColumnHeader1_PN = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatBooksColumnHeader1_Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatBooksColumnHeader1_QTY = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.StatLabel_Books = new System.Windows.Forms.Label();
-            this.StatButton_AllTime = new System.Windows.Forms.Button();
+            this.Top10Label_Books = new System.Windows.Forms.Label();
+            this.Top10TableLayoutPanel_Buttons = new System.Windows.Forms.TableLayoutPanel();
+            this.Top10Button_AllTime = new System.Windows.Forms.Button();
+            this.Top10Button_Month = new System.Windows.Forms.Button();
+            this.Top10Button_Year = new System.Windows.Forms.Button();
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.MainTabControl.SuspendLayout();
             this.CashierTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CashierTabSplitContainer)).BeginInit();
@@ -200,13 +235,14 @@
             this.StatSplitContainer1.SuspendLayout();
             this.StatTableLayoutPanel1_Sales.SuspendLayout();
             this.StatPanel_Controls.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.StatSalesPanel.SuspendLayout();
             this.SalesTableLayoutPanel.SuspendLayout();
             this.Top10TabPage.SuspendLayout();
-            this.StatTableLayoutPanel_Charts.SuspendLayout();
-            this.StatPanel_Music.SuspendLayout();
-            this.StatPanel_Movies.SuspendLayout();
-            this.StatPanel_Books.SuspendLayout();
+            this.Top10TableLayoutPanel_Charts.SuspendLayout();
+            this.Top10Panel_Music.SuspendLayout();
+            this.Top10Panel_Movies.SuspendLayout();
+            this.Top10Panel_Books.SuspendLayout();
+            this.Top10TableLayoutPanel_Buttons.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -319,6 +355,7 @@
             this.CashierTextBox_Search.Name = "CashierTextBox_Search";
             this.CashierTextBox_Search.Size = new System.Drawing.Size(732, 32);
             this.CashierTextBox_Search.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.CashierTextBox_Search, resources.GetString("CashierTextBox_Search.ToolTip"));
             this.CashierTextBox_Search.TextChanged += new System.EventHandler(this.CashierSearchTextBox_TextChanged);
             // 
             // CashierLabel_Search
@@ -391,6 +428,7 @@
             this.CashierButton_ShowReceipts.TabIndex = 0;
             this.CashierButton_ShowReceipts.TabStop = false;
             this.CashierButton_ShowReceipts.Text = "Receipts";
+            this.toolTip1.SetToolTip(this.CashierButton_ShowReceipts, "Shows all receipts in system");
             this.CashierButton_ShowReceipts.UseVisualStyleBackColor = true;
             this.CashierButton_ShowReceipts.Click += new System.EventHandler(this.ShowReceiptsButton_Click);
             // 
@@ -402,6 +440,7 @@
             this.CashierCheckBox_ShowAllProducts.Size = new System.Drawing.Size(179, 22);
             this.CashierCheckBox_ShowAllProducts.TabIndex = 5;
             this.CashierCheckBox_ShowAllProducts.Text = "Show all products";
+            this.toolTip1.SetToolTip(this.CashierCheckBox_ShowAllProducts, "Check to show inactive products");
             this.CashierCheckBox_ShowAllProducts.UseVisualStyleBackColor = true;
             this.CashierCheckBox_ShowAllProducts.CheckedChanged += new System.EventHandler(this.CashierShowAllProductsCheckBox_CheckedChanged);
             // 
@@ -412,6 +451,8 @@
             this.CashierTextBox_ReturnQuantity.Name = "CashierTextBox_ReturnQuantity";
             this.CashierTextBox_ReturnQuantity.Size = new System.Drawing.Size(138, 27);
             this.CashierTextBox_ReturnQuantity.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.CashierTextBox_ReturnQuantity, "Enter how many items that should be returned.\r\nCan not be more than what is on th" +
+        "e receipt.");
             // 
             // CashierLabel_ReturnQuantity
             // 
@@ -429,6 +470,7 @@
             this.CashierTextBox_ReturnProduct.Name = "CashierTextBox_ReturnProduct";
             this.CashierTextBox_ReturnProduct.Size = new System.Drawing.Size(138, 27);
             this.CashierTextBox_ReturnProduct.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.CashierTextBox_ReturnProduct, "Enter product number on \r\nreceipt that is to be returned.");
             // 
             // CashierLabel_ReturnProduct
             // 
@@ -446,6 +488,7 @@
             this.CashierTextBox_ReturnReceipt.Name = "CashierTextBox_ReturnReceipt";
             this.CashierTextBox_ReturnReceipt.Size = new System.Drawing.Size(138, 27);
             this.CashierTextBox_ReturnReceipt.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.CashierTextBox_ReturnReceipt, "Enter valid receipt number");
             // 
             // CashierLabel_ReturnReceipt
             // 
@@ -465,6 +508,7 @@
             this.CashierCheckBox_PrintReceipts.Size = new System.Drawing.Size(143, 22);
             this.CashierCheckBox_PrintReceipts.TabIndex = 6;
             this.CashierCheckBox_PrintReceipts.Text = "Print receipts";
+            this.toolTip1.SetToolTip(this.CashierCheckBox_PrintReceipts, "Enable printing of new receipts");
             this.CashierCheckBox_PrintReceipts.UseVisualStyleBackColor = true;
             // 
             // CashierButton_ReturnItems
@@ -687,6 +731,7 @@
             this.StockCheckBox_ShowAllProducts.TabIndex = 0;
             this.StockCheckBox_ShowAllProducts.TabStop = false;
             this.StockCheckBox_ShowAllProducts.Text = "Show all \r\nproducts";
+            this.toolTip1.SetToolTip(this.StockCheckBox_ShowAllProducts, "Check to show inactive products");
             this.StockCheckBox_ShowAllProducts.UseVisualStyleBackColor = true;
             this.StockCheckBox_ShowAllProducts.CheckedChanged += new System.EventHandler(this.StockShowAllProductsCheckBox_CheckedChanged);
             // 
@@ -761,6 +806,7 @@
             this.StockTextBox_Search.Name = "StockTextBox_Search";
             this.StockTextBox_Search.Size = new System.Drawing.Size(723, 32);
             this.StockTextBox_Search.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.StockTextBox_Search, resources.GetString("StockTextBox_Search.ToolTip"));
             this.StockTextBox_Search.TextChanged += new System.EventHandler(this.StockSearchTextBox_TextChanged);
             // 
             // StockLabel_Search
@@ -1074,7 +1120,7 @@
             // 
             // StatSplitContainer1.Panel2
             // 
-            this.StatSplitContainer1.Panel2.Controls.Add(this.panel1);
+            this.StatSplitContainer1.Panel2.Controls.Add(this.StatSalesPanel);
             this.StatSplitContainer1.Size = new System.Drawing.Size(1636, 817);
             this.StatSplitContainer1.SplitterDistance = 941;
             this.StatSplitContainer1.TabIndex = 0;
@@ -1104,12 +1150,13 @@
             this.StatTextBox_Search.Name = "StatTextBox_Search";
             this.StatTextBox_Search.Size = new System.Drawing.Size(933, 37);
             this.StatTextBox_Search.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.StatTextBox_Search, resources.GetString("StatTextBox_Search.ToolTip"));
             this.StatTextBox_Search.TextChanged += new System.EventHandler(this.StatTextBox_Search_TextChanged);
             // 
             // StatPanel_Controls
             // 
             this.StatPanel_Controls.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StatPanel_Controls.Controls.Add(this.label17);
+            this.StatPanel_Controls.Controls.Add(this.StatYearLabel);
             this.StatPanel_Controls.Controls.Add(this.StatDateTimePicker_Year);
             this.StatPanel_Controls.Controls.Add(this.StatCheckBox_ShowAll);
             this.StatPanel_Controls.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1118,15 +1165,15 @@
             this.StatPanel_Controls.Size = new System.Drawing.Size(933, 36);
             this.StatPanel_Controls.TabIndex = 3;
             // 
-            // label17
+            // StatYearLabel
             // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Verdana", 9F);
-            this.label17.Location = new System.Drawing.Point(770, 6);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(58, 22);
-            this.label17.TabIndex = 4;
-            this.label17.Text = "Year:";
+            this.StatYearLabel.AutoSize = true;
+            this.StatYearLabel.Font = new System.Drawing.Font("Verdana", 9F);
+            this.StatYearLabel.Location = new System.Drawing.Point(770, 6);
+            this.StatYearLabel.Name = "StatYearLabel";
+            this.StatYearLabel.Size = new System.Drawing.Size(58, 22);
+            this.StatYearLabel.TabIndex = 4;
+            this.StatYearLabel.Text = "Year:";
             // 
             // StatDateTimePicker_Year
             // 
@@ -1136,7 +1183,7 @@
             this.StatDateTimePicker_Year.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StatDateTimePicker_Year.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.StatDateTimePicker_Year.Location = new System.Drawing.Point(834, 3);
-            this.StatDateTimePicker_Year.MinDate = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
+            this.StatDateTimePicker_Year.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.StatDateTimePicker_Year.Name = "StatDateTimePicker_Year";
             this.StatDateTimePicker_Year.ShowUpDown = true;
             this.StatDateTimePicker_Year.Size = new System.Drawing.Size(94, 29);
@@ -1153,6 +1200,7 @@
             this.StatCheckBox_ShowAll.Size = new System.Drawing.Size(195, 26);
             this.StatCheckBox_ShowAll.TabIndex = 2;
             this.StatCheckBox_ShowAll.Text = "Show all products";
+            this.toolTip1.SetToolTip(this.StatCheckBox_ShowAll, "Check to show inactive products");
             this.StatCheckBox_ShowAll.UseVisualStyleBackColor = true;
             this.StatCheckBox_ShowAll.CheckedChanged += new System.EventHandler(this.StatCheckBox_ShowAll_CheckedChanged);
             // 
@@ -1176,6 +1224,7 @@
             this.StatListView_Sales.UseCompatibleStateImageBehavior = false;
             this.StatListView_Sales.View = System.Windows.Forms.View.Details;
             this.StatListView_Sales.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.SortListViewOnColumnClick);
+            this.StatListView_Sales.SelectedIndexChanged += new System.EventHandler(this.StatListView_Sales_SelectedIndexChanged);
             // 
             // StatColumnHeader1_ProductCode
             // 
@@ -1187,14 +1236,14 @@
             this.StatColumnHeader2_Title.Text = "Title";
             this.StatColumnHeader2_Title.Width = 825;
             // 
-            // panel1
+            // StatSalesPanel
             // 
-            this.panel1.Controls.Add(this.SalesTableLayoutPanel);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(689, 815);
-            this.panel1.TabIndex = 1;
+            this.StatSalesPanel.Controls.Add(this.SalesTableLayoutPanel);
+            this.StatSalesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatSalesPanel.Location = new System.Drawing.Point(0, 0);
+            this.StatSalesPanel.Name = "StatSalesPanel";
+            this.StatSalesPanel.Size = new System.Drawing.Size(689, 815);
+            this.StatSalesPanel.TabIndex = 1;
             // 
             // SalesTableLayoutPanel
             // 
@@ -1207,18 +1256,46 @@
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabelQuantity, 1, 0);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabelGrossAmount, 2, 0);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_January, 0, 2);
-            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_Februari, 0, 3);
-            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_Mars, 0, 4);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_February, 0, 3);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_March, 0, 4);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_April, 0, 5);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_May, 0, 6);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_June, 0, 7);
-            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_Juli, 0, 8);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_July, 0, 8);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_August, 0, 9);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_September, 0, 10);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_October, 0, 11);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_November, 0, 12);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_December, 0, 13);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_Yearly, 0, 14);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_AllTime_QTY, 1, 1);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_AllTime_Gross, 2, 1);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_January_QTY, 1, 2);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_January_Gross, 2, 2);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_February_QTY, 1, 3);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_February_Gross, 2, 3);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_March_QTY, 1, 4);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_March_Gross, 2, 4);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_April_QTY, 1, 5);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_April_Gross, 2, 5);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_May_QTY, 1, 6);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_May_Gross, 2, 6);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_June_QTY, 1, 7);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_June_Gross, 2, 7);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_July_QTY, 1, 8);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_July_Gross, 2, 8);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_August_QTY, 1, 9);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_August_Gross, 2, 9);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_September_QTY, 1, 10);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_September_Gross, 2, 10);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_October_QTY, 1, 11);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_October_Gross, 2, 11);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_November_QTY, 1, 12);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_November_Gross, 2, 12);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_December_QTY, 1, 13);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_December_Gross, 2, 13);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_Yearly_QTY, 1, 14);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_Yearly_Gross, 2, 14);
             this.SalesTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SalesTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.SalesTableLayoutPanel.Name = "SalesTableLayoutPanel";
@@ -1252,6 +1329,7 @@
             this.StatLabel_AllTime.TabIndex = 0;
             this.StatLabel_AllTime.Text = "All Time";
             this.StatLabel_AllTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_AllTime, "Double click to copy text");
             // 
             // StatLabelQuantity
             // 
@@ -1288,30 +1366,33 @@
             this.StatLabel_January.TabIndex = 3;
             this.StatLabel_January.Text = "Jan";
             this.StatLabel_January.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_January, "Double click to copy text");
             // 
-            // StatLabel_Februari
+            // StatLabel_February
             // 
-            this.StatLabel_Februari.AutoSize = true;
-            this.StatLabel_Februari.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatLabel_Februari.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.StatLabel_Februari.Location = new System.Drawing.Point(4, 163);
-            this.StatLabel_Februari.Name = "StatLabel_Februari";
-            this.StatLabel_Februari.Size = new System.Drawing.Size(222, 53);
-            this.StatLabel_Februari.TabIndex = 4;
-            this.StatLabel_Februari.Text = "Feb";
-            this.StatLabel_Februari.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StatLabel_February.AutoSize = true;
+            this.StatLabel_February.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_February.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.StatLabel_February.Location = new System.Drawing.Point(4, 163);
+            this.StatLabel_February.Name = "StatLabel_February";
+            this.StatLabel_February.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_February.TabIndex = 4;
+            this.StatLabel_February.Text = "Feb";
+            this.StatLabel_February.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_February, "Double click to copy text");
             // 
-            // StatLabel_Mars
+            // StatLabel_March
             // 
-            this.StatLabel_Mars.AutoSize = true;
-            this.StatLabel_Mars.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatLabel_Mars.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.StatLabel_Mars.Location = new System.Drawing.Point(4, 217);
-            this.StatLabel_Mars.Name = "StatLabel_Mars";
-            this.StatLabel_Mars.Size = new System.Drawing.Size(222, 53);
-            this.StatLabel_Mars.TabIndex = 5;
-            this.StatLabel_Mars.Text = "Mar";
-            this.StatLabel_Mars.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StatLabel_March.AutoSize = true;
+            this.StatLabel_March.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_March.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.StatLabel_March.Location = new System.Drawing.Point(4, 217);
+            this.StatLabel_March.Name = "StatLabel_March";
+            this.StatLabel_March.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_March.TabIndex = 5;
+            this.StatLabel_March.Text = "Mar";
+            this.StatLabel_March.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_March, "Double click to copy text");
             // 
             // StatLabel_April
             // 
@@ -1324,6 +1405,7 @@
             this.StatLabel_April.TabIndex = 6;
             this.StatLabel_April.Text = "Apr";
             this.StatLabel_April.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_April, "Double click to copy text");
             // 
             // StatLabel_May
             // 
@@ -1336,6 +1418,7 @@
             this.StatLabel_May.TabIndex = 7;
             this.StatLabel_May.Text = "May";
             this.StatLabel_May.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_May, "Double click to copy text");
             // 
             // StatLabel_June
             // 
@@ -1348,18 +1431,20 @@
             this.StatLabel_June.TabIndex = 8;
             this.StatLabel_June.Text = "Jun";
             this.StatLabel_June.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_June, "Double click to copy text");
             // 
-            // StatLabel_Juli
+            // StatLabel_July
             // 
-            this.StatLabel_Juli.AutoSize = true;
-            this.StatLabel_Juli.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatLabel_Juli.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
-            this.StatLabel_Juli.Location = new System.Drawing.Point(4, 433);
-            this.StatLabel_Juli.Name = "StatLabel_Juli";
-            this.StatLabel_Juli.Size = new System.Drawing.Size(222, 53);
-            this.StatLabel_Juli.TabIndex = 9;
-            this.StatLabel_Juli.Text = "Jul";
-            this.StatLabel_Juli.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StatLabel_July.AutoSize = true;
+            this.StatLabel_July.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_July.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold);
+            this.StatLabel_July.Location = new System.Drawing.Point(4, 433);
+            this.StatLabel_July.Name = "StatLabel_July";
+            this.StatLabel_July.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_July.TabIndex = 9;
+            this.StatLabel_July.Text = "Jul";
+            this.StatLabel_July.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_July, "Double click to copy text");
             // 
             // StatLabel_August
             // 
@@ -1372,6 +1457,7 @@
             this.StatLabel_August.TabIndex = 10;
             this.StatLabel_August.Text = "Aug";
             this.StatLabel_August.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_August, "Double click to copy text");
             // 
             // StatLabel_September
             // 
@@ -1384,6 +1470,7 @@
             this.StatLabel_September.TabIndex = 11;
             this.StatLabel_September.Text = "Sep";
             this.StatLabel_September.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_September, "Double click to copy text");
             // 
             // StatLabel_October
             // 
@@ -1396,6 +1483,7 @@
             this.StatLabel_October.TabIndex = 12;
             this.StatLabel_October.Text = "Oct";
             this.StatLabel_October.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_October, "Double click to copy text");
             // 
             // StatLabel_November
             // 
@@ -1408,6 +1496,7 @@
             this.StatLabel_November.TabIndex = 13;
             this.StatLabel_November.Text = "Nov";
             this.StatLabel_November.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_November, "Double click to copy text");
             // 
             // StatLabel_December
             // 
@@ -1420,6 +1509,7 @@
             this.StatLabel_December.TabIndex = 14;
             this.StatLabel_December.Text = "Dec";
             this.StatLabel_December.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_December, "Double click to copy text");
             // 
             // StatLabel_Yearly
             // 
@@ -1432,10 +1522,348 @@
             this.StatLabel_Yearly.TabIndex = 15;
             this.StatLabel_Yearly.Text = "Total 2020";
             this.StatLabel_Yearly.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip1.SetToolTip(this.StatLabel_Yearly, "Double click to copy text");
+            // 
+            // StatLabel_AllTime_QTY
+            // 
+            this.StatLabel_AllTime_QTY.AutoSize = true;
+            this.StatLabel_AllTime_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_AllTime_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_AllTime_QTY.Location = new System.Drawing.Point(233, 55);
+            this.StatLabel_AllTime_QTY.Name = "StatLabel_AllTime_QTY";
+            this.StatLabel_AllTime_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_AllTime_QTY.TabIndex = 16;
+            this.StatLabel_AllTime_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_AllTime_QTY, "Double click to copy text");
+            // 
+            // StatLabel_AllTime_Gross
+            // 
+            this.StatLabel_AllTime_Gross.AutoSize = true;
+            this.StatLabel_AllTime_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_AllTime_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_AllTime_Gross.Location = new System.Drawing.Point(462, 55);
+            this.StatLabel_AllTime_Gross.Name = "StatLabel_AllTime_Gross";
+            this.StatLabel_AllTime_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_AllTime_Gross.TabIndex = 17;
+            this.StatLabel_AllTime_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_AllTime_Gross, "Double click to copy text");
+            // 
+            // StatLabel_January_QTY
+            // 
+            this.StatLabel_January_QTY.AutoSize = true;
+            this.StatLabel_January_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_January_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_January_QTY.Location = new System.Drawing.Point(233, 109);
+            this.StatLabel_January_QTY.Name = "StatLabel_January_QTY";
+            this.StatLabel_January_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_January_QTY.TabIndex = 18;
+            this.StatLabel_January_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_January_QTY, "Double click to copy text");
+            // 
+            // StatLabel_January_Gross
+            // 
+            this.StatLabel_January_Gross.AutoSize = true;
+            this.StatLabel_January_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_January_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_January_Gross.Location = new System.Drawing.Point(462, 109);
+            this.StatLabel_January_Gross.Name = "StatLabel_January_Gross";
+            this.StatLabel_January_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_January_Gross.TabIndex = 19;
+            this.StatLabel_January_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_January_Gross, "Double click to copy text");
+            // 
+            // StatLabel_February_QTY
+            // 
+            this.StatLabel_February_QTY.AutoSize = true;
+            this.StatLabel_February_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_February_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_February_QTY.Location = new System.Drawing.Point(233, 163);
+            this.StatLabel_February_QTY.Name = "StatLabel_February_QTY";
+            this.StatLabel_February_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_February_QTY.TabIndex = 20;
+            this.StatLabel_February_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_February_QTY, "Double click to copy text");
+            // 
+            // StatLabel_February_Gross
+            // 
+            this.StatLabel_February_Gross.AutoSize = true;
+            this.StatLabel_February_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_February_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_February_Gross.Location = new System.Drawing.Point(462, 163);
+            this.StatLabel_February_Gross.Name = "StatLabel_February_Gross";
+            this.StatLabel_February_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_February_Gross.TabIndex = 21;
+            this.StatLabel_February_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_February_Gross, "Double click to copy text");
+            // 
+            // StatLabel_March_QTY
+            // 
+            this.StatLabel_March_QTY.AutoSize = true;
+            this.StatLabel_March_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_March_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_March_QTY.Location = new System.Drawing.Point(233, 217);
+            this.StatLabel_March_QTY.Name = "StatLabel_March_QTY";
+            this.StatLabel_March_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_March_QTY.TabIndex = 22;
+            this.StatLabel_March_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_March_QTY, "Double click to copy text");
+            // 
+            // StatLabel_March_Gross
+            // 
+            this.StatLabel_March_Gross.AutoSize = true;
+            this.StatLabel_March_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_March_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_March_Gross.Location = new System.Drawing.Point(462, 217);
+            this.StatLabel_March_Gross.Name = "StatLabel_March_Gross";
+            this.StatLabel_March_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_March_Gross.TabIndex = 23;
+            this.StatLabel_March_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_March_Gross, "Double click to copy text");
+            // 
+            // StatLabel_April_QTY
+            // 
+            this.StatLabel_April_QTY.AutoSize = true;
+            this.StatLabel_April_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_April_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_April_QTY.Location = new System.Drawing.Point(233, 271);
+            this.StatLabel_April_QTY.Name = "StatLabel_April_QTY";
+            this.StatLabel_April_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_April_QTY.TabIndex = 24;
+            this.StatLabel_April_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_April_QTY, "Double click to copy text");
+            // 
+            // StatLabel_April_Gross
+            // 
+            this.StatLabel_April_Gross.AutoSize = true;
+            this.StatLabel_April_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_April_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_April_Gross.Location = new System.Drawing.Point(462, 271);
+            this.StatLabel_April_Gross.Name = "StatLabel_April_Gross";
+            this.StatLabel_April_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_April_Gross.TabIndex = 25;
+            this.StatLabel_April_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_April_Gross, "Double click to copy text");
+            // 
+            // StatLabel_May_QTY
+            // 
+            this.StatLabel_May_QTY.AutoSize = true;
+            this.StatLabel_May_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_May_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_May_QTY.Location = new System.Drawing.Point(233, 325);
+            this.StatLabel_May_QTY.Name = "StatLabel_May_QTY";
+            this.StatLabel_May_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_May_QTY.TabIndex = 26;
+            this.StatLabel_May_QTY.Text = "\r\n";
+            this.StatLabel_May_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_May_QTY, "Double click to copy text");
+            // 
+            // StatLabel_May_Gross
+            // 
+            this.StatLabel_May_Gross.AutoSize = true;
+            this.StatLabel_May_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_May_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_May_Gross.Location = new System.Drawing.Point(462, 325);
+            this.StatLabel_May_Gross.Name = "StatLabel_May_Gross";
+            this.StatLabel_May_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_May_Gross.TabIndex = 27;
+            this.StatLabel_May_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_May_Gross, "Double click to copy text");
+            // 
+            // StatLabel_June_QTY
+            // 
+            this.StatLabel_June_QTY.AutoSize = true;
+            this.StatLabel_June_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_June_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_June_QTY.Location = new System.Drawing.Point(233, 379);
+            this.StatLabel_June_QTY.Name = "StatLabel_June_QTY";
+            this.StatLabel_June_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_June_QTY.TabIndex = 28;
+            this.StatLabel_June_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_June_QTY, "Double click to copy text");
+            // 
+            // StatLabel_June_Gross
+            // 
+            this.StatLabel_June_Gross.AutoSize = true;
+            this.StatLabel_June_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_June_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_June_Gross.Location = new System.Drawing.Point(462, 379);
+            this.StatLabel_June_Gross.Name = "StatLabel_June_Gross";
+            this.StatLabel_June_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_June_Gross.TabIndex = 29;
+            this.StatLabel_June_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_June_Gross, "Double click to copy text");
+            // 
+            // StatLabel_July_QTY
+            // 
+            this.StatLabel_July_QTY.AutoSize = true;
+            this.StatLabel_July_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_July_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_July_QTY.Location = new System.Drawing.Point(233, 433);
+            this.StatLabel_July_QTY.Name = "StatLabel_July_QTY";
+            this.StatLabel_July_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_July_QTY.TabIndex = 30;
+            this.StatLabel_July_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_July_QTY, "Double click to copy text");
+            // 
+            // StatLabel_July_Gross
+            // 
+            this.StatLabel_July_Gross.AutoSize = true;
+            this.StatLabel_July_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_July_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_July_Gross.Location = new System.Drawing.Point(462, 433);
+            this.StatLabel_July_Gross.Name = "StatLabel_July_Gross";
+            this.StatLabel_July_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_July_Gross.TabIndex = 31;
+            this.StatLabel_July_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_July_Gross, "Double click to copy text");
+            // 
+            // StatLabel_August_QTY
+            // 
+            this.StatLabel_August_QTY.AutoSize = true;
+            this.StatLabel_August_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_August_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_August_QTY.Location = new System.Drawing.Point(233, 487);
+            this.StatLabel_August_QTY.Name = "StatLabel_August_QTY";
+            this.StatLabel_August_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_August_QTY.TabIndex = 32;
+            this.StatLabel_August_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_August_QTY, "Double click to copy text");
+            // 
+            // StatLabel_August_Gross
+            // 
+            this.StatLabel_August_Gross.AutoSize = true;
+            this.StatLabel_August_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_August_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_August_Gross.Location = new System.Drawing.Point(462, 487);
+            this.StatLabel_August_Gross.Name = "StatLabel_August_Gross";
+            this.StatLabel_August_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_August_Gross.TabIndex = 33;
+            this.StatLabel_August_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_August_Gross, "Double click to copy text");
+            // 
+            // StatLabel_September_QTY
+            // 
+            this.StatLabel_September_QTY.AutoSize = true;
+            this.StatLabel_September_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_September_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_September_QTY.Location = new System.Drawing.Point(233, 541);
+            this.StatLabel_September_QTY.Name = "StatLabel_September_QTY";
+            this.StatLabel_September_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_September_QTY.TabIndex = 34;
+            this.StatLabel_September_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_September_QTY, "Double click to copy text");
+            // 
+            // StatLabel_September_Gross
+            // 
+            this.StatLabel_September_Gross.AutoSize = true;
+            this.StatLabel_September_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_September_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_September_Gross.Location = new System.Drawing.Point(462, 541);
+            this.StatLabel_September_Gross.Name = "StatLabel_September_Gross";
+            this.StatLabel_September_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_September_Gross.TabIndex = 35;
+            this.StatLabel_September_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_September_Gross, "Double click to copy text");
+            // 
+            // StatLabel_October_QTY
+            // 
+            this.StatLabel_October_QTY.AutoSize = true;
+            this.StatLabel_October_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_October_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_October_QTY.Location = new System.Drawing.Point(233, 595);
+            this.StatLabel_October_QTY.Name = "StatLabel_October_QTY";
+            this.StatLabel_October_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_October_QTY.TabIndex = 36;
+            this.StatLabel_October_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_October_QTY, "Double click to copy text");
+            // 
+            // StatLabel_October_Gross
+            // 
+            this.StatLabel_October_Gross.AutoSize = true;
+            this.StatLabel_October_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_October_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_October_Gross.Location = new System.Drawing.Point(462, 595);
+            this.StatLabel_October_Gross.Name = "StatLabel_October_Gross";
+            this.StatLabel_October_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_October_Gross.TabIndex = 37;
+            this.StatLabel_October_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_October_Gross, "Double click to copy text");
+            // 
+            // StatLabel_November_QTY
+            // 
+            this.StatLabel_November_QTY.AutoSize = true;
+            this.StatLabel_November_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_November_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_November_QTY.Location = new System.Drawing.Point(233, 649);
+            this.StatLabel_November_QTY.Name = "StatLabel_November_QTY";
+            this.StatLabel_November_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_November_QTY.TabIndex = 38;
+            this.StatLabel_November_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_November_QTY, "Double click to copy text");
+            // 
+            // StatLabel_November_Gross
+            // 
+            this.StatLabel_November_Gross.AutoSize = true;
+            this.StatLabel_November_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_November_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_November_Gross.Location = new System.Drawing.Point(462, 649);
+            this.StatLabel_November_Gross.Name = "StatLabel_November_Gross";
+            this.StatLabel_November_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_November_Gross.TabIndex = 39;
+            this.StatLabel_November_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_November_Gross, "Double click to copy text");
+            // 
+            // StatLabel_December_QTY
+            // 
+            this.StatLabel_December_QTY.AutoSize = true;
+            this.StatLabel_December_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_December_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_December_QTY.Location = new System.Drawing.Point(233, 703);
+            this.StatLabel_December_QTY.Name = "StatLabel_December_QTY";
+            this.StatLabel_December_QTY.Size = new System.Drawing.Size(222, 53);
+            this.StatLabel_December_QTY.TabIndex = 40;
+            this.StatLabel_December_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_December_QTY, "Double click to copy text");
+            // 
+            // StatLabel_December_Gross
+            // 
+            this.StatLabel_December_Gross.AutoSize = true;
+            this.StatLabel_December_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_December_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_December_Gross.Location = new System.Drawing.Point(462, 703);
+            this.StatLabel_December_Gross.Name = "StatLabel_December_Gross";
+            this.StatLabel_December_Gross.Size = new System.Drawing.Size(223, 53);
+            this.StatLabel_December_Gross.TabIndex = 41;
+            this.StatLabel_December_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_December_Gross, "Double click to copy text");
+            // 
+            // StatLabel_Yearly_QTY
+            // 
+            this.StatLabel_Yearly_QTY.AutoSize = true;
+            this.StatLabel_Yearly_QTY.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_Yearly_QTY.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_Yearly_QTY.Location = new System.Drawing.Point(233, 757);
+            this.StatLabel_Yearly_QTY.Name = "StatLabel_Yearly_QTY";
+            this.StatLabel_Yearly_QTY.Size = new System.Drawing.Size(222, 57);
+            this.StatLabel_Yearly_QTY.TabIndex = 42;
+            this.StatLabel_Yearly_QTY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_Yearly_QTY, "Double click to copy text");
+            // 
+            // StatLabel_Yearly_Gross
+            // 
+            this.StatLabel_Yearly_Gross.AutoSize = true;
+            this.StatLabel_Yearly_Gross.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatLabel_Yearly_Gross.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_Yearly_Gross.Location = new System.Drawing.Point(462, 757);
+            this.StatLabel_Yearly_Gross.Name = "StatLabel_Yearly_Gross";
+            this.StatLabel_Yearly_Gross.Size = new System.Drawing.Size(223, 57);
+            this.StatLabel_Yearly_Gross.TabIndex = 43;
+            this.StatLabel_Yearly_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.StatLabel_Yearly_Gross, "Double click to copy text");
             // 
             // Top10TabPage
             // 
-            this.Top10TabPage.Controls.Add(this.StatTableLayoutPanel_Charts);
+            this.Top10TabPage.Controls.Add(this.Top10TableLayoutPanel_Charts);
             this.Top10TabPage.Location = new System.Drawing.Point(4, 38);
             this.Top10TabPage.Name = "Top10TabPage";
             this.Top10TabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -1444,61 +1872,37 @@
             this.Top10TabPage.Text = "Top 10";
             this.Top10TabPage.UseVisualStyleBackColor = true;
             // 
-            // StatTableLayoutPanel_Charts
+            // Top10TableLayoutPanel_Charts
             // 
-            this.StatTableLayoutPanel_Charts.ColumnCount = 3;
-            this.StatTableLayoutPanel_Charts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
-            this.StatTableLayoutPanel_Charts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.StatTableLayoutPanel_Charts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.StatTableLayoutPanel_Charts.Controls.Add(this.StatButton_Month, 2, 1);
-            this.StatTableLayoutPanel_Charts.Controls.Add(this.StatButton_Year, 1, 1);
-            this.StatTableLayoutPanel_Charts.Controls.Add(this.StatPanel_Music, 2, 0);
-            this.StatTableLayoutPanel_Charts.Controls.Add(this.StatPanel_Movies, 1, 0);
-            this.StatTableLayoutPanel_Charts.Controls.Add(this.StatPanel_Books, 0, 0);
-            this.StatTableLayoutPanel_Charts.Controls.Add(this.StatButton_AllTime, 0, 1);
-            this.StatTableLayoutPanel_Charts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatTableLayoutPanel_Charts.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
-            this.StatTableLayoutPanel_Charts.Location = new System.Drawing.Point(3, 3);
-            this.StatTableLayoutPanel_Charts.Name = "StatTableLayoutPanel_Charts";
-            this.StatTableLayoutPanel_Charts.RowCount = 2;
-            this.StatTableLayoutPanel_Charts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.StatTableLayoutPanel_Charts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
-            this.StatTableLayoutPanel_Charts.Size = new System.Drawing.Size(1636, 817);
-            this.StatTableLayoutPanel_Charts.TabIndex = 1;
+            this.Top10TableLayoutPanel_Charts.ColumnCount = 3;
+            this.Top10TableLayoutPanel_Charts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33332F));
+            this.Top10TableLayoutPanel_Charts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.Top10TableLayoutPanel_Charts.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.Top10TableLayoutPanel_Charts.Controls.Add(this.Top10Panel_Music, 2, 0);
+            this.Top10TableLayoutPanel_Charts.Controls.Add(this.Top10Panel_Movies, 1, 0);
+            this.Top10TableLayoutPanel_Charts.Controls.Add(this.Top10Panel_Books, 0, 0);
+            this.Top10TableLayoutPanel_Charts.Controls.Add(this.Top10TableLayoutPanel_Buttons, 1, 1);
+            this.Top10TableLayoutPanel_Charts.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Top10TableLayoutPanel_Charts.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
+            this.Top10TableLayoutPanel_Charts.Location = new System.Drawing.Point(3, 3);
+            this.Top10TableLayoutPanel_Charts.Name = "Top10TableLayoutPanel_Charts";
+            this.Top10TableLayoutPanel_Charts.RowCount = 2;
+            this.Top10TableLayoutPanel_Charts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Top10TableLayoutPanel_Charts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.Top10TableLayoutPanel_Charts.Size = new System.Drawing.Size(1636, 817);
+            this.Top10TableLayoutPanel_Charts.TabIndex = 1;
             // 
-            // StatButton_Month
+            // Top10Panel_Music
             // 
-            this.StatButton_Month.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatButton_Month.Location = new System.Drawing.Point(1093, 775);
-            this.StatButton_Month.Name = "StatButton_Month";
-            this.StatButton_Month.Size = new System.Drawing.Size(540, 39);
-            this.StatButton_Month.TabIndex = 7;
-            this.StatButton_Month.Text = "This Month";
-            this.StatButton_Month.UseVisualStyleBackColor = true;
-            this.StatButton_Month.Click += new System.EventHandler(this.StatButton_Month_Click);
-            // 
-            // StatButton_Year
-            // 
-            this.StatButton_Year.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatButton_Year.Location = new System.Drawing.Point(548, 775);
-            this.StatButton_Year.Name = "StatButton_Year";
-            this.StatButton_Year.Size = new System.Drawing.Size(539, 39);
-            this.StatButton_Year.TabIndex = 6;
-            this.StatButton_Year.Text = "This Year";
-            this.StatButton_Year.UseVisualStyleBackColor = true;
-            this.StatButton_Year.Click += new System.EventHandler(this.StatButton_Year_Click);
-            // 
-            // StatPanel_Music
-            // 
-            this.StatPanel_Music.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StatPanel_Music.Controls.Add(this.Top10MusicCheckBox);
-            this.StatPanel_Music.Controls.Add(this.StatListView_Music);
-            this.StatPanel_Music.Controls.Add(this.StatLabel_Music);
-            this.StatPanel_Music.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatPanel_Music.Location = new System.Drawing.Point(1093, 3);
-            this.StatPanel_Music.Name = "StatPanel_Music";
-            this.StatPanel_Music.Size = new System.Drawing.Size(540, 766);
-            this.StatPanel_Music.TabIndex = 0;
+            this.Top10Panel_Music.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Top10Panel_Music.Controls.Add(this.Top10MusicCheckBox);
+            this.Top10Panel_Music.Controls.Add(this.Top10ListView_Music);
+            this.Top10Panel_Music.Controls.Add(this.Top10Label_Music);
+            this.Top10Panel_Music.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Top10Panel_Music.Location = new System.Drawing.Point(1093, 3);
+            this.Top10Panel_Music.Name = "Top10Panel_Music";
+            this.Top10Panel_Music.Size = new System.Drawing.Size(540, 766);
+            this.Top10Panel_Music.TabIndex = 0;
             // 
             // Top10MusicCheckBox
             // 
@@ -1506,32 +1910,35 @@
             this.Top10MusicCheckBox.AutoSize = true;
             this.Top10MusicCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Top10MusicCheckBox.Font = new System.Drawing.Font("Verdana", 8F);
-            this.Top10MusicCheckBox.Location = new System.Drawing.Point(356, 3);
+            this.Top10MusicCheckBox.Location = new System.Drawing.Point(355, 3);
             this.Top10MusicCheckBox.Name = "Top10MusicCheckBox";
             this.Top10MusicCheckBox.Size = new System.Drawing.Size(179, 22);
             this.Top10MusicCheckBox.TabIndex = 4;
+            this.Top10MusicCheckBox.TabStop = false;
             this.Top10MusicCheckBox.Text = "Show all products";
+            this.toolTip1.SetToolTip(this.Top10MusicCheckBox, "Check to show inactive products");
             this.Top10MusicCheckBox.UseVisualStyleBackColor = true;
             // 
-            // StatListView_Music
+            // Top10ListView_Music
             // 
-            this.StatListView_Music.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Top10ListView_Music.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.StatListView_Music.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.StatListView_Music.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Top10ListView_Music.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Top10ListView_Music.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.StatMusicColumnHeader1_Rank,
             this.StatMusicColumnHeader1_Pn,
             this.StatMusicColumnHeader2_Title,
             this.StatMusicColumnHeader1_QTY});
-            this.StatListView_Music.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatListView_Music.HideSelection = false;
-            this.StatListView_Music.Location = new System.Drawing.Point(0, 37);
-            this.StatListView_Music.Name = "StatListView_Music";
-            this.StatListView_Music.Size = new System.Drawing.Size(537, 727);
-            this.StatListView_Music.TabIndex = 3;
-            this.StatListView_Music.UseCompatibleStateImageBehavior = false;
-            this.StatListView_Music.View = System.Windows.Forms.View.Details;
+            this.Top10ListView_Music.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Top10ListView_Music.HideSelection = false;
+            this.Top10ListView_Music.Location = new System.Drawing.Point(0, 37);
+            this.Top10ListView_Music.Name = "Top10ListView_Music";
+            this.Top10ListView_Music.Size = new System.Drawing.Size(537, 727);
+            this.Top10ListView_Music.TabIndex = 3;
+            this.Top10ListView_Music.TabStop = false;
+            this.Top10ListView_Music.UseCompatibleStateImageBehavior = false;
+            this.Top10ListView_Music.View = System.Windows.Forms.View.Details;
             // 
             // StatMusicColumnHeader1_Rank
             // 
@@ -1551,28 +1958,28 @@
             // 
             this.StatMusicColumnHeader1_QTY.Text = "Qty";
             // 
-            // StatLabel_Music
+            // Top10Label_Music
             // 
-            this.StatLabel_Music.AutoSize = true;
-            this.StatLabel_Music.Dock = System.Windows.Forms.DockStyle.Top;
-            this.StatLabel_Music.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatLabel_Music.Location = new System.Drawing.Point(0, 0);
-            this.StatLabel_Music.Name = "StatLabel_Music";
-            this.StatLabel_Music.Size = new System.Drawing.Size(96, 34);
-            this.StatLabel_Music.TabIndex = 0;
-            this.StatLabel_Music.Text = "Music";
+            this.Top10Label_Music.AutoSize = true;
+            this.Top10Label_Music.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Top10Label_Music.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Top10Label_Music.Location = new System.Drawing.Point(0, 0);
+            this.Top10Label_Music.Name = "Top10Label_Music";
+            this.Top10Label_Music.Size = new System.Drawing.Size(96, 34);
+            this.Top10Label_Music.TabIndex = 0;
+            this.Top10Label_Music.Text = "Music";
             // 
-            // StatPanel_Movies
+            // Top10Panel_Movies
             // 
-            this.StatPanel_Movies.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StatPanel_Movies.Controls.Add(this.Top10MoviesCheckBox);
-            this.StatPanel_Movies.Controls.Add(this.StatListView_Movies);
-            this.StatPanel_Movies.Controls.Add(this.StatLabel_Movies);
-            this.StatPanel_Movies.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatPanel_Movies.Location = new System.Drawing.Point(548, 3);
-            this.StatPanel_Movies.Name = "StatPanel_Movies";
-            this.StatPanel_Movies.Size = new System.Drawing.Size(539, 766);
-            this.StatPanel_Movies.TabIndex = 0;
+            this.Top10Panel_Movies.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Top10Panel_Movies.Controls.Add(this.Top10MoviesCheckBox);
+            this.Top10Panel_Movies.Controls.Add(this.Top10ListView_Movies);
+            this.Top10Panel_Movies.Controls.Add(this.Top10Label_Movies);
+            this.Top10Panel_Movies.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Top10Panel_Movies.Location = new System.Drawing.Point(548, 3);
+            this.Top10Panel_Movies.Name = "Top10Panel_Movies";
+            this.Top10Panel_Movies.Size = new System.Drawing.Size(539, 766);
+            this.Top10Panel_Movies.TabIndex = 0;
             // 
             // Top10MoviesCheckBox
             // 
@@ -1580,32 +1987,35 @@
             this.Top10MoviesCheckBox.AutoSize = true;
             this.Top10MoviesCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.Top10MoviesCheckBox.Font = new System.Drawing.Font("Verdana", 8F);
-            this.Top10MoviesCheckBox.Location = new System.Drawing.Point(358, 3);
+            this.Top10MoviesCheckBox.Location = new System.Drawing.Point(355, 3);
             this.Top10MoviesCheckBox.Name = "Top10MoviesCheckBox";
             this.Top10MoviesCheckBox.Size = new System.Drawing.Size(179, 22);
             this.Top10MoviesCheckBox.TabIndex = 3;
+            this.Top10MoviesCheckBox.TabStop = false;
             this.Top10MoviesCheckBox.Text = "Show all products";
+            this.toolTip1.SetToolTip(this.Top10MoviesCheckBox, "Check to show inactive products");
             this.Top10MoviesCheckBox.UseVisualStyleBackColor = true;
             // 
-            // StatListView_Movies
+            // Top10ListView_Movies
             // 
-            this.StatListView_Movies.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Top10ListView_Movies.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.StatListView_Movies.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.StatListView_Movies.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Top10ListView_Movies.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Top10ListView_Movies.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.StatMoviesColumnHeader1_Rank,
             this.StatMoviesColumnHeader2_Pn,
             this.StatMoviesColumnHeader3_Title,
             this.StatMoviesColumnHeader4_QTY});
-            this.StatListView_Movies.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatListView_Movies.HideSelection = false;
-            this.StatListView_Movies.Location = new System.Drawing.Point(0, 37);
-            this.StatListView_Movies.Name = "StatListView_Movies";
-            this.StatListView_Movies.Size = new System.Drawing.Size(537, 727);
-            this.StatListView_Movies.TabIndex = 2;
-            this.StatListView_Movies.UseCompatibleStateImageBehavior = false;
-            this.StatListView_Movies.View = System.Windows.Forms.View.Details;
+            this.Top10ListView_Movies.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Top10ListView_Movies.HideSelection = false;
+            this.Top10ListView_Movies.Location = new System.Drawing.Point(0, 37);
+            this.Top10ListView_Movies.Name = "Top10ListView_Movies";
+            this.Top10ListView_Movies.Size = new System.Drawing.Size(537, 727);
+            this.Top10ListView_Movies.TabIndex = 2;
+            this.Top10ListView_Movies.TabStop = false;
+            this.Top10ListView_Movies.UseCompatibleStateImageBehavior = false;
+            this.Top10ListView_Movies.View = System.Windows.Forms.View.Details;
             // 
             // StatMoviesColumnHeader1_Rank
             // 
@@ -1625,28 +2035,28 @@
             // 
             this.StatMoviesColumnHeader4_QTY.Text = "Qty";
             // 
-            // StatLabel_Movies
+            // Top10Label_Movies
             // 
-            this.StatLabel_Movies.AutoSize = true;
-            this.StatLabel_Movies.Dock = System.Windows.Forms.DockStyle.Top;
-            this.StatLabel_Movies.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatLabel_Movies.Location = new System.Drawing.Point(0, 0);
-            this.StatLabel_Movies.Name = "StatLabel_Movies";
-            this.StatLabel_Movies.Size = new System.Drawing.Size(114, 34);
-            this.StatLabel_Movies.TabIndex = 0;
-            this.StatLabel_Movies.Text = "Movies";
+            this.Top10Label_Movies.AutoSize = true;
+            this.Top10Label_Movies.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Top10Label_Movies.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Top10Label_Movies.Location = new System.Drawing.Point(0, 0);
+            this.Top10Label_Movies.Name = "Top10Label_Movies";
+            this.Top10Label_Movies.Size = new System.Drawing.Size(114, 34);
+            this.Top10Label_Movies.TabIndex = 0;
+            this.Top10Label_Movies.Text = "Movies";
             // 
-            // StatPanel_Books
+            // Top10Panel_Books
             // 
-            this.StatPanel_Books.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StatPanel_Books.Controls.Add(this.Top10BooksCheckBox);
-            this.StatPanel_Books.Controls.Add(this.StatListView_Books);
-            this.StatPanel_Books.Controls.Add(this.StatLabel_Books);
-            this.StatPanel_Books.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatPanel_Books.Location = new System.Drawing.Point(3, 3);
-            this.StatPanel_Books.Name = "StatPanel_Books";
-            this.StatPanel_Books.Size = new System.Drawing.Size(539, 766);
-            this.StatPanel_Books.TabIndex = 0;
+            this.Top10Panel_Books.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Top10Panel_Books.Controls.Add(this.Top10BooksCheckBox);
+            this.Top10Panel_Books.Controls.Add(this.Top10ListView_Books);
+            this.Top10Panel_Books.Controls.Add(this.Top10Label_Books);
+            this.Top10Panel_Books.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Top10Panel_Books.Location = new System.Drawing.Point(3, 3);
+            this.Top10Panel_Books.Name = "Top10Panel_Books";
+            this.Top10Panel_Books.Size = new System.Drawing.Size(539, 766);
+            this.Top10Panel_Books.TabIndex = 0;
             // 
             // Top10BooksCheckBox
             // 
@@ -1658,28 +2068,31 @@
             this.Top10BooksCheckBox.Name = "Top10BooksCheckBox";
             this.Top10BooksCheckBox.Size = new System.Drawing.Size(179, 22);
             this.Top10BooksCheckBox.TabIndex = 2;
+            this.Top10BooksCheckBox.TabStop = false;
             this.Top10BooksCheckBox.Text = "Show all products";
+            this.toolTip1.SetToolTip(this.Top10BooksCheckBox, "Check to show inactive products");
             this.Top10BooksCheckBox.UseVisualStyleBackColor = true;
             // 
-            // StatListView_Books
+            // Top10ListView_Books
             // 
-            this.StatListView_Books.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.Top10ListView_Books.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.StatListView_Books.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.StatListView_Books.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Top10ListView_Books.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Top10ListView_Books.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.StatBooksColumnHeader1_Rank,
             this.StatBooksColumnHeader1_PN,
             this.StatBooksColumnHeader1_Title,
             this.StatBooksColumnHeader1_QTY});
-            this.StatListView_Books.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatListView_Books.HideSelection = false;
-            this.StatListView_Books.Location = new System.Drawing.Point(0, 37);
-            this.StatListView_Books.Name = "StatListView_Books";
-            this.StatListView_Books.Size = new System.Drawing.Size(537, 727);
-            this.StatListView_Books.TabIndex = 1;
-            this.StatListView_Books.UseCompatibleStateImageBehavior = false;
-            this.StatListView_Books.View = System.Windows.Forms.View.Details;
+            this.Top10ListView_Books.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Top10ListView_Books.HideSelection = false;
+            this.Top10ListView_Books.Location = new System.Drawing.Point(0, 37);
+            this.Top10ListView_Books.Name = "Top10ListView_Books";
+            this.Top10ListView_Books.Size = new System.Drawing.Size(537, 727);
+            this.Top10ListView_Books.TabIndex = 1;
+            this.Top10ListView_Books.TabStop = false;
+            this.Top10ListView_Books.UseCompatibleStateImageBehavior = false;
+            this.Top10ListView_Books.View = System.Windows.Forms.View.Details;
             // 
             // StatBooksColumnHeader1_Rank
             // 
@@ -1699,27 +2112,76 @@
             // 
             this.StatBooksColumnHeader1_QTY.Text = "Qty";
             // 
-            // StatLabel_Books
+            // Top10Label_Books
             // 
-            this.StatLabel_Books.AutoSize = true;
-            this.StatLabel_Books.Dock = System.Windows.Forms.DockStyle.Top;
-            this.StatLabel_Books.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatLabel_Books.Location = new System.Drawing.Point(0, 0);
-            this.StatLabel_Books.Name = "StatLabel_Books";
-            this.StatLabel_Books.Size = new System.Drawing.Size(100, 34);
-            this.StatLabel_Books.TabIndex = 0;
-            this.StatLabel_Books.Text = "Books";
+            this.Top10Label_Books.AutoSize = true;
+            this.Top10Label_Books.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Top10Label_Books.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Top10Label_Books.Location = new System.Drawing.Point(0, 0);
+            this.Top10Label_Books.Name = "Top10Label_Books";
+            this.Top10Label_Books.Size = new System.Drawing.Size(100, 34);
+            this.Top10Label_Books.TabIndex = 0;
+            this.Top10Label_Books.Text = "Books";
             // 
-            // StatButton_AllTime
+            // Top10TableLayoutPanel_Buttons
             // 
-            this.StatButton_AllTime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatButton_AllTime.Location = new System.Drawing.Point(3, 775);
-            this.StatButton_AllTime.Name = "StatButton_AllTime";
-            this.StatButton_AllTime.Size = new System.Drawing.Size(539, 39);
-            this.StatButton_AllTime.TabIndex = 5;
-            this.StatButton_AllTime.Text = "All Time";
-            this.StatButton_AllTime.UseVisualStyleBackColor = true;
-            this.StatButton_AllTime.Click += new System.EventHandler(this.StatButton_AllTime_Click);
+            this.Top10TableLayoutPanel_Buttons.ColumnCount = 3;
+            this.Top10TableLayoutPanel_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.Top10TableLayoutPanel_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.Top10TableLayoutPanel_Buttons.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.Top10TableLayoutPanel_Buttons.Controls.Add(this.Top10Button_AllTime, 0, 0);
+            this.Top10TableLayoutPanel_Buttons.Controls.Add(this.Top10Button_Month, 2, 0);
+            this.Top10TableLayoutPanel_Buttons.Controls.Add(this.Top10Button_Year, 1, 0);
+            this.Top10TableLayoutPanel_Buttons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Top10TableLayoutPanel_Buttons.Location = new System.Drawing.Point(548, 775);
+            this.Top10TableLayoutPanel_Buttons.MinimumSize = new System.Drawing.Size(539, 39);
+            this.Top10TableLayoutPanel_Buttons.Name = "Top10TableLayoutPanel_Buttons";
+            this.Top10TableLayoutPanel_Buttons.RowCount = 1;
+            this.Top10TableLayoutPanel_Buttons.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.Top10TableLayoutPanel_Buttons.Size = new System.Drawing.Size(539, 39);
+            this.Top10TableLayoutPanel_Buttons.TabIndex = 10;
+            // 
+            // Top10Button_AllTime
+            // 
+            this.Top10Button_AllTime.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Top10Button_AllTime.Location = new System.Drawing.Point(3, 3);
+            this.Top10Button_AllTime.MinimumSize = new System.Drawing.Size(173, 33);
+            this.Top10Button_AllTime.Name = "Top10Button_AllTime";
+            this.Top10Button_AllTime.Size = new System.Drawing.Size(173, 33);
+            this.Top10Button_AllTime.TabIndex = 1;
+            this.Top10Button_AllTime.Text = "All Time";
+            this.Top10Button_AllTime.UseVisualStyleBackColor = true;
+            this.Top10Button_AllTime.Click += new System.EventHandler(this.StatButton_AllTime_Click);
+            // 
+            // Top10Button_Month
+            // 
+            this.Top10Button_Month.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Top10Button_Month.Location = new System.Drawing.Point(361, 3);
+            this.Top10Button_Month.MinimumSize = new System.Drawing.Size(173, 33);
+            this.Top10Button_Month.Name = "Top10Button_Month";
+            this.Top10Button_Month.Size = new System.Drawing.Size(175, 33);
+            this.Top10Button_Month.TabIndex = 3;
+            this.Top10Button_Month.Text = "This Month";
+            this.Top10Button_Month.UseVisualStyleBackColor = true;
+            this.Top10Button_Month.Click += new System.EventHandler(this.StatButton_Month_Click);
+            // 
+            // Top10Button_Year
+            // 
+            this.Top10Button_Year.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Top10Button_Year.Location = new System.Drawing.Point(182, 3);
+            this.Top10Button_Year.MinimumSize = new System.Drawing.Size(173, 33);
+            this.Top10Button_Year.Name = "Top10Button_Year";
+            this.Top10Button_Year.Size = new System.Drawing.Size(173, 33);
+            this.Top10Button_Year.TabIndex = 2;
+            this.Top10Button_Year.Text = "This Year";
+            this.Top10Button_Year.UseVisualStyleBackColor = true;
+            this.Top10Button_Year.Click += new System.EventHandler(this.StatButton_Year_Click);
             // 
             // printPreviewDialog1
             // 
@@ -1795,17 +2257,18 @@
             this.StatTableLayoutPanel1_Sales.PerformLayout();
             this.StatPanel_Controls.ResumeLayout(false);
             this.StatPanel_Controls.PerformLayout();
-            this.panel1.ResumeLayout(false);
+            this.StatSalesPanel.ResumeLayout(false);
             this.SalesTableLayoutPanel.ResumeLayout(false);
             this.SalesTableLayoutPanel.PerformLayout();
             this.Top10TabPage.ResumeLayout(false);
-            this.StatTableLayoutPanel_Charts.ResumeLayout(false);
-            this.StatPanel_Music.ResumeLayout(false);
-            this.StatPanel_Music.PerformLayout();
-            this.StatPanel_Movies.ResumeLayout(false);
-            this.StatPanel_Movies.PerformLayout();
-            this.StatPanel_Books.ResumeLayout(false);
-            this.StatPanel_Books.PerformLayout();
+            this.Top10TableLayoutPanel_Charts.ResumeLayout(false);
+            this.Top10Panel_Music.ResumeLayout(false);
+            this.Top10Panel_Music.PerformLayout();
+            this.Top10Panel_Movies.ResumeLayout(false);
+            this.Top10Panel_Movies.PerformLayout();
+            this.Top10Panel_Books.ResumeLayout(false);
+            this.Top10Panel_Books.PerformLayout();
+            this.Top10TableLayoutPanel_Buttons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1895,38 +2358,38 @@
         private System.Windows.Forms.TabPage Top10TabPage;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
-        private System.Windows.Forms.TableLayoutPanel StatTableLayoutPanel_Charts;
-        private System.Windows.Forms.Button StatButton_Month;
-        private System.Windows.Forms.Button StatButton_Year;
-        private System.Windows.Forms.Panel StatPanel_Music;
-        private System.Windows.Forms.ListView StatListView_Music;
+        private System.Windows.Forms.TableLayoutPanel Top10TableLayoutPanel_Charts;
+        private System.Windows.Forms.Button Top10Button_Month;
+        private System.Windows.Forms.Button Top10Button_Year;
+        private System.Windows.Forms.Panel Top10Panel_Music;
+        private System.Windows.Forms.ListView Top10ListView_Music;
         private System.Windows.Forms.ColumnHeader StatMusicColumnHeader1_Pn;
         private System.Windows.Forms.ColumnHeader StatMusicColumnHeader2_Title;
-        private System.Windows.Forms.Label StatLabel_Music;
-        private System.Windows.Forms.Panel StatPanel_Movies;
-        private System.Windows.Forms.ListView StatListView_Movies;
+        private System.Windows.Forms.Label Top10Label_Music;
+        private System.Windows.Forms.Panel Top10Panel_Movies;
+        private System.Windows.Forms.ListView Top10ListView_Movies;
         private System.Windows.Forms.ColumnHeader StatMoviesColumnHeader2_Pn;
         private System.Windows.Forms.ColumnHeader StatMoviesColumnHeader3_Title;
-        private System.Windows.Forms.Label StatLabel_Movies;
-        private System.Windows.Forms.Panel StatPanel_Books;
-        private System.Windows.Forms.ListView StatListView_Books;
+        private System.Windows.Forms.Label Top10Label_Movies;
+        private System.Windows.Forms.Panel Top10Panel_Books;
+        private System.Windows.Forms.ListView Top10ListView_Books;
         private System.Windows.Forms.ColumnHeader StatBooksColumnHeader1_PN;
         private System.Windows.Forms.ColumnHeader StatBooksColumnHeader1_Title;
-        private System.Windows.Forms.Label StatLabel_Books;
-        private System.Windows.Forms.Button StatButton_AllTime;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label Top10Label_Books;
+        private System.Windows.Forms.Button Top10Button_AllTime;
+        private System.Windows.Forms.Label StatYearLabel;
+        private System.Windows.Forms.Panel StatSalesPanel;
         private System.Windows.Forms.TableLayoutPanel SalesTableLayoutPanel;
         private System.Windows.Forms.Label StatLabel_AllTime;
         private System.Windows.Forms.Label StatLabelQuantity;
         private System.Windows.Forms.Label StatLabelGrossAmount;
         private System.Windows.Forms.Label StatLabel_January;
-        private System.Windows.Forms.Label StatLabel_Februari;
-        private System.Windows.Forms.Label StatLabel_Mars;
+        private System.Windows.Forms.Label StatLabel_February;
+        private System.Windows.Forms.Label StatLabel_March;
         private System.Windows.Forms.Label StatLabel_April;
         private System.Windows.Forms.Label StatLabel_May;
         private System.Windows.Forms.Label StatLabel_June;
-        private System.Windows.Forms.Label StatLabel_Juli;
+        private System.Windows.Forms.Label StatLabel_July;
         private System.Windows.Forms.Label StatLabel_August;
         private System.Windows.Forms.Label StatLabel_September;
         private System.Windows.Forms.Label StatLabel_October;
@@ -1942,6 +2405,36 @@
         private System.Windows.Forms.ColumnHeader StatBooksColumnHeader1_QTY;
         private System.Windows.Forms.ColumnHeader StatMusicColumnHeader1_Rank;
         private System.Windows.Forms.ColumnHeader StatMusicColumnHeader1_QTY;
+        private System.Windows.Forms.TableLayoutPanel Top10TableLayoutPanel_Buttons;
+        private System.Windows.Forms.Label StatLabel_AllTime_QTY;
+        private System.Windows.Forms.Label StatLabel_AllTime_Gross;
+        private System.Windows.Forms.Label StatLabel_January_QTY;
+        private System.Windows.Forms.Label StatLabel_January_Gross;
+        private System.Windows.Forms.Label StatLabel_February_QTY;
+        private System.Windows.Forms.Label StatLabel_February_Gross;
+        private System.Windows.Forms.Label StatLabel_March_QTY;
+        private System.Windows.Forms.Label StatLabel_March_Gross;
+        private System.Windows.Forms.Label StatLabel_April_QTY;
+        private System.Windows.Forms.Label StatLabel_April_Gross;
+        private System.Windows.Forms.Label StatLabel_May_QTY;
+        private System.Windows.Forms.Label StatLabel_May_Gross;
+        private System.Windows.Forms.Label StatLabel_June_QTY;
+        private System.Windows.Forms.Label StatLabel_June_Gross;
+        private System.Windows.Forms.Label StatLabel_July_QTY;
+        private System.Windows.Forms.Label StatLabel_July_Gross;
+        private System.Windows.Forms.Label StatLabel_August_QTY;
+        private System.Windows.Forms.Label StatLabel_August_Gross;
+        private System.Windows.Forms.Label StatLabel_September_QTY;
+        private System.Windows.Forms.Label StatLabel_September_Gross;
+        private System.Windows.Forms.Label StatLabel_October_QTY;
+        private System.Windows.Forms.Label StatLabel_October_Gross;
+        private System.Windows.Forms.Label StatLabel_November_QTY;
+        private System.Windows.Forms.Label StatLabel_November_Gross;
+        private System.Windows.Forms.Label StatLabel_December_QTY;
+        private System.Windows.Forms.Label StatLabel_December_Gross;
+        private System.Windows.Forms.Label StatLabel_Yearly_QTY;
+        private System.Windows.Forms.Label StatLabel_Yearly_Gross;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 
