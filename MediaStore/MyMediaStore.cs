@@ -21,7 +21,7 @@ namespace MediaStore
         private Sales MySales;
         private Stock MyStock;
         private ReceiptsDialog receiptDialog;
-        //private bool UnsavedChanges = false;
+        private bool UnsavedChanges = false;
 
         #endregion Fields
 
@@ -182,18 +182,27 @@ namespace MediaStore
             {
                 if (uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture) == 0)
                 {
-                    SaveUpdatedProductFromStockTab();
-                    UpdateListViews();
-                    SaveFiles();
+                    //SaveUpdatedProductFromStockTab();
+                    //UpdateListViews();
+                    //SaveFiles();
+
+                    Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
+                    product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
+                    UnsavedChanges = true;
+
                 }
                 else if (StockCheckBox_Active.Checked == false && uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture) > 0)
                 {
                     DialogResult dlgr = MessageBox.Show($"The product still has quantity in stock.\r\nAre you sure the product should be inactive?", "Quantity is not zero", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
                     if (dlgr == DialogResult.Yes)
                     {
-                        SaveUpdatedProductFromStockTab();
-                        UpdateListViews();
-                        SaveFiles();
+                        //SaveUpdatedProductFromStockTab();
+                        //UpdateListViews();
+                        //SaveFiles();
+
+                        Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
+                        product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
+                        UnsavedChanges = true;
                     }
                     else
                     {
@@ -204,9 +213,12 @@ namespace MediaStore
                 }
                 else
                 {
-                    SaveUpdatedProductFromStockTab();
-                    UpdateListViews();
-                    SaveFiles();
+                    //SaveUpdatedProductFromStockTab();
+                    //UpdateListViews();
+                    //SaveFiles();
+                    Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
+                    product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
+                    UnsavedChanges = true;
                 }
             }
 
@@ -221,9 +233,7 @@ namespace MediaStore
                 if (dlgr == DialogResult.Yes)
                 {
                     e.Cancel = true;
-                    MainTabControl.SelectedTab = CashierTabPage;
-                    CashierTabPage.Focus();
-
+                    MainTabControl.SelectTab(CashierTabPage);
                     return;
                 }
                 else if (dlgr == DialogResult.No)
@@ -232,18 +242,17 @@ namespace MediaStore
                 }
             }
 
-            //if (UnsavedChanges)
-            //{
-            //    DialogResult dlgr = MessageBox.Show("You have unsaved changes in the Stock-tab. Do you want to save changes before quitting?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            if (UnsavedChanges)
+            {
+                DialogResult dlgr = MessageBox.Show("You have unsaved changes in the Stock-tab. Do you want to save changes before quitting?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
-            //    if (dlgr == DialogResult.Yes)
-            //    {
-            //        e.Cancel = true;
-            //        MainTabControl.SelectedTab = StockTabPage;
-            //        StockTabPage.Focus();
-            //        return;
-            //    }
-            //}
+                if (dlgr == DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                    MainTabControl.SelectTab(StockTabPage);
+                    return;
+                }
+            }
 
             SaveFiles();
 
@@ -480,8 +489,8 @@ namespace MediaStore
 
         private void StockSaveUpdatedProductButton_Click(object sender, EventArgs e)
         {
-            SaveUpdatedProductFromStockTab();
-            UpdateListViews();
+            if (SaveUpdatedProductFromStockTab())
+                UpdateListViews();
         }
 
         private void StockSearchTextBox_TextChanged(object sender, EventArgs e)
@@ -532,77 +541,99 @@ namespace MediaStore
             MySales.SaveSalesToFile(salesFileName);
         }
 
-        private void SaveUpdatedProductFromStockTab()
+        private bool SaveUpdatedProductFromStockTab()
         {
-            if (ValidateFieldsInStockTab())
+            if (StockTextBox_ProductCode.TextLength != 0)
             {
-                uint productCode = uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture);
-                Product updatedProduct = MyStock.GetProduct(productCode);
-
-                if (StockCheckBox_Active.Checked == true)
+                if (ValidateFieldsInStockTab())
                 {
-                    updatedProduct.UpdateProduct(StockTextBox_Title.Text,
-                    (Product.ProductType)Enum.Parse(typeof(Product.ProductType), StockListBox_Type.Text, true),
-                    decimal.Parse(StockTextBox_Price.Text, CultureInfo.CurrentCulture),
-                    uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture),
-                    StockTextBox_Creator.Text, StockTextBox_FreeText.Text,
-                    StockTextBox_Publisher.Text,
-                    uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
-                    Product.ProductStatus.Active);
-                    //UnsavedChanges = false;
+                    uint productCode = uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture);
+                    Product updatedProduct = MyStock.GetProduct(productCode);
+
+                    if (StockCheckBox_Active.Checked == true)
+                    {
+                        updatedProduct.UpdateProduct(StockTextBox_Title.Text,
+                        (Product.ProductType)Enum.Parse(typeof(Product.ProductType), StockListBox_Type.Text, true),
+                        decimal.Parse(StockTextBox_Price.Text, CultureInfo.CurrentCulture),
+                        uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture),
+                        StockTextBox_Creator.Text, StockTextBox_FreeText.Text,
+                        StockTextBox_Publisher.Text,
+                        uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
+                        Product.ProductStatus.Active);
+                        UnsavedChanges = false;
+                    }
+                    else
+                    {
+                        updatedProduct.UpdateProduct(StockTextBox_Title.Text,
+                        (Product.ProductType)Enum.Parse(typeof(Product.ProductType), StockListBox_Type.Text, true),
+                        decimal.Parse(StockTextBox_Price.Text, CultureInfo.CurrentCulture),
+                        uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture),
+                        StockTextBox_Creator.Text, StockTextBox_FreeText.Text,
+                        StockTextBox_Publisher.Text,
+                        uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
+                        Product.ProductStatus.InActive);
+                        UnsavedChanges = false;
+                    }
+                    return true;
                 }
                 else
                 {
-                    updatedProduct.UpdateProduct(StockTextBox_Title.Text,
-                    (Product.ProductType)Enum.Parse(typeof(Product.ProductType), StockListBox_Type.Text, true),
-                    decimal.Parse(StockTextBox_Price.Text, CultureInfo.CurrentCulture),
-                    uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture),
-                    StockTextBox_Creator.Text, StockTextBox_FreeText.Text,
-                    StockTextBox_Publisher.Text,
-                    uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
-                    Product.ProductStatus.InActive);
-                    //UnsavedChanges = false;
+                    MessageBox.Show("Some fields are not correctly formated.\r\nFor instance no newlines or ';' are allowed in text fields.", "Unsupported format", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
-
             }
-            else
-            {
-                MessageBox.Show("Some fields are not correctly formated. Newlines or ';' are not allowed.", "Unsupported format", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            return true;
         }
 
         private void SelectStockListViewItem()
         {
+            uint productCode;
+
             if (StockListView1.SelectedItems.Count == 0)
             {
                 return;
             }
             else if (StockTextBox_ProductCode.TextLength != 0)
             {
+                productCode = uint.Parse(StockListView1.Items[StockListView1.SelectedIndices[0]].Text, CultureInfo.CurrentCulture);
 
-                //if (UnsavedChanges)
-                //{
-                //    DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before changing product?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                if (UnsavedChanges)
+                {
+                    DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before changing product?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
-                //    if (dlgr == DialogResult.Yes)
-                //    {
-                //        SaveUpdatedProductFromStockTab();
-                //        UpdateStockListView();
-                //        SaveFiles();
-                //        return;
-                //    }
-                //    else
-                //    {
-                //        UpdateStockListView();
-                //    }
-                //}
+                    if (dlgr == DialogResult.Yes)
+                    {
+                        if (SaveUpdatedProductFromStockTab())
+                        {
+                            UpdateStockListView();
+                            SaveFiles();
+                            UnsavedChanges = false;
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        UnsavedChanges = false;
+                    }
+                }
 
+                UpdateStockBoxes(productCode);
             }
+            else
+            {
+                productCode = uint.Parse(StockListView1.Items[StockListView1.SelectedIndices[0]].Text, CultureInfo.CurrentCulture);
+                UpdateStockBoxes(productCode);
+            }
+        }
 
-
-            uint productCode = uint.Parse(StockListView1.Items[StockListView1.SelectedIndices[0]].Text, CultureInfo.CurrentCulture);
-
+        private void UpdateStockBoxes(uint productCode)
+        {
             Product selectedProduct = MyStock.GetProduct(productCode);
+
+            Unload_StockTextBox_EventHandler();
 
             StockTextBox_ProductCode.Text = selectedProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
             StockListBox_Type.Text = selectedProduct.Type.ToString();
@@ -613,19 +644,11 @@ namespace MediaStore
             StockTextBox_Creator.Text = selectedProduct.Creator;
             StockTextBox_Publisher.Text = selectedProduct.Publisher;
             StockTextBox_FreeText.Text = selectedProduct.FreeText;
+            StockCheckBox_Active.Checked = selectedProduct.Status == Product.ProductStatus.Active ? true : false;
 
-            StockCheckBox_Active.CheckedChanged -= new EventHandler(this.IsActiveCheckBox_CheckedChanged);
-            if (selectedProduct.Status == Product.ProductStatus.Active)
-            {
-
-                StockCheckBox_Active.Checked = true;
-            }
-            else
-            {
-                StockCheckBox_Active.Checked = false;
-            }
-            StockCheckBox_Active.CheckedChanged += new EventHandler(this.IsActiveCheckBox_CheckedChanged);
+            Load_StockTextBox_EventHandler();
         }
+
         private void StatSetLabels()
         {
             StatLabel_January.Text = new DateTime(2010, 1, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
@@ -747,6 +770,10 @@ namespace MediaStore
             StatLabel_November_Gross.Text = keyValuePairs[Statistics.SaleStat.November].Value.ToString(CultureInfo.CurrentCulture);
             StatLabel_December_Gross.Text = keyValuePairs[Statistics.SaleStat.December].Value.ToString(CultureInfo.CurrentCulture);
             StatLabel_Yearly_Gross.Text = keyValuePairs[Statistics.SaleStat.Yearly].Value.ToString(CultureInfo.CurrentCulture);
+
+            StatLabel_TotalSales_TOT.Text = Statistics.TotalSalesStatistics(MyStock, MySales.ReceiptsAsList());
+
+
         }
 
         private void UpdateStatListView()
@@ -852,5 +879,68 @@ namespace MediaStore
             }
         }
         #endregion Methods
+
+        private void StockTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (StockTextBox_ProductCode.TextLength != 0)
+            {
+                UnsavedChanges = true;
+            }
+        }
+
+        private void Unload_StockTextBox_EventHandler()
+        {
+            StockTextBox_Price.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
+            StockListBox_Type.SelectedValueChanged -= new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_FreeText.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_ReleaseYear.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_Publisher.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_Creator.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_Quantity.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_Price.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_Title.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
+            StockCheckBox_Active.CheckedChanged -= new EventHandler(this.IsActiveCheckBox_CheckedChanged);
+        }
+
+        private void Load_StockTextBox_EventHandler()
+        {
+            StockTextBox_Price.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
+            StockListBox_Type.SelectedValueChanged += new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_FreeText.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_ReleaseYear.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_Publisher.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_Creator.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_Quantity.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_Price.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
+            StockTextBox_Title.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
+            StockCheckBox_Active.CheckedChanged += new EventHandler(this.IsActiveCheckBox_CheckedChanged);
+        }
+
+        private void MainTabControl_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (UnsavedChanges)
+            {
+                DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before leaving?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+                if (dlgr == DialogResult.Yes)
+                {
+                    if (SaveUpdatedProductFromStockTab())
+                    {
+                        UpdateStockListView();
+                        SaveFiles();
+                        UnsavedChanges = false;
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+                }
+                else
+                {
+                    UpdateStockBoxes(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
+                    UnsavedChanges = false;
+                }
+            }
+        }
     }
 }

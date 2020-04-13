@@ -196,6 +196,9 @@
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.StatPanel_TotalSales = new System.Windows.Forms.Panel();
+            this.StatLabel_TotalSales = new System.Windows.Forms.Label();
+            this.StatLabel_TotalSales_TOT = new System.Windows.Forms.Label();
             this.MainTabControl.SuspendLayout();
             this.CashierTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CashierTabSplitContainer)).BeginInit();
@@ -243,6 +246,7 @@
             this.Top10Panel_Movies.SuspendLayout();
             this.Top10Panel_Books.SuspendLayout();
             this.Top10TableLayoutPanel_Buttons.SuspendLayout();
+            this.StatPanel_TotalSales.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -258,6 +262,7 @@
             this.MainTabControl.SelectedIndex = 0;
             this.MainTabControl.Size = new System.Drawing.Size(1650, 865);
             this.MainTabControl.TabIndex = 0;
+            this.MainTabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.MainTabControl_Selecting);
             // 
             // CashierTabPage
             // 
@@ -887,6 +892,7 @@
             this.StockListBox_Type.Name = "StockListBox_Type";
             this.StockListBox_Type.Size = new System.Drawing.Size(175, 27);
             this.StockListBox_Type.TabIndex = 8;
+            this.StockListBox_Type.SelectedValueChanged += new System.EventHandler(this.StockTextBox_TextChanged);
             // 
             // StockButton_Update
             // 
@@ -936,6 +942,7 @@
             this.StockTextBox_FreeText.Name = "StockTextBox_FreeText";
             this.StockTextBox_FreeText.Size = new System.Drawing.Size(626, 250);
             this.StockTextBox_FreeText.TabIndex = 11;
+            this.StockTextBox_FreeText.TextChanged += new System.EventHandler(this.StockTextBox_TextChanged);
             // 
             // StockLabel_ReleaseYear
             // 
@@ -958,6 +965,7 @@
             this.StockTextBox_ReleaseYear.Size = new System.Drawing.Size(127, 32);
             this.StockTextBox_ReleaseYear.TabIndex = 9;
             this.StockTextBox_ReleaseYear.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.StockTextBox_ReleaseYear.TextChanged += new System.EventHandler(this.StockTextBox_TextChanged);
             // 
             // StockLabel_Publisher
             // 
@@ -978,6 +986,7 @@
             this.StockTextBox_Publisher.Name = "StockTextBox_Publisher";
             this.StockTextBox_Publisher.Size = new System.Drawing.Size(445, 32);
             this.StockTextBox_Publisher.TabIndex = 7;
+            this.StockTextBox_Publisher.TextChanged += new System.EventHandler(this.StockTextBox_TextChanged);
             // 
             // StockLabel_Creator
             // 
@@ -998,6 +1007,7 @@
             this.StockTextBox_Creator.Name = "StockTextBox_Creator";
             this.StockTextBox_Creator.Size = new System.Drawing.Size(493, 32);
             this.StockTextBox_Creator.TabIndex = 10;
+            this.StockTextBox_Creator.TextChanged += new System.EventHandler(this.StockTextBox_TextChanged);
             // 
             // StockLabel_Type
             // 
@@ -1029,6 +1039,7 @@
             this.StockTextBox_Quantity.Size = new System.Drawing.Size(136, 32);
             this.StockTextBox_Quantity.TabIndex = 5;
             this.StockTextBox_Quantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.StockTextBox_Quantity.TextChanged += new System.EventHandler(this.StockTextBox_TextChanged);
             // 
             // StockLabel_Price
             // 
@@ -1050,6 +1061,7 @@
             this.StockTextBox_Price.Size = new System.Drawing.Size(175, 32);
             this.StockTextBox_Price.TabIndex = 4;
             this.StockTextBox_Price.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.StockTextBox_Price.TextChanged += new System.EventHandler(this.StockTextBox_TextChanged);
             // 
             // StockLabel_Title
             // 
@@ -1070,6 +1082,7 @@
             this.StockTextBox_Title.Name = "StockTextBox_Title";
             this.StockTextBox_Title.Size = new System.Drawing.Size(626, 32);
             this.StockTextBox_Title.TabIndex = 6;
+            this.StockTextBox_Title.TextChanged += new System.EventHandler(this.StockTextBox_TextChanged);
             // 
             // StockLabel_ProductCode
             // 
@@ -1296,6 +1309,7 @@
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_December_Gross, 2, 13);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_Yearly_QTY, 1, 14);
             this.SalesTableLayoutPanel.Controls.Add(this.StatLabel_Yearly_Gross, 2, 14);
+            this.SalesTableLayoutPanel.Controls.Add(this.StatPanel_TotalSales, 0, 0);
             this.SalesTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.SalesTableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.SalesTableLayoutPanel.Name = "SalesTableLayoutPanel";
@@ -2198,6 +2212,38 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument1_PrintPage);
             // 
+            // StatPanel_TotalSales
+            // 
+            this.StatPanel_TotalSales.Controls.Add(this.StatLabel_TotalSales_TOT);
+            this.StatPanel_TotalSales.Controls.Add(this.StatLabel_TotalSales);
+            this.StatPanel_TotalSales.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatPanel_TotalSales.Location = new System.Drawing.Point(4, 4);
+            this.StatPanel_TotalSales.Name = "StatPanel_TotalSales";
+            this.StatPanel_TotalSales.Size = new System.Drawing.Size(222, 47);
+            this.StatPanel_TotalSales.TabIndex = 44;
+            // 
+            // StatLabel_TotalSales
+            // 
+            this.StatLabel_TotalSales.AutoSize = true;
+            this.StatLabel_TotalSales.Dock = System.Windows.Forms.DockStyle.Top;
+            this.StatLabel_TotalSales.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatLabel_TotalSales.Location = new System.Drawing.Point(0, 0);
+            this.StatLabel_TotalSales.Name = "StatLabel_TotalSales";
+            this.StatLabel_TotalSales.Size = new System.Drawing.Size(104, 18);
+            this.StatLabel_TotalSales.TabIndex = 0;
+            this.StatLabel_TotalSales.Text = "Total Sales";
+            // 
+            // StatLabel_TotalSales_TOT
+            // 
+            this.StatLabel_TotalSales_TOT.AutoSize = true;
+            this.StatLabel_TotalSales_TOT.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.StatLabel_TotalSales_TOT.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_TotalSales_TOT.Location = new System.Drawing.Point(0, 29);
+            this.StatLabel_TotalSales_TOT.Name = "StatLabel_TotalSales_TOT";
+            this.StatLabel_TotalSales_TOT.Size = new System.Drawing.Size(188, 18);
+            this.StatLabel_TotalSales_TOT.TabIndex = 1;
+            this.StatLabel_TotalSales_TOT.Text = "                              ";
+            // 
             // MyMediaStore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -2269,6 +2315,8 @@
             this.Top10Panel_Books.ResumeLayout(false);
             this.Top10Panel_Books.PerformLayout();
             this.Top10TableLayoutPanel_Buttons.ResumeLayout(false);
+            this.StatPanel_TotalSales.ResumeLayout(false);
+            this.StatPanel_TotalSales.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2435,6 +2483,9 @@
         private System.Windows.Forms.Label StatLabel_Yearly_QTY;
         private System.Windows.Forms.Label StatLabel_Yearly_Gross;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Panel StatPanel_TotalSales;
+        private System.Windows.Forms.Label StatLabel_TotalSales_TOT;
+        private System.Windows.Forms.Label StatLabel_TotalSales;
     }
 }
 

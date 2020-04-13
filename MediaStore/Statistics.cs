@@ -78,6 +78,19 @@ namespace MediaStore
             Yearly = 13
         }
 
+        public static string TotalSalesStatistics(Stock stock, List<Receipt> receiptList)
+        {
+            decimal grossAmout = 0;
+            if (receiptList != null && stock != null)
+            {
+                foreach (var item in receiptList)
+                {
+                    grossAmout += item.Quantity * item.Price;
+                }
+
+            }
+            return grossAmout.ToString("0.00",CultureInfo.CurrentCulture);
+        }
 
         public static Dictionary<SaleStat, KeyValuePair<uint, decimal>> SalesStatistics(uint productCode, DateTime dateTime, Stock stock, List<Receipt> receiptList)
         {
@@ -95,11 +108,7 @@ namespace MediaStore
                     select rec;
 
 
-
-
-
                 var values = (SaleStat[])Enum.GetValues(typeof(SaleStat));
-
 
                 foreach (var item in values)
                 {
@@ -149,7 +158,7 @@ namespace MediaStore
 
         }
 
-        
+
     }
 
 
