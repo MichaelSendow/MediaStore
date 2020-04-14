@@ -26,6 +26,7 @@ namespace MediaStore
                     foreach (var receipt in receiptList)
                     {
                         ListViewItem listViewItem = new ListViewItem(receipt.ReceiptNumber.ToString(CultureInfo.CurrentCulture));
+                        listViewItem.Name = listViewItem.Text;
                         listViewItem.SubItems.Add(receipt.ProductCode.ToString(CultureInfo.CurrentCulture));
                         listViewItem.SubItems.Add(stock.GetProduct(receipt.ProductCode).Title);
                         listViewItem.SubItems.Add(receipt.Quantity.ToString(CultureInfo.CurrentCulture));

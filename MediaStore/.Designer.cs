@@ -163,6 +163,9 @@
             this.StatLabel_December_Gross = new System.Windows.Forms.Label();
             this.StatLabel_Yearly_QTY = new System.Windows.Forms.Label();
             this.StatLabel_Yearly_Gross = new System.Windows.Forms.Label();
+            this.StatPanel_TotalSales = new System.Windows.Forms.Panel();
+            this.StatLabel_TotalSales_TOT = new System.Windows.Forms.Label();
+            this.StatLabel_TotalSales = new System.Windows.Forms.Label();
             this.Top10TabPage = new System.Windows.Forms.TabPage();
             this.Top10TableLayoutPanel_Charts = new System.Windows.Forms.TableLayoutPanel();
             this.Top10Panel_Music = new System.Windows.Forms.Panel();
@@ -196,9 +199,6 @@
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.StatPanel_TotalSales = new System.Windows.Forms.Panel();
-            this.StatLabel_TotalSales = new System.Windows.Forms.Label();
-            this.StatLabel_TotalSales_TOT = new System.Windows.Forms.Label();
             this.MainTabControl.SuspendLayout();
             this.CashierTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CashierTabSplitContainer)).BeginInit();
@@ -240,13 +240,13 @@
             this.StatPanel_Controls.SuspendLayout();
             this.StatSalesPanel.SuspendLayout();
             this.SalesTableLayoutPanel.SuspendLayout();
+            this.StatPanel_TotalSales.SuspendLayout();
             this.Top10TabPage.SuspendLayout();
             this.Top10TableLayoutPanel_Charts.SuspendLayout();
             this.Top10Panel_Music.SuspendLayout();
             this.Top10Panel_Movies.SuspendLayout();
             this.Top10Panel_Books.SuspendLayout();
             this.Top10TableLayoutPanel_Buttons.SuspendLayout();
-            this.StatPanel_TotalSales.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -427,6 +427,8 @@
             // 
             // CashierButton_ShowReceipts
             // 
+            this.CashierButton_ShowReceipts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CashierButton_ShowReceipts.Location = new System.Drawing.Point(587, 64);
             this.CashierButton_ShowReceipts.Name = "CashierButton_ShowReceipts";
             this.CashierButton_ShowReceipts.Size = new System.Drawing.Size(86, 28);
@@ -439,6 +441,8 @@
             // 
             // CashierCheckBox_ShowAllProducts
             // 
+            this.CashierCheckBox_ShowAllProducts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CashierCheckBox_ShowAllProducts.AutoSize = true;
             this.CashierCheckBox_ShowAllProducts.Location = new System.Drawing.Point(679, 5);
             this.CashierCheckBox_ShowAllProducts.Name = "CashierCheckBox_ShowAllProducts";
@@ -451,6 +455,7 @@
             // 
             // CashierTextBox_ReturnQuantity
             // 
+            this.CashierTextBox_ReturnQuantity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CashierTextBox_ReturnQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CashierTextBox_ReturnQuantity.Location = new System.Drawing.Point(425, 29);
             this.CashierTextBox_ReturnQuantity.Name = "CashierTextBox_ReturnQuantity";
@@ -461,6 +466,7 @@
             // 
             // CashierLabel_ReturnQuantity
             // 
+            this.CashierLabel_ReturnQuantity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CashierLabel_ReturnQuantity.AutoSize = true;
             this.CashierLabel_ReturnQuantity.Location = new System.Drawing.Point(425, 5);
             this.CashierLabel_ReturnQuantity.Name = "CashierLabel_ReturnQuantity";
@@ -470,6 +476,7 @@
             // 
             // CashierTextBox_ReturnProduct
             // 
+            this.CashierTextBox_ReturnProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CashierTextBox_ReturnProduct.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CashierTextBox_ReturnProduct.Location = new System.Drawing.Point(281, 29);
             this.CashierTextBox_ReturnProduct.Name = "CashierTextBox_ReturnProduct";
@@ -479,6 +486,7 @@
             // 
             // CashierLabel_ReturnProduct
             // 
+            this.CashierLabel_ReturnProduct.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CashierLabel_ReturnProduct.AutoSize = true;
             this.CashierLabel_ReturnProduct.Location = new System.Drawing.Point(281, 5);
             this.CashierLabel_ReturnProduct.Name = "CashierLabel_ReturnProduct";
@@ -488,6 +496,7 @@
             // 
             // CashierTextBox_ReturnReceipt
             // 
+            this.CashierTextBox_ReturnReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CashierTextBox_ReturnReceipt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.CashierTextBox_ReturnReceipt.Location = new System.Drawing.Point(137, 29);
             this.CashierTextBox_ReturnReceipt.Name = "CashierTextBox_ReturnReceipt";
@@ -497,6 +506,7 @@
             // 
             // CashierLabel_ReturnReceipt
             // 
+            this.CashierLabel_ReturnReceipt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CashierLabel_ReturnReceipt.AutoSize = true;
             this.CashierLabel_ReturnReceipt.Location = new System.Drawing.Point(137, 5);
             this.CashierLabel_ReturnReceipt.Name = "CashierLabel_ReturnReceipt";
@@ -506,7 +516,8 @@
             // 
             // CashierCheckBox_PrintReceipts
             // 
-            this.CashierCheckBox_PrintReceipts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CashierCheckBox_PrintReceipts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CashierCheckBox_PrintReceipts.AutoSize = true;
             this.CashierCheckBox_PrintReceipts.Location = new System.Drawing.Point(679, 69);
             this.CashierCheckBox_PrintReceipts.Name = "CashierCheckBox_PrintReceipts";
@@ -766,6 +777,7 @@
             // 
             // StockSplitContainer2.Panel2
             // 
+            this.StockSplitContainer2.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.StockSplitContainer2.Panel2.Controls.Add(this.StockListBox_Type);
             this.StockSplitContainer2.Panel2.Controls.Add(this.StockButton_Update);
             this.StockSplitContainer2.Panel2.Controls.Add(this.StockCheckBox_Active);
@@ -826,8 +838,9 @@
             // 
             // StockListView1
             // 
-            this.StockListView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.StockListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.StockListView1.BackColor = System.Drawing.SystemColors.Window;
             this.StockListView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.StockListView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -879,6 +892,7 @@
             // 
             // StockListBox_Type
             // 
+            this.StockListBox_Type.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockListBox_Type.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StockListBox_Type.DisplayMember = "Product.ProductType";
             this.StockListBox_Type.Font = new System.Drawing.Font("Verdana", 10F);
@@ -896,19 +910,19 @@
             // 
             // StockButton_Update
             // 
-            this.StockButton_Update.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.StockButton_Update.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.StockButton_Update.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Bold);
             this.StockButton_Update.Location = new System.Drawing.Point(503, 728);
             this.StockButton_Update.Name = "StockButton_Update";
             this.StockButton_Update.Size = new System.Drawing.Size(128, 83);
             this.StockButton_Update.TabIndex = 13;
-            this.StockButton_Update.Text = "Update";
+            this.StockButton_Update.Text = "Save Changes";
             this.StockButton_Update.UseVisualStyleBackColor = true;
             this.StockButton_Update.Click += new System.EventHandler(this.StockSaveUpdatedProductButton_Click);
             // 
             // StockCheckBox_Active
             // 
-            this.StockCheckBox_Active.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.StockCheckBox_Active.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.StockCheckBox_Active.AutoSize = true;
             this.StockCheckBox_Active.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.StockCheckBox_Active.Checked = true;
@@ -924,6 +938,7 @@
             // 
             // StockLabel_FreeText
             // 
+            this.StockLabel_FreeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockLabel_FreeText.AutoSize = true;
             this.StockLabel_FreeText.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StockLabel_FreeText.Location = new System.Drawing.Point(0, 225);
@@ -934,6 +949,7 @@
             // 
             // StockTextBox_FreeText
             // 
+            this.StockTextBox_FreeText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockTextBox_FreeText.BackColor = System.Drawing.Color.White;
             this.StockTextBox_FreeText.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StockTextBox_FreeText.Font = new System.Drawing.Font("Verdana", 10F);
@@ -946,6 +962,7 @@
             // 
             // StockLabel_ReleaseYear
             // 
+            this.StockLabel_ReleaseYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockLabel_ReleaseYear.AutoSize = true;
             this.StockLabel_ReleaseYear.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StockLabel_ReleaseYear.Location = new System.Drawing.Point(0, 169);
@@ -956,6 +973,7 @@
             // 
             // StockTextBox_ReleaseYear
             // 
+            this.StockTextBox_ReleaseYear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockTextBox_ReleaseYear.BackColor = System.Drawing.Color.White;
             this.StockTextBox_ReleaseYear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StockTextBox_ReleaseYear.Font = new System.Drawing.Font("Verdana", 10F);
@@ -969,6 +987,7 @@
             // 
             // StockLabel_Publisher
             // 
+            this.StockLabel_Publisher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockLabel_Publisher.AutoSize = true;
             this.StockLabel_Publisher.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StockLabel_Publisher.Location = new System.Drawing.Point(0, 113);
@@ -979,6 +998,7 @@
             // 
             // StockTextBox_Publisher
             // 
+            this.StockTextBox_Publisher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockTextBox_Publisher.BackColor = System.Drawing.Color.White;
             this.StockTextBox_Publisher.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StockTextBox_Publisher.Font = new System.Drawing.Font("Verdana", 10F);
@@ -990,6 +1010,7 @@
             // 
             // StockLabel_Creator
             // 
+            this.StockLabel_Creator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockLabel_Creator.AutoSize = true;
             this.StockLabel_Creator.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StockLabel_Creator.Location = new System.Drawing.Point(133, 169);
@@ -1000,6 +1021,7 @@
             // 
             // StockTextBox_Creator
             // 
+            this.StockTextBox_Creator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockTextBox_Creator.BackColor = System.Drawing.Color.White;
             this.StockTextBox_Creator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StockTextBox_Creator.Font = new System.Drawing.Font("Verdana", 10F);
@@ -1011,6 +1033,7 @@
             // 
             // StockLabel_Type
             // 
+            this.StockLabel_Type.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockLabel_Type.AutoSize = true;
             this.StockLabel_Type.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StockLabel_Type.Location = new System.Drawing.Point(451, 113);
@@ -1021,6 +1044,7 @@
             // 
             // StockLabel_Quantity
             // 
+            this.StockLabel_Quantity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockLabel_Quantity.AutoSize = true;
             this.StockLabel_Quantity.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StockLabel_Quantity.Location = new System.Drawing.Point(496, 1);
@@ -1031,6 +1055,7 @@
             // 
             // StockTextBox_Quantity
             // 
+            this.StockTextBox_Quantity.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockTextBox_Quantity.BackColor = System.Drawing.Color.White;
             this.StockTextBox_Quantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StockTextBox_Quantity.Font = new System.Drawing.Font("Verdana", 10F);
@@ -1043,6 +1068,7 @@
             // 
             // StockLabel_Price
             // 
+            this.StockLabel_Price.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockLabel_Price.AutoSize = true;
             this.StockLabel_Price.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StockLabel_Price.Location = new System.Drawing.Point(309, 1);
@@ -1053,6 +1079,7 @@
             // 
             // StockTextBox_Price
             // 
+            this.StockTextBox_Price.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockTextBox_Price.BackColor = System.Drawing.Color.White;
             this.StockTextBox_Price.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StockTextBox_Price.Font = new System.Drawing.Font("Verdana", 10F);
@@ -1065,6 +1092,7 @@
             // 
             // StockLabel_Title
             // 
+            this.StockLabel_Title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockLabel_Title.AutoSize = true;
             this.StockLabel_Title.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StockLabel_Title.Location = new System.Drawing.Point(0, 57);
@@ -1075,6 +1103,7 @@
             // 
             // StockTextBox_Title
             // 
+            this.StockTextBox_Title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockTextBox_Title.BackColor = System.Drawing.Color.White;
             this.StockTextBox_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StockTextBox_Title.Font = new System.Drawing.Font("Verdana", 10F);
@@ -1086,6 +1115,7 @@
             // 
             // StockLabel_ProductCode
             // 
+            this.StockLabel_ProductCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockLabel_ProductCode.AutoSize = true;
             this.StockLabel_ProductCode.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StockLabel_ProductCode.Location = new System.Drawing.Point(6, 1);
@@ -1096,6 +1126,7 @@
             // 
             // StockTextBox_ProductCode
             // 
+            this.StockTextBox_ProductCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.StockTextBox_ProductCode.BackColor = System.Drawing.Color.White;
             this.StockTextBox_ProductCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.StockTextBox_ProductCode.Enabled = false;
@@ -1875,6 +1906,38 @@
             this.StatLabel_Yearly_Gross.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.StatLabel_Yearly_Gross, "Double click to copy text");
             // 
+            // StatPanel_TotalSales
+            // 
+            this.StatPanel_TotalSales.Controls.Add(this.StatLabel_TotalSales_TOT);
+            this.StatPanel_TotalSales.Controls.Add(this.StatLabel_TotalSales);
+            this.StatPanel_TotalSales.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StatPanel_TotalSales.Location = new System.Drawing.Point(4, 4);
+            this.StatPanel_TotalSales.Name = "StatPanel_TotalSales";
+            this.StatPanel_TotalSales.Size = new System.Drawing.Size(222, 47);
+            this.StatPanel_TotalSales.TabIndex = 44;
+            // 
+            // StatLabel_TotalSales_TOT
+            // 
+            this.StatLabel_TotalSales_TOT.AutoSize = true;
+            this.StatLabel_TotalSales_TOT.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.StatLabel_TotalSales_TOT.Font = new System.Drawing.Font("Verdana", 8F);
+            this.StatLabel_TotalSales_TOT.Location = new System.Drawing.Point(0, 29);
+            this.StatLabel_TotalSales_TOT.Name = "StatLabel_TotalSales_TOT";
+            this.StatLabel_TotalSales_TOT.Size = new System.Drawing.Size(188, 18);
+            this.StatLabel_TotalSales_TOT.TabIndex = 1;
+            this.StatLabel_TotalSales_TOT.Text = "                              ";
+            // 
+            // StatLabel_TotalSales
+            // 
+            this.StatLabel_TotalSales.AutoSize = true;
+            this.StatLabel_TotalSales.Dock = System.Windows.Forms.DockStyle.Top;
+            this.StatLabel_TotalSales.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatLabel_TotalSales.Location = new System.Drawing.Point(0, 0);
+            this.StatLabel_TotalSales.Name = "StatLabel_TotalSales";
+            this.StatLabel_TotalSales.Size = new System.Drawing.Size(104, 18);
+            this.StatLabel_TotalSales.TabIndex = 0;
+            this.StatLabel_TotalSales.Text = "Total Sales";
+            // 
             // Top10TabPage
             // 
             this.Top10TabPage.Controls.Add(this.Top10TableLayoutPanel_Charts);
@@ -2212,38 +2275,6 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument1_PrintPage);
             // 
-            // StatPanel_TotalSales
-            // 
-            this.StatPanel_TotalSales.Controls.Add(this.StatLabel_TotalSales_TOT);
-            this.StatPanel_TotalSales.Controls.Add(this.StatLabel_TotalSales);
-            this.StatPanel_TotalSales.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.StatPanel_TotalSales.Location = new System.Drawing.Point(4, 4);
-            this.StatPanel_TotalSales.Name = "StatPanel_TotalSales";
-            this.StatPanel_TotalSales.Size = new System.Drawing.Size(222, 47);
-            this.StatPanel_TotalSales.TabIndex = 44;
-            // 
-            // StatLabel_TotalSales
-            // 
-            this.StatLabel_TotalSales.AutoSize = true;
-            this.StatLabel_TotalSales.Dock = System.Windows.Forms.DockStyle.Top;
-            this.StatLabel_TotalSales.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatLabel_TotalSales.Location = new System.Drawing.Point(0, 0);
-            this.StatLabel_TotalSales.Name = "StatLabel_TotalSales";
-            this.StatLabel_TotalSales.Size = new System.Drawing.Size(104, 18);
-            this.StatLabel_TotalSales.TabIndex = 0;
-            this.StatLabel_TotalSales.Text = "Total Sales";
-            // 
-            // StatLabel_TotalSales_TOT
-            // 
-            this.StatLabel_TotalSales_TOT.AutoSize = true;
-            this.StatLabel_TotalSales_TOT.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.StatLabel_TotalSales_TOT.Font = new System.Drawing.Font("Verdana", 8F);
-            this.StatLabel_TotalSales_TOT.Location = new System.Drawing.Point(0, 29);
-            this.StatLabel_TotalSales_TOT.Name = "StatLabel_TotalSales_TOT";
-            this.StatLabel_TotalSales_TOT.Size = new System.Drawing.Size(188, 18);
-            this.StatLabel_TotalSales_TOT.TabIndex = 1;
-            this.StatLabel_TotalSales_TOT.Text = "                              ";
-            // 
             // MyMediaStore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -2306,6 +2337,8 @@
             this.StatSalesPanel.ResumeLayout(false);
             this.SalesTableLayoutPanel.ResumeLayout(false);
             this.SalesTableLayoutPanel.PerformLayout();
+            this.StatPanel_TotalSales.ResumeLayout(false);
+            this.StatPanel_TotalSales.PerformLayout();
             this.Top10TabPage.ResumeLayout(false);
             this.Top10TableLayoutPanel_Charts.ResumeLayout(false);
             this.Top10Panel_Music.ResumeLayout(false);
@@ -2315,8 +2348,6 @@
             this.Top10Panel_Books.ResumeLayout(false);
             this.Top10Panel_Books.PerformLayout();
             this.Top10TableLayoutPanel_Buttons.ResumeLayout(false);
-            this.StatPanel_TotalSales.ResumeLayout(false);
-            this.StatPanel_TotalSales.PerformLayout();
             this.ResumeLayout(false);
 
         }

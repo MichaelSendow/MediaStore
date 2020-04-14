@@ -164,6 +164,7 @@ namespace MediaStore
                 QtyNumericLabel.Visible = true;
 
                 QtyNumericUpDown.Maximum = StockMaxQty;
+                QtyNumericUpDown.Minimum = 1;
                 QtyNumericUpDown.Visible = true;
 
                 FunctionButton.Text = "Add to Basket";

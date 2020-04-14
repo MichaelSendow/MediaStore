@@ -47,6 +47,7 @@ namespace MediaStore
                 foreach (var item in statList)
                 {
                     ListViewItem lvi = new ListViewItem(i.ToString(CultureInfo.CurrentCulture));
+                    lvi.Name = lvi.Text;
                     lvi.SubItems.Add(item.Key.ToString(CultureInfo.CurrentCulture));
                     lvi.SubItems.Add(stock.GetProduct(item.Key).Title);
                     lvi.SubItems.Add(item.Value.ToString(CultureInfo.CurrentCulture));

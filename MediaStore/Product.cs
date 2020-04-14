@@ -152,6 +152,7 @@ namespace MediaStore
         public ListViewItem GetProductListViewItem()
         {
             ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
+            listViewItem.Name = listViewItem.Text;
             listViewItem.SubItems.Add(Title);
             listViewItem.SubItems.Add(Type.ToString());
             listViewItem.SubItems.Add(Price.ToString("0.00", CultureInfo.CurrentCulture));
@@ -195,6 +196,7 @@ namespace MediaStore
         public ListViewItem ShoppingBasketGetProductListViewItem()
         {
             ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
+            listViewItem.Name = listViewItem.Text;
             listViewItem.SubItems.Add(Title);
             listViewItem.SubItems.Add(Price.ToString("0.00", CultureInfo.CurrentCulture));
             listViewItem.SubItems.Add(Quantity.ToString(CultureInfo.CurrentCulture));
@@ -214,6 +216,7 @@ namespace MediaStore
         public ListViewItem StatisticsGetProductListViewItem()
         {
             ListViewItem listViewItem = new ListViewItem(ProductCode.ToString(CultureInfo.CurrentCulture));
+            listViewItem.Name = listViewItem.Text;
             listViewItem.SubItems.Add(Title);
 
             if (Status == ProductStatus.Active)

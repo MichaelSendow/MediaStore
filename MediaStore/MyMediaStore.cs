@@ -228,7 +228,7 @@ namespace MediaStore
         {
             if (MyShoppingBasket.Products.Count != 0)
             {
-                DialogResult dlgr = MessageBox.Show("The Shopping Basket is not empty. \r\nComplete sale before qutting?", "Complete sale?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                DialogResult dlgr = MessageBox.Show("The Shopping Basket is not empty. \r\nReview basket before qutting?", "Uncompleted sale", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
                 if (dlgr == DialogResult.Yes)
                 {
@@ -244,7 +244,7 @@ namespace MediaStore
 
             if (UnsavedChanges)
             {
-                DialogResult dlgr = MessageBox.Show("You have unsaved changes in the Stock-tab. Do you want to save changes before quitting?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                DialogResult dlgr = MessageBox.Show("You have unsaved changes in the Stock-tab. Do you want to review changes before quitting?", "Unsaved changes", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
                 if (dlgr == DialogResult.Yes)
                 {
@@ -252,10 +252,14 @@ namespace MediaStore
                     MainTabControl.SelectTab(StockTabPage);
                     return;
                 }
+                else if (dlgr == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                    return;
+                }
             }
 
             SaveFiles();
-
         }
 
         //Printing Text File in C#
@@ -561,6 +565,7 @@ namespace MediaStore
                         uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
                         Product.ProductStatus.Active);
                         UnsavedChanges = false;
+                        StockSplitContainer1.Panel2.BackColor = Color.Transparent;
                     }
                     else
                     {
@@ -573,6 +578,7 @@ namespace MediaStore
                         uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
                         Product.ProductStatus.InActive);
                         UnsavedChanges = false;
+                        StockSplitContainer1.Panel2.BackColor = Color.Transparent;
                     }
                     return true;
                 }
@@ -599,7 +605,7 @@ namespace MediaStore
 
                 if (UnsavedChanges)
                 {
-                    DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before changing product?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before changing product?", "Save changes?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
                     if (dlgr == DialogResult.Yes)
                     {
@@ -608,15 +614,21 @@ namespace MediaStore
                             UpdateStockListView();
                             SaveFiles();
                             UnsavedChanges = false;
+                            StockSplitContainer1.Panel2.BackColor = Color.Transparent;
                         }
                         else
                         {
                             return;
                         }
                     }
-                    else
+                    else if (dlgr == DialogResult.No)
                     {
                         UnsavedChanges = false;
+                        StockSplitContainer1.Panel2.BackColor = Color.Transparent;
+                    }
+                    else
+                    {
+                        return;
                     }
                 }
 
@@ -885,6 +897,7 @@ namespace MediaStore
             if (StockTextBox_ProductCode.TextLength != 0)
             {
                 UnsavedChanges = true;
+                StockSplitContainer1.Panel2.BackColor = Color.MistyRose;
             }
         }
 
@@ -920,7 +933,7 @@ namespace MediaStore
         {
             if (UnsavedChanges)
             {
-                DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before leaving?", "Save changes?", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                DialogResult dlgr = MessageBox.Show("You have unsaved changes. \r\nDo you want to save changes before leaving?", "Save changes?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
                 if (dlgr == DialogResult.Yes)
                 {
@@ -929,16 +942,22 @@ namespace MediaStore
                         UpdateStockListView();
                         SaveFiles();
                         UnsavedChanges = false;
+                        StockSplitContainer1.Panel2.BackColor = Color.Transparent;
                     }
                     else
                     {
                         e.Cancel = true;
                     }
                 }
-                else
+                else if (dlgr == DialogResult.No)
                 {
                     UpdateStockBoxes(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
                     UnsavedChanges = false;
+                    StockSplitContainer1.Panel2.BackColor = Color.Transparent;
+                }
+                else
+                {
+                    e.Cancel = true;
                 }
             }
         }
