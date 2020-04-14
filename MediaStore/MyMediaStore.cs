@@ -333,7 +333,7 @@ namespace MediaStore
                 {
                     ReceiptList.Clear();
                     ReceiptList.Add($"Receipt {DateTime.Now.ToString("yyyy-MM-dd HH:mm", CultureInfo.CurrentCulture)}");
-                    ReceiptList.Add($"Receiptnumber: {receiptNumber.ToString(CultureInfo.CurrentCulture)}");
+                    ReceiptList.Add($"Receipt number: {receiptNumber.ToString(CultureInfo.CurrentCulture)}");
                     ReceiptList.Add("");
                     ReceiptList.Add("#          Title                             Price        Qty               Total");
                     ReceiptList.Add("".PadRight(81, '-'));
