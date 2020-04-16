@@ -34,7 +34,9 @@ namespace MediaStore
         #endregion Methods
 
         #region Classes
-
+        /// <summary>
+        /// Enables high resolution monitors
+        /// </summary>
         internal class NativeMethods
         {
             #region Methods

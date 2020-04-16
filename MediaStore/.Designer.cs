@@ -934,7 +934,7 @@
             this.StockCheckBox_Active.TabIndex = 12;
             this.StockCheckBox_Active.Text = "Active";
             this.StockCheckBox_Active.UseVisualStyleBackColor = true;
-            this.StockCheckBox_Active.CheckedChanged += new System.EventHandler(this.IsActiveCheckBox_CheckedChanged);
+            this.StockCheckBox_Active.CheckedChanged += new System.EventHandler(this.Stock_IsActiveCheckBox_CheckedChanged);
             // 
             // StockLabel_FreeText
             // 

@@ -24,7 +24,7 @@ namespace MediaStore
         /// <summary>
         /// Case insensitive comparer object
         /// </summary>
-        private CaseInsensitiveComparer ObjectCompare;
+        private readonly CaseInsensitiveComparer ObjectCompare;
 
         /// <summary>
         /// Specifies the order in which to sort (i.e. 'Ascending').

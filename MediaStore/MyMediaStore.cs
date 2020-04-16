@@ -8,14 +8,17 @@ using System.Windows.Forms;
 
 namespace MediaStore
 {
+    /// <summary>
+    /// Simple media store
+    /// </summary>
     public partial class MyMediaStore : Form
     {
         #region Fields
 
         private const string productsFileName = "products.csv";
         private const string salesFileName = "sales.csv";
-
         private readonly ListViewColumnSorter lvwColumnSorter;
+
         private readonly ShoppingBasket MyShoppingBasket;
         private readonly List<string> ReceiptList;
         private Sales MySales;
@@ -27,24 +30,38 @@ namespace MediaStore
 
         #region Constructors
 
+        /// <summary>
+        /// Konstruktor för MyMediaStore
+        /// </summary>
         public MyMediaStore()
         {
             InitializeComponent();
 
+            //Skapa ny kolumnsorterare och bind den till alla listviews
             lvwColumnSorter = new ListViewColumnSorter();
             CashierListView1.ListViewItemSorter = lvwColumnSorter;
             ShoppingBasketListView1.ListViewItemSorter = lvwColumnSorter;
             StockListView1.ListViewItemSorter = lvwColumnSorter;
             StatListView_Sales.ListViewItemSorter = lvwColumnSorter;
+            //Skapar en ny tom varukorg
             MyShoppingBasket = new ShoppingBasket();
+            //Förbereder för kvittoutskrifter
             ReceiptList = new List<string>();
+            //Sätter värde på Numeric-up-down i Statistics-tabben till dagens datum
             StatDateTimePicker_Year.Value = DateTime.Now;
+            //Kopplar på eventhanteraren för kontrollen.
             this.StatDateTimePicker_Year.ValueChanged += new System.EventHandler(this.StatDateTimePicker_Year_ValueChanged);
 
         }
-
+        /// <summary>
+        /// När formuläret laddas laddar denna metod in produktfilen och kvittofilen. Uppdaterar alla ListViews och sätter lite startvärden för statistiksidan.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MyMediaStore_Load(object sender, EventArgs e)
         {
+            //Ladda produktfil om sådan finns. Annars skapa ett tomt lager.
+            //Stänger ned programmet om inläsning misslyckas.
             try
             {
                 if (File.Exists(productsFileName))
@@ -61,6 +78,8 @@ namespace MediaStore
                 return;
             }
 
+            //Ladda kvittofil om sådan finns. Annars skapas en tom bokföring.
+            //Stänger ned programmet om inläsning misslyckas.
             try
             {
                 if (File.Exists(salesFileName))
@@ -77,9 +96,12 @@ namespace MediaStore
                 return;
             }
 
+            //Sätter några labels i Statistic-tabben
             StatSetLabels();
+            //Uppdatera alla listviews med produkter.
             UpdateListViews();
 
+            //Sätt label och räkna ut statisitk för Statistics-tabben
             StatLabel_TotalSales.Text = "All Sales / All Sales " + StatDateTimePicker_Year.Value.ToString("yyyy", CultureInfo.CurrentCulture);
             StatLabel_TotalSales_TOT.Text = Statistics.TotalSalesStatistics(MyStock, MySales.ReceiptsAsList(), StatDateTimePicker_Year.Value);
         }
@@ -87,6 +109,11 @@ namespace MediaStore
         #endregion Constructors
 
         #region EventMethods
+        /// <summary>
+        /// Öppna en dialog för att lägga till ny produkt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddNewProductButton_Click(object sender, EventArgs e)
         {
             Product newProduct = new Product
@@ -110,17 +137,27 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Returnerar produkter till lagret
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CashierReturnItemsButton_Click(object sender, EventArgs e)
         {
-            //All fields has text
+            //Kontrollerar att alla fält är ifyllda
             if (CashierTextBox_ReturnReceipt.TextLength != 0 && CashierTextBox_ReturnProduct.TextLength != 0 && CashierTextBox_ReturnQuantity.TextLength != 0)
             {
-                //All fields are validnumbers
-                if (ValidateUINT(CashierTextBox_ReturnReceipt.Text) && ValidateUINT(CashierTextBox_ReturnProduct.Text) && ValidateUINT(CashierTextBox_ReturnQuantity.Text))
+                //Kontrollerar att all text går att konvertera till typen uint
+                if (
+                    uint.TryParse(CashierTextBox_ReturnReceipt.Text, out uint receiptNumber) &&
+                    uint.TryParse(CashierTextBox_ReturnProduct.Text, out uint productCode) &&
+                    uint.TryParse(CashierTextBox_ReturnQuantity.Text, out uint quantityToReturn)
+                    )
                 {
-                    uint receiptNumber = uint.Parse(CashierTextBox_ReturnReceipt.Text, CultureInfo.CurrentCulture);
-                    uint productCode = uint.Parse(CashierTextBox_ReturnProduct.Text, CultureInfo.CurrentCulture);
-                    uint quantityToReturn = uint.Parse(CashierTextBox_ReturnQuantity.Text, CultureInfo.CurrentCulture);
+                    //Konverterar texten i fälten till uint
+                    //receiptNumber = uint.Parse(CashierTextBox_ReturnReceipt.Text, CultureInfo.CurrentCulture);
+                    //productCode = uint.Parse(CashierTextBox_ReturnProduct.Text, CultureInfo.CurrentCulture);
+                    //quantityToReturn = uint.Parse(CashierTextBox_ReturnQuantity.Text, CultureInfo.CurrentCulture);
 
                     if (quantityToReturn <= 0)
                     {
@@ -128,6 +165,7 @@ namespace MediaStore
                         return;
                     }
 
+                    //Om siffrorna stämmer så returneras varan till lagret och kvittot uppdateras.
                     if (MySales.ReturnProduct(receiptNumber, productCode, quantityToReturn))
                     {
                         MyStock.AddQuantity(productCode, quantityToReturn);
@@ -148,18 +186,28 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Sökfunktion i Cashier-fliken 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CashierSearchTextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateCashierStockListView();
         }
 
+        /// <summary>
+        /// Visa/dölj inaktiva produkter i Cashier-fliken
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CashierShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             UpdateCashierStockListView();
         }
 
         /// <summary>
-        /// Should add product to ShoppingBasket
+        /// Öppnar en dialog för att köpa en produkt
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -167,67 +215,27 @@ namespace MediaStore
         {
             uint productCode = uint.Parse(CashierListView1.SelectedItems[0].Text, CultureInfo.CurrentCulture);
 
+            //Så att dispose kallas korrekt på det nya formuläret.
             using (ProductForm productForm = new ProductForm(MyStock.GetProduct(productCode), ProductForm.FormFunction.AddToBasket, MyStock.Products[productCode].Quantity))
             {
                 productForm.ShowDialog();
                 if (productForm.FunctionSucceeded)
                 {
                     uint qty = productForm.GetNumericSpinBoxValue();
+                    //Lägg till varan i korgen
                     MyShoppingBasket.AddProductToBasket(MyStock.GetProduct(productCode), qty);
+                    //Räkna ned lagret med lika många exemplar som flyttades till korgen.
                     MyStock.Products[productCode].Quantity -= qty;
                     UpdateListViews();
                 }
             }
         }
 
-        private void IsActiveCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (uint.TryParse(StockTextBox_Quantity.Text, out uint _))
-            {
-                if (uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture) == 0)
-                {
-                    //SaveUpdatedProductFromStockTab();
-                    //UpdateListViews();
-                    //SaveFiles();
-
-                    Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
-                    product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
-                    UnsavedChanges = true;
-
-                }
-                else if (StockCheckBox_Active.Checked == false && uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture) > 0)
-                {
-                    DialogResult dlgr = MessageBox.Show($"The product still has quantity in stock.\r\nAre you sure the product should be inactive?", "Quantity is not zero", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-                    if (dlgr == DialogResult.Yes)
-                    {
-                        //SaveUpdatedProductFromStockTab();
-                        //UpdateListViews();
-                        //SaveFiles();
-
-                        Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
-                        product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
-                        UnsavedChanges = true;
-                    }
-                    else
-                    {
-                        this.StockCheckBox_Active.CheckedChanged -= new EventHandler(this.IsActiveCheckBox_CheckedChanged);
-                        StockCheckBox_Active.Checked = true;
-                        this.StockCheckBox_Active.CheckedChanged += new EventHandler(this.IsActiveCheckBox_CheckedChanged);
-                    }
-                }
-                else
-                {
-                    //SaveUpdatedProductFromStockTab();
-                    //UpdateListViews();
-                    //SaveFiles();
-                    Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
-                    product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
-                    UnsavedChanges = true;
-                }
-            }
-
-        }
-
+        /// <summary>
+        /// Kallas på när man byter flik. Kontroll för att fråga om man vill spara ändringar på en produkt om sådan finns i Stock-fliken. Ändrar tillbaka bakgrundsfärgen vid YES/NO. Cancel gör inget.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainTabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
             if (UnsavedChanges)
@@ -261,6 +269,11 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Kallas på när man stänger programmet. Kontrollerar att varukorgen är tom och att inga ändringar finns att spara. Om allt är som det ska så sparas produktfil och kvittofil.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MyMediaStore_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (MyShoppingBasket.Products.Count != 0)
@@ -302,6 +315,11 @@ namespace MediaStore
         //Printing Text File in C#
         //https://www.c-sharpcorner.com/article/printing-text-file-in-C-Sharp/
         //2020-03-29
+        /// <summary>
+        /// Utskriftsfunktion, modifierad för att läsa från en Lista av strängar istället för från en streamreader.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PrintDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
             Graphics graphics = e.Graphics;
@@ -345,27 +363,18 @@ namespace MediaStore
             }
         }
 
-        private void SelectStatListViewItem()
-        {
-            if (StatListView_Sales.SelectedItems.Count == 0)
-            {
-                return;
-            }
-            else
-            {
-                uint productCode = uint.Parse(StatListView_Sales.Items[StatListView_Sales.SelectedIndices[0]].Text, CultureInfo.CurrentCulture);
-                Dictionary<Statistics.SaleStat, KeyValuePair<uint, decimal>> keyValuePairs = Statistics.SalesStatistics(productCode, StatDateTimePicker_Year.Value, MyStock, MySales.ReceiptsAsList());
-                UpdateStatisticsTabPage(keyValuePairs);
-            }
-        }
-
+        /// <summary>
+        /// Skapar upp kvitto för att printa samt ett kvitto för bokföringen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShoppingBasketCheckOutButton_Click(object sender, EventArgs e)
         {
             if (MyShoppingBasket.Products.Count != 0)
             {
                 uint receiptNumber = MySales.GetNextReceiptNumber();
 
-                //Prints to default printer.
+                //Printar till standardskrivare om checkbox är ikryssad
                 if (CashierCheckBox_PrintReceipts.CheckState == CheckState.Checked)
                 {
                     ReceiptList.Clear();
@@ -386,55 +395,73 @@ namespace MediaStore
                     printPreviewDialog1.ShowDialog();
                 }
 
-                //Add new receipt
+                //Lägger till kvitto till bokföringen.
                 foreach (var product in MyShoppingBasket.Products.Values)
                 {
                     MySales.AddReceipt(new Receipt(receiptNumber, product.ProductCode, DateTime.Now.ToString("yyyy-MM-dd", CultureInfo.CurrentCulture), product.Quantity, product.Price));
                 }
 
+                //Töm listview, varukorg och sätt om TotalSum till 0
                 ShoppingBasketListView1.Items.Clear();
                 MyShoppingBasket.ClearBasket();
                 ShoppingBasketTextBox_TotalSum.Text = "0";
             }
+            //Bara så att användaren får lite feedback på att försäljning gått igenom
             MessageBox.Show("Sale completed", "Sold", MessageBoxButtons.OK, MessageBoxIcon.Information);
             SaveFiles();
         }
-
+        /// <summary>
+        ///Tömmer varukorgen och återbördar exemplaren till lagret
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShoppingBasketClearBasketButton_Click(object sender, EventArgs e)
         {
             ClearShoppingBasket();
             UpdateListViews();
             SaveFiles();
         }
-
+        /// <summary>
+        /// Öppnar dialog som ger användaren möjlighet att ändra antalet varor kunden vill köpa
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShoppingBasketListView_DoubleClick(object sender, EventArgs e)
         {
             uint productCode = uint.Parse(ShoppingBasketListView1.SelectedItems[0].Text, CultureInfo.CurrentCulture);
 
+            //Ny dialog 
             using (ProductForm productForm = new ProductForm(MyShoppingBasket.GetProduct(productCode), ProductForm.FormFunction.ShoppingList, MyStock.Products[productCode].Quantity))
             {
                 productForm.ShowDialog();
                 if (productForm.FunctionSucceeded)
                 {
+                    //Om allt går bra läs tillbaka den nya kvantiteten
                     uint qty = productForm.GetNumericSpinBoxValue();
                     uint originalQty = MyShoppingBasket.GetProduct(productCode).Quantity;
 
                     if (qty == 0)
                     {
+                        //Om qty == 0 så returnera allt till lagret
                         MyShoppingBasket.Products.Remove(productCode);
                         MyStock.Products[productCode].Quantity += originalQty;
                     }
                     else
                     {
+                        //Annars justera lager och varukorg
                         MyShoppingBasket.Products[productCode].Quantity = qty;
                         MyStock.Products[productCode].Quantity += originalQty - qty;
                     }
-
+                    //Uppdatera listviews för att återspegla ändringen i lagerstatus
                     UpdateListViews();
                 }
             }
         }
 
+        /// <summary>
+        /// Öppnar ett enkelt formulär för att lista alla kvitton i bokföringen. Underlättar vid demonstrationssyfte.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ShowReceiptsButton_Click(object sender, EventArgs e)
         {
             if (receiptDialog != null)
@@ -446,9 +473,15 @@ namespace MediaStore
             receiptDialog.Show();
         }
 
-        /// How to sort a ListView control by a column in Visual C#
-        /// https://support.microsoft.com/en-us/help/319401/how-to-sort-a-listview-control-by-a-column-in-visual-c
-        /// 2020-03-21
+        // How to sort a ListView control by a column in Visual C#
+        // https://support.microsoft.com/en-us/help/319401/how-to-sort-a-listview-control-by-a-column-in-visual-c
+        // 2020-03-21
+        // 
+        /// <summary>
+        /// Sorterar listview via kolumnklick
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SortListViewOnColumnClick(object sender, ColumnClickEventArgs e)
         {
             if (e.Column == lvwColumnSorter.SortColumn)
@@ -470,6 +503,7 @@ namespace MediaStore
                 lvwColumnSorter.Order = SortOrder.Ascending;
             }
 
+            //Hårdkodat för mina listviews. Sätter textsortering eller numerisksortering.
             if (e.Column >= 1 && e.Column <= 2)
             {
                 lvwColumnSorter.TextSort = true;
@@ -482,6 +516,11 @@ namespace MediaStore
             ((ListView)sender).Sort();
         }
 
+        /// <summary>
+        /// Uppdaterar tio-i-topplistorna med all försäljning någonsin
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatButton_AllTime_Click(object sender, EventArgs e)
         {
             Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.AllTime);
@@ -489,6 +528,11 @@ namespace MediaStore
             Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.AllTime);
         }
 
+        /// <summary>
+        /// Uppdaterar tio-i-topplistorna med all försäljning för innevarande månad
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatButton_Month_Click(object sender, EventArgs e)
         {
             Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.Month);
@@ -496,6 +540,11 @@ namespace MediaStore
             Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.Month);
         }
 
+        /// <summary>
+        /// Uppdaterar tio-i-topplistorna med all försäljning för i år
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatButton_Year_Click(object sender, EventArgs e)
         {
             Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.Year);
@@ -503,11 +552,21 @@ namespace MediaStore
             Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.Year);
         }
 
+        /// <summary>
+        /// Visa/dölj inaktiva produkter i Statistics-fliken
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatCheckBox_ShowAll_CheckedChanged(object sender, EventArgs e)
         {
             UpdateStatListView();
         }
 
+        /// <summary>
+        /// Uppdaterar formuläret för att återspegla valt år i datetime-väljaren
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatDateTimePicker_Year_ValueChanged(object sender, EventArgs e)
         {
             StatLabel_Yearly.Text = "Total " + StatDateTimePicker_Year.Value.ToString("yyyy", CultureInfo.CurrentCulture);
@@ -516,37 +575,121 @@ namespace MediaStore
             StatListView_Sales_SelectedIndexChanged(sender, e);
         }
 
+        /// <summary>
+        /// Kallas på vid val av produkt i listan över produkter i Statistic-fliken
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatListView_Sales_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectStatListViewItem();
         }
 
+        /// <summary>
+        /// Sökfunktion i Statistics-fliken
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StatTextBox_Search_TextChanged(object sender, EventArgs e)
         {
             UpdateStatListView();
         }
 
+        /// <summary>
+        /// Checkbox i Stock-fliken för att ändra en produkts status mellan aktiv och ej aktiv
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Stock_IsActiveCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            //Kontrollera att QTY fältet är korrekt
+            if (uint.TryParse(StockTextBox_Quantity.Text, out uint _))
+            {
+                //Om QTY är 0 behövs ingen extra kontroll
+                if (uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture) == 0)
+                {
+                    //Hämta produkt
+                    Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
+                    //Om checkbox är checked sätt till aktiv annars till inaktiv
+                    product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
+                    //Uppdatera att osparade ändringar finns
+                    UnsavedChanges = true;
+
+                }
+                //Om produkten finns i lager och är aktiv så behöver vi frånga om man är säker på vad man håller på med.
+                else if (StockCheckBox_Active.Checked == false && uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture) > 0)
+                {
+                    DialogResult dlgr = MessageBox.Show($"The product still has quantity in stock.\r\nAre you sure the product should be inactive?", "Quantity is not zero", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                    if (dlgr == DialogResult.Yes)
+                    {
+                        Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
+                        product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
+                        UnsavedChanges = true;
+                    }
+                    else
+                    {
+                        //Om man inte vill sätta om till inaktiv behöver vi temporärt stoppa eventhanteraren för att inte hamna i en loop när vi sätter tillbaka checkboxen.
+                        this.StockCheckBox_Active.CheckedChanged -= new EventHandler(this.Stock_IsActiveCheckBox_CheckedChanged);
+                        StockCheckBox_Active.Checked = true;
+                        this.StockCheckBox_Active.CheckedChanged += new EventHandler(this.Stock_IsActiveCheckBox_CheckedChanged);
+                    }
+                }
+                // För att aktivera en produkt behöver vi inga kontroller.
+                else
+                {
+                    Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
+                    product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
+                    UnsavedChanges = true;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Kallas på vid val av produkt i listan över produkter i Stock-fliken
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockListView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             SelectStockListViewItem();
         }
 
+        /// <summary>
+        /// Uppdaterar vald produkt i Stock-fliken
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockSaveUpdatedProductButton_Click(object sender, EventArgs e)
         {
             if (SaveUpdatedProductFromStockTab())
                 UpdateListViews();
         }
 
+        /// <summary>
+        /// Sökfunktion i Stock-fliken
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockSearchTextBox_TextChanged(object sender, EventArgs e)
         {
             UpdateStockListView();
         }
 
+        /// <summary>
+        /// Visa/dölj inaktiva produkter i Stock-fliken
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockShowAllProductsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             UpdateStockListView();
         }
 
+        /// <summary>
+        /// Om ett värde ändras i en produkt på Stock-fliken så sätter vi UnsavedChanges till true och ändrar bakgrundsfärg
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockTextBox_TextChanged(object sender, EventArgs e)
         {
             if (StockTextBox_ProductCode.TextLength != 0)
@@ -560,15 +703,8 @@ namespace MediaStore
         #region Methods
 
         /// <summary>
-        /// Checks if a string is only numbers.
+        /// Hjälpmetod för att tömma varukorg
         /// </summary>
-        /// <param name="TextBoxNumber"></param>
-        /// <returns></returns>
-        private static bool ValidateUINT(string stringToValidate)
-        {
-            return uint.TryParse(stringToValidate, out uint _);
-        }
-
         private void ClearShoppingBasket()
         {
             ShoppingBasketListView1.Items.Clear();
@@ -580,12 +716,19 @@ namespace MediaStore
             MyShoppingBasket.ClearBasket();
         }
 
+        /// <summary>
+        /// Hjälpmetod för att stänga ned programmet utan att spara filer
+        /// </summary>
         private void ExitWithoutSavingFile()
         {
+            //Koppla loss eventhanteraren för FormClosing() och stäng ned!
             this.FormClosing -= new FormClosingEventHandler(this.MyMediaStore_FormClosing);
             this.Close();
         }
 
+        /// <summary>
+        /// Hjälpmetod för att koppla på eventhanteraren för TextChanged i Stock-fliken
+        /// </summary>
         private void Load_StockTextBox_EventHandler()
         {
             StockTextBox_Price.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
@@ -597,50 +740,48 @@ namespace MediaStore
             StockTextBox_Quantity.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
             StockTextBox_Price.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
             StockTextBox_Title.TextChanged += new EventHandler(this.StockTextBox_TextChanged);
-            StockCheckBox_Active.CheckedChanged += new EventHandler(this.IsActiveCheckBox_CheckedChanged);
+            StockCheckBox_Active.CheckedChanged += new EventHandler(this.Stock_IsActiveCheckBox_CheckedChanged);
         }
 
+        /// <summary>
+        /// Hjälpmetod för att spara produktfil och kvittofil
+        /// </summary>
         private void SaveFiles()
         {
             MyStock.SaveStockToFile(productsFileName);
             MySales.SaveSalesToFile(salesFileName);
         }
 
+        /// <summary>
+        /// Hjälpmetod för att spara förändrad produkt i Stock-fliken
+        /// </summary>
+        /// <returns>True om produkten gick att spara till lagret.</returns>
         private bool SaveUpdatedProductFromStockTab()
         {
+            //En produkt är "uppritad" i formuläret
             if (StockTextBox_ProductCode.TextLength != 0)
             {
+                //Kontrollera att alla fält är korrekt formaterade
                 if (ValidateFieldsInStockTab())
                 {
+                    //Hämta produktkoden
                     uint productCode = uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture);
+                    //Hämta produkten
                     Product updatedProduct = MyStock.GetProduct(productCode);
 
-                    if (StockCheckBox_Active.Checked == true)
-                    {
-                        updatedProduct.UpdateProduct(StockTextBox_Title.Text,
-                        (Product.ProductType)Enum.Parse(typeof(Product.ProductType), StockListBox_Type.Text, true),
-                        decimal.Parse(StockTextBox_Price.Text, CultureInfo.CurrentCulture),
-                        uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture),
-                        StockTextBox_Creator.Text, StockTextBox_FreeText.Text,
-                        StockTextBox_Publisher.Text,
-                        uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
-                        Product.ProductStatus.Active);
-                        UnsavedChanges = false;
-                        StockSplitContainer1.Panel2.BackColor = Color.Transparent;
-                    }
-                    else
-                    {
-                        updatedProduct.UpdateProduct(StockTextBox_Title.Text,
-                        (Product.ProductType)Enum.Parse(typeof(Product.ProductType), StockListBox_Type.Text, true),
-                        decimal.Parse(StockTextBox_Price.Text, CultureInfo.CurrentCulture),
-                        uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture),
-                        StockTextBox_Creator.Text, StockTextBox_FreeText.Text,
-                        StockTextBox_Publisher.Text,
-                        uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
-                        Product.ProductStatus.InActive);
-                        UnsavedChanges = false;
-                        StockSplitContainer1.Panel2.BackColor = Color.Transparent;
-                    }
+                    //Uppdatera produkten
+                    updatedProduct.UpdateProduct(StockTextBox_Title.Text,
+                    (Product.ProductType)Enum.Parse(typeof(Product.ProductType), StockListBox_Type.Text, true),
+                    decimal.Parse(StockTextBox_Price.Text, CultureInfo.CurrentCulture),
+                    uint.Parse(StockTextBox_Quantity.Text, CultureInfo.CurrentCulture),
+                    StockTextBox_Creator.Text, StockTextBox_FreeText.Text,
+                    StockTextBox_Publisher.Text,
+                    uint.Parse(StockTextBox_ReleaseYear.Text, CultureInfo.CurrentCulture),
+                    StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive);
+                    //Sätt UnsavedChanges till false och ändra tillbaka bakgrundsfärgen
+                    UnsavedChanges = false;
+                    StockSplitContainer1.Panel2.BackColor = Color.Transparent;
+
                     return true;
                 }
                 else
@@ -652,6 +793,25 @@ namespace MediaStore
             return true;
         }
 
+        /// <summary>
+        /// Hjälpmetod vid val av produkt i Statistics-fliken
+        /// </summary>
+        private void SelectStatListViewItem()
+        {
+            if (StatListView_Sales.SelectedItems.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                uint productCode = uint.Parse(StatListView_Sales.Items[StatListView_Sales.SelectedIndices[0]].Text, CultureInfo.CurrentCulture);
+                Dictionary<Statistics.SaleStat, KeyValuePair<uint, decimal>> keyValuePairs = Statistics.SalesStatistics(productCode, StatDateTimePicker_Year.Value, MyStock, MySales.ReceiptsAsList());
+                UpdateStatisticsTabPage(keyValuePairs);
+            }
+        }
+        /// <summary>
+        /// Hjälpmetod vid val av produkt i Stock-fliken
+        /// </summary>
         private void SelectStockListViewItem()
         {
             uint productCode;
@@ -702,6 +862,9 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Hjälpmetod för att sätta rätt text på labels i Statistics-fliken
+        /// </summary>
         private void StatSetLabels()
         {
             StatLabel_January.Text = new DateTime(2010, 1, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
@@ -718,11 +881,18 @@ namespace MediaStore
             StatLabel_December.Text = new DateTime(2010, 12, 1).ToString("MMM", CultureInfo.CurrentCulture).ToUpper(CultureInfo.CurrentCulture);
         }
 
+        /// <summary>
+        /// Hjälpmetod för att bygga upp tio-i-topplistor
+        /// </summary>
+        /// <param name="productType">Vilken produkttyp som listan ska framställas för</param>
+        /// <param name="listView">Vilken listview som ska uppdateras</param>
+        /// <param name="checkBox">Visa alla produkter eller bara aktiva</param>
+        /// <param name="mode">Vilken tio-i-topp vill man ta fram: AllTime, Year, eller Month</param>
         private void Top10(Product.ProductType productType, ListView listView, CheckBox checkBox, Statistics.Mode mode)
         {
             List<Receipt> receipts = MySales.ReceiptsAsList();
             listView.Items.Clear();
-            List<ListViewItem> listViewItems = checkBox.Checked ? Statistics.Top10(MyStock, receipts, productType, showOnlyActive: false, mode) : Statistics.Top10(MyStock, receipts, productType, showOnlyActive: true, mode);
+            List<ListViewItem> listViewItems = Statistics.Top10(MyStock, receipts, productType, checkBox.Checked ? false : true, mode);
 
             for (int i = 0; i < listViewItems.Count && i < 10; i++)
             {
@@ -730,6 +900,9 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Hjälpmetod för att koppla loss eventhanteraren för TextChanged i Stock-fliken
+        /// </summary>
         private void Unload_StockTextBox_EventHandler()
         {
             StockTextBox_Price.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
@@ -741,31 +914,41 @@ namespace MediaStore
             StockTextBox_Quantity.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
             StockTextBox_Price.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
             StockTextBox_Title.TextChanged -= new EventHandler(this.StockTextBox_TextChanged);
-            StockCheckBox_Active.CheckedChanged -= new EventHandler(this.IsActiveCheckBox_CheckedChanged);
+            StockCheckBox_Active.CheckedChanged -= new EventHandler(this.Stock_IsActiveCheckBox_CheckedChanged);
         }
 
+        /// <summary>
+        /// Hjälpmetod för att uppdatera listview i Cashier-fliken
+        /// </summary>
         private void UpdateCashierStockListView()
         {
 
             Stock stock;
-
+            //Töm listan på items
             CashierListView1.Items.Clear();
 
+            //Kolla om sökraden är tom 
             if (CashierTextBox_Search.TextLength == 0)
             {
+                //isf är stock = vårt lager
                 stock = MyStock;
             }
+            //Annars kollar vi om nyckelord har används i sökrutan och kör en splitSearcher
             else if (CashierTextBox_Search.Text.Contains(';'))
             {
                 SplitSearcher splitSearcher = new SplitSearcher();
+                //splitSearcher returnerar ett lager med enbart de produkter som uppfyller sökkriterierna
                 stock = splitSearcher.Search(MyStock, CashierTextBox_Search.Text);
             }
+            //Om inga nyckelord används så kör vi en WildSearch som är en fritextsökning över alla fält
             else
             {
                 WildSearch wildSearcher = new WildSearch();
-
+                //WildSearch returnerar ett lager med enbart de produkter som uppfyller sökkriterierna
                 stock = wildSearcher.Search(MyStock, CashierTextBox_Search.Text);
             }
+
+            //Nu har vi ett lager vi kan visa upp i en listview
 
             foreach (KeyValuePair<uint, Product> productValuePair in stock.Products)
             {
@@ -783,6 +966,9 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Uppdaterar alla listviews
+        /// </summary>
         private void UpdateListViews()
         {
             UpdateShoppingBasketListView();
@@ -791,6 +977,9 @@ namespace MediaStore
             UpdateStatListView();
         }
 
+        /// <summary>
+        /// Hjälpmetod för att uppdatera varukorgens listview
+        /// </summary>
         private void UpdateShoppingBasketListView()
         {
             ShoppingBasketListView1.Items.Clear();
@@ -806,8 +995,13 @@ namespace MediaStore
             ShoppingBasketTextBox_TotalSum.Text = Math.Round(totalSum, 2).ToString(CultureInfo.CurrentCulture);
         }
 
+        /// <summary>
+        /// Hjälpmetod för att rita upp Statistics-fliken
+        /// </summary>
+        /// <param name="keyValuePairs">Dictionary innehållande kombination av säljinfotyp och ett keyvaluepair med QTY,GrossAmount </param>
         private void UpdateStatisticsTabPage(Dictionary<Statistics.SaleStat, KeyValuePair<uint, decimal>> keyValuePairs)
         {
+            //Sätter alla labels
             StatLabel_AllTime_QTY.Text = keyValuePairs[Statistics.SaleStat.AllTime].Key.ToString(CultureInfo.CurrentCulture);
             StatLabel_January_QTY.Text = keyValuePairs[Statistics.SaleStat.January].Key.ToString(CultureInfo.CurrentCulture);
             StatLabel_February_QTY.Text = keyValuePairs[Statistics.SaleStat.February].Key.ToString(CultureInfo.CurrentCulture);
@@ -838,14 +1032,16 @@ namespace MediaStore
             StatLabel_December_Gross.Text = keyValuePairs[Statistics.SaleStat.December].Value.ToString(CultureInfo.CurrentCulture);
             StatLabel_Yearly_Gross.Text = keyValuePairs[Statistics.SaleStat.Yearly].Value.ToString(CultureInfo.CurrentCulture);
 
-
+            //Sätter special labeln som visar totalförsäljning för det valda året.
             StatLabel_TotalSales_TOT.Text = Statistics.TotalSalesStatistics(MyStock, MySales.ReceiptsAsList(), StatDateTimePicker_Year.Value);
-
-
         }
 
+        /// <summary>
+        /// Hjälpmetod för att uppdatera listview i Statistics-fliken
+        /// </summary>
         private void UpdateStatListView()
         {
+            //Samma logik som i UpdateCashierStockListView()
 
             Stock stock;
 
@@ -884,6 +1080,10 @@ namespace MediaStore
 
         }
 
+        /// <summary>
+        /// Hjälpmetod för att rita upp en produkt i Stock-fliken
+        /// </summary>
+        /// <param name="productCode">Produktnummer på den valda produkten</param>
         private void UpdateStockBoxes(uint productCode)
         {
             Product selectedProduct = MyStock.GetProduct(productCode);
@@ -903,8 +1103,14 @@ namespace MediaStore
 
             Load_StockTextBox_EventHandler();
         }
+
+        /// <summary>
+        /// Hjälpmetod för att uppdatera listview i Stock-fliken
+        /// </summary>
         private void UpdateStockListView()
         {
+            //Samma logik som i UpdateCashierStockListView()
+
             Stock stock;
 
             StockListView1.Items.Clear();
@@ -942,9 +1148,9 @@ namespace MediaStore
         }
 
         /// <summary>
-        /// Checks if all fields are correctly formated.
+        /// Kontrollerar att alla fält för en produkt i Stock-fliken är korrekt formaterade.
         /// </summary>
-        /// <returns>True if all fields are correctly formated.</returns>
+        /// <returns>True om alla fält är korrekt formaterade</returns>
         private bool ValidateFieldsInStockTab()
         {
             if (
