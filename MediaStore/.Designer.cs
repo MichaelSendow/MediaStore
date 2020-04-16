@@ -1232,7 +1232,6 @@
             this.StatDateTimePicker_Year.ShowUpDown = true;
             this.StatDateTimePicker_Year.Size = new System.Drawing.Size(94, 29);
             this.StatDateTimePicker_Year.TabIndex = 3;
-            this.StatDateTimePicker_Year.ValueChanged += new System.EventHandler(this.StatDateTimePicker_Year_ValueChanged);
             // 
             // StatCheckBox_ShowAll
             // 
@@ -1934,9 +1933,9 @@
             this.StatLabel_TotalSales.Font = new System.Drawing.Font("Verdana", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.StatLabel_TotalSales.Location = new System.Drawing.Point(0, 0);
             this.StatLabel_TotalSales.Name = "StatLabel_TotalSales";
-            this.StatLabel_TotalSales.Size = new System.Drawing.Size(104, 18);
+            this.StatLabel_TotalSales.Size = new System.Drawing.Size(171, 18);
             this.StatLabel_TotalSales.TabIndex = 0;
-            this.StatLabel_TotalSales.Text = "Total Sales";
+            this.StatLabel_TotalSales.Text = "All Sales / All Sales";
             // 
             // Top10TabPage
             // 

@@ -79,18 +79,24 @@ namespace MediaStore
             Yearly = 13
         }
 
-        public static string TotalSalesStatistics(Stock stock, List<Receipt> receiptList)
+        public static string TotalSalesStatistics(Stock stock, List<Receipt> receiptList, DateTime dateTime)
         {
             decimal grossAmout = 0;
+            decimal yearGross = 0;
             if (receiptList != null && stock != null)
             {
-                foreach (var item in receiptList)
+                foreach (var receipt in receiptList)
                 {
-                    grossAmout += item.Quantity * item.Price;
+                    grossAmout += receipt.Quantity * receipt.Price;
+
+                    if (DateTime.Parse(receipt.DateOfSale, CultureInfo.CurrentCulture.DateTimeFormat).Year == dateTime.Year)
+                    {
+                        yearGross += receipt.Quantity * receipt.Price;
+                    }
                 }
 
             }
-            return grossAmout.ToString("0.00",CultureInfo.CurrentCulture);
+            return grossAmout.ToString("0.00",CultureInfo.CurrentCulture) + " / " + yearGross.ToString("0.00", CultureInfo.CurrentCulture);
         }
 
         public static Dictionary<SaleStat, KeyValuePair<uint, decimal>> SalesStatistics(uint productCode, DateTime dateTime, Stock stock, List<Receipt> receiptList)

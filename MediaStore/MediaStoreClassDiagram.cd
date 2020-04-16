@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="MediaStore.FileHandler">
+    <Position X="3.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAQACAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>FileHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaStore.ListViewColumnSorter" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAIABAAAAAAAAAAAAAAAgABBAAAABAAAAAAAA=</HashCode>
+      <FileName>ListViewColumnSorter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MediaStore.Product">
+    <Position X="21.25" Y="0.5" Width="3.75" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="MediaStore.Product.ProductStatus">
+        <TypeIdentifier>
+          <NewMemberFileName>Product.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="MediaStore.Product.ProductType">
+        <TypeIdentifier>
+          <NewMemberFileName>Product.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAQQEAQAIAEAECAEAAADAAAAAgAAAEQACgEAAIAA=</HashCode>
+      <FileName>Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaStore.ProductForm">
+    <Position X="7" Y="3.75" Width="3.25" />
+    <Members>
+      <Field Name="components" Hidden="true" />
+      <Field Name="CreatorLabel" Hidden="true" />
+      <Field Name="CreatorTextBox" Hidden="true" />
+      <Field Name="CxlButton" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Field Name="FreeTextBox" Hidden="true" />
+      <Field Name="FreeTextLabel" Hidden="true" />
+      <Field Name="FunctionButton" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="IsActiveCheckBox" Hidden="true" />
+      <Field Name="PriceLabel" Hidden="true" />
+      <Field Name="PriceTextBox" Hidden="true" />
+      <Field Name="ProductCodeLabel" Hidden="true" />
+      <Field Name="ProductCodeTextBox" Hidden="true" />
+      <Field Name="PublisherLabel" Hidden="true" />
+      <Field Name="PublisherTextBox" Hidden="true" />
+      <Field Name="QtyNumericLabel" Hidden="true" />
+      <Field Name="QtyNumericUpDown" Hidden="true" />
+      <Field Name="QuantityLabel" Hidden="true" />
+      <Field Name="QuantityTextBox" Hidden="true" />
+      <Field Name="ReleaseYearLabel" Hidden="true" />
+      <Field Name="ReleaseYearTextBox" Hidden="true" />
+      <Field Name="TitleLabel" Hidden="true" />
+      <Field Name="TitleTextBox" Hidden="true" />
+      <Field Name="TypeLabel" Hidden="true" />
+      <Field Name="TypeListBox" Hidden="true" />
+      <Field Name="TypeTextBox" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="MediaStore.ProductForm.FormFunction">
+        <TypeIdentifier>
+          <NewMemberFileName>ProductForm.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>kAgFACREhGAAIAEAHACBAoJCEAAgQkDBBAEAAABAAAg=</HashCode>
+      <FileName>ProductForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaStore.Receipt">
+    <Position X="18" Y="3.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAQAAAAAEAAAAAAAAAAAAAAAAAAAAgBAAIAA=</HashCode>
+      <FileName>Receipt.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaStore.ReceiptsDialog">
+    <Position X="7" Y="0.5" Width="3.25" />
+    <Members>
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABSAAAEAAAACAAAACAAAAAAAAASAAggAAAAA=</HashCode>
+      <FileName>ReceiptsDialog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaStore.Sales">
+    <Position X="14.75" Y="2.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAIABAQAAAAABAAgAAAAAAAA=</HashCode>
+      <FileName>Sales.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaStore.ShoppingBasket">
+    <Position X="14.75" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAgAAAAAAAACAAAAAQ=</HashCode>
+      <FileName>ShoppingBasket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaStore.SplitSearcher" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="4" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="MediaStore.SplitSearcher.ProductField">
+        <TypeIdentifier>
+          <NewMemberFileName>SplitSearcher.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>SplitSearcher.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MediaStore.Statistics">
+    <Position X="0.5" Y="3.75" Width="4.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="MediaStore.Statistics.Mode">
+        <TypeIdentifier>
+          <NewMemberFileName>Statistics.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="MediaStore.Statistics.SaleStat">
+        <TypeIdentifier>
+          <NewMemberFileName>Statistics.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BAAAAAAgAAAgAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Statistics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaStore.Stock">
+    <Position X="18" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAEAAAAAAAQAAAAAAAAAAAAAAACAAQAAQ=</HashCode>
+      <FileName>Stock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MediaStore.WildSearch" BaseTypeListCollapsed="true">
+    <Position X="5.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>WildSearch.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="MediaStore.MyMediaStore">
+    <Position X="10.5" Y="0.5" Width="4" />
+    <Members>
+      <Field Name="CashierButton_ReturnItems" Hidden="true" />
+      <Field Name="CashierButton_ShowReceipts" Hidden="true" />
+      <Field Name="CashierCheckBox_PrintReceipts" Hidden="true" />
+      <Field Name="CashierCheckBox_ShowAllProducts" Hidden="true" />
+      <Field Name="CashierLabel_ReturnProduct" Hidden="true" />
+      <Field Name="CashierLabel_ReturnQuantity" Hidden="true" />
+      <Field Name="CashierLabel_ReturnReceipt" Hidden="true" />
+      <Field Name="CashierLabel_Search" Hidden="true" />
+      <Field Name="CashierListView1" Hidden="true" />
+      <Field Name="CashierListViewColumnHeader_Price" Hidden="true" />
+      <Field Name="CashierListViewColumnHeader_ProductCode" Hidden="true" />
+      <Field Name="CashierListViewColumnHeader_ProductType" Hidden="true" />
+      <Field Name="CashierListViewColumnHeader_Qty" Hidden="true" />
+      <Field Name="CashierListViewColumnHeader_Title" Hidden="true" />
+      <Field Name="CashierShoppingBasketLabel" Hidden="true" />
+      <Field Name="CashierSplitContainer1" Hidden="true" />
+      <Field Name="CashierSplitContainer2" Hidden="true" />
+      <Field Name="CashierTabPage" Hidden="true" />
+      <Field Name="CashierTabSplitContainer" Hidden="true" />
+      <Field Name="CashierTextBox_ReturnProduct" Hidden="true" />
+      <Field Name="CashierTextBox_ReturnQuantity" Hidden="true" />
+      <Field Name="CashierTextBox_ReturnReceipt" Hidden="true" />
+      <Field Name="CashierTextBox_Search" Hidden="true" />
+      <Field Name="components" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="MainTabControl" Hidden="true" />
+      <Field Name="printDocument1" Hidden="true" />
+      <Field Name="printPreviewDialog1" Hidden="true" />
+      <Field Name="SalesTableLayoutPanel" Hidden="true" />
+      <Field Name="ShoppingBasketButton_CheckOut" Hidden="true" />
+      <Field Name="ShoppingBasketButton_ClearBasket" Hidden="true" />
+      <Field Name="ShoppingBasketColumnHeader_Price" Hidden="true" />
+      <Field Name="ShoppingBasketColumnHeader_ProductCode" Hidden="true" />
+      <Field Name="ShoppingBasketColumnHeader_Quantity" Hidden="true" />
+      <Field Name="ShoppingBasketColumnHeader_Title" Hidden="true" />
+      <Field Name="ShoppingBasketColumnHeader_TotalSum" Hidden="true" />
+      <Field Name="ShoppingBasketLabel_TotalSum" Hidden="true" />
+      <Field Name="ShoppingBasketListView1" Hidden="true" />
+      <Field Name="ShoppingBasketSplitContainer1" Hidden="true" />
+      <Field Name="ShoppingBasketSplitContainer2" Hidden="true" />
+      <Field Name="ShoppingBasketTextBox_TotalSum" Hidden="true" />
+      <Field Name="StatBooksColumnHeader1_PN" Hidden="true" />
+      <Field Name="StatBooksColumnHeader1_QTY" Hidden="true" />
+      <Field Name="StatBooksColumnHeader1_Rank" Hidden="true" />
+      <Field Name="StatBooksColumnHeader1_Title" Hidden="true" />
+      <Field Name="StatCheckBox_ShowAll" Hidden="true" />
+      <Field Name="StatColumnHeader1_ProductCode" Hidden="true" />
+      <Field Name="StatColumnHeader2_Title" Hidden="true" />
+      <Field Name="StatDateTimePicker_Year" Hidden="true" />
+      <Field Name="StatisticsTabPage" Hidden="true" />
+      <Field Name="StatLabel_AllTime" Hidden="true" />
+      <Field Name="StatLabel_AllTime_Gross" Hidden="true" />
+      <Field Name="StatLabel_AllTime_QTY" Hidden="true" />
+      <Field Name="StatLabel_April" Hidden="true" />
+      <Field Name="StatLabel_April_Gross" Hidden="true" />
+      <Field Name="StatLabel_April_QTY" Hidden="true" />
+      <Field Name="StatLabel_August" Hidden="true" />
+      <Field Name="StatLabel_August_Gross" Hidden="true" />
+      <Field Name="StatLabel_August_QTY" Hidden="true" />
+      <Field Name="StatLabel_December" Hidden="true" />
+      <Field Name="StatLabel_December_Gross" Hidden="true" />
+      <Field Name="StatLabel_December_QTY" Hidden="true" />
+      <Field Name="StatLabel_February" Hidden="true" />
+      <Field Name="StatLabel_February_Gross" Hidden="true" />
+      <Field Name="StatLabel_February_QTY" Hidden="true" />
+      <Field Name="StatLabel_January" Hidden="true" />
+      <Field Name="StatLabel_January_Gross" Hidden="true" />
+      <Field Name="StatLabel_January_QTY" Hidden="true" />
+      <Field Name="StatLabel_July" Hidden="true" />
+      <Field Name="StatLabel_July_Gross" Hidden="true" />
+      <Field Name="StatLabel_July_QTY" Hidden="true" />
+      <Field Name="StatLabel_June" Hidden="true" />
+      <Field Name="StatLabel_June_Gross" Hidden="true" />
+      <Field Name="StatLabel_June_QTY" Hidden="true" />
+      <Field Name="StatLabel_March" Hidden="true" />
+      <Field Name="StatLabel_March_Gross" Hidden="true" />
+      <Field Name="StatLabel_March_QTY" Hidden="true" />
+      <Field Name="StatLabel_May" Hidden="true" />
+      <Field Name="StatLabel_May_Gross" Hidden="true" />
+      <Field Name="StatLabel_May_QTY" Hidden="true" />
+      <Field Name="StatLabel_November" Hidden="true" />
+      <Field Name="StatLabel_November_Gross" Hidden="true" />
+      <Field Name="StatLabel_November_QTY" Hidden="true" />
+      <Field Name="StatLabel_October" Hidden="true" />
+      <Field Name="StatLabel_October_Gross" Hidden="true" />
+      <Field Name="StatLabel_October_QTY" Hidden="true" />
+      <Field Name="StatLabel_September" Hidden="true" />
+      <Field Name="StatLabel_September_Gross" Hidden="true" />
+      <Field Name="StatLabel_September_QTY" Hidden="true" />
+      <Field Name="StatLabel_TotalSales" Hidden="true" />
+      <Field Name="StatLabel_TotalSales_TOT" Hidden="true" />
+      <Field Name="StatLabel_Yearly" Hidden="true" />
+      <Field Name="StatLabel_Yearly_Gross" Hidden="true" />
+      <Field Name="StatLabel_Yearly_QTY" Hidden="true" />
+      <Field Name="StatLabelGrossAmount" Hidden="true" />
+      <Field Name="StatLabelQuantity" Hidden="true" />
+      <Field Name="StatListView_Sales" Hidden="true" />
+      <Field Name="StatMoviesColumnHeader1_Rank" Hidden="true" />
+      <Field Name="StatMoviesColumnHeader2_Pn" Hidden="true" />
+      <Field Name="StatMoviesColumnHeader3_Title" Hidden="true" />
+      <Field Name="StatMoviesColumnHeader4_QTY" Hidden="true" />
+      <Field Name="StatMusicColumnHeader1_Pn" Hidden="true" />
+      <Field Name="StatMusicColumnHeader1_QTY" Hidden="true" />
+      <Field Name="StatMusicColumnHeader1_Rank" Hidden="true" />
+      <Field Name="StatMusicColumnHeader2_Title" Hidden="true" />
+      <Field Name="StatPanel_Controls" Hidden="true" />
+      <Field Name="StatPanel_TotalSales" Hidden="true" />
+      <Field Name="StatSalesPanel" Hidden="true" />
+      <Field Name="StatSplitContainer1" Hidden="true" />
+      <Field Name="StatTableLayoutPanel1_Sales" Hidden="true" />
+      <Field Name="StatTextBox_Search" Hidden="true" />
+      <Field Name="StatYearLabel" Hidden="true" />
+      <Field Name="StockButton_AddNewProduct" Hidden="true" />
+      <Field Name="StockButton_Update" Hidden="true" />
+      <Field Name="StockCheckBox_Active" Hidden="true" />
+      <Field Name="StockCheckBox_ShowAllProducts" Hidden="true" />
+      <Field Name="StockColumnHeader1_ProductCode" Hidden="true" />
+      <Field Name="StockColumnHeader2_Title" Hidden="true" />
+      <Field Name="StockColumnHeader3_Type" Hidden="true" />
+      <Field Name="StockColumnHeader4_Price" Hidden="true" />
+      <Field Name="StockColumnHeader5_Quantity" Hidden="true" />
+      <Field Name="StockLabel_Creator" Hidden="true" />
+      <Field Name="StockLabel_FreeText" Hidden="true" />
+      <Field Name="StockLabel_Price" Hidden="true" />
+      <Field Name="StockLabel_ProductCode" Hidden="true" />
+      <Field Name="StockLabel_Publisher" Hidden="true" />
+      <Field Name="StockLabel_Quantity" Hidden="true" />
+      <Field Name="StockLabel_ReleaseYear" Hidden="true" />
+      <Field Name="StockLabel_Search" Hidden="true" />
+      <Field Name="StockLabel_Title" Hidden="true" />
+      <Field Name="StockLabel_Type" Hidden="true" />
+      <Field Name="StockListBox_Type" Hidden="true" />
+      <Field Name="StockListView1" Hidden="true" />
+      <Field Name="StockSearchPanel1" Hidden="true" />
+      <Field Name="StockSplitContainer1" Hidden="true" />
+      <Field Name="StockSplitContainer2" Hidden="true" />
+      <Field Name="StockTabPage" Hidden="true" />
+      <Field Name="StockTextBox_Creator" Hidden="true" />
+      <Field Name="StockTextBox_FreeText" Hidden="true" />
+      <Field Name="StockTextBox_Price" Hidden="true" />
+      <Field Name="StockTextBox_ProductCode" Hidden="true" />
+      <Field Name="StockTextBox_Publisher" Hidden="true" />
+      <Field Name="StockTextBox_Quantity" Hidden="true" />
+      <Field Name="StockTextBox_ReleaseYear" Hidden="true" />
+      <Field Name="StockTextBox_Search" Hidden="true" />
+      <Field Name="StockTextBox_Title" Hidden="true" />
+      <Field Name="toolTip1" Hidden="true" />
+      <Field Name="Top10BooksCheckBox" Hidden="true" />
+      <Field Name="Top10Button_AllTime" Hidden="true" />
+      <Field Name="Top10Button_Month" Hidden="true" />
+      <Field Name="Top10Button_Year" Hidden="true" />
+      <Field Name="Top10Label_Books" Hidden="true" />
+      <Field Name="Top10Label_Movies" Hidden="true" />
+      <Field Name="Top10Label_Music" Hidden="true" />
+      <Field Name="Top10ListView_Books" Hidden="true" />
+      <Field Name="Top10ListView_Movies" Hidden="true" />
+      <Field Name="Top10ListView_Music" Hidden="true" />
+      <Field Name="Top10MoviesCheckBox" Hidden="true" />
+      <Field Name="Top10MusicCheckBox" Hidden="true" />
+      <Field Name="Top10Panel_Books" Hidden="true" />
+      <Field Name="Top10Panel_Movies" Hidden="true" />
+      <Field Name="Top10Panel_Music" Hidden="true" />
+      <Field Name="Top10TableLayoutPanel_Buttons" Hidden="true" />
+      <Field Name="Top10TableLayoutPanel_Charts" Hidden="true" />
+      <Field Name="Top10TabPage" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>jTBRv9oNfr9zbA8qfeDqLnNuTnvSr98lxsdkzq+Zg+k=</HashCode>
+      <FileName>MyMediaStore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="MediaStore.ISearch">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>ISearch.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

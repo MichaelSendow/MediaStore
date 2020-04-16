@@ -111,7 +111,7 @@ namespace MediaStore
                 }
                 else
                 {
-                    MessageBox.Show("Some fields are incorrect.", "Incorrect fields", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Some fields are incorrect. \r\nPrice, Quantity, Title, and Release year are mandatory.", "Incorrect fields", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -188,9 +188,12 @@ namespace MediaStore
 
                 ProductCodeTextBox.Text = FormsProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
                 PriceTextBox.ReadOnly = false;
+                PriceTextBox.Text = "0";
                 QuantityTextBox.ReadOnly = false;
+                QuantityTextBox.Text = "0";
                 TitleTextBox.ReadOnly = false;
                 ReleaseYearTextBox.ReadOnly = false;
+                ReleaseYearTextBox.Text = DateTime.Today.ToString("yyyy",CultureInfo.CurrentCulture);
                 CreatorTextBox.ReadOnly = false;
                 PublisherTextBox.ReadOnly = false;
                 FreeTextBox.ReadOnly = false;
@@ -245,7 +248,7 @@ namespace MediaStore
                 decimal.TryParse(PriceTextBox.Text, out decimal _) &&
                 uint.TryParse(QuantityTextBox.Text, out uint _) &&
                 uint.TryParse(ReleaseYearTextBox.Text, out uint _) &&
-                TitleTextBox.Text.Contains(Environment.NewLine) == false && TitleTextBox.Text.Contains(";") == false &&
+                TitleTextBox.Text.Contains(Environment.NewLine) == false && TitleTextBox.Text.Contains(";") == false && TitleTextBox.Text.Trim().Length != 0 &&
                 CreatorTextBox.Text.Contains(Environment.NewLine) == false && CreatorTextBox.Text.Contains(";") == false &&
                 PublisherTextBox.Text.Contains(Environment.NewLine) == false && PublisherTextBox.Text.Contains(";") == false &&
                 FreeTextBox.Text.Contains(Environment.NewLine) == false && FreeTextBox.Text.Contains(";") == false
