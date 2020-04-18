@@ -737,6 +737,7 @@
             // 
             // StockCheckBox_ShowAllProducts
             // 
+            this.StockCheckBox_ShowAllProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.StockCheckBox_ShowAllProducts.AutoSize = true;
             this.StockCheckBox_ShowAllProducts.Checked = true;
             this.StockCheckBox_ShowAllProducts.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -1211,6 +1212,7 @@
             // 
             // StatYearLabel
             // 
+            this.StatYearLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.StatYearLabel.AutoSize = true;
             this.StatYearLabel.Font = new System.Drawing.Font("Verdana", 9F);
             this.StatYearLabel.Location = new System.Drawing.Point(770, 6);
@@ -1221,7 +1223,7 @@
             // 
             // StatDateTimePicker_Year
             // 
-            this.StatDateTimePicker_Year.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.StatDateTimePicker_Year.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.StatDateTimePicker_Year.CalendarFont = new System.Drawing.Font("Verdana", 8F);
             this.StatDateTimePicker_Year.CustomFormat = "yyyy";
             this.StatDateTimePicker_Year.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1235,7 +1237,7 @@
             // 
             // StatCheckBox_ShowAll
             // 
-            this.StatCheckBox_ShowAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.StatCheckBox_ShowAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.StatCheckBox_ShowAll.AutoSize = true;
             this.StatCheckBox_ShowAll.Font = new System.Drawing.Font("Verdana", 9F);
             this.StatCheckBox_ShowAll.Location = new System.Drawing.Point(3, 5);
@@ -2229,7 +2231,7 @@
             this.Top10Button_AllTime.TabIndex = 1;
             this.Top10Button_AllTime.Text = "All Time";
             this.Top10Button_AllTime.UseVisualStyleBackColor = true;
-            this.Top10Button_AllTime.Click += new System.EventHandler(this.StatButton_AllTime_Click);
+            this.Top10Button_AllTime.Click += new System.EventHandler(this.Top10Button_AllTime_Click);
             // 
             // Top10Button_Month
             // 
@@ -2243,7 +2245,7 @@
             this.Top10Button_Month.TabIndex = 3;
             this.Top10Button_Month.Text = "This Month";
             this.Top10Button_Month.UseVisualStyleBackColor = true;
-            this.Top10Button_Month.Click += new System.EventHandler(this.StatButton_Month_Click);
+            this.Top10Button_Month.Click += new System.EventHandler(this.Top10Button_Month_Click);
             // 
             // Top10Button_Year
             // 
@@ -2257,7 +2259,7 @@
             this.Top10Button_Year.TabIndex = 2;
             this.Top10Button_Year.Text = "This Year";
             this.Top10Button_Year.UseVisualStyleBackColor = true;
-            this.Top10Button_Year.Click += new System.EventHandler(this.StatButton_Year_Click);
+            this.Top10Button_Year.Click += new System.EventHandler(this.Top10Button_Year_Click);
             // 
             // printPreviewDialog1
             // 

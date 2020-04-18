@@ -169,7 +169,7 @@ namespace MediaStore
                     if (MySales.ReturnProduct(receiptNumber, productCode, quantityToReturn))
                     {
                         MyStock.AddQuantity(productCode, quantityToReturn);
-                        UpdateStockListView();
+                        UpdateListViews();
                         CashierTextBox_ReturnReceipt.Text = "";
                         CashierTextBox_ReturnProduct.Text = "";
                         CashierTextBox_ReturnQuantity.Text = "";
@@ -517,42 +517,6 @@ namespace MediaStore
         }
 
         /// <summary>
-        /// Uppdaterar tio-i-topplistorna med all försäljning någonsin
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StatButton_AllTime_Click(object sender, EventArgs e)
-        {
-            Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.AllTime);
-            Top10(Product.ProductType.Movie, Top10ListView_Movies, Top10MoviesCheckBox, Statistics.Mode.AllTime);
-            Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.AllTime);
-        }
-
-        /// <summary>
-        /// Uppdaterar tio-i-topplistorna med all försäljning för innevarande månad
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StatButton_Month_Click(object sender, EventArgs e)
-        {
-            Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.Month);
-            Top10(Product.ProductType.Movie, Top10ListView_Movies, Top10MoviesCheckBox, Statistics.Mode.Month);
-            Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.Month);
-        }
-
-        /// <summary>
-        /// Uppdaterar tio-i-topplistorna med all försäljning för i år
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void StatButton_Year_Click(object sender, EventArgs e)
-        {
-            Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.Year);
-            Top10(Product.ProductType.Movie, Top10ListView_Movies, Top10MoviesCheckBox, Statistics.Mode.Year);
-            Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.Year);
-        }
-
-        /// <summary>
         /// Visa/dölj inaktiva produkter i Statistics-fliken
         /// </summary>
         /// <param name="sender"></param>
@@ -614,6 +578,7 @@ namespace MediaStore
                     product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
                     //Uppdatera att osparade ändringar finns
                     UnsavedChanges = true;
+                    StockSplitContainer1.Panel2.BackColor = Color.MistyRose;
 
                 }
                 //Om produkten finns i lager och är aktiv så behöver vi frånga om man är säker på vad man håller på med.
@@ -625,6 +590,7 @@ namespace MediaStore
                         Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
                         product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
                         UnsavedChanges = true;
+                        StockSplitContainer1.Panel2.BackColor = Color.MistyRose;
                     }
                     else
                     {
@@ -640,6 +606,7 @@ namespace MediaStore
                     Product product = MyStock.GetProduct(uint.Parse(StockTextBox_ProductCode.Text, CultureInfo.CurrentCulture));
                     product.Status = StockCheckBox_Active.Checked ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
                     UnsavedChanges = true;
+                    StockSplitContainer1.Panel2.BackColor = Color.MistyRose;
                 }
             }
         }
@@ -697,6 +664,54 @@ namespace MediaStore
                 UnsavedChanges = true;
                 StockSplitContainer1.Panel2.BackColor = Color.MistyRose;
             }
+        }
+
+        /// <summary>
+        /// Uppdaterar tio-i-topplistorna med all försäljning någonsin
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Top10Button_AllTime_Click(object sender, EventArgs e)
+        {
+            Top10Button_AllTime.BackColor = Color.LightSkyBlue;
+            Top10Button_Month.BackColor = Color.Transparent;
+            Top10Button_Year.BackColor = Color.Transparent;
+
+            Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.AllTime);
+            Top10(Product.ProductType.Movie, Top10ListView_Movies, Top10MoviesCheckBox, Statistics.Mode.AllTime);
+            Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.AllTime);
+        }
+
+        /// <summary>
+        /// Uppdaterar tio-i-topplistorna med all försäljning för innevarande månad
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Top10Button_Month_Click(object sender, EventArgs e)
+        {
+            Top10Button_AllTime.BackColor = Color.Transparent;
+            Top10Button_Month.BackColor = Color.LightSkyBlue;
+            Top10Button_Year.BackColor = Color.Transparent;
+
+            Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.Month);
+            Top10(Product.ProductType.Movie, Top10ListView_Movies, Top10MoviesCheckBox, Statistics.Mode.Month);
+            Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.Month);
+        }
+
+        /// <summary>
+        /// Uppdaterar tio-i-topplistorna med all försäljning för i år
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Top10Button_Year_Click(object sender, EventArgs e)
+        {
+            Top10Button_AllTime.BackColor = Color.Transparent;
+            Top10Button_Month.BackColor = Color.Transparent;
+            Top10Button_Year.BackColor = Color.LightSkyBlue;
+
+            Top10(Product.ProductType.Book, Top10ListView_Books, Top10BooksCheckBox, Statistics.Mode.Year);
+            Top10(Product.ProductType.Movie, Top10ListView_Movies, Top10MoviesCheckBox, Statistics.Mode.Year);
+            Top10(Product.ProductType.Music, Top10ListView_Music, Top10MusicCheckBox, Statistics.Mode.Year);
         }
         #endregion EventMethods
 

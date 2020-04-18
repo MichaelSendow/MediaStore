@@ -8,14 +8,28 @@ namespace MediaStore
     {
         #region Fields
 
+        /// <summary>
+        /// Den produkt som visas i formuläret.
+        /// </summary>
         private readonly Product FormsProduct;
+
+        /// <summary>
+        /// Maxvolym produkten kan ha i vissa lägen.
+        /// </summary>
         private readonly uint StockMaxQty;
 
         #endregion Fields
 
         #region Properties
 
+        /// <summary>
+        /// Vilken funktion formuläret ska fylla
+        /// </summary>
         public FormFunction Function { get; set; }
+
+        /// <summary>
+        /// Predikat för att visa om funktionen lyckats eller ej
+        /// </summary>
         public bool FunctionSucceeded { get; set; }
 
         #endregion Properties
@@ -35,14 +49,12 @@ namespace MediaStore
 
         #region Constructors
 
-        public ProductForm()
-        {
-            InitializeComponent();
-            Function = FormFunction.None;
-            FormsProduct = new Product();
-            FunctionSucceeded = false;
-        }
-
+        /// <summary>
+        /// Klasskonstruktor. Skapar formulär i enlighet med vald funktion
+        /// </summary>
+        /// <param name="product">Vilken produkt som ska visas i formuläret</param>
+        /// <param name="formFunction">Vilken funktion formuläret ska anta.</param>
+        /// <param name="maxQty">Maxantal av en produkt</param>
         public ProductForm(Product product, FormFunction formFunction, uint maxQty = 1000000)
         {
             InitializeComponent();
@@ -76,6 +88,12 @@ namespace MediaStore
 
         #region EventMethods
 
+        /// <summary>
+        /// Om formulärfunktionen är NewProduct försöker vi spara produkten till FormsProduct och döljer formuläret. 
+        /// Vid annan funktion döljs formuläret.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FunctionButton_Click(object sender, EventArgs e)
         {
             if (Function == FormFunction.NewProduct)
@@ -121,18 +139,21 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Om checkboxen i formuläret ändras sätter vi status på produkten till motsvarande
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void IsActiveCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (IsActiveCheckBox.Checked == true)
-            {
-                FormsProduct.Status = Product.ProductStatus.Active;
-            }
-            else
-            {
-                FormsProduct.Status = Product.ProductStatus.InActive;
-            }
+            FormsProduct.Status = IsActiveCheckBox.Checked == true ? Product.ProductStatus.Active : Product.ProductStatus.InActive;
         }
 
+        /// <summary>
+        /// Om close-knappen klickas istället för Function-knappen sätts FunctionSucceeded = false
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ProductCloseButton_Click(object sender, EventArgs e)
         {
             FunctionSucceeded = false;
@@ -143,11 +164,18 @@ namespace MediaStore
 
         #region Methods
 
+        /// <summary>
+        /// Hjälpmetod som läser av kvantitetsväljaren
+        /// </summary>
+        /// <returns></returns>
         public uint GetNumericSpinBoxValue()
         {
             return (uint)QtyNumericUpDown.Value;
         }
 
+        /// <summary>
+        /// Hjälpmetod som initierar formuläret om funktionen är AddToBasket
+        /// </summary>
         private void AddToBasketForm()
         {
             if (FormsProduct != null)
@@ -171,6 +199,9 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Hjälpmetod som initierar formuläret om funktionen är NewProduct
+        /// </summary>
         private void NewProduct()
         {
             if (FormsProduct != null)
@@ -193,7 +224,7 @@ namespace MediaStore
                 QuantityTextBox.Text = "0";
                 TitleTextBox.ReadOnly = false;
                 ReleaseYearTextBox.ReadOnly = false;
-                ReleaseYearTextBox.Text = DateTime.Today.ToString("yyyy",CultureInfo.CurrentCulture);
+                ReleaseYearTextBox.Text = DateTime.Today.ToString("yyyy", CultureInfo.CurrentCulture);
                 CreatorTextBox.ReadOnly = false;
                 PublisherTextBox.ReadOnly = false;
                 FreeTextBox.ReadOnly = false;
@@ -204,6 +235,9 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Hjälpmetod som populerer alla kontroller i forumläret utifrån dess produkt
+        /// </summary>
         private void PopulateForm()
         {
             ProductCodeTextBox.Text = FormsProduct.ProductCode.ToString(CultureInfo.CurrentCulture);
@@ -217,12 +251,13 @@ namespace MediaStore
             PublisherTextBox.Text = FormsProduct.Publisher;
             FreeTextBox.Text = FormsProduct.FreeText;
 
-            if (FormsProduct.Status != Product.ProductStatus.Active)
-            {
-                IsActiveCheckBox.Checked = false;
-            }
+            IsActiveCheckBox.Checked = FormsProduct.Status == Product.ProductStatus.Active ? true : false;
+
         }
 
+        /// <summary>
+        /// Hjälpmetod som initierar formuläret om funktionen är ShoppingList
+        /// </summary>
         private void ShoppingList()
         {
             PopulateForm();
@@ -241,6 +276,10 @@ namespace MediaStore
             FunctionButton.Text = "Update Quantity";
         }
 
+        /// <summary>
+        /// Hjälpfunktion som stämmer av att alla kontrollers värden i formuläret är giltigt formaterade
+        /// </summary>
+        /// <returns>True om alla kontroller är giltigt ifyllda</returns>
         private bool ValidateFields()
         {
             if (

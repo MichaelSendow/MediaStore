@@ -10,7 +10,7 @@ namespace MediaStore
         #region Properties
 
         /// <summary>
-        /// List of products in stock. Key = ProductCode, Value = Product
+        /// Dictionary som innehåller alla varor i lagret. Key = ProductCode, Value = Product
         /// </summary>
         /// 
         public IDictionary<uint, Product> Products
@@ -22,11 +22,18 @@ namespace MediaStore
 
         #region Constructors
 
+        /// <summary>
+        /// Konstruktor som skapar ett tomt lager.
+        /// </summary>
         public Stock()
         {
             Products = new Dictionary<uint, Product>();
         }
 
+        /// <summary>
+        /// Konstruktor som skapar en kopia av ett existerande lager.
+        /// </summary>
+        /// <param name="stock"></param>
         public Stock(Stock stock)
         {
             if (stock != null)
@@ -40,6 +47,10 @@ namespace MediaStore
 
         }
 
+        /// <summary>
+        /// Konstruktor som skapar ett lager utifrån inläsning av fil
+        /// </summary>
+        /// <param name="filePathName">Sökväg till fil innehållande varulager</param>
         public Stock(string filePathName)
         {
             Products = new Dictionary<uint, Product>();
@@ -56,6 +67,10 @@ namespace MediaStore
 
         #region Methods
 
+        /// <summary>
+        /// Lägger till en produkt till varulagret
+        /// </summary>
+        /// <param name="product">Produkten att lägga till</param>
         internal void AddProduct(Product product)
         {
             try
@@ -69,6 +84,11 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Ökar kvantitet på produkt i lager.
+        /// </summary>
+        /// <param name="productCode">Produktkod</param>
+        /// <param name="quantity">Antal att öka lagret med</param>
         internal void AddQuantity(uint productCode, uint quantity)
         {
             if (Products.ContainsKey(productCode))
@@ -77,14 +97,10 @@ namespace MediaStore
             }
         }
 
-        //internal void DeleteProduct(uint productCode)
-        //{
-        //    if (Products.ContainsKey(productCode))
-        //    {
-        //        Products.Remove(productCode);
-        //    }
-        //}
-
+        /// <summary>
+        /// Metod för att få fram ett ledigt produktnummer.
+        /// </summary>
+        /// <returns>Nytt unikt produktnummer</returns>
         internal uint GetNextProductCode()
         {
             uint nextProductCode = 1;
@@ -92,10 +108,14 @@ namespace MediaStore
             if (Products.Count != 0)
                 nextProductCode = Products.Keys.Max() + 1;
 
-
             return nextProductCode;
         }
 
+        /// <summary>
+        /// Hämtar en produkt från lagret
+        /// </summary>
+        /// <param name="productCode">Produktens produktnummer</param>
+        /// <returns></returns>
         internal Product GetProduct(uint productCode)
         {
             if (Products.TryGetValue(productCode, out Product product))
@@ -116,10 +136,15 @@ namespace MediaStore
         //    return productsList;
         //}
 
+        /// <summary>
+        /// Sparar varulagret till fil
+        /// </summary>
+        /// <param name="filePathName">Sökväg till fil innehållande varulager</param>
         internal void SaveStockToFile(string filePathName)
         {
             FileHandler.SaveStock(this, filePathName);
         }
+
 
         //internal void SubtractQuantity(uint productCode, uint quantity)
         //{

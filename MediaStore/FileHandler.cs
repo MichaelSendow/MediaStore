@@ -9,6 +9,11 @@ namespace MediaStore
     {
         #region Methods
 
+        /// <summary>
+        /// Läser in försäljningshistorik från fil
+        /// </summary>
+        /// <param name="filePathName">Sökväg till fil innehållandes försäljningshistorik</param>
+        /// <returns></returns>
         internal static List<Receipt> LoadSales(string filePathName)
         {
             List<Receipt> receiptList = new List<Receipt>();
@@ -52,6 +57,11 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Läser in produktdata från fil
+        /// </summary>
+        /// <param name="filePathName">Sökväg till fil innehållandes produktdata</param>
+        /// <returns></returns>
         internal static List<Product> LoadStock(string filePathName)
         {
             List<Product> productList = new List<Product>();
@@ -99,6 +109,11 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Sparar försäljningshistorik till fil
+        /// </summary>
+        /// <param name="sales">Försäljningshistorik att spara</param>
+        /// <param name="filePathName">Sökväg till fil innehållandes försäljningshistorik</param>
         internal static void SaveSales(Sales sales, string filePathName)
         {
             try
@@ -124,6 +139,11 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Sparar produktdata till fil
+        /// </summary>
+        /// <param name="stock">Produktdata att spara</param>
+        /// <param name="filePathName">Sökväg till fil innhållandes produktdata</param>
         internal static void SaveStock(Stock stock, string filePathName)
         {
             try

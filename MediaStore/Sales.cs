@@ -8,30 +8,40 @@ namespace MediaStore
     {
         #region Properties
 
+        /// <summary>
+        /// Dictionary som innehåller alla kvitton. Key = Kvittonummer, Value = lista på kvitton tillhörande kvittonummret
+        /// </summary>
         public IDictionary<uint, List<Receipt>> Ledger { get; set; }
 
         #endregion Properties
 
         #region Constructors
 
+        /// <summary>
+        /// Skapar en tom huvudbok utan försäljningshistorik
+        /// </summary>
         public Sales()
         {
             Ledger = new Dictionary<uint, List<Receipt>>();
         }
 
-        public Sales(List<Receipt> receipts)
-        {
-            Ledger = new Dictionary<uint, List<Receipt>>();
-            if (receipts != null)
-            {
-                foreach (var receipt in receipts)
-                {
-                    AddReceipt(receipt);
+        //public Sales(List<Receipt> receipts)
+        //{
+        //    Ledger = new Dictionary<uint, List<Receipt>>();
+        //    if (receipts != null)
+        //    {
+        //        foreach (var receipt in receipts)
+        //        {
+        //            AddReceipt(receipt);
 
-                }
-            }
-        }
+        //        }
+        //    }
+        //}
 
+        /// <summary>
+        /// Läser in försäljningshistorik från fil
+        /// </summary>
+        /// <param name="filePathName">SÖkväg till fil innehållande försäljningshistorik</param>
         public Sales(string filePathName)
         {
 
@@ -47,13 +57,16 @@ namespace MediaStore
 
                 }
             }
-
         }
 
         #endregion Constructors
 
         #region Methods
 
+        /// <summary>
+        /// Lägger till nytt kvitto till försäljningshistoriken
+        /// </summary>
+        /// <param name="receipt"></param>
         internal void AddReceipt(Receipt receipt)
         {
             if (Ledger.ContainsKey(receipt.ReceiptNumber))
@@ -66,6 +79,10 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Metod för att få fram ett ledigt kvittonummer.
+        /// </summary>
+        /// <returns>Nytt unikt kvittonummer</returns>
         internal uint GetNextReceiptNumber()
         {
             uint nextProductCode = 1;
@@ -77,6 +94,13 @@ namespace MediaStore
             return nextProductCode;
         }
 
+        /// <summary>
+        /// Makulerar en försäljning. Kvittonummer, produkt och kvantitet måste finnas i historiken.
+        /// </summary>
+        /// <param name="receiptNumber">Kvittonummer</param>
+        /// <param name="productCode">Produkten som ska returneras på kvittot</param>
+        /// <param name="QtyToReturn">Antalet exemplar av produkten som ska returneras</param>
+        /// <returns>True om kvittot finns, produkten finns på kvittot och antalet inte överskrider det som finns på kvittot.</returns>
         internal bool ReturnProduct(uint receiptNumber, uint productCode, uint QtyToReturn)
         {
             if (Ledger.TryGetValue(receiptNumber, out List<Receipt> receiptList))
@@ -118,11 +142,19 @@ namespace MediaStore
             }
         }
 
+        /// <summary>
+        /// Sparar försäljningshistorik till fil
+        /// </summary>
+        /// <param name="filePathName">Sökväg till fil innehållande försäljningshistorik</param>
         internal void SaveSalesToFile(string filePathName)
         {
             FileHandler.SaveSales(this, filePathName);
         }
 
+        /// <summary>
+        /// Plattar ut dictionary listorna till en lista innehållandes alla enskilda kvitton
+        /// </summary>
+        /// <returns>Platt lista av alla kvitton</returns>
         internal List<Receipt> ReceiptsAsList()
         {
             List<Receipt> receipts = new List<Receipt>();
