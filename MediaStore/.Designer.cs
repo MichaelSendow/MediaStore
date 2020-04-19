@@ -108,7 +108,7 @@
             this.StockTextBox_ProductCode = new System.Windows.Forms.TextBox();
             this.StatisticsTabPage = new System.Windows.Forms.TabPage();
             this.StatSplitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.StatTableLayoutPanel1_Sales = new System.Windows.Forms.TableLayoutPanel();
+            this.StatTableLayoutPanel1_Sales = new MediaStore.DoubleBufferedTableLayoutPanel(this.components);
             this.StatPanel_Controls = new System.Windows.Forms.Panel();
             this.StatYearLabel = new System.Windows.Forms.Label();
             this.StatDateTimePicker_Year = new System.Windows.Forms.DateTimePicker();
@@ -169,7 +169,7 @@
             this.StatLabel_TotalSales_TOT = new System.Windows.Forms.Label();
             this.StatLabel_TotalSales = new System.Windows.Forms.Label();
             this.Top10TabPage = new System.Windows.Forms.TabPage();
-            this.Top10TableLayoutPanel_Charts = new System.Windows.Forms.TableLayoutPanel();
+            this.Top10TableLayoutPanel_Charts = new MediaStore.DoubleBufferedTableLayoutPanel(this.components);
             this.Top10Panel_Music = new System.Windows.Forms.Panel();
             this.Top10MusicCheckBox = new System.Windows.Forms.CheckBox();
             this.Top10ListView_Music = new System.Windows.Forms.ListView();
@@ -194,7 +194,7 @@
             this.StatBooksColumnHeader1_Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatBooksColumnHeader1_QTY = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Top10Label_Books = new System.Windows.Forms.Label();
-            this.Top10TableLayoutPanel_Buttons = new System.Windows.Forms.TableLayoutPanel();
+            this.Top10TableLayoutPanel_Buttons = new MediaStore.DoubleBufferedTableLayoutPanel(this.components);
             this.Top10Button_AllTime = new System.Windows.Forms.Button();
             this.Top10Button_Month = new System.Windows.Forms.Button();
             this.Top10Button_Year = new System.Windows.Forms.Button();
@@ -2454,7 +2454,6 @@
         private System.Windows.Forms.TextBox StockTextBox_Search;
         private System.Windows.Forms.Label StockLabel_Search;
         private System.Windows.Forms.SplitContainer StatSplitContainer1;
-        private System.Windows.Forms.TableLayoutPanel StatTableLayoutPanel1_Sales;
         private System.Windows.Forms.ListView StatListView_Sales;
         private System.Windows.Forms.ColumnHeader StatColumnHeader1_ProductCode;
         private System.Windows.Forms.ColumnHeader StatColumnHeader2_Title;
@@ -2464,7 +2463,6 @@
         private System.Windows.Forms.TabPage Top10TabPage;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
-        private System.Windows.Forms.TableLayoutPanel Top10TableLayoutPanel_Charts;
         private System.Windows.Forms.Button Top10Button_Month;
         private System.Windows.Forms.Button Top10Button_Year;
         private System.Windows.Forms.Panel Top10Panel_Music;
@@ -2510,7 +2508,6 @@
         private System.Windows.Forms.ColumnHeader StatBooksColumnHeader1_QTY;
         private System.Windows.Forms.ColumnHeader StatMusicColumnHeader1_Rank;
         private System.Windows.Forms.ColumnHeader StatMusicColumnHeader1_QTY;
-        private System.Windows.Forms.TableLayoutPanel Top10TableLayoutPanel_Buttons;
         private System.Windows.Forms.Label StatLabel_AllTime_QTY;
         private System.Windows.Forms.Label StatLabel_AllTime_Gross;
         private System.Windows.Forms.Label StatLabel_January_QTY;
@@ -2547,6 +2544,9 @@
         private System.Windows.Forms.Label StatSearchLabel;
         private System.Windows.Forms.TextBox StatTextBox_Search;
         private DoubleBufferedTableLayoutPanel SalesTableLayoutPanel;
+        private DoubleBufferedTableLayoutPanel StatTableLayoutPanel1_Sales;
+        private DoubleBufferedTableLayoutPanel Top10TableLayoutPanel_Charts;
+        private DoubleBufferedTableLayoutPanel Top10TableLayoutPanel_Buttons;
     }
 }
 
