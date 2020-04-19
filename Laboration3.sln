@@ -8,6 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E09780C1-BCF2-42BB-857A-44E788210CA4}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		DVGB07_Lab3B_Ver3.docx = DVGB07_Lab3B_Ver3.docx
+		DVGB07_Lab3B_Ver3.pdf = DVGB07_Lab3B_Ver3.pdf
 		products.csv = products.csv
 		sales.csv = sales.csv
 	EndProjectSection
