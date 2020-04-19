@@ -1,0 +1,101 @@
+ProductCode;Title;Type;Price;Quantity;ReleaseYear;Creator;Publisher;FreeText;Status
+1;The Last Wish;Book;99,50;49;2020;Andrzej Sapkowski;Orion/Gollancz;ISBN: 978-1-4732-3106-1, Längd: 288 sidor;Active
+2;Revenger;Book;129,50;9;2017;Alastair Reynolds;Orion/Gollancz;ISBN: 978-0-575-09055-2, Längd: 432 sidor;Active
+3;Joker;Movie;198,99;10;2019;Todd Philips;FOX;Den misslyckade komikern Arthur Fleck (Joaquin Phoenix) håller långsamt på att förlora förståndet och omvandlas till den ständigt leende brottslingen Jokern i Todd Phillips omtalade film. Längd: 122 minuter;Active
+4;Satan I Gatan;Music;79,00;22;2019;Veronica Maggio;UNIVERSAL, Universal Music AB;EAN: 0602527659886, 11 spår;Active
+5;Avatar: The Last Airbender, The Complete Collection;Music;297,20;10;2017;Michael Dante DiMartino & Bryan Konietzko;Twentieth Century Fox;De som praktiserar en av de fyra elementens krafter slåss mot varandra. De olika fraktionerna, Eld, Vatten, Jord och Luft, kämpar om herreväldet, och den som är ödesbestämd att få slut på striderna är Avataren. Tyvärr är Avataren en omogen pojkspoling på tolv år, som inte vill ha något ansvar alls. Längd: 1468 minuter;Active
+6;Harry Potter: The Complete Collection;Book;739,60;10;2014;J.K Rowling;Bloomsbury Publishing Ltd.;A beautiful boxed set containing all seven Harry Potter novels in paperback. These new editions of the classic and internationally bestselling, multi-award-winning series feature instantly pick-up-able new jackets by Jonny Duddle, with huge child appeal, to bring Harry Potter to the next generation of readers. Its time to PASS THE MAGIC ON ... ISBN: 978-1-408-85677-2;InActive
+7;Flexidy;Movie;118,02;10;2004;Brietta Treace;Stracke-Hansen;groupware;InActive
+8;Tempsoft;Movie;289,47;1;2006;Marty Rosenblad;Gaylord-Larkin;uniform;Active
+9;Holdlamis;Book;440,56;68;1981;Mead Orth;Ernser Group;Reverse-engineered;Active
+10;Lotstring;Movie;150,67;268;2007;Nicol Pert;Wilderman-Schowalter;Advanced;Active
+11;Bigtax;Movie;476,82;103;2012;Pauli Mahony;Pouros-Towne;;Active
+12;Latlux;Book;232,29;0;2020;Elisa Durran;Prosacco, Hauck and Nienow;responsive;Active
+13;Zamit;Movie;392,16;33;1993;Willamina Seldner;Collier LLC;Face to face;InActive
+14;Cardguard;Movie;514,25;0;2008;Sybyl Crannell;Schowalter, Kemmer and Bode;;InActive
+15;Bytecard;Book;89,19;170;1985;Alicea Tevlin;Wolf-Walter;pricing structure;Active
+16;It the movie;Movie;290,08;0;2004;Mariette Kharchinski;Schiller LLC;Persistent;InActive
+17;Kanlam III;Book;495,58;244;2019;Wendie Ditchfield;Wintheiser and Sons;product;Active
+18;Home Star Runner;Movie;152,94;30;1983;Valerie Swyne;Ryan-O'Keefe;matrices;Active
+19;Sonsing;Movie;394,80;0;2000;Amber Gaiter;Streich, Bechtelar and Stark;matrices;InActive
+20;Sub-Ex;Music;382,72;31;1988;Sophia Enoksson;West, Effertz and Baumbach;well-modulated;Active
+21;Bitchip;Movie;50,69;155;1990;Teddy Lindelof;Bode, Kuhic and Bins;;Active
+22;Konklab;Book;314,70;0;1979;Albert Zammett;Blick and Sons;Advanced;InActive
+23;Solarbreeze;Movie;171,91;60;1987;Florie Lowry;Parisian Inc;Multi-tiered;Active
+24;Zathin0r;Book;501,40;0;2007;Helenka Dallman;Weimann Group;Enterprise-wide;InActive
+25;Sonsing;Book;146,15;106;1995;Danice Goodswen;Tillman-Brakus;process improvement;Active
+26;Lotstring is a good read;Book;441,86;204;1994;Benoite Gini;McGlynn, Kling and Hintz;non-volatile;Active
+27;Y-find;Movie;449,94;0;1993;Nance Ivanishev;Corwin, Olson and Monahan;benchmark;InActive
+28;Ronstring;Book;53,04;0;2020;Robinett de Najera;Parisian-Herman;Extended;InActive
+29;Alpha;Movie;291,52;0;2015;Amby Waby;Mertz, Marks and Green;directional;InActive
+30;Biodex;Music;574,55;72;1980;Thelma Bramhill;Pollich Group;needs-based;Active
+31;Namfix;Movie;497,19;0;2017;Gibby Blasli;Osinski and Sons;Profound;InActive
+32;Viva;Music;103,31;116;1985;Marshal Marriott;Johnston, Anderson and Abbott;;Active
+33;Redhold;Book;286,88;258;2002;Edgard Aslott;Larkin Group;stable;Active
+34;Tres-Zap;Book;389,23;273;2014;Leodora McAlinden;Lang, Huel and Rogahn;approach;Active
+35;Okinawa boyscouts;Music;115,67;71;2012;Valentine McMurray;Rowe Group;Synergistic;Active
+36;Konklux;Movie;83,09;0;1986;Amanda Gurrado;Kunze, Cremin and Huels;;InActive
+37;Opela;Movie;270,63;117;2007;Clayborn Deinhardt;Bruen, Casper and Kuvalis;migration;Active
+38;Tempsofter: More tempo;Music;552,70;175;1985;Emyle Van der Son;Hackett, Herman and Bartoletti;alliance;Active
+39;Wrapsafe;Book;87,97;236;1989;Domeniga Yelland;Russel, White and Wisoky;Organized;Active
+40;Y-Solowarm;Movie;254,26;0;1993;Sasha Mulholland;Daniel-Langworth;Managed;InActive
+41;Tresom;Movie;307,20;0;2002;Chandra Cubitt;Douglas Group;analyzing;InActive
+42;Cardguard;Book;349,53;295;2002;Kristel Tattersfield;Breitenberg, Hessel and Schaefer;Expanded;Active
+43;Rank;Book;543,70;247;2015;Boigie Braz;Cummerata-Kessler;;Active
+44;Home Ing;Music;408,24;9;1986;Joby Martynov;Kuphal-Rice;;InActive
+45;Subin;Book;329,84;0;2005;Tony Abatelli;Simonis-Heidenreich;knowledge base;InActive
+46;Voltsillam;Music;224,38;179;1990;Tommie Stratiff;Beier, Crooks and White;adapter;Active
+47;Stim;Music;225,64;0;2000;Cathleen Shernock;Senger and Sons;holistic;InActive
+48;Toughjoyfax;Book;235,13;257;1986;Ronni Morpeth;Kertzmann Inc;functionalities;Active
+49;Tres-Zap;Movie;366,97;0;1979;Emlyn Baroch;Lang, Hand and Runolfsson;standardization;InActive
+50;Kanlam;Music;552,39;79;2014;Nanni Rosenblad;Ebert Group;Digitized;Active
+51;Y-Solowarm;Book;487,06;13;2015;Ameline Doggerell;Denesik-VonRueden;emulation;Active
+52;4Zap;Book;454,61;24;1996;Corrinne Haslen;Kuphal-Grimes;core;Active
+53;Treeflex;Music;197,51;151;2002;Ingunna Rideout;Bailey, Smith and Runolfsson;tangible;Active
+54;Aerified;Movie;67,07;0;2010;Lennie Jellman;Nolan-Mosciski;disintermediate;InActive
+55;Asoka;Music;327,43;0;2013;Allin MacDearmaid;Hoeger-Beatty;Inverse;InActive
+56;Regrant;Music;335,68;121;2013;Daniella O' Brian;Kling and Sons;Graphical User Interface;Active
+57;Tempsoft;Music;300,88;0;1990;Thor Eagling;Cormier Inc;archive;InActive
+58;Alphazap;Book;273,64;0;1986;Kiri Lovstrom;Jones-Marks;functionalities;InActive
+59;Andalax;Music;310,44;0;2015;Kasey Give;Kovacek-Bauch;;InActive
+60;Namfix;Music;498,64;86;2018;Alena Cadding;Runte Group;;Active
+61;Asoka;Book;232,91;0;2016;Veda MacAnellye;Hagenes, Rogahn and Jenkins;project;InActive
+62;Lotlux;Movie;424,34;0;1982;Dame Jeanenet;Schroeder Inc;;InActive
+63;Span;Book;313,45;53;2005;Giorgia Cunniffe;Konopelski, Jacobi and Quigley;extranet;Active
+64;Fix San;Book;174,67;0;1994;Rhetta Axtens;Dibbert-Boehm;methodology;InActive
+65;Stim;Book;135,86;116;1988;Karleen Crowth;Walker LLC;Integrated;Active
+66;Alpha Dog;Book;197,93;0;1983;Viva Dufaur;Toy, Trantow and Conroy;zero defect;InActive
+67;Die harder;Movie;546,51;94;1991;Effie MacNeilly;Bruen, Mayert and Heller;multi-tasking;Active
+68;Zathin;Movie;235,96;155;2003;Harriott Conti;Hilll-Larson;4th generation;Active
+69;Tempsoft: Less tempo plz;Movie;230,83;56;1990;Caresse Clayfield;Kris-Bode;Synergized;Active
+70;Bitchip;Music;595,04;82;2016;Ario Brooks;Lindgren-Jacobson;;Active
+71;Solarbreeze;Book;117,58;152;2003;Florina Andryunin;Mraz, Fritsch and Hudson;hub;Active
+72;Gembucket;Book;56,46;0;2017;Thomasin Thomtson;Heller-Lubowitz;Graphical User Interface;InActive
+73;Pannier;Music;127,50;0;1989;Consolata Pendlebery;Trantow-Haag;discrete;InActive
+74;Tempsoft;Book;126,31;269;1992;Merle Swyndley;Langosh Group;Phased;Active
+75;Ventosanzap;Music;434,22;200;2002;Janina Ogles;Will-Kutch;conglomeration;Active
+76;Ronstring;Music;432,18;26;2003;Wandie Whitcher;Thiel Group;zero administration;Active
+77;Opela;Music;399,19;277;1992;Linnie Girardot;Batz, Hansen and Kulas;Versatile;Active
+78;Prodder;Movie;580,81;145;2000;Sarina Wicks;Pfannerstill and Sons;Focused;Active
+79;Bitchiper;Movie;317,98;0;2013;Ingeberg Taffley;Wisozk Group;;InActive
+80;Pannier;Book;354,74;249;1991;Tarrance Barnett;Huels, Pagac and Cartwright;incremental;Active
+81;Zoolab;Music;195,62;0;2019;Marlowe Criag;Johnston, Morissette and Lowe;grid-enabled;InActive
+82;It;Book;176,39;40;1998;Barbee Stitson;Leffler Inc;monitoring;Active
+83;Zamit;Book;386,08;0;2005;Bran Arro;Prosacco-Frami;grid-enabled;InActive
+84;Zathin;Music;63,49;292;1982;Jena Coopland;Wiza, Hirthe and White;didactic;Active
+85;Greenlam;Movie;113,59;0;2008;Kendricks Aloshkin;Berge LLC;Monitored;InActive
+86;Cardguard the musical;Music;513,35;139;1984;Janos Jefford;Sporer-Lebsack;complexity;Active
+87;Latlux not Lotlux;Music;179,24;54;2014;Tisha Posnette;D'Amore LLC;firmware;Active
+88;Zontrax;Music;580,27;238;2003;Jonah Odde;Haley Inc;hybrid;Active
+89;Toughjoyfax: The picture book;Book;52,81;0;1997;Meriel Cattrell;Heller and Sons;database;InActive
+90;IT the Musical;Music;372,57;214;1994;Cleopatra Purkess;Stark-Stroman;grid-enabled;Active
+91;Zoolab;Movie;351,43;0;2009;Vicki Tizzard;Mante, Kohler and Cartwright;Self-enabling;InActive
+92;Domainer;Movie;107,96;0;1988;Patti Cordoba;Greenfelder, Sipes and Heller;Future-proofed;InActive
+93;Tresom;Music;491,34;0;2011;Carley Hablet;Schuppe-O'Hara;;InActive
+94;Ventosanzap;Movie;582,54;0;1989;Ardelis Dewick;Weber-Wehner;Synchronised;InActive
+95;Temp;Book;570,07;0;1979;Yettie Cawkwell;Wyman-Dare;De-engineered;InActive
+96;Tin;Music;548,15;241;1996;Wiatt Huot;Dibbert and Sons;upward-trending;Active
+97;Domainer III;Book;535,12;166;2002;Russell Ragge;O'Conner-Halvorson;function;Active
+98;Konklux is a good read;Book;358,43;151;2001;Beverley Leahey;Trantow and Sons;Reverse-engineered;Active
+99;Biodex;Book;289,12;0;2000;Lyell Meake;Lubowitz, Hudson and Streich;Streamlined;InActive
+100;Konklab: The day before;Music;520,65;29;1992;Giffer Apperley;Schultz, Boehm and Douglas;;Active
