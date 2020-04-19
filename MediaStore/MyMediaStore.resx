@@ -120,36 +120,6 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>438, 17</value>
   </metadata>
-  <data name="StatTextBox_Search.ToolTip" xml:space="preserve">
-    <value>Enter text to search
-
-Keyword usage:
-[keyword];[Searchterm]
-Example:
-Quantity;5
-Returns all products with quantity 5
-
-Example:
-Price;&gt;100
-Returns all products with price greater than or equal to 100
-
-Example:
-Quantity;&gt;10;Price;&lt;500
-Returns all products with quantity greater than or equal to 10
-and price less than or equal to 500
-
-Keywords that can be used
-ProductCode;
-Title;
-Type;
-Price;
-Quantity;
-ReleaseYear;
-Creator;
-Publisher;
-FreeText;
-Status;</value>
-  </data>
   <data name="CashierTextBox_Search.ToolTip" xml:space="preserve">
     <value>Keyword usage:
 [keyword];[Searchterm]
@@ -180,6 +150,36 @@ Status;</value>
   </data>
   <data name="StockTextBox_Search.ToolTip" xml:space="preserve">
     <value>Keyword usage:
+[keyword];[Searchterm]
+Example:
+Quantity;5
+Returns all products with quantity 5
+
+Example:
+Price;&gt;100
+Returns all products with price greater than or equal to 100
+
+Example:
+Quantity;&gt;10;Price;&lt;500
+Returns all products with quantity greater than or equal to 10
+and price less than or equal to 500
+
+Keywords that can be used
+ProductCode;
+Title;
+Type;
+Price;
+Quantity;
+ReleaseYear;
+Creator;
+Publisher;
+FreeText;
+Status;</value>
+  </data>
+  <data name="StatTextBox_Search.ToolTip" xml:space="preserve">
+    <value>Enter text to search
+
+Keyword usage:
 [keyword];[Searchterm]
 Example:
 Quantity;5

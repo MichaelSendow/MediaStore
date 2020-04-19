@@ -116,8 +116,11 @@
             this.StatListView_Sales = new System.Windows.Forms.ListView();
             this.StatColumnHeader1_ProductCode = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StatColumnHeader2_Title = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.StatSearchLabel = new System.Windows.Forms.Label();
+            this.StatTextBox_Search = new System.Windows.Forms.TextBox();
             this.StatSalesPanel = new System.Windows.Forms.Panel();
-            this.SalesTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.SalesTableLayoutPanel = new MediaStore.DoubleBufferedTableLayoutPanel(this.components);
             this.StatLabel_AllTime = new System.Windows.Forms.Label();
             this.StatLabelQuantity = new System.Windows.Forms.Label();
             this.StatLabelGrossAmount = new System.Windows.Forms.Label();
@@ -198,9 +201,6 @@
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.StatTextBox_Search = new System.Windows.Forms.TextBox();
-            this.StatSearchLabel = new System.Windows.Forms.Label();
             this.MainTabControl.SuspendLayout();
             this.CashierTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CashierTabSplitContainer)).BeginInit();
@@ -240,6 +240,7 @@
             this.StatSplitContainer1.SuspendLayout();
             this.StatTableLayoutPanel1_Sales.SuspendLayout();
             this.StatPanel_Controls.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.StatSalesPanel.SuspendLayout();
             this.SalesTableLayoutPanel.SuspendLayout();
             this.StatPanel_TotalSales.SuspendLayout();
@@ -249,7 +250,6 @@
             this.Top10Panel_Movies.SuspendLayout();
             this.Top10Panel_Books.SuspendLayout();
             this.Top10TableLayoutPanel_Buttons.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainTabControl
@@ -1274,6 +1274,39 @@
             this.StatColumnHeader2_Title.Text = "Title";
             this.StatColumnHeader2_Title.Width = 825;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.StatSearchLabel);
+            this.panel1.Controls.Add(this.StatTextBox_Search);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(933, 44);
+            this.panel1.TabIndex = 4;
+            // 
+            // StatSearchLabel
+            // 
+            this.StatSearchLabel.AutoSize = true;
+            this.StatSearchLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StatSearchLabel.Location = new System.Drawing.Point(0, 1);
+            this.StatSearchLabel.Name = "StatSearchLabel";
+            this.StatSearchLabel.Size = new System.Drawing.Size(113, 34);
+            this.StatSearchLabel.TabIndex = 3;
+            this.StatSearchLabel.Text = "Search";
+            // 
+            // StatTextBox_Search
+            // 
+            this.StatTextBox_Search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.StatTextBox_Search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.StatTextBox_Search.Font = new System.Drawing.Font("Verdana", 10F);
+            this.StatTextBox_Search.Location = new System.Drawing.Point(119, 6);
+            this.StatTextBox_Search.Name = "StatTextBox_Search";
+            this.StatTextBox_Search.Size = new System.Drawing.Size(807, 32);
+            this.StatTextBox_Search.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.StatTextBox_Search, resources.GetString("StatTextBox_Search.ToolTip"));
+            this.StatTextBox_Search.TextChanged += new System.EventHandler(this.StatTextBox_Search_TextChanged);
+            // 
             // StatSalesPanel
             // 
             this.StatSalesPanel.Controls.Add(this.SalesTableLayoutPanel);
@@ -2269,39 +2302,6 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDocument1_PrintPage);
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.StatSearchLabel);
-            this.panel1.Controls.Add(this.StatTextBox_Search);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(933, 44);
-            this.panel1.TabIndex = 4;
-            // 
-            // StatTextBox_Search
-            // 
-            this.StatTextBox_Search.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.StatTextBox_Search.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.StatTextBox_Search.Font = new System.Drawing.Font("Verdana", 10F);
-            this.StatTextBox_Search.Location = new System.Drawing.Point(119, 6);
-            this.StatTextBox_Search.Name = "StatTextBox_Search";
-            this.StatTextBox_Search.Size = new System.Drawing.Size(807, 32);
-            this.StatTextBox_Search.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.StatTextBox_Search, resources.GetString("StatTextBox_Search.ToolTip"));
-            this.StatTextBox_Search.TextChanged += new System.EventHandler(this.StatTextBox_Search_TextChanged);
-            // 
-            // StatSearchLabel
-            // 
-            this.StatSearchLabel.AutoSize = true;
-            this.StatSearchLabel.Font = new System.Drawing.Font("Verdana", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StatSearchLabel.Location = new System.Drawing.Point(0, 1);
-            this.StatSearchLabel.Name = "StatSearchLabel";
-            this.StatSearchLabel.Size = new System.Drawing.Size(113, 34);
-            this.StatSearchLabel.TabIndex = 3;
-            this.StatSearchLabel.Text = "Search";
-            // 
             // MyMediaStore
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -2360,6 +2360,8 @@
             this.StatTableLayoutPanel1_Sales.ResumeLayout(false);
             this.StatPanel_Controls.ResumeLayout(false);
             this.StatPanel_Controls.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.StatSalesPanel.ResumeLayout(false);
             this.SalesTableLayoutPanel.ResumeLayout(false);
             this.SalesTableLayoutPanel.PerformLayout();
@@ -2374,8 +2376,6 @@
             this.Top10Panel_Books.ResumeLayout(false);
             this.Top10Panel_Books.PerformLayout();
             this.Top10TableLayoutPanel_Buttons.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2485,7 +2485,6 @@
         private System.Windows.Forms.Button Top10Button_AllTime;
         private System.Windows.Forms.Label StatYearLabel;
         private System.Windows.Forms.Panel StatSalesPanel;
-        private System.Windows.Forms.TableLayoutPanel SalesTableLayoutPanel;
         private System.Windows.Forms.Label StatLabel_AllTime;
         private System.Windows.Forms.Label StatLabelQuantity;
         private System.Windows.Forms.Label StatLabelGrossAmount;
@@ -2547,6 +2546,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label StatSearchLabel;
         private System.Windows.Forms.TextBox StatTextBox_Search;
+        private DoubleBufferedTableLayoutPanel SalesTableLayoutPanel;
     }
 }
 

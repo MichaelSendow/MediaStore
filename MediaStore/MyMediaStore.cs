@@ -51,8 +51,8 @@ namespace MediaStore
             StatDateTimePicker_Year.Value = DateTime.Now;
             //Kopplar på eventhanteraren för kontrollen.
             this.StatDateTimePicker_Year.ValueChanged += new System.EventHandler(this.StatDateTimePicker_Year_ValueChanged);
-
         }
+
         /// <summary>
         /// När formuläret laddas laddar denna metod in produktfilen och kvittofilen. Uppdaterar alla ListViews och sätter lite startvärden för statistiksidan.
         /// </summary>
