@@ -14,11 +14,14 @@ namespace MediaStore
     /// Double Buffered layout panel - removes flicker during resize operations.
     /// https://www.richard-banks.org/2007/09/how-to-create-flicker-free.html
     /// [2020-04-19]
+    /// 
+    /// Double Buffered Table Layout Panel
+    /// https://docs.telerik.com/devtools/winforms/knowledge-base/double-buffered-table-layout
+    /// [2020-04-19]
     /// </summary>
     public partial class DoubleBufferedTableLayoutPanel : TableLayoutPanel
     {
-        public DoubleBufferedTableLayoutPanel()
-        : base()
+        public DoubleBufferedTableLayoutPanel() : base()
         {
             SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
         }
